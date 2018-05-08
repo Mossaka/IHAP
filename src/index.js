@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import routes from './routes'
 import {Router, browserHistory} from 'react-router';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 ReactDOM.render(
     //<App />, document.getElementById('root')
     <Router history={browserHistory} routes={routes} />,
