@@ -5,7 +5,7 @@ import ViewTicket from './components/ticket/ViewTicket';
 import HomePage from './components/home/HomePage';
 import ProfilePage from './components/profile/ProfilePage';
 import Signin from './components/common/Signin';
-import Signup from './components/common/Sinup';
+import Signup from './components/common/Signup';
 
 export default (
     <Route path="/" component={App}>
