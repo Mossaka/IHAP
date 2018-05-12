@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
+import {auth} from '../../firebase';
 const INITIAL_STATE = {
   email: '',
   password: '',
@@ -15,7 +15,7 @@ export default class Signin extends React.Component {
         this.toggle = this.toggle.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        
+
       }
       handleChange(e) {
         this.setState({
@@ -30,6 +30,15 @@ export default class Signin extends React.Component {
           email,
           password,
         } = this.state;
+
+        auth.doSignInWithEmailAndPassword(email, password)
+        .then(() => {
+          alert("login success");
+          this.setState(() => ({ ...INITIAL_STATE }));
+        })
+        .catch(error => {
+          console.log(error)
+        });
         this.toggle();
       }
 
@@ -38,7 +47,7 @@ export default class Signin extends React.Component {
           modal: !this.state.modal
         });
       }
-      
+
       render() {
         return (
           <div>
@@ -49,13 +58,13 @@ export default class Signin extends React.Component {
               <h2 className="text-center"> Sign In</h2>
                 <FormGroup>
                   <Label for="email">Email Addess</Label>
-                  <Input type="email" id="SigninEmail" placeholder="Email Address" 
+                  <Input type="email" id="SigninEmail" placeholder="Email Address"
                          onChange={this.handleChange}
                   />
                 </FormGroup>
                 <FormGroup>
                   <Label for="password">Password</Label>
-                  <Input type="password" id="SigninPassword" placeholder="Password" 
+                  <Input type="password" id="SigninPassword" placeholder="Password"
                          onChange = {this.handleChange}
                   />
                 </FormGroup>

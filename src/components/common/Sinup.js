@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-
+import {auth ,db} from '../../firebase';
 const INITIAL_STATE = {
   username: '',
   email: '',
@@ -15,7 +15,7 @@ export default class Signup extends React.Component {
     constructor(props) {
         super(props);
         this.state = { ...INITIAL_STATE };
-    
+
         this.toggle = this.toggle.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,16 +40,24 @@ export default class Signup extends React.Component {
           email,
           password
         } = this.state;
+         auth.doCreateUserWithEmailAndPassword(email, password)
+        .then(authUser => {
+          // this.setState(()=> ({ ...INITIAL_STATE }))
+          db.doCreateUser(authUser.uid, username, email)
+            .then( () => {
+              this.setState( () => ({...INITIAL_STATE}));
+            }).catch(error => {alert(error)})
+        }).catch(error => {console.log(error)})
         this.toggle();
 
       }
-    
+
       toggle() {
         this.setState({
           modal: !this.state.modal
         });
       }
-    
+
       render() {
         return (
           <div>
@@ -60,25 +68,25 @@ export default class Signup extends React.Component {
                 <h2 className="text-center"> Sign Up </h2>
                 <FormGroup>
                   <Label for="username">User Name</Label>
-                  <Input type="username" 
-                          id="SignupUsername" 
-                          placeholder="Username" 
+                  <Input type="username"
+                          id="SignupUsername"
+                          placeholder="Username"
                           onChange={this.handleChange}
                           />
                 </FormGroup>
                 <FormGroup>
                   <Label for="email">Email Addess</Label>
-                  <Input type="email" id="SignupEmail" placeholder="Email Addess" 
+                  <Input type="email" id="SignupEmail" placeholder="Email Addess"
                           onChange={this.handleChange}/>
                 </FormGroup>
                 <FormGroup>
                   <Label for="password">Password</Label>
-                  <Input type="password" id="SignupPassword" placeholder="Password" 
+                  <Input type="password" id="SignupPassword" placeholder="Password"
                           onChange={this.handleChange}/>
                 </FormGroup>
                 <FormGroup>
                   <Label for="password">Confirm Password</Label>
-                  <Input type="password" id="SignupConfirmPassword" placeholder="Confirm Password" 
+                  <Input type="password" id="SignupConfirmPassword" placeholder="Confirm Password"
                           onChange={this.handleChange}/>
                 </FormGroup>
                 <FormGroup>
