@@ -10,9 +10,14 @@
     width: 100px; 
 }
 
-.left {
-    float:left;
+
+#nav {
+    display: flex;
+    justify-content: space-between;
+    
 }
-.right {
-    float:right; 
+
+.center {
+    display: flex;
+    justify-content: space-between;
 }

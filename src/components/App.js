@@ -9,7 +9,6 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <Header />
-          <h1 className="App-title">Welcome to IHAP</h1>
         </header>
         {this.props.children}
       </div>
