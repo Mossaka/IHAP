@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link, IndexLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import lever from '../../assets/lever.png';
 import '../../styles/Header.css';
@@ -11,7 +11,7 @@ const Header = ({ loading }) => {
   return (
     <nav id='nav'>
       <div className="logo">
-        <IndexLink to="/" activeClassName="active"><img src={logo} className="image" alt="IHAP Logo" /></IndexLink>
+        <Link to="/"><img src={logo} className="image" alt="IHAP Logo" /></Link>
       </div>
 
       <div className="center">
@@ -26,9 +26,9 @@ const Header = ({ loading }) => {
       </div>
 
       <div className="user">
-        <Link to="/signin" activeClassName="active"><Button className="button" color="primary" size="sm">Log in</Button></Link>
+        <Link to="/signin"><Button className="button" color="primary" size="sm">Log in</Button></Link>
         <br />
-        <Link to="/signup" activeClassName="active"><Button className="button" color="primary" size="sm">Sign up</Button></Link>
+        <Link to="/signup"><Button className="button" color="primary" size="sm">Sign up</Button></Link>
       </div>
     </nav>
   );
