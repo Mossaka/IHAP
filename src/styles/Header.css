@@ -1,0 +1,18 @@
+.image {
+    height: 80px;
+}
+.upsidedownImage {
+    height: 80px;
+    transform: rotate(180deg);
+}
+
+.button {
+    width: 100px; 
+}
+
+.left {
+    float:left;
+}
+.right {
+    float:right; 
+}

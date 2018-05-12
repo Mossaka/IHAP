@@ -49,7 +49,7 @@ export default class Signin extends React.Component {
               <h2 className="text-center"> Sign In</h2>
                 <FormGroup>
                   <Label for="email">Email Addess</Label>
-                  <Input type="email" id="SigninEmail" placeholder="Email Addess" 
+                  <Input type="email" id="SigninEmail" placeholder="Email Address" 
                          onChange={this.handleChange}
                   />
                 </FormGroup>
