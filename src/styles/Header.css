@@ -1,15 +1,33 @@
 .image {
     height: 80px;
 }
-.upsidedownImage {
-    height: 80px;
-    transform: rotate(180deg);
-}
 
 .button {
     width: 100px; 
+    margin: 2px;
 }
 
+.clickable:hover {
+    cursor: pointer;
+}
+
+#searchBar {
+    
+}
+
+#lever {
+    position:relative;
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    width: 90px;
+}
+
+#search {
+    position: absolute;
+    text-align: left;
+    bottom: 0;
+}
 
 #nav {
     display: flex;
