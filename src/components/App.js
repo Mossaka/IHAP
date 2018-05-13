@@ -3,7 +3,7 @@ import logo from '../assets/logo.png';
 import '../styles/App.css';
 import Header from './common/Header';
 import Signup from './common/Signup';
-import Signin from './common/Signup';
+import Signin from './common/Signin';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 class App extends Component {
