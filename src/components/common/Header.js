@@ -58,7 +58,7 @@ export default class Header extends React.Component {
     return (
       <nav id='nav'>
         <Col className="logo" xs="3">
-          <IndexLink to="/" activeClassName="active"><img src={logo} className="image" alt="IHAP Logo" /></IndexLink>
+          <Link to="/"><img src={logo} className="image" alt="IHAP Logo" /></Link>
         </Col>
   
         <Col className="center" xs="auto">
