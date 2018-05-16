@@ -1,0 +1,30 @@
+.story-preview {
+    margin-bottom: 1rem;
+}
+.card-img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.avatar {
+    border-radius: 50%;
+    float: left;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    background-color: #F7EEE7;
+}
+
+.card-author-info { 
+    margin-top: auto;
+}
+
+polygon:hover {
+    fill: rgba(242, 211, 56, 0.8)
+}
+
+polygon {
+    fill: rgba(242,211,56, .4)
+}

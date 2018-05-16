@@ -3,11 +3,37 @@ import {Link} from 'react-router';
 import StoryPreview from './StoryPreview';
 
 class HomePage extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-      <div>
-        <h1>HomePage</h1>
-        <StoryPreview />
+      <div className='container'>
+        <h3 className='my-5'>Top Stories</h3>
+        <hr/>
+        <div className="card-deck">
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+          <StoryPreview />
+        </div>
       </div>
     );
   }
