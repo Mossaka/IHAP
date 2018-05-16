@@ -5,6 +5,7 @@ import Header from './common/Header';
 import Signup from './common/Signup';
 import Signin from './common/Signin';
 import { BrowserRouter, Route } from 'react-router-dom';
+import HomePage from './home/HomePage';
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
         </header>
         <Route path="/signup" component={Signup}/>
         <Route path="/signin" component={Signin}/>
+        <HomePage />
       </div>
     );
   }
