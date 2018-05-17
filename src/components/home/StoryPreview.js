@@ -26,12 +26,12 @@ class StoryPreview extends React.Component {
                 <h6 className="card-title">Card Title</h6>
                 <p className="card-text" style={{fontSize: '14px'}}>Story Preview.</p>
                 <div className="card-author-info">
-                  <a href='/'>
+                  <Link to='/profile'>
                     <img className="avatar" src={avatar} style={{width: '35px'}} alt="Avatar" />
-                  </a>
-                  <a href='/'>
+                  </Link>
+                  <Link to='/profile'>
                     <p className='w-60 pt-3 mb-0 ml-1' style={{fontSize: '15px', float:'left'}}>username</p>
-                  </a>
+                  </Link>
                 </div>
             </div>
         </div>
