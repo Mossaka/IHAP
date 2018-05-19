@@ -14,7 +14,7 @@ class StoryPreview extends React.Component {
   render() {
     return (
       <div className="story-preview">
-        <div className="card" style={{"max-width": "14rem"}}>
+        <div className="card" >
             <img className="card-img-top img-fluid card-img" src={greycard} alt="Card image cap" />
             {/* there will be problem here if image is not fixed size. I set the card-img-overlay to a fixed size */}
             <div class="card-img-overlay" style={{height:'100px'}}> 

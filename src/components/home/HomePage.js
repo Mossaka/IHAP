@@ -7,32 +7,25 @@ class HomePage extends React.Component {
     super(props);
   }
 
+  generateCard(num) {
+    var a = []
+    for(let i = 0; i < num; i++) {
+      a.push((
+        <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
+          <StoryPreview />
+        </div>
+      ))
+    }
+    return a;
+  }
+
   render() {
     return (
       <div className='container'>
         <h3 className='my-5'>Top Stories</h3>
         <hr/>
-        <div className="card-deck">
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
-          <StoryPreview />
+        <div className = "row">
+          { this.generateCard(12) }
         </div>
       </div>
     );
