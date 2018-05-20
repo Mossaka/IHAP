@@ -18,41 +18,44 @@ class StoryPreview extends React.Component {
         ticketDetails: "Ticket details... "
       }
 
-      this.updateStateData = this.updateStateData.bind(this);
 
       var ticket = firebase.database().ref('tickets/' + this.props.ticketID);
+      ticket.once("value").then((snapshot) => {
+        if(snapshot.exists() && snapshot.child('problem').exists()){
+          var problemid = snapshot.child('problem').val();
+          var problem = firebase.database().ref('problems/' + problemid);
+          problem.on("value", (snapshot) => {
+            if(snapshot.exists()) {
+              this.setState({
+                image: snapshot.child('image').val(),
+                ticketTitle: snapshot.child('title').val().substring(0, 30),
+                ticketDetails: snapshot.child('story').val().substring(0, 100)
+              })
+              console.log(this.state.ticketTitle);
+            }
+          }); 
+        }
+        
+        if(snapshot.exists() && snapshot.child('owner').exists()) {
+          var userid = snapshot.child('owner').val();
+          var user = firebase.database().ref('users/' + userid); 
+          user.once("value").then((snapshot) => {
+            if(snapshot.exists()) {
+              this.setState({
+                avatar: snapshot.child('avatar').val(),
+                username: snapshot.child('username').val()
+              })
+            }
+          })
+        }
+        
 
-      ticket.once("value").then(snapshot => this.updateStateData(snapshot)); 
+      })
 
   }
 
-  updateStateData(ticketSnapshot) {
-    if(ticketSnapshot.exists() && ticketSnapshot.child('problem').exists()) {
-      var problemid = ticketSnapshot.child('problem').val();
-      var problem = firebase.database().ref('problems/' + problemid);
-      problem.once("value").then((snapshot) => {
-        this.setState({
-          image: snapshot.child('image').val(),
-          ticketTitle: snapshot.child('title').val().substring(0, 30),
-          ticketDetails: snapshot.child('story').val().substring(0, 100)
-        })
-      })
-    }
-
-    if(ticketSnapshot.exists() && ticketSnapshot.child('owner').exists()) {
-      var userid = ticketSnapshot.child('owner').val();
-      var user = firebase.database().ref('users/' + userid); 
-      user.once("value").then((snapshot) => {
-        this.setState({
-          avatar: snapshot.child('avatar').val(),
-          username: snapshot.child('username').val()
-        })
-      })
-    }
-  }
 
   render() {
-    
 
     return (
       <div className="story-preview">
