@@ -1,25 +1,28 @@
 .searchTitle{
     margin: auto;
     max-width:80%;
+    padding: 2rem 1rem 1rem 1rem;
+}
+
+.filterItem {
+    font-size: 0.8rem;
+}
+
+.left {
     text-align: left;
-    padding: 2rem 2rem 1rem 2rem
+    vertical-align: baseline;
+    float: left;
+    clear: none;
+    width: 85%;
 }
 
-.filter{
+.right {
+    text-align: right;
+    vertical-align: text-bottom;
     float: right;
-    display: flex;
-    overflow: auto;
-    margin: auto;
-    padding: 10px 20px 10px 20px;
-}
-
-.titleBox{
-    width:90%;
-    margin: auto;
-    display: flex;
-    overflow: auto;
-    padding: 30px 20px 10px 0px;
-    
+    clear: none;
+    width: 15%;
+    height: 80%
 }
 
 .search {

@@ -25,11 +25,11 @@ export default class FilterButton extends React.Component {
           Filter by
         </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem >relevant</DropdownItem>
+          <DropdownItem className="filterItem">relevant</DropdownItem>
           <DropdownItem divider />
-          <DropdownItem >time</DropdownItem>
+          <DropdownItem className="filterItem">time</DropdownItem>
           <DropdownItem divider />
-          <DropdownItem >votes</DropdownItem>
+          <DropdownItem className="filterItem">votes</DropdownItem>
         </DropdownMenu>
       </ButtonDropdown>
     );

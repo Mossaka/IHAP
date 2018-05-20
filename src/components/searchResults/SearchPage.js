@@ -13,15 +13,9 @@ class SearchPage extends React.Component {
   render() {
     return (
       <div className='container'>
-        
-        <div className = 'titleBox'>
-          <div className = 'textbox'>
-            <h3> Search Results </h3>
-          </div>
-          <div claddName = 'userbox'>
-            <FilterButton width='16' height='' style={{float:'right'}}/>
-          </div>
-          
+        <div className = 'searchTitle'>
+          <h3 className = 'left'> Search Results </h3>
+          <FilterButton className = 'right'/>
         </div>
         <hr/>
         
