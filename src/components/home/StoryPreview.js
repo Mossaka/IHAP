@@ -10,6 +10,7 @@ class StoryPreview extends React.Component {
   constructor(props) {
       super(props)
 
+      // Initialize states for this Story Preview component
       this.state = {
         avatar: avatar,
         image: greycard,
@@ -18,24 +19,26 @@ class StoryPreview extends React.Component {
         ticketDetails: "Ticket details... "
       }
 
-
+      // Get the ticket from database
       var ticket = firebase.database().ref('tickets/' + this.props.ticketID);
+      // Once we get the ticket snapshot, 
       ticket.once("value").then((snapshot) => {
+        // If the problem field exists, bind a value change listener to the problem object in database
         if(snapshot.exists() && snapshot.child('problem').exists()){
           var problemid = snapshot.child('problem').val();
           var problem = firebase.database().ref('problems/' + problemid);
           problem.on("value", (snapshot) => {
+            // If snapshot exists, log the changes to the component's state
             if(snapshot.exists()) {
               this.setState({
                 image: snapshot.child('image').val(),
                 ticketTitle: snapshot.child('title').val().substring(0, 30),
                 ticketDetails: snapshot.child('story').val().substring(0, 100)
               })
-              console.log(this.state.ticketTitle);
             }
           }); 
         }
-        
+        // If the owner field exists, set the avatar and username for this component
         if(snapshot.exists() && snapshot.child('owner').exists()) {
           var userid = snapshot.child('owner').val();
           var user = firebase.database().ref('users/' + userid); 
@@ -48,10 +51,7 @@ class StoryPreview extends React.Component {
             }
           })
         }
-        
-
       })
-
   }
 
 
