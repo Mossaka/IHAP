@@ -7,11 +7,12 @@ import HomePage from './home/HomePage';
 import ProfilePage from './profile/ProfilePage';
 import ViewTicket from './ticket/ViewTicket';
 import SearchPage from './searchResults/SearchPage';
+import './App.css';
 
 export default class App extends React.Component {
   render() {
     return (
-      <React.Fragment>
+      <div className="app">
         <Header />
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
@@ -21,7 +22,7 @@ export default class App extends React.Component {
           <Route path="/search" component={SearchPage} />
           <Route component={HomePage} />
         </Switch>
-      </React.Fragment>
+      </div>
     );
   }
 }
