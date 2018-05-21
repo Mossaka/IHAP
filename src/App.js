@@ -5,7 +5,7 @@ import Signup from './common/Signup';
 import Signin from './common/Signin';
 import HomePage from './home/HomePage';
 import ProfilePage from './profile/ProfilePage';
-import ViewTicket from './ticket/ViewTicket';
+import TicketPage from './ticket/TicketPage';
 import SearchPage from './searchResults/SearchPage';
 import './App.css';
 
@@ -18,7 +18,7 @@ export default class App extends React.Component {
         <Route path="/signin" component={Signin} />
         <Switch>
           <Route path="/profile" component={ProfilePage} />
-          <Route path="/tickets" component={ViewTicket} />
+          <Route path="/ticket/:id" component={TicketPage} />
           <Route path="/search" component={SearchPage} />
           <Route component={HomePage} />
         </Switch>
