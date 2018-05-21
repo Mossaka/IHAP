@@ -2,8 +2,11 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import lever from '../../assets/lever.png';
+import avatar from '../../assets/img_avatar.png'
+
 import '../../styles/Header.css';
-import { Button, Col, Input } from 'reactstrap';
+
+import { Button, Col, Input, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 
 export default class Header extends React.Component {
@@ -12,11 +15,16 @@ export default class Header extends React.Component {
     this.state = {
       random: false,
       rotation: 0,
-      loggedIn: false
+      searchDropdownOpen: false,
+      userDropdownOpen: false,
+      loggedIn: true
     }
     this.handleLeverClick = this.handleLeverClick.bind(this);
     this.setRandom = this.setRandom.bind(this);
     this.setSearch = this.setSearch.bind(this);
+    this.toggleSearch = this.toggleSearch.bind(this);
+    this.toggleUserDropdown = this.toggleUserDropdown.bind(this);
+
   }
 
   handleLeverClick() {
@@ -45,23 +53,66 @@ export default class Header extends React.Component {
     );
   }
 
+  toggleSearch() {
+    this.setState({
+      searchDropdownOpen: !this.state.searchDropdownOpen
+    });
+  }
+
+  toggleUserDropdown() {
+    this.setState({
+      userDropdownOpen: !this.state.userDropdownOpen
+    });
+  }
+
 
   render() {
     const searchOrButton = this.state.random ? (
-      <Button color="primary">GET RANDOM TICKET</Button>
+      <div className="searchOrRandom">
+        <Button className="searchOrRandomItem" color="secondary" block >GET RANDOM TICKET</Button>
+      </div>
     ) : (
-      <div> 
-        <Input type="search" name="search" placeholder="Search" />
-        <Button color="primary">SEARCH</Button>
+      <div className="searchOrRandom">
+        <Input className="searchOrRandomItem"  type="search" name="search" placeholder="Search" />
+        <ButtonDropdown className="searchOrRandomItem" isOpen={this.state.searchDropdownOpen} toggle={this.toggleSearch}>
+        <DropdownToggle caret color="secondary" >
+          Search
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem>Search Tickets</DropdownItem>
+          <DropdownItem>Search Users</DropdownItem>
+        </DropdownMenu>
+      </ButtonDropdown>
       </div>
     ); 
+
+    const loggedInOrNot = this.state.loggedIn ? (
+      <div className="loggedInOrNotElements">
+        <img className="avatar" src={avatar} style={{width: '35px'}} alt="Avatar" />
+        <ButtonDropdown isOpen={this.state.userDropdownOpen} toggle={this.toggleUserDropdown}>
+          <Button id="caret" color="secondary">username</Button>
+          <DropdownToggle caret color="secondary" />
+          <DropdownMenu>
+            <DropdownItem >Settings</DropdownItem>
+            <DropdownItem >Logout</DropdownItem>
+          </DropdownMenu>
+        </ButtonDropdown>
+      </div>
+    ) : (
+      <div className="loggedInOrNotElements">
+        <Link to="/signin" activeClassName="active"><Button className="button" color="secondary" size="sm">Sign in</Button></Link>
+            <br />
+        <Link to="/signup" activeClassName="active"><Button className="button" color="secondary" size="sm">Sign up</Button></Link>
+      </div>
+    ); 
+
     return (
       <nav id='nav'>
         <Col className="logo" xs="3">
           <Link to="/"><img src={logo} className="image" alt="IHAP Logo" /></Link>
         </Col>
   
-        <Col className="center" xs="auto">
+        <Col className="center" xs="6">
           {searchOrButton}
           <div id="lever">
             <div>
@@ -75,9 +126,7 @@ export default class Header extends React.Component {
         </Col>
   
         <Col className="user" xs="3">
-          <Link to="/signin" activeClassName="active"><Button className="button" color="primary" size="sm">Log in</Button></Link>
-          <br />
-          <Link to="/signup" activeClassName="active"><Button className="button" color="primary" size="sm">Sign up</Button></Link>
+          {loggedInOrNot}
         </Col>
       </nav>
     );
