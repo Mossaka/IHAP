@@ -1,0 +1,72 @@
+.avatar {
+    border-radius: 50%;
+    float: left;
+}
+
+.image {
+    height: 80px;
+}
+
+.button {
+    width: 100px; 
+    margin: 2px;
+}
+
+.clickable:hover {
+    cursor: pointer;
+}
+
+#nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: #222;
+    padding: 10px; 
+}
+
+.center {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.searchOrRandom {
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+
+}
+
+.searchOrRandomItem {
+    height: 40px;
+}
+
+.loggedInOrNotElements {
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
+
+#lever {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    width: 90px;
+}
+
+#search {
+    position: absolute;
+    text-align: left;
+    bottom: 0;
+}
+
