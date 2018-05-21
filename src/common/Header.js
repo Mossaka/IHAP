@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import lever from '../assets/lever.png';
-import avatar from '../assets/img_avatar.png';
+import avatar from '../assets/img_avatar.png'
+import * as global from '../global.js'
 import User from './User';
-
 import './Header.css';
 
 import { Button, Col, Input, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
@@ -17,6 +17,8 @@ export default class Header extends React.Component {
       random: false,
       rotation: 0,
       searchDropdownOpen: false,
+      searching: 'Tickets',
+      keyword: '',
       userDropdownOpen: false,
       loggedIn: false,
       showSignup: false
@@ -26,7 +28,17 @@ export default class Header extends React.Component {
     this.setSearch = this.setSearch.bind(this);
     this.toggleSearch = this.toggleSearch.bind(this);
     this.toggleUserDropdown = this.toggleUserDropdown.bind(this);
+    this.searchTickets = this.searchTickets.bind(this);
+    this.searchUsers = this.searchUsers.bind(this);
+    this.searchBarOnChange = this.searchBarOnChange.bind(this);
+  }
 
+  searchBarOnChange(e) {
+    this.setState (
+      {
+        keyword: e.target.value,
+      }
+    );
   }
 
   handleLeverClick() {
@@ -56,15 +68,37 @@ export default class Header extends React.Component {
   }
 
   toggleSearch() {
-    this.setState({
-      searchDropdownOpen: !this.state.searchDropdownOpen
-    });
+    this.setState(
+      {
+        
+        searchDropdownOpen: !this.state.searchDropdownOpen
+      }
+    );
   }
 
   toggleUserDropdown() {
-    this.setState({
-      userDropdownOpen: !this.state.userDropdownOpen
-    });
+    this.setState(
+      {
+        userDropdownOpen: !this.state.userDropdownOpen
+      }
+    );
+  }
+
+  searchTickets() {
+    this.setState (
+      {
+        searching: "Tickets"
+      }
+    );
+
+  }
+
+  searchUsers() {
+    this.setState (
+      {
+        searching: "Users"
+      }
+    );
   }
 
 
@@ -74,19 +108,19 @@ export default class Header extends React.Component {
         <Button className="searchOrRandomItem" color="secondary" block >GET RANDOM TICKET</Button>
       </div>
     ) : (
-        <div className="searchOrRandom">
-          <Input className="searchOrRandomItem" type="search" name="search" placeholder="Search" />
-          <ButtonDropdown className="searchOrRandomItem" isOpen={this.state.searchDropdownOpen} toggle={this.toggleSearch}>
-            <DropdownToggle caret color="secondary" >
-              Search
+      <div className="searchOrRandom">
+        <Input className="searchOrRandomItem"  type="search" name="search" placeholder="Search" onChange={this.searchBarOnChange}/>
+        <ButtonDropdown className="searchOrRandomItem" isOpen={this.state.searchDropdownOpen} toggle={this.toggleSearch}>
+        <DropdownToggle caret color="secondary" >
+          Search {this.state.searching}
         </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem>Search Tickets</DropdownItem>
-              <DropdownItem>Search Users</DropdownItem>
-            </DropdownMenu>
-          </ButtonDropdown>
-        </div>
-      );
+        <DropdownMenu>
+          <Link to={"/search/" + global.TICKETS + "/" + this.state.keyword}> <DropdownItem onClick={this.searchTickets}>Search Tickets</DropdownItem></Link>
+          <Link to={"/search/" + global.USERS + "/" + this.state.keyword}><DropdownItem onClick={this.searchUsers}>Search Users</DropdownItem></Link>
+        </DropdownMenu>
+      </ButtonDropdown>
+      </div>
+    ); 
 
     const loggedInOrNot = this.state.loggedIn ? (
       <div className="loggedInOrNotElements">
