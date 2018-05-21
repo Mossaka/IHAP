@@ -1,83 +1,74 @@
 import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import firebase from 'firebase';
-
-const INITIAL_STATE = {
-  username: '',
-  email: '',
-  password: '',
-  password2: '',
-  error: null,
-  modal: true,
-};
 
 export default class Signup extends React.Component {
   constructor(props) {
     super(props);
-    this.state = INITIAL_STATE;
+    this.state = {
+      name: '',
+      email: '',
+      pass: '',
+      pass2: '',
+      error: null,
+      match: null
+    };
   }
 
   handleChange = (e) => {
     const target = e.target;
-    if (target.type === 'text') {
-      this.setState({ 'username': target.value })
-    } else {
-      this.setState({
-        [target.type]: target.value
-      });
+    this.setState({
+      [target.name]: target.value
+    });
+
+    if (target.name === 'pass2') {
+      if (target.value !== this.state.pass) {
+        this.setState({ match: false });
+      }
+      else {
+        this.setState({ match: true });
+      }
     }
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    alert(this.state.username + this.state.email + this.state.password)
-    const {
-      username,
-      email,
-      password
-    } = this.state;
-    firebase.auth().doCreateUserWithEmailAndPassword(email, password)
-      .then(authUser => {
-        // this.setState(()=> ({ ...INITIAL_STATE }))
-        firebase.database().doCreateUser(authUser.uid, username, email)
-          .then(() => {
-            this.setState(() => ({ ...INITIAL_STATE }));
-          }).catch(error => { alert(error) })
-      }).catch(error => { console.log(error) })
-    this.toggle();
+    if (!this.state.match) return;
 
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass)
+      .then(res => {
+        firebase.database().ref('profiles/' + res.user.uid)
+          .set({
+            username: this.state.name
+          });
+      })
+      .catch(e => {
+        this.setState({ error: e.message });
+      });
   }
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <h2 className="text-center"> Sign Up </h2>
+      <Form onSubmit={this.handleSubmit} >
         <FormGroup>
-          <Label for="username">User Name</Label>
-          <Input type="username"
-            id="SignupUsername"
-            placeholder="Username"
-            onChange={this.handleChange}
-          />
+          <Label>User Name</Label>
+          <Input type="text" name="name" onChange={this.handleChange} value={this.state.name} required />
         </FormGroup>
         <FormGroup>
-          <Label for="email">Email Addess</Label>
-          <Input type="email" id="SignupEmail" placeholder="Email Addess"
-            onChange={this.handleChange} />
+          <Label>Email Addess</Label>
+          <Input type="email" name="email" onChange={this.handleChange} value={this.state.email} required />
         </FormGroup>
         <FormGroup>
-          <Label for="password">Password</Label>
-          <Input type="password" id="SignupPassword" placeholder="Password"
-            onChange={this.handleChange} />
+          <Label>Password</Label>
+          <Input type="password" name="pass" onChange={this.handleChange} value={this.state.pass} required />
         </FormGroup>
         <FormGroup>
-          <Label for="password">Confirm Password</Label>
-          <Input type="password" id="SignupConfirmPassword" placeholder="Confirm Password"
-            onChange={this.handleChange} />
+          <Label>Confirm Password</Label>
+          <Input type="password" name="pass2" onChange={this.handleChange} value={this.state.pass2} required />
         </FormGroup>
-        <FormGroup>
-          <Button color="primary" size="lg" block type="submit">Sign Up</Button>
-        </FormGroup>
+        {this.state.match === false && <Alert color="danger">Password doesn't match</Alert>}
+        {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
+        <Button color="primary">Sign Up</Button>
       </Form>
     );
   }

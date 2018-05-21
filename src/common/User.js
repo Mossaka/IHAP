@@ -8,7 +8,8 @@ import avatar from '../assets/img_avatar.png';
 
 const STR = {
   in: 'Sign In',
-  up: 'Sign Up'
+  up: 'Sign Up',
+  name: ''
 }
 
 export default class User extends React.Component {
@@ -22,6 +23,10 @@ export default class User extends React.Component {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+        firebase.database().ref('profiles/' + user.uid + '/username').once('value')
+          .then(snapshot => {
+            this.setState({ name: snapshot.val() });
+          });
         this.setState({
           mode: null,
           loggedIn: true
@@ -55,7 +60,7 @@ export default class User extends React.Component {
         <div className="user">
           <img src={avatar} />
           <Dropdown isOpen={this.state.dropdown} toggle={this.toggleDropdown}>
-            <DropdownToggle>Username</DropdownToggle>
+            <DropdownToggle>{this.state.name}</DropdownToggle>
             <DropdownMenu>
               <DropdownItem>Settings</DropdownItem>
               <DropdownItem onClick={this.handleLogout}>Logout</DropdownItem>
@@ -69,7 +74,7 @@ export default class User extends React.Component {
         <div className="user">
           <Button size="sm" onClick={() => this.setState({ mode: 'in' })}>Sign in</Button>
           <Button size="sm" onClick={() => this.setState({ mode: 'up' })}>Sign up</Button>
-          <Modal isOpen={this.state.mode} toggle={this.closeModal}>
+          <Modal isOpen={this.state.mode !== null} toggle={this.closeModal}>
             <ModalHeader toggle={this.closeModal}>{STR[this.state.mode]}</ModalHeader>
             <ModalBody>
               {this.state.mode === 'in' && <Signin />}

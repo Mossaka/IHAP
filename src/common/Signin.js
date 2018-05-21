@@ -19,11 +19,8 @@ export default class Signin extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(res => {
-        console.log(res);
-      })
       .catch(e => {
-        this.setState({ error: e });
+        this.setState({ error: e.message });
       });
   }
 
@@ -38,7 +35,7 @@ export default class Signin extends React.Component {
           <Label>Password</Label>
           <Input type="password" onChange={this.handleChange} value={this.state.password} />
         </FormGroup>
-        {this.state.error && <Alert color="danger">{this.state.error.message}</Alert>}
+        {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
         <Button color="primary">Sign In</Button>
       </Form>
     );
