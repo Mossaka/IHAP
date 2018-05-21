@@ -14,6 +14,7 @@ export default class Editor extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log(e)
+    this.props.onSubmit()
   }
 
   handleImage = (e) => {
@@ -43,7 +44,7 @@ export default class Editor extends React.Component {
         </FormGroup>
         <FormGroup>
           <Label>Thumbnail</Label>
-          <CustomInput type="file" label="Yo, pick a file!" onChange={this.handleImage}/>
+          <CustomInput id="fileInput" type="file" label="Yo, pick a file!" onChange={this.handleImage}/>
         </FormGroup>
         <ReactQuill value={this.state.text} modules={modules} onChange={this.handleChange} />
         <FormGroup>
