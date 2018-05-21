@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import greycard from '../../assets/greycard.jpg'
-import avatar from '../../assets/img_avatar.png'
+import greycard from '../assets/greycard.jpg'
+import avatar from '../assets/img_avatar.png'
 import firebase from 'firebase';
-// import bookmark from '../../assets/bookmark.png'
-import '../../styles/StoryPreview.css'
+// import bookmark from '../assets/bookmark.png'
+import './StoryPreview.css'
 
 class StoryPreview extends React.Component {
   constructor(props) {

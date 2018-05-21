@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import avatar from '../../assets/img_avatar.png'
-// import bookmark from '../../assets/bookmark.png'
-import '../../styles/SearchPreview.css'
+import avatar from '../assets/img_avatar.png'
+// import bookmark from '../assets/bookmark.png'
+import './SearchPreview.css'
 
 
 class SearchPreview extends React.Component {

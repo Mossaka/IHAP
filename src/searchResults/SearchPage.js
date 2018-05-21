@@ -3,7 +3,7 @@ import SearchPreview from './SearchPreview';
 import FilterButton from './FilterButton';
 import { Button, Col, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import '../../styles/SearchPreview.css'
+import './SearchPreview.css'
 
 class SearchPage extends React.Component {
   constructor(props) {

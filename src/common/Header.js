@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/logo.png';
-import lever from '../../assets/lever.png';
-import avatar from '../../assets/img_avatar.png'
+import logo from '../assets/logo.png';
+import lever from '../assets/lever.png';
+import avatar from '../assets/img_avatar.png'
 
-import '../../styles/Header.css';
+import './Header.css';
 
 import { Button, Col, Input, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 

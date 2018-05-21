@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {browserHistory} from 'react-router';
-import avatar from '../../assets/img_avatar.png';
+import avatar from '../assets/img_avatar.png';
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 export default class TicketBar extends React.Component {
