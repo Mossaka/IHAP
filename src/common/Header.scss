@@ -42,6 +42,16 @@
     .searchOrRandomItem {
         height: 40px;
     }
+
+    .randomButton {
+        color: white;
+        display: block;
+        height: 100%;
+    }
+
+    .randomButton:hover {
+        text-decoration: none;
+    }
     
     .loggedInOrNotElements {
         width: 100%;
@@ -50,7 +60,7 @@
         align-items: center;
         justify-content: center;
     }
-    
+
     #lever {
         position: relative;
         display: flex;

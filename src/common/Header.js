@@ -104,7 +104,7 @@ export default class Header extends React.Component {
   render() {
     const searchOrButton = this.state.random ? (
       <div className="searchOrRandom">
-        <Button className="searchOrRandomItem" color="secondary" block >GET RANDOM TICKET</Button>
+        <Button className="searchOrRandomItem" color="secondary" block ><Link className="randomButton" to={"/ticket/" + Math.ceil(Math.random() * 1)}>GET RANDOM TICKET</Link></Button>
       </div>
     ) : (
       <div className="searchOrRandom">
@@ -114,7 +114,7 @@ export default class Header extends React.Component {
           Search {this.state.searching}
         </DropdownToggle>
         <DropdownMenu>
-          <Link to={"/search/" + global.TICKETS + "/" + this.state.keyword}> <DropdownItem onClick={this.searchTickets}>Search Tickets</DropdownItem></Link>
+          <Link to={"/search/" + global.TICKETS + "/" + this.state.keyword}><DropdownItem onClick={this.searchTickets}>Search Tickets</DropdownItem></Link>
           <Link to={"/search/" + global.USERS + "/" + this.state.keyword}><DropdownItem onClick={this.searchUsers}>Search Users</DropdownItem></Link>
         </DropdownMenu>
       </ButtonDropdown>
