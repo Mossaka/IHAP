@@ -19,7 +19,7 @@ export default class App extends React.Component {
         <Switch>
           <Route path="/profile" component={ProfilePage} />
           <Route path="/ticket/:id" component={TicketPage} />
-          <Route path="/search" component={SearchPage} />
+          <Route path="/search/:type/:keyword" component={SearchPage} />
           <Route component={HomePage} />
         </Switch>
       </div>

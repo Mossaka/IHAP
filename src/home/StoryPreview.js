@@ -60,27 +60,30 @@ class StoryPreview extends React.Component {
     return (
       <div className="story-preview">
         <div className="card" >
-          <img className="card-img-top img-fluid card-img" src={this.state.image} alt="Card image cap" />
-          {/* there will be problem here if image is not fixed size. I set the card-img-overlay to a fixed size */}
-          <div className="card-img-overlay" style={{ height: '100px' }}>
-            <svg width='16' height='42' style={{ float: 'right' }}>
-              <polygon points='0,0 0,33 8,40 16,33 16,0' />
-            </svg>
-          </div>
-          <div className="card-body pb-1 pl-1 pr-1">
-            <h6 className="card-title">
-              <Link to={'/ticket/' + this.props.ticketID}>{this.state.ticketTitle}</Link>
-            </h6>
-            <p className="card-text" style={{ fontSize: '14px' }}>{this.state.ticketDetails}</p>
-            <div className="card-author-info">
-              <Link to='/profile'>
-                <img className="avatar" src={this.state.avatar} alt="Avatar" />
-              </Link>
-              <Link to='/profile'>
-                <p className='w-60 pt-3 mb-0 ml-1' style={{ fontSize: '15px', float: 'left' }}>{this.state.username}</p>
-              </Link>
+          <Link className="clickable-card" to={'/ticket/' + this.props.ticketID}>
+            <img className="card-img-top img-fluid card-img" src={this.state.image} alt="Card image cap" />
+            {/* there will be problem here if image is not fixed size. I set the card-img-overlay to a fixed size */}
+            <div className="card-img-overlay" style={{ height: '100px' }}>
+              <svg width='16' height='42' style={{ float: 'right' }}>
+                <polygon points='0,0 0,33 8,40 16,33 16,0' />
+              </svg>
             </div>
-          </div>
+            
+            <div className="card-body pb-1 pl-1 pr-1">
+              <h6 className="card-title">
+                {this.state.ticketTitle}
+              </h6>
+              <p className="card-text" style={{ fontSize: '14px' }}>{this.state.ticketDetails}</p>
+              <div className="card-author-info">
+                <Link to='/profile'>
+                  <img className="avatar" src={this.state.avatar} alt="Avatar" />
+                </Link>
+                <Link to='/profile'>
+                  <p className='w-60 pt-3 mb-0 ml-1' style={{ fontSize: '15px', float: 'left' }}>{this.state.username}</p>
+                </Link>
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
     );

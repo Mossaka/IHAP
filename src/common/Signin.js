@@ -58,7 +58,7 @@ export default class Signin extends React.Component {
               <Form onSubmit={this.handleSubmit}>
               <h2 className="text-center"> Sign In</h2>
                 <FormGroup>
-                  <Label for="email">Email Addess</Label>
+                  <Label for="email">Email Address</Label>
                   <Input type="email" id="SigninEmail" placeholder="Email Address"
                          onChange={this.handleChange}
                   />
@@ -66,7 +66,7 @@ export default class Signin extends React.Component {
                 <FormGroup>
                   <Label for="password">Password</Label>
                   <Input type="password" id="SigninPassword" placeholder="Password"
-                         onChange = {this.handleChange}
+                         onChange={this.handleChange}
                   />
                 </FormGroup>
                 <FormGroup>
