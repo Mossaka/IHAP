@@ -14,12 +14,10 @@ export default class App extends React.Component {
     return (
       <div className="app">
         <Header />
-        <Route path="/signup" component={Signup} />
-        <Route path="/signin" component={Signin} />
         <Switch>
-          <Route path="/profile" component={ProfilePage} />
           <Route path="/ticket/:id" component={TicketPage} />
           <Route path="/search" component={SearchPage} />
+          <Route path="/profile" component={ProfilePage} />
           <Route component={HomePage} />
         </Switch>
       </div>
