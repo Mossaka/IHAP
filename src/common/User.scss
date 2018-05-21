@@ -1,14 +1,17 @@
 .user {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   .btn {
-    width: 100px; 
+    width: 100px;
     margin: 2px;
   }
 
-  .loggedInOrNotElements {
-    width: 100%;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  img {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
   }
 }

@@ -129,7 +129,7 @@ export default class Header extends React.Component {
           </div>
         </Col>
 
-        <Col className="user" xs="3">
+        <Col xs="3">
           <User />
         </Col>
       </nav>
