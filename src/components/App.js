@@ -11,7 +11,7 @@ import SearchPage from './searchResults/SearchPage';
 export default class App extends React.Component {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Header />
         <Route path="/signup" component={Signup} />
         <Route path="/signin" component={Signin} />
@@ -21,7 +21,7 @@ export default class App extends React.Component {
           <Route path="/search" component={SearchPage} />
           <Route component={HomePage} />
         </Switch>
-      </div>
+      </React.Fragment>
     );
   }
 }
