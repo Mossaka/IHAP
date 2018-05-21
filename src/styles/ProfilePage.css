@@ -11,6 +11,11 @@
     margin-top: 20px;
 }
 
+#user_image {
+    border-radius: 50%;
+    float: left;
+}
+
 .username {
     margin-left: 7px;
     margin-top: 15px;

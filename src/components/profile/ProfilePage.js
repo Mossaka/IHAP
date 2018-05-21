@@ -51,7 +51,7 @@ export default class ProfilePage extends React.Component {
           <Row>
             <Col xs='3'>
               <div id="user">
-                <img className="avatar" src={avatar} style={{width: '70px'}} alt="Avatar" />
+                <img id="user_image" src={avatar} style={{width: '70px'}} alt="Avatar" />
                 <p className="username" style={{fontSize: '25px', float:'left'}}>username</p>
               </div>
             </Col>
