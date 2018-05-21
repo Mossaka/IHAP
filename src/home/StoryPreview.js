@@ -22,35 +22,47 @@ class StoryPreview extends React.Component {
     // Get the ticket from database
     var ticket = firebase.database().ref('tickets/' + this.props.ticketID);
     // Once we get the ticket snapshot, 
-    ticket.once("value").then((snapshot) => {
+    ticket.once('value').then((snapshot) => {
       // If the problem field exists, bind a value change listener to the problem object in database
       if (snapshot.exists() && snapshot.child('problem').exists()) {
         var problemid = snapshot.child('problem').val();
         var problem = firebase.database().ref('problems/' + problemid);
-        problem.on("value", (snapshot) => {
+        problem.on('value', (snapshot) => {
           // If snapshot exists, log the changes to the component's state
           if (snapshot.exists()) {
             this.setState({
               image: snapshot.child('image').val(),
               ticketTitle: snapshot.child('title').val().substring(0, 30),
-              ticketDetails: snapshot.child('story').val().substring(0, 100)
+              ticketDetails: snapshot.child('story').val().substring(0, 100)            
             })
+            
           }
         });
-      }
-      // If the owner field exists, set the avatar and username for this component
-      if (snapshot.exists() && snapshot.child('owner').exists()) {
-        var userid = snapshot.child('owner').val();
-        var user = firebase.database().ref('users/' + userid);
-        user.once("value").then((snapshot) => {
-          if (snapshot.exists()) {
-            this.setState({
-              avatar: snapshot.child('avatar').val(),
-              username: snapshot.child('username').val()
+
+        // If the owner field of problem exists, set the avatar and username for this component
+        problem.once('value').then((snapshot) => {
+          if (snapshot.exists() && snapshot.child('creator').exists()) {
+            console.log("in here");
+
+            var userid = snapshot.child('creator').val();
+            var user = firebase.database().ref('users/' + userid);
+            user.once('value').then((snapshot) => {
+              if (snapshot.exists() && snapshot.child('profileID').exists()) {
+                var profileID = snapshot.child('profileID').val();
+                var profile = firebase.database().ref('profiles/' + profileID);
+                profile.once('value').then((snapshot) => {
+                  this.setState({
+                    avatar: snapshot.child('avatar').val(),
+                    username: snapshot.child('username').val()
+                  })
+                })
+                
+              }
             })
           }
         })
       }
+      
     })
   }
 
