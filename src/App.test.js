@@ -47,5 +47,5 @@ describe('Header', () =>{
     expect(wrapper.state('random')).toBe(true);
     wrapper.find('img[alt="Lever"]').last().simulate('click');
     expect(wrapper.state('random')).toBe(false);
-  })
+  });
 })

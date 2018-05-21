@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import {auth} from '../../firebase';
+import firebase from 'firebase';
+
 const INITIAL_STATE = {
   email: '',
   password: '',
@@ -31,7 +32,7 @@ export default class Signin extends React.Component {
           password,
         } = this.state;
 
-        auth.doSignInWithEmailAndPassword(email, password)
+        firebase.auth().doSignInWithEmailAndPassword(email, password)
         .then(() => {
           alert("login success");
           this.setState(() => ({ ...INITIAL_STATE }));
