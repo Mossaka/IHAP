@@ -39,7 +39,7 @@ export default class Signup extends React.Component {
       .then(res => {
         firebase.database().ref('profiles/' + res.user.uid)
           .set({
-            username: this.state.name
+            displayName: this.state.name
           });
       })
       .catch(e => {

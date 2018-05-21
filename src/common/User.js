@@ -23,7 +23,7 @@ export default class User extends React.Component {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        firebase.database().ref('profiles/' + user.uid + '/username').once('value')
+        firebase.database().ref('profiles/' + user.uid + '/displayName').once('value')
           .then(snapshot => {
             this.setState({ name: snapshot.val() });
           });
