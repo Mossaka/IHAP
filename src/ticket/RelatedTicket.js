@@ -1,22 +1,19 @@
-import React, {PropTypes} from 'react';
-import { Card, CardText, CardBody, CardTitle, CardLink } from 'reactstrap';
+import React from 'react';
+import { Card, CardBody, CardTitle, CardLink } from 'reactstrap';
 
-class RelatedTicket extends React.Component {
-  constructor(props, context) {
-      super(props, context);
+export default class RelatedTicket extends React.Component {
+  constructor(props) {
+    super(props);
   }
 
   render() {
-      return (
-          <div>
-            <Card>
-              <CardBody>
-                <CardTitle>Related Ticket</CardTitle>
-                <CardLink href="#">Card Link</CardLink>
-              </CardBody>
-            </Card>
-          </div>
-      )
+    return (
+      <Card>
+        <CardBody>
+          <CardTitle>Related Ticket</CardTitle>
+          <CardLink href="#">Card Link</CardLink>
+        </CardBody>
+      </Card>
+    );
   }
-
 }
