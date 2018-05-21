@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router';
 import StoryPreview from './StoryPreview';
 
 class HomePage extends React.Component {
@@ -8,24 +7,24 @@ class HomePage extends React.Component {
   }
 
   generateCard(num) {
-    var a = []
-    for(let i = 0; i < num; i++) {
-      a.push((
-        <div className="col-sm-6 col-md-4 col-lg-3 col-xl-3">
-          <StoryPreview ticketID="1"/>
+    let cards = [];
+    for (let i = 0; i < num; i++) {
+      cards.push(
+        <div key={i} className="col-sm-6 col-md-4 col-lg-3">
+          <StoryPreview ticketID="1" />
         </div>
-      ))
+      );
     }
-    return a;
+    return cards;
   }
 
   render() {
     return (
       <div className='container'>
         <h3 className='my-5'>Top Stories</h3>
-        <hr/>
-        <div className = "row">
-          { this.generateCard(12) }
+        <hr />
+        <div className="row">
+          {this.generateCard(12)}
         </div>
       </div>
     );
