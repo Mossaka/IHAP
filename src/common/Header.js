@@ -1,12 +1,10 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import lever from '../assets/lever.png';
-import avatar from '../assets/img_avatar.png'
-import * as global from '../global.js'
+import * as global from '../global.js';
 import User from './User';
 import './Header.css';
-
 import { Button, Col, Input, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 
@@ -19,7 +17,6 @@ export default class Header extends React.Component {
       searchDropdownOpen: false,
       searching: 'Tickets',
       keyword: '',
-      userDropdownOpen: false,
       loggedIn: false,
       showSignup: false
     }
@@ -27,7 +24,6 @@ export default class Header extends React.Component {
     this.setRandom = this.setRandom.bind(this);
     this.setSearch = this.setSearch.bind(this);
     this.toggleSearch = this.toggleSearch.bind(this);
-    this.toggleUserDropdown = this.toggleUserDropdown.bind(this);
     this.searchTickets = this.searchTickets.bind(this);
     this.searchUsers = this.searchUsers.bind(this);
     this.searchBarOnChange = this.searchBarOnChange.bind(this);
@@ -76,14 +72,6 @@ export default class Header extends React.Component {
     );
   }
 
-  toggleUserDropdown() {
-    this.setState(
-      {
-        userDropdownOpen: !this.state.userDropdownOpen
-      }
-    );
-  }
-
   searchTickets() {
     this.setState (
       {
@@ -121,25 +109,6 @@ export default class Header extends React.Component {
       </ButtonDropdown>
       </div>
     ); 
-
-    const loggedInOrNot = this.state.loggedIn ? (
-      <div className="loggedInOrNotElements">
-        <img className="avatar" src={avatar} style={{ width: '35px' }} alt="Avatar" />
-        <ButtonDropdown isOpen={this.state.userDropdownOpen} toggle={this.toggleUserDropdown}>
-          <Button id="caret" color="secondary">username</Button>
-          <DropdownToggle caret color="secondary" />
-          <DropdownMenu>
-            <DropdownItem >Settings</DropdownItem>
-            <DropdownItem >Logout</DropdownItem>
-          </DropdownMenu>
-        </ButtonDropdown>
-      </div>
-    ) : (
-        <div className="loggedInOrNotElements">
-          <Button className="button" color="secondary" size="sm">Sign in</Button>
-          <Button className="button" color="secondary" size="sm" onClick={() => this.setState({ showSignup: true })}>Sign up</Button>
-        </div>
-      );
 
     return (
       <nav id='nav'>

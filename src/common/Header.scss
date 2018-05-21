@@ -14,11 +14,6 @@
         height: 80px;
     }
     
-    .button {
-        width: 100px; 
-        margin: 2px;
-    }
-    
     .clickable:hover {
         cursor: pointer;
     }
@@ -41,14 +36,6 @@
     
     .searchOrRandomItem {
         height: 40px;
-    }
-    
-    .loggedInOrNotElements {
-        width: 100%;
-        height: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
     
     #lever {
