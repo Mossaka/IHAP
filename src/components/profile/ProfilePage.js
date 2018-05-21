@@ -1,10 +1,12 @@
 import React, {PropTypes} from 'react';
 import {browserHistory} from 'react-router';
 import avatar from '../../assets/img_avatar.png';
-import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Row, Col } from 'reactstrap';
+import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
+import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import classnames from 'classnames';
 import TicketBar from './TicketBar';
 import UserBar from './UserBar';
+import '../../styles/ProfilePage.css';
 
 export default class ProfilePage extends React.Component {
   constructor(props, context) {
@@ -12,9 +14,11 @@ export default class ProfilePage extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.toggleUserTab = this.toggleUserTab.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
     this.state = {
       activeTab: '1',
-      userTab: '1'
+      userTab: '1',
+      dropdownOpen: false
     };
   }
 
@@ -34,21 +38,49 @@ export default class ProfilePage extends React.Component {
     }
   }
 
+  toggleDropdown() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  }
+
+
   render() {
     return (
-        <div>
-          <div>
-            <Row>
-              <Col>
-                <img className="avatar" src={avatar} style={{width: '70px'}} alt="Avatar" />
-                <p className='w-60 pt-3 mb-0 ml-1' style={{fontSize: '15px', float:'left'}}>username</p>
-                <Button color={"primary"}>Follow</Button>
-              </Col>
-            </Row>
-          </div>
-          <div>
-            <Row>
-              <Col xs='8'>
+        <Container>
+          <Row>
+            <Col xs='3'>
+              <div id="user">
+                <img id="user_image" src={avatar} style={{width: '70px'}} alt="Avatar" />
+                <p className="username" style={{fontSize: '25px', float:'left'}}>username</p>
+              </div>
+            </Col>
+            <Col xs='auto'>
+              <div className="info">
+                <Nav>
+                  <NavItem>
+                    <NavLink href='#'>Email</NavLink>
+                  </NavItem>
+                  <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
+                    <DropdownToggle nav caret>Bio</DropdownToggle>
+                    <DropdownMenu>
+                      <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                    </DropdownMenu>
+                  </Dropdown>
+                </Nav>
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs='3'>
+              <div id="follow">
+                <Button color={"primary"} style={{float:'left'}} size="sm">Follow</Button>
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs='8'>
+              <div id="tabs">
                 <Nav tabs>
                   <NavItem>
                     <NavLink className={classnames({active:this.state.activeTab === '1'})} onClick={() => {this.toggle('1')}}>
@@ -79,22 +111,36 @@ export default class ProfilePage extends React.Component {
                 <TabContent activeTab={this.state.activeTab}>
                   <TabPane tabId='1'>
                     <TicketBar />
+                    <TicketBar />
+                    <TicketBar />
                   </TabPane>
                   <TabPane tabId='2'>
+                    <TicketBar />
                     <TicketBar />
                   </TabPane>
                   <TabPane tabId='3'>
                     <TicketBar />
+                    <TicketBar />
+                    <TicketBar />
+                    <TicketBar />
                   </TabPane>
                   <TabPane tabId='4'>
+                    <TicketBar />
+                    <TicketBar />
+                    <TicketBar />
+                    <TicketBar />
+                    <TicketBar />
+                    <TicketBar />
                     <TicketBar />
                   </TabPane>
                   <TabPane tabId='5'>
                     <TicketBar />
                   </TabPane>
                 </TabContent>
-              </Col>
-              <Col xs='4'>
+              </div>
+            </Col>
+            <Col xs='4'>
+              <div id="tabs">
                 <Nav tabs>
                   <NavItem>
                     <NavLink className={classnames({active:this.state.userTab === '1'})} onClick={() => {this.toggleUserTab('1')}}>
@@ -110,15 +156,20 @@ export default class ProfilePage extends React.Component {
                 <TabContent activeTab={this.state.userTab}>
                   <TabPane tabId='1'>
                     <UserBar />
+                    <UserBar />
+                    <UserBar />
+                    <UserBar />
+                    <UserBar />
                   </TabPane>
                   <TabPane tabId='2'>
                     <UserBar />
+                    <UserBar />
                   </TabPane>
                 </TabContent>
-              </Col>
-            </Row>
-          </div>
-        </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
     );
   }
 }

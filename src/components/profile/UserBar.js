@@ -12,12 +12,12 @@ export default class TicketBar extends React.Component {
     return(
         <div>
           <Navbar>
-            <NavbarBrand href="/tickets">
+            <NavbarBrand href="/profile">
               <img className="avatar" src={avatar} style={{width: '35px'}} alt="Avatar" />
             </NavbarBrand>
             <Nav>
               <NavItem navbar>
-                <NavLink href="/tickets">view</NavLink>
+                <NavLink href="/profile">view</NavLink>
               </NavItem>
             </Nav>
           </Navbar>

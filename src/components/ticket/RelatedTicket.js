@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import { db } from "./firebase"
 import { Card, CardText, CardBody, CardTitle, CardLink } from 'reactstrap';
 
 class RelatedTicket extends React.Component {
