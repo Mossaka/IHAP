@@ -1,29 +1,5 @@
-.searchTitle{
-    margin: auto;
-    max-width:80%;
-    padding: 2rem 1rem 1rem 1rem;
-}
+@import "../_global";
 
-.filterItem {
-    font-size: 0.8rem;
-}
-
-.left {
-    text-align: left;
-    vertical-align: baseline;
-    float: left;
-    clear: none;
-    width: 85%;
-}
-
-.right {
-    text-align: right;
-    vertical-align: text-bottom;
-    float: right;
-    clear: none;
-    width: 15%;
-    height: 80%
-}
 
 .search {
     width:100%;
@@ -38,11 +14,11 @@
     background: rgb(207, 232, 240);
     display: flex;
     overflow: auto;
-
 }
 
+
 .search:hover{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: $box-shadow-on-hover;
 }
 
 .container {
@@ -86,3 +62,15 @@
 .search-author-info { 
     margin-top: auto;
 }
+
+polygon:hover {
+    fill: $story-preview-bookmark-tag-fill-color;
+    opacity: 1;
+}
+
+polygon {
+    fill: $story-preview-bookmark-tag-fill-color;
+    opacity: 0.75;
+
+}
+

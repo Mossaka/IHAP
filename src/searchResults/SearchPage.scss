@@ -1,0 +1,28 @@
+.searchpage {
+    .searchTitle{
+        margin: auto;
+        max-width:80%;
+        padding: 2rem 1rem 1rem 1rem;
+    }
+
+    .filterItem {
+        font-size: 0.8rem;
+    }
+
+    .left {
+        text-align: left;
+        vertical-align: baseline;
+        float: left;
+        clear: none;
+        width: 85%;
+    }
+
+    .right {
+        text-align: right;
+        vertical-align: text-bottom;
+        float: right;
+        clear: none;
+        width: 15%;
+        height: 80%
+    }
+}

@@ -3,7 +3,7 @@ import SearchPreview from './SearchPreview';
 import FilterButton from './FilterButton';
 import { Button, Col, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import './SearchPreview.css'
+import './SearchPage.css'
 import * as global from '../global.js'
 
 class SearchPage extends React.Component {
@@ -18,7 +18,7 @@ class SearchPage extends React.Component {
 
   render() {
     return (
-      <div className='container'>
+      <div className='container searchpage'>
         <div className = 'searchTitle'>
           <h3 className = 'left'> {this.state.searchType} Results: {this.props.match.params.keyword}</h3>
           <FilterButton className = 'right'/>
@@ -30,6 +30,10 @@ class SearchPage extends React.Component {
           <SearchPreview />
           <SearchPreview />
           <SearchPreview />
+        </div>
+
+        <div className="create-ticket" style={{marginTop: '1rem'}}>
+          <Button color='warning'>Create Ticket</Button>
         </div>
       </div>
     );
