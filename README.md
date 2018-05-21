@@ -4,7 +4,8 @@ npm start
 
 ## Style Guide
 1. 2 spaces indentation, semicolon at the end of line, single quote string
-2. put scss files next to your component
+2. double quote in JSX
+3. put scss files next to your component
 
 ## How To SASS
 1. add a class name to your component root
