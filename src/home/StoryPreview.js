@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import greycard from '../assets/greycard.jpg'
-import avatar from '../assets/img_avatar.png'
 import firebase from 'firebase';
 // import bookmark from '../assets/bookmark.png'
 import './StoryPreview.css'
 import Bookmark from '../common/Bookmark';
+import Avatar from '../common/Avatar';
+import { spawn } from 'child_process';
 
 class StoryPreview extends React.Component {
   constructor(props) {
@@ -13,12 +14,9 @@ class StoryPreview extends React.Component {
 
     // Initialize states for this Story Preview component
     this.state = {
-      avatar: avatar,
       image: greycard,
-      username: "myusername",
       ticketTitle: "Ticket Title!!",
       ticketDetails: "Ticket details... ",
-      uid: ''
     }
 
     // Get the ticket from database
@@ -30,19 +28,9 @@ class StoryPreview extends React.Component {
         this.setState({
           image: snapshot.child('image').val(),
           ticketTitle: snapshot.child('title').val().substring(0, 30),
-          ticketDetails: snapshot.child('content').val().substring(0, 100)            
-        })
-        if(snapshot.child('creator').exists()) {
-          let userid = snapshot.child('creator').val();
-          let profile = firebase.database().ref('profiles/' + userid);
-          profile.once('value').then((snapshot) => {
-            this.setState({
-              avatar: snapshot.child('avatar').val(),
-              username: snapshot.child('username').val(),
-              uid: userid
-            })
-          })
-        }  
+          ticketDetails: snapshot.child('content').val().substring(0, 100),
+          creator: snapshot.val().creator
+        });
       }
     });
   }
@@ -54,27 +42,19 @@ class StoryPreview extends React.Component {
       <div className="story-preview">
         <div className="card" >
           <Link className="clickable-card" to={'/ticket/' + this.props.ticketID}>
-            
+
             <img className="card-img-top img-fluid card-img" src={this.state.image} alt="Card image cap" />
             {/* there will be problem here if image is not fixed size. I set the card-img-overlay to a fixed size */}
             <div className="card-img-overlay" style={{ height: '100px' }}>
-              <Bookmark ticketID={this.props.ticketID}/>
+              <Bookmark ticketID={this.props.ticketID} />
             </div>
-            
+
             <div className="card-body pb-1 pl-1 pr-1">
               <h6 className="card-title">
                 {this.state.ticketTitle}
               </h6>
               <p className="card-text" style={{ fontSize: '14px' }}>{this.state.ticketDetails}</p>
-              <div className="card-author-info">
-                <Link to={'/profile/' + this.state.uid}>
-                  {/* <img className="avatar" src={this.state.avatar} alt="Avatar" /> */}
-                  <div id="avatar" style={{backgroundImage: `URL(${this.state.avatar})`}}></div>
-                </Link>
-                <Link to={'/profile/' + this.state.uid}>
-                  <p className='w-60 pt-3 mb-0 ml-1' style={{ fontSize: '15px', float: 'left' }}>{this.state.username}</p>
-                </Link>
-              </div>
+              {this.state.creator && <Avatar id={this.state.creator} />}
             </div>
           </Link>
         </div>
