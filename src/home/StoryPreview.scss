@@ -24,17 +24,7 @@
     .card-author-info { 
         margin-top: auto;
     }
-    
-    polygon:hover {
-        fill: $story-preview-bookmark-tag-fill-color;
-        opacity: 1;
-    }
-    
-    polygon {
-        fill: $story-preview-bookmark-tag-fill-color;
-        opacity: 0.75;
 
-    }
     .clickable-card {
         text-decoration: none;
         color: black;

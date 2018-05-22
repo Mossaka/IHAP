@@ -32,10 +32,10 @@ class SearchPage extends React.Component {
         <hr />
 
         <div className="card-deck">
-          <SearchPreview />
-          <SearchPreview />
-          <SearchPreview />
-          <SearchPreview />
+          <SearchPreview ticketID='1'/>
+          <SearchPreview ticketID='1'/>
+          <SearchPreview ticketID='1'/>
+          <SearchPreview ticketID='1'/>
         </div>
 
         <div className="create-ticket" style={{ marginTop: '1rem' }}>
