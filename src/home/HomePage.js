@@ -20,7 +20,7 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className='container mx-5'>
+      <div className='container'>
         <h3 className='my-5'>Top Stories</h3>
         <hr />
         <div className="row">
