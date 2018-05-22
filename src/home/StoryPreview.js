@@ -33,7 +33,7 @@ class StoryPreview extends React.Component {
             this.setState({
               image: snapshot.child('image').val(),
               ticketTitle: snapshot.child('title').val().substring(0, 30),
-              ticketDetails: snapshot.child('story').val().substring(0, 100)            
+              ticketDetails: snapshot.child('content').val().substring(0, 100)            
             })
             
           }
