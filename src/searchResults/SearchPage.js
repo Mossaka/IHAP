@@ -39,7 +39,8 @@ class SearchPage extends React.Component {
         </div>
 
         <div className="create-ticket" style={{ marginTop: '1rem' }}>
-          {this.state.loggedIn ? <NewTicketButton /> : <Button>Sign In to Post</Button>}
+          {this.state.loggedIn ? <Button><Link to="/ticket/new">What's Your Problem</Link></Button>
+            : <Button>Sign In to Post</Button>}
         </div>
       </div>
     );
