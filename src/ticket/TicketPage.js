@@ -1,5 +1,7 @@
 import React from 'react';
 import Solution from './Solution';
+import Content from './Content';
+import Ticket from './Ticket';
 import RelateTicket from './RelatedTicket';
 import { Container, Row, Col } from 'reactstrap';
 import firebase from 'firebase';
@@ -8,22 +10,16 @@ export default class TicketPage extends React.Component {
   constructor(props) {
     super(props);
     if (props.match.params.id === 'new') return;
-
-    let db = firebase.database();
-    db.ref('tickets/' + this.props.match.params.id).once('value').then(t => {
-      this.setState({ ...t.val() });
-    });
   }
 
   render() {
-
     return (
       <Container>
         <Row>
           <Col xs="6">
             <h3>Problem</h3>
             <hr />
-
+            <Ticket id={this.props.match.params.id} />
             <div className="mt-5">
               <RelateTicket />
             </div>
