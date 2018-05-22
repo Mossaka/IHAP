@@ -6,12 +6,12 @@ class HomePage extends React.Component {
     super(props);
   }
 
-  generateCard(num) {
+  generateCard(num, id) {
     let cards = [];
     for (let i = 0; i < num; i++) {
       cards.push(
         <div key={i} className="col-sm-6 col-md-4 col-lg-3">
-          <StoryPreview ticketID="1" />
+          <StoryPreview ticketID={id} />
         </div>
       );
     }
@@ -20,11 +20,23 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className='container'>
+      <div className='container mx-5'>
         <h3 className='my-5'>Top Stories</h3>
         <hr />
         <div className="row">
-          {this.generateCard(12)}
+          {this.generateCard(4, '1')}
+        </div>
+        <h2 className='my-3'>For you</h2>
+        <hr />
+        
+        <div className='row'>
+          {this.generateCard(8, '2')}
+        </div>
+        <h2 className="my-3">Recent Stories</h2>
+        <hr />
+
+        <div className='row'>
+          {this.generateCard(12, '1')}
         </div>
       </div>
     );
