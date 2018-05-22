@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import { Row, Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
+import firebase from 'firebase';
 
 class ProfileSettingPage extends React.Component {
   constructor(props) {
@@ -10,11 +11,12 @@ class ProfileSettingPage extends React.Component {
         lastname: '',
         title: '',
         biography: '',
-        password: '',
+        avatar: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleImage = this.handleImage.bind(this);
   }
 
   handleChange(event) {
@@ -27,9 +29,24 @@ class ProfileSettingPage extends React.Component {
   }
 
   handleSubmit(event) {
-    alert("The new name is " + this.state.firstname + " " + this.state.lastname)
+    // need error handling
+    // console.log(this.props.uid)
+    firebase.database().ref('profiles/' + this.props.uid).update({
+        ...this.state
+    })
     this.props.onSubmit();
     event.preventDefault();
+  }
+
+  handleImage(event) {
+    let file = event.target.files[0]
+    // need to error handling this. vunerable to abusing
+    firebase.storage().ref().child('chicken.jpg').put(file).then(snapshot => {
+        console.log('uploaded a file!');
+        snapshot.ref.getDownloadURL().then(url=>{
+            this.setState({avatar: url})
+        })
+    })
   }
 
 
@@ -59,12 +76,12 @@ class ProfileSettingPage extends React.Component {
                     <textarea type="biography" name="biography" value={this.state.biography} onChange={this.handleChange} className="form-control" id="InputBiography" rows="6"></textarea>
                 </FormGroup>
             </Row>
-            <Row>
+            {/* <Row>
                 <FormGroup className="form-group col-md-12">
                     <Label for="password" className="col-form-label float-left">PASSWORD</Label>
                     <input type="password" name='password' value={this.state.password} onChange={this.handleChange} className="form-control" id="ChangePassword" />
                 </FormGroup>
-            </Row>
+            </Row> */}
             <Row>
                 <FormGroup className="col-md-12">
                     <Label>Thumbnail</Label>

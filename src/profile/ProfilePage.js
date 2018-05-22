@@ -8,6 +8,7 @@ import TicketBar from './TicketBar';
 import UserBar from './UserBar';
 import './ProfilePage.css';
 import ProfileSettingPage from './ProfileSettingPage';
+import firebase from 'firebase';
 
 export default class ProfilePage extends React.Component {
   constructor(props, context) {
@@ -21,9 +22,58 @@ export default class ProfilePage extends React.Component {
       userTab: '1',
       dropdownOpen: false,
       setting: false,
+      avatar: avatar,
+      email: 'email',
+      firstname: 'Gary',
+      lastname: 'Gillespie',
+      username: 'gg',
+      bio: "Loading",
+      tickets: [],
+      solutions: [],
+      bookmarked: [],
+      following: [],
+      followingUsers: [],
+      followedUsers: [],
+      currentUser: false,
+      uid: '',
     };
 
     this.toggleSetting = this.toggleSetting.bind(this)
+  }
+
+  componentDidMount() {
+    const uid = this.props.match.params.id;
+
+    firebase.auth().onAuthStateChanged(user => {
+      if(user) {
+        if(user.uid === uid) { // the profile page is login user's profile
+          this.setState({currentUser: true, uid: user.uid})
+        } else {
+          this.setState({currentUser: false, uid: user.uid})
+        }
+      } else {
+        this.setState({currentUser: false})
+      }
+    })
+
+    firebase.database().ref('profiles/' + uid).once('value').then(snapshot => {
+      this.setState({
+        ...snapshot.val()
+      })
+    })
+
+    firebase.database().ref('networks/' + uid).once('value').then(snapshot => {
+      this.setState({
+        ...snapshot.val()
+      })
+    })
+
+    firebase.database().ref('notebooks/' + uid).once('value').then(snapshot => {
+      this.setState({
+        ...snapshot.val()
+      })
+    })
+
   }
 
   toggle(tab) {
@@ -52,27 +102,49 @@ export default class ProfilePage extends React.Component {
     this.setState({ setting: !this.state.setting });
   }
 
+
+  generateTicketBarGivenTicketList(ticketList) {
+    return (
+      <div>
+        {Object.keys(ticketList).map(key => 
+          <TicketBar ticketID={ticketList[key]} />
+        )}
+      </div>
+    )
+  }
+
+  // haven't used it yet
+  generateUserBarGivenUserList(userList) {
+    return (
+      <div>
+        {Object.keys(userList).map(key => 
+          <UserBar uid={userList[key]} />
+        )}
+      </div>
+    )
+  }
+
   renderUserInfo() {
     return (
       <div className='user-info'>
         <Row>
           <Col xs='3'>
             <div id="user">
-              <img id="user_image" src={avatar} style={{width: '70px'}} alt="Avatar" />
-              <p className="username" style={{fontSize: '25px', float:'left'}}>username</p>
-              <Button size='sm' onClick={this.toggleSetting}>Edit</Button>
+              <div id="avatar" style={{backgroundImage: `URL(${this.state.avatar})`, width:'50px', height:'50px'}}></div>
+              <p className="username" style={{fontSize: '25px', float:'left'}}>{this.state.username}</p>
+              {this.state.currentUser ? <Button size='sm' onClick={this.toggleSetting}>Edit</Button> : <div></div>}
             </div>
           </Col>
           <Col xs='auto'>
             <div className="info">
               <Nav>
                 <NavItem>
-                  <NavLink href='#'>Email</NavLink>
+                  <NavLink href='#'>{this.state.email}</NavLink>
                 </NavItem>
                 <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
                   <DropdownToggle nav caret>Bio</DropdownToggle>
                   <DropdownMenu>
-                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                    <p>{this.state.bio}</p>
                   </DropdownMenu>
                 </Dropdown>
               </Nav>
@@ -96,7 +168,7 @@ export default class ProfilePage extends React.Component {
       return (
         <Container>
           {this.renderUserInfo()}
-          <ProfileSettingPage onSubmit={this.toggleSetting}/>
+          <ProfileSettingPage onSubmit={this.toggleSetting} uid={this.state.uid}/>
         </Container>
       )
     } else {
@@ -109,7 +181,7 @@ export default class ProfilePage extends React.Component {
                   <Nav tabs>
                     <NavItem>
                       <NavLink className={classnames({active:this.state.activeTab === '1'})} onClick={() => {this.toggle('1')}}>
-                        Problem
+                        Ticket
                       </NavLink>
                     </NavItem>
                     <NavItem>
@@ -135,9 +207,7 @@ export default class ProfilePage extends React.Component {
                   </Nav>
                   <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId='1'>
-                      <TicketBar />
-                      <TicketBar />
-                      <TicketBar />
+                      {this.generateTicketBarGivenTicketList(this.state.tickets)}
                     </TabPane>
                     <TabPane tabId='2'>
                       <TicketBar />
@@ -150,16 +220,10 @@ export default class ProfilePage extends React.Component {
                       <TicketBar />
                     </TabPane>
                     <TabPane tabId='4'>
-                      <TicketBar />
-                      <TicketBar />
-                      <TicketBar />
-                      <TicketBar />
-                      <TicketBar />
-                      <TicketBar />
-                      <TicketBar />
+                      {this.generateTicketBarGivenTicketList(this.state.bookmarked)}
                     </TabPane>
                     <TabPane tabId='5'>
-                      <TicketBar />
+                      {this.generateTicketBarGivenTicketList(this.state.following)}
                     </TabPane>
                   </TabContent>
                 </div>
@@ -180,15 +244,10 @@ export default class ProfilePage extends React.Component {
                   </Nav>
                   <TabContent activeTab={this.state.userTab}>
                     <TabPane tabId='1'>
-                      <UserBar />
-                      <UserBar />
-                      <UserBar />
-                      <UserBar />
-                      <UserBar />
+                      {this.generateUserBarGivenUserList(this.state.followingUsers)}
                     </TabPane>
                     <TabPane tabId='2'>
-                      <UserBar />
-                      <UserBar />
+                      {this.generateUserBarGivenUserList(this.state.followedUsers)}
                     </TabPane>
                   </TabContent>
                 </div>

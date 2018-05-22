@@ -17,7 +17,7 @@ export default class App extends React.Component {
         <Switch>
           <Route path="/ticket/:id" component={TicketPage} />
           <Route path="/search/:type/:keyword" component={SearchPage} />
-          <Route path='/profile' component={ProfilePage} />
+          <Route path='/profile/:id' component={ProfilePage} />
           <Route component={HomePage} />
         </Switch>
       </div>

@@ -3,3 +3,12 @@
 $story-preview-background-color: #F7EEE7;
 $story-preview-bookmark-tag-fill-color: rgba(242, 211, 56, 0.8);
 $box-shadow-on-hover: 0 8px 16px 0 rgba(0,0,0,0.2); 
+
+%avatar {
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+    background-position: top center;
+    border-radius: 50%;
+    float: left
+}

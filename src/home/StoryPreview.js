@@ -17,7 +17,8 @@ class StoryPreview extends React.Component {
       image: greycard,
       username: "myusername",
       ticketTitle: "Ticket Title!!",
-      ticketDetails: "Ticket details... "
+      ticketDetails: "Ticket details... ",
+      uid: ''
     }
 
     // Get the ticket from database
@@ -37,7 +38,8 @@ class StoryPreview extends React.Component {
           profile.once('value').then((snapshot) => {
             this.setState({
               avatar: snapshot.child('avatar').val(),
-              username: snapshot.child('username').val()
+              username: snapshot.child('username').val(),
+              uid: userid
             })
           })
         }  
@@ -52,6 +54,7 @@ class StoryPreview extends React.Component {
       <div className="story-preview">
         <div className="card" >
           <Link className="clickable-card" to={'/ticket/' + this.props.ticketID}>
+            
             <img className="card-img-top img-fluid card-img" src={this.state.image} alt="Card image cap" />
             {/* there will be problem here if image is not fixed size. I set the card-img-overlay to a fixed size */}
             <div className="card-img-overlay" style={{ height: '100px' }}>
@@ -64,10 +67,11 @@ class StoryPreview extends React.Component {
               </h6>
               <p className="card-text" style={{ fontSize: '14px' }}>{this.state.ticketDetails}</p>
               <div className="card-author-info">
-                <Link to='/profile'>
-                  <img className="avatar" src={this.state.avatar} alt="Avatar" />
+                <Link to={'/profile/' + this.state.uid}>
+                  {/* <img className="avatar" src={this.state.avatar} alt="Avatar" /> */}
+                  <div id="avatar" style={{backgroundImage: `URL(${this.state.avatar})`}}></div>
                 </Link>
-                <Link to='/profile'>
+                <Link to={'/profile/' + this.state.uid}>
                   <p className='w-60 pt-3 mb-0 ml-1' style={{ fontSize: '15px', float: 'left' }}>{this.state.username}</p>
                 </Link>
               </div>

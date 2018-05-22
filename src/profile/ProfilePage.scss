@@ -1,3 +1,5 @@
+@import "../_global";
+
 #user {
     margin-top: 10px;
 }
@@ -11,9 +13,8 @@
     margin-top: 20px;
 }
 
-#user_image {
-    border-radius: 50%;
-    float: left;
+#avatar {
+    @extend %avatar;
 }
 
 .username {
