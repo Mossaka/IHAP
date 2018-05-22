@@ -18,9 +18,9 @@ class Bookmark extends React.Component {
                 const ticketID = this.props.ticketID;
                 firebase.database().ref('notebooks/' + uid + '/bookmarked').on('value', snapshot => {
                     snapshot.forEach(childSnapshot => {
-                        let bookmarked = childSnapshot.val() === this.props.ticketID;
-                        console.log(bookmarked)
-                        this.setState({bookmarked: bookmarked});
+                        if( childSnapshot.val() === this.props.ticketID ) {
+                            this.setState({bookmarked: true});
+                        }
                     })
                 })
             } else {
@@ -43,7 +43,7 @@ class Bookmark extends React.Component {
                 firebase.database().ref('tickets/' + ticketID + '/bookmarkCount').on('value', snapshot => {
                     count = snapshot.val().valueOf() + 1;
                 })
-                if(count != null) {
+                if(count != null && this.state.bookmarked == false) {
                     updates['bookmarkCount'] = count
                     this.setState({bookmarked: true})
                     firebase.database().ref('tickets/' + ticketID).update(updates)
