@@ -5,6 +5,7 @@ import avatar from '../assets/img_avatar.png'
 import firebase from 'firebase';
 // import bookmark from '../assets/bookmark.png'
 import './StoryPreview.css'
+import Bookmark from '../common/Bookmark';
 
 class StoryPreview extends React.Component {
   constructor(props) {
@@ -24,46 +25,24 @@ class StoryPreview extends React.Component {
     // Once we get the ticket snapshot, 
     ticket.once('value').then((snapshot) => {
       // If the problem field exists, bind a value change listener to the problem object in database
-      if (snapshot.exists() && snapshot.child('problem').exists()) {
-        var problemid = snapshot.child('problem').val();
-        var problem = firebase.database().ref('problems/' + problemid);
-        problem.on('value', (snapshot) => {
-          // If snapshot exists, log the changes to the component's state
-          if (snapshot.exists()) {
-            this.setState({
-              image: snapshot.child('image').val(),
-              ticketTitle: snapshot.child('title').val().substring(0, 30),
-              ticketDetails: snapshot.child('story').val().substring(0, 100)            
-            })
-            
-          }
-        });
-
-        // If the owner field of problem exists, set the avatar and username for this component
-        problem.once('value').then((snapshot) => {
-          if (snapshot.exists() && snapshot.child('creator').exists()) {
-            console.log("in here");
-
-            var userid = snapshot.child('creator').val();
-            var user = firebase.database().ref('users/' + userid);
-            user.once('value').then((snapshot) => {
-              if (snapshot.exists() && snapshot.child('profileID').exists()) {
-                var profileID = snapshot.child('profileID').val();
-                var profile = firebase.database().ref('profiles/' + profileID);
-                profile.once('value').then((snapshot) => {
-                  this.setState({
-                    avatar: snapshot.child('avatar').val(),
-                    username: snapshot.child('username').val()
-                  })
-                })
-                
-              }
-            })
-          }
+      if (snapshot.exists()) {
+        this.setState({
+          image: snapshot.child('image').val(),
+          ticketTitle: snapshot.child('title').val().substring(0, 30),
+          ticketDetails: snapshot.child('content').val().substring(0, 100)            
         })
+        if(snapshot.child('creator').exists()) {
+          let userid = snapshot.child('creator').val();
+          let profile = firebase.database().ref('profiles/' + userid);
+          profile.once('value').then((snapshot) => {
+            this.setState({
+              avatar: snapshot.child('avatar').val(),
+              username: snapshot.child('username').val()
+            })
+          })
+        }  
       }
-      
-    })
+    });
   }
 
 
@@ -76,9 +55,7 @@ class StoryPreview extends React.Component {
             <img className="card-img-top img-fluid card-img" src={this.state.image} alt="Card image cap" />
             {/* there will be problem here if image is not fixed size. I set the card-img-overlay to a fixed size */}
             <div className="card-img-overlay" style={{ height: '100px' }}>
-              <svg width='16' height='42' style={{ float: 'right' }}>
-                <polygon points='0,0 0,33 8,40 16,33 16,0' />
-              </svg>
+              <Bookmark ticketID={this.props.ticketID}/>
             </div>
             
             <div className="card-body pb-1 pl-1 pr-1">

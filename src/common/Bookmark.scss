@@ -1,0 +1,14 @@
+@import "../_global";
+
+.bookmark {
+    polygon:hover {
+        fill: $story-preview-bookmark-tag-fill-color;
+        opacity: 1;
+    }
+
+    polygon {
+        fill: $story-preview-bookmark-tag-fill-color;
+        opacity: 0.75;
+
+    }
+}
