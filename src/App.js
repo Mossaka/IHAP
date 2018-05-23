@@ -7,7 +7,6 @@ import HomePage from './home/HomePage';
 import ProfilePage from './profile/ProfilePage';
 import TicketPage from './ticket/TicketPage';
 import SearchPage from './searchResults/SearchPage';
-import './App.css';
 
 export default class App extends React.Component {
   render() {

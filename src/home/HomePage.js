@@ -21,18 +21,18 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className='container'>
-        <h3 className='my-5'>Top Stories</h3>
+        <h3 className='my-5' style={{'text-align': 'center'}}>Top Stories</h3>
         <hr />
         <div className="row">
           {this.generateCard(4, '1')}
         </div>
-        <h2 className='my-3'>For you</h2>
+        <h2 className='my-3' style={{'text-align': 'center'}}>For you</h2>
         <hr />
         
         <div className='row'>
           {this.generateCard(8, '2')}
         </div>
-        <h2 className="my-3">Recent Stories</h2>
+        <h2 className="my-3" style={{'text-align': 'center'}}>Recent Stories</h2>
         <hr />
 
         <div className='row'>

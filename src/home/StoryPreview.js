@@ -54,7 +54,7 @@ class StoryPreview extends React.Component {
               {this.state.ticketTitle}
             </h6>
             <p className="card-text" style={{ fontSize: '14px' }}>{this.state.ticketDetails}</p>
-            {this.state.creator && <Avatar className="avatar" id={this.state.creator} />}
+            {this.state.creator && <Avatar id={this.state.creator} />}
           </div>
 
         </div>

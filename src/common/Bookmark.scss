@@ -1,9 +1,12 @@
 @import "../_global";
 
 .bookmark {
+    position: relative;
+
     polygon:hover {
         fill: $story-preview-bookmark-tag-fill-color;
         opacity: 1;
+        cursor: pointer;
     }
 
     polygon {
