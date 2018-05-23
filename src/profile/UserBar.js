@@ -1,5 +1,4 @@
-import React, {PropTypes} from 'react';
-import {browserHistory} from 'react-router';
+import React from 'react';
 import avatar from '../assets/img_avatar.png';
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import firebase from 'firebase'

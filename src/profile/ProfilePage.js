@@ -1,8 +1,7 @@
-import React, {PropTypes} from 'react';
-import {browserHistory} from 'react-router';
+import React from 'react';
 import avatar from '../assets/img_avatar.png';
 import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
-import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import {Dropdown, DropdownMenu, DropdownToggle } from 'reactstrap';
 import classnames from 'classnames';
 import TicketBar from './TicketBar';
 import UserBar from './UserBar';

@@ -1,10 +1,8 @@
 import React from 'react';
 import Solution from './Solution';
-import Content from './Content';
 import Ticket from './Ticket';
 import RelateTicket from './RelatedTicket';
 import { Container, Row, Col } from 'reactstrap';
-import firebase from 'firebase';
 
 export default class TicketPage extends React.Component {
   constructor(props) {

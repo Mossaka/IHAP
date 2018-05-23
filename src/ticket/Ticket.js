@@ -27,7 +27,7 @@ export default class Ticket extends React.Component {
         <CardBody>
           <CardTitle>{this.state.title}</CardTitle>
         </CardBody>
-        <img width="100%" src={this.state.image} />
+        <img width="100%" src={this.state.image} alt="ticket thumbnail" />
         <CardBody>
           <CardText>{this.state.content}</CardText>
           Last Edit: <TimeDisplay time={this.state.dateEdited} />

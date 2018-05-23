@@ -38,7 +38,7 @@ export default class Header extends React.Component {
   }
 
   handleLeverClick() {
-    if (this.state.random == true) {
+    if (this.state.random === true) {
       this.setSearch();
     } else {
       this.setRandom();

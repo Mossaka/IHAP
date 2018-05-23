@@ -1,12 +1,7 @@
 import React from 'react';
-import { Card, CardText, CardBody, CardTitle, Button } from 'reactstrap';
-import FontAwesome from 'react-fontawesome';
-import Editor from './Editor';
+import { Card, CardText, CardBody } from 'reactstrap';
 
 export default class Content extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   handleUpVote = () => {
     let newUpVote = this.state.upvote + 1;
