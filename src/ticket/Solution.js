@@ -1,18 +1,35 @@
 import React from 'react';
-import Content from './Content';
+import firebase from 'firebase';
+import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
+import TimeDisplay from '../common/TimeDisplay';
+import Vote from './Vote';
+import Avatar from '../common/Avatar';
 
 export default class Solution extends React.Component {
+  constructor(props) {
+    super(props);
+
+    firebase.database().ref('solutions/' + this.props.id).once('value').then(s => {
+      this.setState({ ...s.val() });
+    });
+  }
+
   render() {
-    if (this.props.id === null) {
+    if (!this.state) {
       return (
-        <h1>Loading</h1>
+        <h1>Loading...</h1>
       );
     }
 
     return (
-      <Content>
-
-      </Content>
+      <Card>
+        <CardBody>
+          <CardText>{this.state.content}</CardText>
+          Last Edit: <TimeDisplay time={this.state.dateEdited} />
+        </CardBody>
+        <Vote up={this.state.upvote} down={this.state.downvote} path={'solutions/' + this.props.id} />
+        <Avatar id={this.state.creator} />
+      </Card>
     );
   }
 }

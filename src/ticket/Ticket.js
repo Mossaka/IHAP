@@ -5,12 +5,13 @@ import TimeDisplay from '../common/TimeDisplay';
 import Vote from './Vote';
 import Avatar from '../common/Avatar';
 
-export default class Problem extends React.Component {
+export default class Ticket extends React.Component {
   constructor(props) {
     super(props);
 
     firebase.database().ref('tickets/' + this.props.id).once('value').then(t => {
       this.setState({ ...t.val() });
+      this.props.gotSolution(t.val().solutions);
     });
   }
 
@@ -31,7 +32,7 @@ export default class Problem extends React.Component {
           <CardText>{this.state.content}</CardText>
           Last Edit: <TimeDisplay time={this.state.dateEdited} />
         </CardBody>
-        <Vote up={this.state.upvote} down={this.state.downvote} id={this.props.id} />
+        <Vote up={this.state.upvote} down={this.state.downvote} path={'tickets/' + this.props.id} />
         <Avatar id={this.state.creator} />
       </Card>
     );

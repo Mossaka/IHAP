@@ -5,12 +5,15 @@ import firebase from 'firebase';
 export default class Vote extends React.Component {
   constructor(props) {
     super(props);
-    this.state = props;
+    this.state = {
+      up: Number(props.up),
+      down: Number(props.down)
+    }
   }
 
   handleUpVote = () => {
     let newVote = this.state.up + 1;
-    firebase.database().ref('tickets/' + this.props.id)
+    firebase.database().ref(this.props.path)
       .update({ upvote: newVote });
     this.setState({
       up: newVote
@@ -19,7 +22,7 @@ export default class Vote extends React.Component {
 
   handleDownVote = () => {
     let newVote = this.state.down + 1;
-    firebase.database().ref('tickets/' + this.props.id)
+    firebase.database().ref(this.props.path)
       .update({ downvote: newVote });
     this.setState({
       down: newVote
