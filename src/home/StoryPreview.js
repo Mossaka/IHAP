@@ -26,9 +26,9 @@ class StoryPreview extends React.Component {
       // If the problem field exists, bind a value change listener to the problem object in database
       if (snapshot.exists()) {
         this.setState({
-          image: snapshot.child('image').val(),
-          ticketTitle: snapshot.child('title').val().substring(0, 30),
-          ticketDetails: snapshot.child('content').val().substring(0, 100),
+          image: snapshot.val().image,
+          ticketTitle: snapshot.val().title.substring(0, 30),
+          ticketDetails: snapshot.val().content.substring(0, 100),
           creator: snapshot.val().creator
         });
       }
@@ -41,22 +41,22 @@ class StoryPreview extends React.Component {
     return (
       <div className="story-preview">
         <div className="card" >
-          <Link className="clickable-card" to={'/ticket/' + this.props.ticketID}>
+          <Link className="clickable-card" to={'/ticket/' + this.props.ticketID}></Link>
 
-            <img className="card-img-top img-fluid card-img" src={this.state.image} alt="Card image cap" />
-            {/* there will be problem here if image is not fixed size. I set the card-img-overlay to a fixed size */}
-            <div className="card-img-overlay" style={{ height: '100px' }}>
-              <Bookmark ticketID={this.props.ticketID} />
-            </div>
+          <img className="card-img-top img-fluid card-img" src={this.state.image} alt="Card image cap" />
+          {/* there will be problem here if image is not fixed size. I set the card-img-overlay to a fixed size */}
+          <div className="card-img-overlay" style={{ height: '100px' }}>
+            <Bookmark ticketID={this.props.ticketID} />
+          </div>
 
-            <div className="card-body pb-1 pl-1 pr-1">
-              <h6 className="card-title">
-                {this.state.ticketTitle}
-              </h6>
-              <p className="card-text" style={{ fontSize: '14px' }}>{this.state.ticketDetails}</p>
-              {this.state.creator && <Avatar id={this.state.creator} />}
-            </div>
-          </Link>
+          <div className="card-body pb-1 pl-1 pr-1">
+            <h6 className="card-title">
+              {this.state.ticketTitle}
+            </h6>
+            <p className="card-text" style={{ fontSize: '14px' }}>{this.state.ticketDetails}</p>
+            {this.state.creator && <Avatar className="avatar" id={this.state.creator} />}
+          </div>
+
         </div>
       </div>
     );
