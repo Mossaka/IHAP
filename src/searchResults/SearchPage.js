@@ -1,11 +1,10 @@
 import React from 'react';
 import SearchPreview from './SearchPreview';
 import FilterButton from './FilterButton';
-import { Button, Col, Input } from 'reactstrap';
+import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './SearchPage.css'
 import * as global from '../global.js'
-import NewTicketButton from '../ticket/NewTicketButton';
 import firebase from 'firebase';
 
 class SearchPage extends React.Component {

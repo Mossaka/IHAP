@@ -17,7 +17,7 @@
   },
   "scripts": {
     "sass:w": "node-sass-chokidar src -w -o src",
-    "start-js": "react-scripts start",
-    "start": "run-p sass:w start-js"
+    "react": "react-scripts start",
+    "start": "run-p sass:w react"
   }
 }

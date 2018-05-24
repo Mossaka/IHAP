@@ -1,6 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router';
-import { Row, Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
+import { Row, Button, Form, FormGroup, Label, CustomInput } from 'reactstrap';
 import firebase from 'firebase';
 
 class ProfileSettingPage extends React.Component {

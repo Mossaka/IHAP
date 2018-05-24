@@ -6,7 +6,6 @@ import firebase from 'firebase';
 import './StoryPreview.css'
 import Bookmark from '../common/Bookmark';
 import Avatar from '../common/Avatar';
-import { spawn } from 'child_process';
 
 class StoryPreview extends React.Component {
   constructor(props) {
@@ -43,7 +42,7 @@ class StoryPreview extends React.Component {
         <div className="card" >
           <Link className="clickable-card" to={'/ticket/' + this.props.ticketID}></Link>
 
-          <img className="card-img-top img-fluid card-img" src={this.state.image} alt="Card image cap" />
+          <img className="card-img-top img-fluid card-img" src={this.state.image} alt="ticket thumbnail" />
           {/* there will be problem here if image is not fixed size. I set the card-img-overlay to a fixed size */}
           <div className="card-img-overlay" style={{ height: '100px' }}>
             <Bookmark ticketID={this.props.ticketID} />

@@ -2,9 +2,6 @@ import React from 'react';
 import StoryPreview from './StoryPreview';
 
 class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   generateCard(num, id) {
     let cards = [];

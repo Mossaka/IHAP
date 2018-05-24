@@ -7,9 +7,6 @@ import Bookmark from '../common/Bookmark';
 
 
 class SearchPreview extends React.Component {
-  constructor(props) {
-      super(props)
-  }
 
   render() {
     return (
