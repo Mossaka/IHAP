@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'reactstrap';
 import firebase from 'firebase';
 
 export default class Vote extends React.Component {
@@ -14,15 +13,15 @@ export default class Vote extends React.Component {
   }
 
   handleUpVote = () => {
-    if(!this.state.upvoteClicked && !this.state.downvoteClicked){
+    if (!this.state.upvoteClicked && !this.state.downvoteClicked) {
       let newVote = this.state.up + 1;
       firebase.database().ref(this.props.path)
         .update({ upvote: newVote });
       this.setState({
         up: newVote,
-        upvoteClicked:true
+        upvoteClicked: true
       });
-    }else if(!this.state.upvoteClicked && this.state.downvoteClicked){
+    } else if (!this.state.upvoteClicked && this.state.downvoteClicked) {
       let newUpVote = this.state.up + 1;
       let newDownVote = this.state.down - 1;
       firebase.database().ref(this.props.path)
@@ -33,24 +32,24 @@ export default class Vote extends React.Component {
         up: newUpVote,
         down: newDownVote,
         upvoteClicked: true,
-        downvoteClicked : false
+        downvoteClicked: false
       });
-    }else{
+    } else {
       alert("Cannot upVote twice");
     }
   }
 
   handleDownVote = () => {
-    if(!this.state.upvoteClicked && !this.state.downvoteClicked){
+    if (!this.state.upvoteClicked && !this.state.downvoteClicked) {
       let newVote = this.state.down + 1;
       firebase.database().ref(this.props.path)
         .update({ downvote: newVote });
       this.setState({
         downvote: newVote,
-        downvoteClicked:true
+        downvoteClicked: true
       });
-    }else if(this.state.upvoteClicked && !this.state.downvoteClicked){
-      let newUpVote = this.state.up -1 ;
+    } else if (this.state.upvoteClicked && !this.state.downvoteClicked) {
+      let newUpVote = this.state.up - 1;
       let newDownVote = this.state.down + 1;
       firebase.database().ref(this.props.path)
         .update({ upvote: newUpVote });
@@ -60,9 +59,9 @@ export default class Vote extends React.Component {
         up: newUpVote,
         down: newDownVote,
         upvoteClicked: false,
-        downvoteClicked : true
+        downvoteClicked: true
       });
-    }else{
+    } else {
       alert("Cannot downVote twice");
     }
   }
