@@ -13,7 +13,6 @@ class SearchPage extends React.Component {
     super(props);
 
     this.state = {
-      searchType: this.props.match.params.type == global.TICKETS ? "Ticket" : "User",
       loggedIn: false
     }
     firebase.auth().onAuthStateChanged(user => {
@@ -26,7 +25,7 @@ class SearchPage extends React.Component {
     return (
       <div className='container searchpage'>
         <div className='searchTitle'>
-          <h3 className='left'> {this.state.searchType} Results: {this.props.match.params.keyword}</h3>
+          <h3 className='left'> {this.props.match.params.type == global.TICKETS ? "Ticket" : "User"} Results: {this.props.match.params.keyword}</h3>
           <FilterButton className='right' />
         </div>
         <hr />

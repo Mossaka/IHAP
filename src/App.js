@@ -11,7 +11,7 @@ import SearchPage from './searchResults/SearchPage';
 export default class App extends React.Component {
   render() {
     return (
-      <div className="app">
+      <div id="app">
         <Header />
         <Switch>
           <Route path="/ticket/:id" component={TicketPage} />

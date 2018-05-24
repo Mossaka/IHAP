@@ -21,7 +21,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className='container'>
-        <h3 className='my-5' style={{'text-align': 'center'}}>Top Stories</h3>
+        <h2 className='my-5' style={{'text-align': 'center'}}>Top Stories</h2>
         <hr />
         <div className="row">
           {this.generateCard(4, '1')}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import lever from '../assets/lever.png';
 import * as global from '../global.js';
@@ -8,7 +8,7 @@ import './Header.css';
 import { Button, Col, Input, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 
-export default class Header extends React.Component {
+class Header extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -16,7 +16,7 @@ export default class Header extends React.Component {
       rotation: 0,
       searchDropdownOpen: false,
       searching: 'Tickets',
-      keyword: '',
+      keyword: ' ',
       loggedIn: false,
       showSignup: false
     }
@@ -26,17 +26,27 @@ export default class Header extends React.Component {
     this.toggleSearch = this.toggleSearch.bind(this);
     this.searchTickets = this.searchTickets.bind(this);
     this.searchUsers = this.searchUsers.bind(this);
-    this.searchBarOnChange = this.searchBarOnChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.search = this.search.bind(this);
   }
 
-  searchBarOnChange(e) {
+  search() {
+    this.props.history.push('/search/' + (this.state.searching === 'Tickets' ? global.TICKETS : global.USERS) + '/' + this.state.keyword);
+  }
+
+
+  handleKeyPress(e) {
     this.setState (
       {
         keyword: e.target.value,
       }
     );
+    if(e.key === 'Enter') {
+      this.search();
+    }
   }
 
+  
   handleLeverClick() {
     if (this.state.random == true) {
       this.setSearch();
@@ -66,7 +76,6 @@ export default class Header extends React.Component {
   toggleSearch() {
     this.setState(
       {
-        
         searchDropdownOpen: !this.state.searchDropdownOpen
       }
     );
@@ -78,6 +87,7 @@ export default class Header extends React.Component {
         searching: "Tickets"
       }
     );
+    this.search();
 
   }
 
@@ -87,6 +97,7 @@ export default class Header extends React.Component {
         searching: "Users"
       }
     );
+    this.search();
   }
 
 
@@ -97,14 +108,13 @@ export default class Header extends React.Component {
       </div>
     ) : (
       <div className="searchOrRandom">
-        <Input className="searchOrRandomItem"  type="search" name="search" placeholder="Search" onChange={this.searchBarOnChange}/>
+        <Input className="searchOrRandomItem"  type="search" name="search" placeholder="Search" onKeyUp={this.handleKeyPress}/>
         <ButtonDropdown className="searchOrRandomItem" isOpen={this.state.searchDropdownOpen} toggle={this.toggleSearch}>
-        <DropdownToggle caret color="secondary" >
-          Search {this.state.searching}
-        </DropdownToggle>
+        <Button color="secondary" onClick={this.search}>Search {this.state.searching}</Button>
+        <DropdownToggle caret color="secondary" />
         <DropdownMenu>
-          <Link to={"/search/" + global.TICKETS + "/" + this.state.keyword}><DropdownItem onClick={this.searchTickets}>Search Tickets</DropdownItem></Link>
-          <Link to={"/search/" + global.USERS + "/" + this.state.keyword}><DropdownItem onClick={this.searchUsers}>Search Users</DropdownItem></Link>
+          <DropdownItem onClick={this.searchTickets}>Search Tickets</DropdownItem>
+          <DropdownItem onClick={this.searchUsers}>Search Users</DropdownItem>
         </DropdownMenu>
       </ButtonDropdown>
       </div>
@@ -136,3 +146,4 @@ export default class Header extends React.Component {
     );
   }
 }
+export default withRouter(Header);
