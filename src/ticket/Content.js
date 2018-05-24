@@ -23,9 +23,7 @@ export default class Content extends React.Component {
         <CardBody>
           <CardText>{this.props.content}</CardText>
           <div class="d-flex bd-highlight mb-4">
-            <div className="p-2 bd-highlight" onClick={this.handleUpVote} ><i className="far fa-arrow-alt-circle-up"></i> </div>
-            <div className="p-2 bd-highlight"><p> {this.state.upvote} / {this.state.downvote}</p></div>
-            <div className="p-2 bd-highlight" onClick={this.handleDownVote}><i className="far fa-arrow-alt-circle-down"></i></div>
+            <Vote/>
           </div>
         </CardBody>
       </Card>
