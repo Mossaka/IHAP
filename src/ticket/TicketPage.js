@@ -3,6 +3,7 @@ import Solution from './Solution';
 import Ticket from './Ticket';
 import RelateTicket from './RelatedTicket';
 import { Container, Row, Col } from 'reactstrap';
+import EditTicket from './EditTicket';
 
 export default class TicketPage extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ export default class TicketPage extends React.Component {
     this.state = {
       solutions: []
     }
-    if (props.match.params.id === 'new') return;
+
   }
 
   loadSolutions = (obj) => {
@@ -22,7 +23,9 @@ export default class TicketPage extends React.Component {
   }
 
   render() {
-    let sols = this.state.solutions.map(s => <Solution id={s} />);
+    if (this.props.match.params.id === 'new') {
+      return <EditTicket />;
+    }
 
     return (
       <Container>
@@ -38,7 +41,7 @@ export default class TicketPage extends React.Component {
           <Col xs="6">
             <h3>Solutions</h3>
             <hr />
-            {sols}
+            {this.state.solutions.map(s => <Solution id={s} />)}
           </Col>
         </Row>
       </Container>
