@@ -1,10 +1,11 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import avatar from '../assets/img_avatar.png'
+//import {Link} from 'react-router-dom';
+//import avatar from '../assets/img_avatar.png'
 // import bookmark from '../assets/bookmark.png'
 import './SearchPreview.css'
 import Bookmark from '../common/Bookmark';
 import firebase from 'firebase';
+import Avatar from '../common/Avatar'
 
 
 class SearchPreview extends React.Component {
@@ -37,6 +38,7 @@ class SearchPreview extends React.Component {
     return (
       <div className = "container">
         <div className ="search">
+          
           <div className = "textbox">
             <div className ="title">
               <h5><b>{this.state.ticketTitle}</b></h5>
@@ -46,12 +48,13 @@ class SearchPreview extends React.Component {
             </div>
           </div>
           <div className = "userbox">
-            <Link to='/profile'>
+            {this.state.creator && <Avatar id={this.state.creator} />}
+            {/*<Link to='/profile'>
               <img className="avatar" src={avatar} style={{width: '35px'}} alt="Avatar" />
             </Link>
             <Link to='/profile'>
               <p className='w-60 pt-3 mb-0 ml-1' style={{fontSize: '15px', float:'left'}}>username</p>
-            </Link>
+            </Link>*/}
           </div>
           <Bookmark ticketID={this.props.ticketID}/>
 

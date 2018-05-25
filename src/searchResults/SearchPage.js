@@ -21,51 +21,35 @@ class SearchPage extends React.Component {
       if (user) this.setState({ loggedIn: true });
       else this.setState({ loggedIn: false });
     });
-
-    //this.componentDidMount = this.componentDidMount.bind();
   }
 
-  componentDidMount() {
-    var self = this;
+  componentWillMount() {
+    //var self = this;
     var keyword = this.props.match.params.keyword;
     if (this.props.match.params.type === global.TICKETS) {
-      //generateTicketCard(this.props.match.params.keyword);
-        
-      weightedSearch(keyword, 5, 2, 1, 0, 0, 0).then(function(ids) {
-
-        var cards = ids.map(function(id) {
-          return <SearchPreview ticketID={id} />
-        });
-
-        console.log(cards);
-
-        self.setState({ cards: cards});
-      })
-
-    } else {
-      //generateUserCard(this.props.match.params.keyword);
-
-        
-      var ids = [];
-      var ref = firebase.database().ref('profiles');
-      ref.orderByChild('username').startAt(keyword.toLowerCase()).endAt(keyword.toLowerCase()+'\uf8ff').on('child_added', function(snapshot) {
-        ids.push(snapshot.key);
-      });
-      ref.orderByChild('username').startAt(keyword.toUpperCase()).endAt(keyword.toUpperCase()+'\uf8ff').on('child_added', function(snapshot) {
-        ids.push(snapshot.key);
-      });
-
-      var cards = ids.map(function(id) {
-        return <UserPreview userID={id} />
-      });
+      this.generateTicketCard(keyword);
       
-      this.setState({ cards: cards});
+    } else {
+      this.generateUserCard(keyword);
+    }
+  }
 
+  componentWillUpdate(prevProps, prevStates) {
+    if (this.props.match.params.keyword !== prevProps.match.keyword) {
+      var keyword = this.props.match.params.keyword;
+      //var self = this;
+      if (this.props.match.params.type === global.TICKETS) {
+        this.generateTicketCard(keyword);
+        
+      } else {
+        this.generateUserCard(keyword);
 
+      }
     }
   }
 
   generateUserCard(keyword) {
+    var self = this;
     var ids = [];
     var ref = firebase.database().ref('profiles');
     ref.orderByChild('username').startAt(keyword.toLowerCase()).endAt(keyword.toLowerCase()+'\uf8ff').on('child_added', function(snapshot) {
@@ -79,17 +63,18 @@ class SearchPage extends React.Component {
       return <UserPreview userID={id} />
     });
     
-    this.setState({ cards: cards});
+    self.setState({ cards: cards});
   }
 
   generateTicketCard(keyword) {
-    weightedSearch(keyword, 5, 0, 0, 1, 0, 0).then(function(ids) {
+    var self = this;
+    weightedSearch(keyword, 5, 2, 1, 0, 0, 0).then(function(ids) {
 
       var cards = ids.map(function(id) {
         return <SearchPreview ticketID={id} />
       });
 
-      this.setState({ cards: cards});
+      self.setState({ cards: cards});
     })
   }
 
