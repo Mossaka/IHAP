@@ -127,12 +127,11 @@ export default class ProfilePage extends React.Component {
   renderUserInfo() {
     return (
       <div className='user-info'>
-        <Row>
+        <Row xs='8'>
           <Col xs='3'>
             <div id="user">
-              <div id="avatar" style={{backgroundImage: `URL(${this.state.avatar})`, width:'50px', height:'50px'}}></div>
+              <div id="avatar" style={{backgroundImage: `URL(${this.state.avatar})`, width:'100px', height:'100px'}}></div>
               <p className="username" style={{fontSize: '25px', float:'left'}}>{this.state.username}</p>
-              {this.state.currentUser ? <Button size='sm' onClick={this.toggleSetting}>Edit</Button> : <div></div>}
             </div>
           </Col>
           <Col xs='auto'>
@@ -148,16 +147,16 @@ export default class ProfilePage extends React.Component {
                   </DropdownMenu>
                 </Dropdown>
               </Nav>
+            </div>  
+          </Col>
+          <Col>
+            <div id="follow" className='float-right' style={{bottom:'0', float:'right'}}>
+              {this.state.currentUser ? <Button size='sm' onClick={this.toggleSetting}>Edit</Button> : <div></div>}
+              {this.state.currentUser ? <div></div> : <Button color={"primary"} style={{float:'left'}} size="sm">Follow</Button>}
             </div>
           </Col>
         </Row>
-        <Row>
-          <Col xs='3'>
-            <div id="follow">
-              <Button color={"primary"} style={{float:'left'}} size="sm">Follow</Button>
-            </div>
-          </Col>
-        </Row>
+            
       </div>
     )
   }

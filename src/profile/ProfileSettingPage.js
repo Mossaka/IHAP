@@ -100,23 +100,23 @@ class ProfileSettingPage extends React.Component {
             <Row>
                 <FormGroup className="col-md-6">
                     <Label for="firstname" className="col-form-label float-left">FIRST NAME</Label>
-                    <input type="firstname" placeholder={this.state.firstname} name="firstname" value={this.state.firstname} onChange={this.handleChange} className="form-control" id="InputFirstname"/>
+                    <input type="firstname" name="firstname" value={this.state.profile.firstname} onChange={this.handleChange} className="form-control" id="InputFirstname"/>
                 </FormGroup> 
                 <div className="form-group col-md-6">
                     <Label for="lastName" className="col-form-label float-left">LAST NAME</Label>
-                    <input type="lastName" placeholder={this.state.lastname} name="lastname" value={this.state.lastname} onChange={this.handleChange} className="form-control" id="InputLastName"/>
+                    <input type="lastName" name="lastname" value={this.state.profile.lastname} onChange={this.handleChange} className="form-control" id="InputLastName"/>
                 </div>
             </Row>
             <Row>
                 <FormGroup className="form-group col-md-12">
                     <Label for="title" className="col-form-label float-left">TITLE</Label>
-                    <input type="title" placeholder={this.state.title} name="title" value={this.state.title} onChange={this.handleChange} className="form-control" id="InputTitle" />
+                    <input type="title" name="title" value={this.state.profile.title} onChange={this.handleChange} className="form-control" id="InputTitle" />
                 </FormGroup>
             </Row>
             <Row>
                 <FormGroup className="form-group col-md-12">
                     <Label for="biography" className="col-form-label float-left">BIOGRAPHY</Label>
-                    <textarea type="biography" placeholder={this.state.biography} name="biography" value={this.state.biography} onChange={this.handleChange} className="form-control" id="InputBiography" rows="6"></textarea>
+                    <textarea type="biography" name="biography" value={this.state.profile.biography} onChange={this.handleChange} className="form-control" id="InputBiography" rows="6"></textarea>
                 </FormGroup>
             </Row>
             <Row>
