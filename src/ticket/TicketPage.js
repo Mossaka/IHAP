@@ -12,7 +12,6 @@ export default class TicketPage extends React.Component {
     this.state = {
       solutions: []
     }
-
   }
 
   loadSolutions = (obj) => {
@@ -50,7 +49,7 @@ export default class TicketPage extends React.Component {
           <Col xs="6">
             <h3>Solutions</h3>
             <hr />
-            {this.state.solutions.map(s => <Solution id={s} />)}
+            {this.state.solutions.map(s => <Solution key={s} id={s} />)}
           </Col>
         </Row>
       </Container>

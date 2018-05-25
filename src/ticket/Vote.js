@@ -8,8 +8,14 @@ export default class Vote extends React.Component {
       up: Number(props.up),
       down: Number(props.down),
       upvoteClicked: false,
-      downvoteClicked: false
+      downvoteClicked: false,
+      loggedin: false
     }
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) this.setState({ loggedIn: true });
+      else this.setState({ loggedIn: false });
+    });
   }
 
   handleUpVote = () => {
@@ -67,6 +73,9 @@ export default class Vote extends React.Component {
   }
 
   render() {
+    if (!this.state.loggedIn)
+      return null;
+
     return (
       <div className="d-flex">
         <i className="far fa-arrow-alt-circle-up" onClick={this.handleUpVote}></i>
