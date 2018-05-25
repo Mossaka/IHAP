@@ -36,8 +36,10 @@ class HomePage extends React.Component {
     // change to 0 0 3 1 3
     weightedSearch("", num, 0, 0, 0, 0, 0).then(function(ids) {
 
-      var cards = ids.map(function(id) {
-        return <StoryPreview ticketID={id} />
+      var cards = ids.map(function(id, index) {
+        return (<div key={index} className="col-sm-6 col-md-4 col-lg-3">
+                  <StoryPreview ticketID={id} />
+                </div>)
       });
 
       if (cards.length < num) {
@@ -53,8 +55,10 @@ class HomePage extends React.Component {
     // change to 0 0 0 1 3
     weightedSearch("", num, 0, 0, 0, 0, 0).then(function(ids) {
 
-      var cards = ids.map(function(id) {
-        return <StoryPreview ticketID={id} />
+      var cards = ids.map(function(id, index) {
+        return (<div key={index} className="col-sm-6 col-md-4 col-lg-3">
+                  <StoryPreview ticketID={id} />
+                </div>)
       });
 
       if (cards.length < num) {
@@ -69,8 +73,11 @@ class HomePage extends React.Component {
     var self = this;
     weightedSearch("", num, 0, 0, 1, 0, 0).then(function(ids) {
 
-      var cards = ids.map(function(id) {
-        return <StoryPreview ticketID={id} />
+      var cards = ids.map(function(id, index) {
+        return ( 
+        <div key={index} className="col-sm-6 col-md-4 col-lg-3">
+          <StoryPreview ticketID={id} />
+        </div> )
       });
 
       if (cards.length < num) {
