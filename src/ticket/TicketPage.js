@@ -1,10 +1,10 @@
 import React from 'react';
 import Solution from './Solution';
-import Content from './Content';
 import Ticket from './Ticket';
 import RelateTicket from './RelatedTicket';
 import { Container, Row, Col } from 'reactstrap';
-import firebase from 'firebase';
+import EditTicket from './EditTicket';
+import './TicketPage.css';
 
 export default class TicketPage extends React.Component {
   constructor(props) {
@@ -12,7 +12,6 @@ export default class TicketPage extends React.Component {
     this.state = {
       solutions: []
     }
-    if (props.match.params.id === 'new') return;
   }
 
   loadSolutions = (obj) => {
@@ -24,10 +23,20 @@ export default class TicketPage extends React.Component {
   }
 
   render() {
-    let sols = this.state.solutions.map(s => <Solution id={s} />);
+    if (this.props.match.params.id === 'new') {
+      return (
+        <Container className="ticket-page">
+          <Row>
+            <Col xs={{ size: 6, offset: 3 }}>
+              <EditTicket />
+            </Col>
+          </Row>
+        </Container>
+      );
+    }
 
     return (
-      <Container>
+      <Container className="ticket-page">
         <Row>
           <Col xs="6">
             <h3>Problem</h3>
@@ -40,7 +49,7 @@ export default class TicketPage extends React.Component {
           <Col xs="6">
             <h3>Solutions</h3>
             <hr />
-            {sols}
+            {this.state.solutions.map(s => <Solution key={s} id={s} />)}
           </Col>
         </Row>
       </Container>

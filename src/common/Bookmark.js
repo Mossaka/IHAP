@@ -1,6 +1,5 @@
 import firebase from 'firebase';
 import React from 'react';
-import {Link} from 'react-router-dom';
 import './Bookmark.css'
 
 class Bookmark extends React.Component {
@@ -15,7 +14,6 @@ class Bookmark extends React.Component {
         firebase.auth().onAuthStateChanged(user => {
             if(user) {
                 const uid = user.uid;
-                const ticketID = this.props.ticketID;
                 firebase.database().ref('notebooks/' + uid + '/bookmarked').on('value', snapshot => {
                     snapshot.forEach(childSnapshot => {
                         if( childSnapshot.val() === this.props.ticketID ) {
@@ -43,7 +41,7 @@ class Bookmark extends React.Component {
                 firebase.database().ref('tickets/' + ticketID + '/bookmarkCount').on('value', snapshot => {
                     count = snapshot.val().valueOf() + 1;
                 })
-                if(count != null && this.state.bookmarked == false) {
+                if(count != null && this.state.bookmarked === false) {
                     updates['bookmarkCount'] = count
                     this.setState({bookmarked: true})
                     firebase.database().ref('tickets/' + ticketID).update(updates)

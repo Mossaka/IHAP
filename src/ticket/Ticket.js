@@ -27,13 +27,13 @@ export default class Ticket extends React.Component {
         <CardBody>
           <CardTitle>{this.state.title}</CardTitle>
         </CardBody>
-        <img width="100%" src={this.state.image} />
+        <img width="100%" src={this.state.image} alt="ticket thumbnail" />
         <CardBody>
-          <CardText>{this.state.content}</CardText>
+          <CardText dangerouslySetInnerHTML={{ __html: this.state.content }}></CardText>
           Last Edit: <TimeDisplay time={this.state.dateEdited} />
         </CardBody>
         <Vote up={this.state.upvote} down={this.state.downvote} path={'tickets/' + this.props.id} />
-        <Avatar id={this.state.creator} />
+        {!this.state.anonymous && <Avatar id={this.state.creator} />}
       </Card>
     );
   }
