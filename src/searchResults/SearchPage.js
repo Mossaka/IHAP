@@ -7,26 +7,62 @@ import { Link } from 'react-router-dom';
 import './SearchPage.css'
 import * as global from '../global.js'
 import firebase from 'firebase';
+import { weightedSearch } from './SearchTicket';
 
 class SearchPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      loggedIn: false
+      loggedIn: false,
+      cards: []
     }
     firebase.auth().onAuthStateChanged(user => {
       if (user) this.setState({ loggedIn: true });
       else this.setState({ loggedIn: false });
     });
+
+    //this.componentDidMount = this.componentDidMount.bind();
   }
 
-  generateTicketCard(ids) {
-    var cards = ids.map(function(id) {
-      return <SearchPreview ticketID={id} />
-    });
+  componentDidMount() {
+    var self = this;
+    var keyword = this.props.match.params.keyword;
+    if (this.props.match.params.type === global.TICKETS) {
+      //generateTicketCard(this.props.match.params.keyword);
+        
+      weightedSearch(keyword, 5, 2, 1, 0, 0, 0).then(function(ids) {
 
-    return cards;
+        var cards = ids.map(function(id) {
+          return <SearchPreview ticketID={id} />
+        });
+
+        console.log(cards);
+
+        self.setState({ cards: cards});
+      })
+
+    } else {
+      //generateUserCard(this.props.match.params.keyword);
+
+        
+      var ids = [];
+      var ref = firebase.database().ref('profiles');
+      ref.orderByChild('username').startAt(keyword.toLowerCase()).endAt(keyword.toLowerCase()+'\uf8ff').on('child_added', function(snapshot) {
+        ids.push(snapshot.key);
+      });
+      ref.orderByChild('username').startAt(keyword.toUpperCase()).endAt(keyword.toUpperCase()+'\uf8ff').on('child_added', function(snapshot) {
+        ids.push(snapshot.key);
+      });
+
+      var cards = ids.map(function(id) {
+        return <UserPreview userID={id} />
+      });
+      
+      this.setState({ cards: cards});
+
+
+    }
   }
 
   generateUserCard(keyword) {
@@ -42,11 +78,19 @@ class SearchPage extends React.Component {
     var cards = ids.map(function(id) {
       return <UserPreview userID={id} />
     });
-    return cards;
+    
+    this.setState({ cards: cards});
   }
 
-  searchTicket(keywords) {
-    //var ref = firebase.database.ref('tickets');
+  generateTicketCard(keyword) {
+    weightedSearch(keyword, 5, 0, 0, 1, 0, 0).then(function(ids) {
+
+      var cards = ids.map(function(id) {
+        return <SearchPreview ticketID={id} />
+      });
+
+      this.setState({ cards: cards});
+    })
   }
 
   render() {
@@ -59,7 +103,7 @@ class SearchPage extends React.Component {
         <hr />
 
         <div className="card-deck">
-          {this.generateUserCard(this.props.match.params.keyword)}
+          {this.state.cards}
         </div>
 
         <div className="create-ticket" style={{ marginTop: '1rem' }}>

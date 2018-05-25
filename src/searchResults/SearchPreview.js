@@ -4,9 +4,34 @@ import avatar from '../assets/img_avatar.png'
 // import bookmark from '../assets/bookmark.png'
 import './SearchPreview.css'
 import Bookmark from '../common/Bookmark';
+import firebase from 'firebase';
 
 
 class SearchPreview extends React.Component {
+  constructor(props) {
+    super(props)
+
+    // Initialize states for this Story Preview component
+    this.state = {
+      ticketTitle: "Ticket Title!!",
+      ticketDetails: "Ticket details... ",
+    }
+
+    // Get the ticket from database
+    var ticket = firebase.database().ref('tickets/' + this.props.ticketID);
+    // Once we get the ticket snapshot, 
+    ticket.once('value').then((snapshot) => {
+      // If the problem field exists, bind a value change listener to the problem object in database
+      if (snapshot.exists()) {
+        this.setState({
+          image: snapshot.val().image,
+          ticketTitle: snapshot.val().title.substring(0, 30),
+          ticketDetails: stripHtml(snapshot.val().content.substring(0, 100)),
+          creator: snapshot.val().creator
+        });
+      }
+    });
+  }
 
   render() {
     return (
@@ -14,10 +39,10 @@ class SearchPreview extends React.Component {
         <div className ="search">
           <div className = "textbox">
             <div className ="title">
-              <h5><b>Title</b></h5>
+              <h5><b>{this.state.ticketTitle}</b></h5>
             </div> 
             <div className ="description">
-              <p>Description: What's in a name? That which we call a rose. By any other word would smell as sweet;</p> 
+              <p>{this.state.ticketDetails}</p> 
             </div>
           </div>
           <div className = "userbox">
@@ -34,6 +59,12 @@ class SearchPreview extends React.Component {
       </div>
     );
   }
+}
+
+function stripHtml (html){
+    var tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+    return tempDiv.textContent || tempDiv.innerText || "";
 }
 
 export default SearchPreview
