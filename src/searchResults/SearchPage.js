@@ -46,7 +46,7 @@ class SearchPage extends React.Component {
   }
 
   searchTicket(keywords) {
-    var ref = firebase.database.ref('tickets');
+    //var ref = firebase.database.ref('tickets');
   }
 
   render() {
