@@ -74,7 +74,7 @@ class EditTicket extends React.Component {
       <Form onSubmit={this.handleSubmit}>
         <FormGroup>
           <Label>Title</Label>
-          <Input type="text" name="title" value={this.state.title} onChange={this.handleChange} required />
+          <Input type="text" name="title" value={this.state.title} onChange={this.handleChange} required maxlength="32"/>
         </FormGroup>
         <FormGroup>
           <Label>Thumbnail URL</Label>
