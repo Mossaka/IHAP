@@ -4,6 +4,7 @@ import Ticket from './Ticket';
 import RelateTicket from './RelatedTicket';
 import { Container, Row, Col } from 'reactstrap';
 import EditTicket from './EditTicket';
+import './TicketPage.css';
 
 export default class TicketPage extends React.Component {
   constructor(props) {
@@ -24,11 +25,19 @@ export default class TicketPage extends React.Component {
 
   render() {
     if (this.props.match.params.id === 'new') {
-      return <EditTicket />;
+      return (
+        <Container className="ticket-page">
+          <Row>
+            <Col xs={{ size: 6, offset: 3 }}>
+              <EditTicket />
+            </Col>
+          </Row>
+        </Container>
+      );
     }
 
     return (
-      <Container>
+      <Container className="ticket-page">
         <Row>
           <Col xs="6">
             <h3>Problem</h3>
