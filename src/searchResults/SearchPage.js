@@ -34,7 +34,7 @@ class SearchPage extends React.Component {
     }
   }
 
-  componentWillUpdate(prevProps, prevStates) {
+  getDerivedStateFromProps(prevProps, prevStates) {
     if (this.props.match.params.keyword !== prevProps.match.keyword) {
       var keyword = this.props.match.params.keyword;
       //var self = this;
