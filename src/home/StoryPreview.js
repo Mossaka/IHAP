@@ -20,7 +20,7 @@ class StoryPreview extends React.Component {
 
     // Get the ticket from database
     var ticket = firebase.database().ref('tickets/' + this.props.ticketID);
-    // Once we get the ticket snapshot, 
+    // Once we get the ticket snapshot,
     ticket.once('value').then((snapshot) => {
       // If the problem field exists, bind a value change listener to the problem object in database
       if (snapshot.exists()) {
@@ -39,7 +39,7 @@ class StoryPreview extends React.Component {
 
     return (
       <div className="story-preview">
-        <div className="card" >
+        <div className="card" style={{ height: '400px' }}>
           <Link className="clickable-card" to={'/ticket/' + this.props.ticketID}></Link>
 
           <img className="card-img-top img-fluid card-img" src={this.state.image} alt="ticket thumbnail" />
@@ -53,7 +53,7 @@ class StoryPreview extends React.Component {
               {this.state.ticketTitle}
             </h6>
             <p className="card-text" style={{ fontSize: '14px' }}>{this.state.ticketDetails}</p>
-            {this.state.creator && <Avatar id={this.state.creator} />}
+            {this.state.creator && <Avatar id={this.state.creator}  style={{position: 'relative', bottom: '0px'}}/>}
           </div>
 
         </div>

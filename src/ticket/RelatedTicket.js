@@ -1,7 +1,12 @@
 import React from 'react';
+import firebase from 'firebase'
 import { Card, CardBody, CardTitle, CardLink } from 'reactstrap';
 
 export default class RelatedTicket extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
 
   render() {
     return (
