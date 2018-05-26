@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import firebase from 'firebase';
+import "./Signup.css"
 
 export default class Signup extends React.Component {
   constructor(props) {
@@ -69,7 +70,9 @@ export default class Signup extends React.Component {
         </FormGroup>
         {this.state.match === false && <Alert color="danger">Password doesn't match</Alert>}
         {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
-        <Button color="primary">Sign Up</Button>
+        <Button className="signUpButton" color="steelblue">
+          <span>Sign Up</span>
+        </Button>
       </Form>
     );
   }
