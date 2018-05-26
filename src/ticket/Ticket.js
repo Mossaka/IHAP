@@ -4,6 +4,7 @@ import { Card, CardBody, CardTitle, CardText, Button } from 'reactstrap';
 import TimeDisplay from '../common/TimeDisplay';
 import Vote from './Vote';
 import Avatar from '../common/Avatar';
+import EditTicket from './EditTicket';
 
 export default class Ticket extends React.Component {
   constructor(props) {
@@ -23,13 +24,26 @@ export default class Ticket extends React.Component {
   }
 
   edit = () => {
-
+    this.setState({ edit: !this.state.edit });
   }
 
   render() {
     if (!this.state) {
       return (
         <h1>Loading...</h1>
+      );
+    }
+
+    if (this.state.edit) {
+      let preload = {
+        title: this.state.title,
+        content: this.state.content,
+        image: this.state.image,
+        anonymous: this.state.anonymous
+      };
+
+      return (
+        <EditTicket cancel={this.edit} preload={preload} id={this.props.id}/>
       );
     }
 
