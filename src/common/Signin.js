@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import firebase from 'firebase';
+import "./Signin.css"
 
 export default class Signin extends React.Component {
   constructor(props) {
@@ -36,7 +37,9 @@ export default class Signin extends React.Component {
           <Input type="password" onChange={this.handleChange} value={this.state.password} />
         </FormGroup>
         {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
-        <Button color="primary">Sign In</Button>
+        <Button className="signInButton" color="steelblue">
+          <span>Sign In</span>
+        </Button>
       </Form>
     );
   }

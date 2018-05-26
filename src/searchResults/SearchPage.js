@@ -60,7 +60,7 @@ class SearchPage extends React.Component {
 
   generateTicketCard(keyword) {
     var self = this;
-    weightedSearch(keyword, 5, {title: 5, content: 2, rating: 2, upvotes: 1}).then(function(ids) {
+    weightedSearch(keyword, 5, {title: 5, content: 2}).then(function(ids) {
 
       var cards = ids.map(function(id) {
         return <SearchPreview ticketID={id} />
