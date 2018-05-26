@@ -22,6 +22,9 @@ class SearchPage extends React.Component {
       show: '1',
     };
     this.toggleTab = this.toggleTab.bind(this);
+    this.refreshSearch = this.refreshSearch.bind(this);
+    this.generateTicketCard = this.generateTicketCard.bind(this);
+    this.generateUserCard = this.generateUserCard.bind(this);
     firebase.auth().onAuthStateChanged(user => {
       if (user) this.setState({ loggedIn: true });
       else this.setState({ loggedIn: false });
