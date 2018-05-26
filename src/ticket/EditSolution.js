@@ -39,14 +39,16 @@ export default class EditSolution extends React.Component {
     }
 
     let db = firebase.database();
+    let uid = firebase.auth().currentUser.uid;
     let key = db.ref('solutions').push({
       content: this.state.content,
-      creator: firebase.auth().currentUser.uid,
+      creator: uid,
       dateEdited: new Date().getTime(),
       upvote: 0,
       downvote: 0
     }).key;
     db.ref('tickets/' + this.props.ticket + '/solutions').push(key);
+    db.ref('profiles/' + uid + '/solutions').push(key);
     window.location.reload();
   }
 

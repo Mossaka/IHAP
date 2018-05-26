@@ -39,7 +39,8 @@ class EditTicket extends React.Component {
       return;
     }
 
-    firebase.database().ref('tickets')
+    let db = firebase.database();
+    let key = db.ref('tickets')
       .push({
         anonymous: this.state.anonymous,
         content: this.state.content,
@@ -49,14 +50,10 @@ class EditTicket extends React.Component {
         title: this.state.title,
         upvote: 0,
         downvote: 0
-      })
-      .then(res => {
-        console.log(res);
-        this.props.history.push('/ticket/' + res.key);
-      })
-      .catch(e => {
-        this.setState({ error: e });
-      });
+      }).key;
+
+    db.ref('profiles/' + firebase.auth().currentUser.uid + '/tickets').push(key);
+    this.props.history.push('/ticket/' + key);
   }
 
   render() {
@@ -74,7 +71,7 @@ class EditTicket extends React.Component {
       <Form onSubmit={this.handleSubmit}>
         <FormGroup>
           <Label>Title</Label>
-          <Input type="text" name="title" value={this.state.title} onChange={this.handleChange} required maxlength="32"/>
+          <Input type="text" name="title" value={this.state.title} onChange={this.handleChange} required maxlength="32" />
         </FormGroup>
         <FormGroup>
           <Label>Thumbnail URL</Label>
