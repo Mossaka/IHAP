@@ -54,7 +54,7 @@ export default class Signup extends React.Component {
       <Form onSubmit={this.handleSubmit} >
         <FormGroup>
           <Label>User Name</Label>
-          <Input type="text" name="name" onChange={this.handleChange} value={this.state.name} required />
+          <Input type="text" name="name" onChange={this.handleChange} value={this.state.name} required  maxlength="32"/>
         </FormGroup>
         <FormGroup>
           <Label>Email Addess</Label>
@@ -62,7 +62,7 @@ export default class Signup extends React.Component {
         </FormGroup>
         <FormGroup>
           <Label>Password</Label>
-          <Input type="password" name="pass" onChange={this.handleChange} value={this.state.pass} required />
+          <Input type="password" name="pass" onChange={this.handleChange} value={this.state.pass} required maxlength="32"/>
         </FormGroup>
         <FormGroup>
           <Label>Confirm Password</Label>
