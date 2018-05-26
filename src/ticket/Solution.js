@@ -24,7 +24,7 @@ export default class Solution extends React.Component {
     return (
       <Card>
         <CardBody>
-          <CardText>{this.state.content}</CardText>
+          <CardText dangerouslySetInnerHTML={{ __html: this.state.content }}></CardText>
           Last Edit: <TimeDisplay time={this.state.dateEdited} />
         </CardBody>
         <Vote up={this.state.upvote} down={this.state.downvote} path={'solutions/' + this.props.id} />

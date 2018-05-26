@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import firebase from 'firebase';
+import "./Signup.css"
 
 export default class Signup extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ export default class Signup extends React.Component {
         firebase.database().ref('profiles/' + res.user.uid)
           .set({
             username: this.state.name,
+            username_lowercase: this.state.name.toLowerCase(),
             dateCreated: new Date().getTime()
           });
       })
@@ -53,7 +55,7 @@ export default class Signup extends React.Component {
       <Form onSubmit={this.handleSubmit} >
         <FormGroup>
           <Label>User Name</Label>
-          <Input type="text" name="name" onChange={this.handleChange} value={this.state.name} required />
+          <Input type="text" name="name" onChange={this.handleChange} value={this.state.name} required  maxlength="32"/>
         </FormGroup>
         <FormGroup>
           <Label>Email Addess</Label>
@@ -61,7 +63,7 @@ export default class Signup extends React.Component {
         </FormGroup>
         <FormGroup>
           <Label>Password</Label>
-          <Input type="password" name="pass" onChange={this.handleChange} value={this.state.pass} required />
+          <Input type="password" name="pass" onChange={this.handleChange} value={this.state.pass} required maxlength="32"/>
         </FormGroup>
         <FormGroup>
           <Label>Confirm Password</Label>
@@ -69,7 +71,9 @@ export default class Signup extends React.Component {
         </FormGroup>
         {this.state.match === false && <Alert color="danger">Password doesn't match</Alert>}
         {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
-        <Button color="primary">Sign Up</Button>
+        <Button className="signUpButton" color="steelblue">
+          <span>Sign Up</span>
+        </Button>
       </Form>
     );
   }

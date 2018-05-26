@@ -15,7 +15,9 @@ class SearchPage extends React.Component {
 
     this.state = {
       loggedIn: false,
-      cards: []
+      cards: [],
+      keyword: '',
+      search: '',
     }
     firebase.auth().onAuthStateChanged(user => {
       if (user) this.setState({ loggedIn: true });
@@ -23,28 +25,21 @@ class SearchPage extends React.Component {
     });
   }
 
-  componentWillMount() {
-    //var self = this;
-    var keyword = this.props.match.params.keyword;
-    if (this.props.match.params.type === global.TICKETS) {
-      this.generateTicketCard(keyword);
-      
-    } else {
-      this.generateUserCard(keyword);
-    }
-  }
+  refreshSearch() {
+    if (this.props.match.params.keyword !== this.state.keyword || this.props.match.params.type !== this.state.search) {
+      var key = this.props.match.params.keyword;
+      var searchType = this.props.match.params.type;
 
-  getDerivedStateFromProps(prevProps, prevStates) {
-    if (this.props.match.params.keyword !== prevProps.match.keyword) {
-      var keyword = this.props.match.params.keyword;
-      //var self = this;
-      if (this.props.match.params.type === global.TICKETS) {
-        this.generateTicketCard(keyword);
+      if (searchType === global.TICKETS) {
+        this.generateTicketCard(key);
         
       } else {
-        this.generateUserCard(keyword);
-
+        this.generateUserCard(key);
       }
+      this.setState({
+        keyword: key,
+        search: searchType
+      });
     }
   }
 
@@ -52,10 +47,7 @@ class SearchPage extends React.Component {
     var self = this;
     var ids = [];
     var ref = firebase.database().ref('profiles');
-    ref.orderByChild('username').startAt(keyword.toLowerCase()).endAt(keyword.toLowerCase()+'\uf8ff').on('child_added', function(snapshot) {
-      ids.push(snapshot.key);
-    });
-    ref.orderByChild('username').startAt(keyword.toUpperCase()).endAt(keyword.toUpperCase()+'\uf8ff').on('child_added', function(snapshot) {
+    ref.orderByChild('username_lowercase').startAt(keyword.toLowerCase()).endAt(keyword.toLowerCase()+'\uf8ff').on('child_added', function(snapshot) {
       ids.push(snapshot.key);
     });
 
@@ -79,6 +71,8 @@ class SearchPage extends React.Component {
   }
 
   render() {
+    this.refreshSearch();
+
     return (
       <div className='container searchpage'>
         <div className='searchTitle'>
