@@ -1,12 +1,9 @@
 import firebase from 'firebase';
 
-export function weightedSearch(keyword, count, title, content, dateEdited, rating, upvotes) {
+export function weightedSearch(keyword, count, weights) {
     var keywords = [];
     
-    if (!keyword.replace(/\s/g, '')) {
-      title = 0;
-      content = 0;
-    } else {
+    if (keyword.replace(/\s/g, '')) {
       keywords = keyword.toLowerCase().split(' ');
     }
     
@@ -20,25 +17,25 @@ export function weightedSearch(keyword, count, title, content, dateEdited, ratin
 
           var weight = 0;
 
-          if (title > 0) {
-            weight += title * subsetRatio(keywords, data.title.toLowerCase().split(' '));
+          if ("title" in weights) {
+            weight += weights["title"] * subsetRatio(keywords, data.title.toLowerCase().split(' '));
           }
 
-          if (content > 0) {
-            weight += content * subsetRatio(keywords, stripHtml(data.content).toLowerCase().split(' '));
+          if ("content" in weights) {
+            weight += weights["content"] * subsetRatio(keywords, stripHtml(data.content).toLowerCase().split(' '));
           }
 
-          if (dateEdited > 0) {
+          if ("dateEdited" in weights) {
             var now = new Date().getTime();
-            weight += dateEdited * (Math.exp(-0.00000001 * (now - data.dateEdited)));
+            weight += weights["dateEdited"] * (Math.exp(-0.00000001 * (now - data.dateEdited)));
           }
 
-          if (rating > 0 && (data.upvote + data.downvote) !== 0) {
-            weight += rating * (data.upvote / (data.upvote + data.downvote));
+          if ("rating" in weights && (data.upvote + data.downvote) !== 0) {
+            weight += weights["rating"] * (data.upvote / (data.upvote + data.downvote));
           }
 
-          if (upvotes > 0) {
-            weight += upvotes * (1 / (1 + Math.exp(-0.1 * (data.upvote - 20))));
+          if ("upvotes" in weights) {
+            weight += weights["upvotes"] * (1 / (1 + Math.exp(-0.1 * (data.upvote - 20))));
             console.log((1 / (1 + Math.exp(-0.1 * (data.upvote - 20)))));
           }
 
