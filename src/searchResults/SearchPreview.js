@@ -28,6 +28,7 @@ class SearchPreview extends React.Component {
           image: snapshot.val().image,
           ticketTitle: snapshot.val().title.substring(0, 30),
           ticketDetails: stripHtml(snapshot.val().content.substring(0, 100)),
+          anonymous: snapshot.val().anonymous,
           creator: snapshot.val().creator
         });
       }
@@ -48,7 +49,7 @@ class SearchPreview extends React.Component {
             </div>
           </div>
           <div className = "userbox">
-            {this.state.creator && <Avatar id={this.state.creator} />}
+            {this.state.creator && !this.state.anonymous && <Avatar id={this.state.creator} />}
             {/*<Link to='/profile'>
               <img className="avatar" src={avatar} style={{width: '35px'}} alt="Avatar" />
             </Link>
