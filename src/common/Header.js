@@ -77,7 +77,7 @@ class Header extends React.Component {
     ) : (
       <div className="searchOrRandom">
         <Input className="searchOrRandomItem" type="search" name="search" placeholder="Search" onKeyUp={this.handleKeyPress}/>
-        <Button color="secondary" onClick={this.search}>Search </Button>
+        <Button color="secondary" onClick={this.search}>Search</Button>
       </div>
     ); 
 
