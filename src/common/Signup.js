@@ -41,6 +41,7 @@ export default class Signup extends React.Component {
         firebase.database().ref('profiles/' + res.user.uid)
           .set({
             username: this.state.name,
+            username_lowercase: this.state.name.toLowerCase(),
             dateCreated: new Date().getTime()
           });
       })

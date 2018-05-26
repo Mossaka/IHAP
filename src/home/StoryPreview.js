@@ -16,6 +16,7 @@ class StoryPreview extends React.Component {
       image: greycard,
       ticketTitle: "Ticket Title!!",
       ticketDetails: "Ticket details... ",
+      anonymous: true
     }
 
     // Get the ticket from database
@@ -28,6 +29,7 @@ class StoryPreview extends React.Component {
           image: snapshot.val().image,
           ticketTitle: snapshot.val().title.substring(0, 30),
           ticketDetails: snapshot.val().content.substring(0, 100),
+          anonymous: snapshot.val().anonymous,
           creator: snapshot.val().creator
         });
       }
@@ -53,10 +55,10 @@ class StoryPreview extends React.Component {
               {this.state.ticketTitle}
             </h6>
             <p className="card-text" style={{ fontSize: '14px' }}>{this.state.ticketDetails}</p>
-            {this.state.creator && <Avatar id={this.state.creator}  style={{position: 'relative', bottom: '0px'}}/>}
+            {this.state.creator && !this.state.anonymous && <Avatar id={this.state.creator}  style={{position: 'relative', bottom: '0px'}}/>}
           </div>
 
-        </div>
+         </div>
       </div>
     );
   }
