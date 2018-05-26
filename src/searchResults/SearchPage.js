@@ -25,7 +25,7 @@ class SearchPage extends React.Component {
     });
   }
 
-  refreshSearch(prevProps) {
+  refreshSearch() {
     if (this.props.match.params.keyword !== this.state.keyword || this.props.match.params.type !== this.state.search) {
       var key = this.props.match.params.keyword;
       var searchType = this.props.match.params.type;
@@ -35,7 +35,6 @@ class SearchPage extends React.Component {
         
       } else {
         this.generateUserCard(key);
-
       }
       this.setState({
         keyword: key,
@@ -48,10 +47,7 @@ class SearchPage extends React.Component {
     var self = this;
     var ids = [];
     var ref = firebase.database().ref('profiles');
-    ref.orderByChild('username').startAt(keyword.toLowerCase()).endAt(keyword.toLowerCase()+'\uf8ff').on('child_added', function(snapshot) {
-      ids.push(snapshot.key);
-    });
-    ref.orderByChild('username').startAt(keyword.toUpperCase()).endAt(keyword.toUpperCase()+'\uf8ff').on('child_added', function(snapshot) {
+    ref.orderByChild('username_lowercase').startAt(keyword.toLowerCase()).endAt(keyword.toLowerCase()+'\uf8ff').on('child_added', function(snapshot) {
       ids.push(snapshot.key);
     });
 
