@@ -4,6 +4,7 @@ import Ticket from './Ticket';
 import RelateTicket from './RelatedTicket';
 import { Container, Row, Col } from 'reactstrap';
 import EditTicket from './EditTicket';
+import EditSolution from './EditSolution';
 import './TicketPage.css';
 
 export default class TicketPage extends React.Component {
@@ -50,6 +51,7 @@ export default class TicketPage extends React.Component {
             <h3>Solutions</h3>
             <hr />
             {this.state.solutions.map(s => <Solution key={s} id={s} />)}
+            <EditSolution ticket={this.props.match.params.id} />
           </Col>
         </Row>
       </Container>
