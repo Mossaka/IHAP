@@ -35,6 +35,11 @@ class SearchPage extends React.Component {
     if (this.props.match.params.keyword !== this.state.keyword) {
       var key = this.props.match.params.keyword;
 
+      this.setState({
+        ticketCards: [],
+        userCards: []
+      });
+
       this.generateTicketCard(key);
 
       this.generateUserCard(key);
@@ -75,7 +80,6 @@ class SearchPage extends React.Component {
 
 
   generateUserCard(keyword) {
-    var self = this;
     var ids = [];
     var ref = firebase.database().ref('profiles');
     ref.orderByChild('username_lowercase').startAt(keyword.toLowerCase()).endAt(keyword.toLowerCase()+'\uf8ff').on('child_added', function(snapshot) {
@@ -86,7 +90,7 @@ class SearchPage extends React.Component {
       return <UserPreview userID={id} />
     });
     
-    self.setState({ userCards: cards});
+    this.setState({ userCards: cards});
   }
 
   generateTicketCard(keyword) {
