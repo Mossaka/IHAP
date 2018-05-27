@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import './SearchPage.css'
 import firebase from 'firebase';
 import { weightedSearch } from './SearchTicket';
+import FilterButton from './FilterButton';
 
 class SearchPage extends React.Component {
   constructor(props) {
