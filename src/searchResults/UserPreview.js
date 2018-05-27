@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Col } from 'reactstrap';
+import { Col, Container } from 'reactstrap';
 import firebase from 'firebase';
+import './SearchPreview.css'
+import Avatar from '../common/Avatar'
 
 
 class UserPreview extends React.Component {
@@ -28,21 +30,18 @@ class UserPreview extends React.Component {
 
   render() {
     return (
-        <div className = "container">
+        <Container>
           <div className ="search">
-            <Col xs='auto'>
-              <Link to='/profile'>
-                <img className="avatar" src={this.state.Avatar} style={{width: '50px'}} alt="Avatar" />
-              </Link>
-              <Link to='/profile'>
-                <p><b>{this.state.Username}</b></p>
-              </Link>
+            <Col xs="2">
+              <Avatar id={this.props.userID} />
             </Col>
-            <Col xs='auto'>
-              <p>Biography: {this.state.Bio}</p>
+            <Col xs='10'>
+                <Container>
+                  <p>{this.state.Bio}</p>
+                </Container>
             </Col>
           </div>
-        </div>
+        </Container>
     );
   }
 }

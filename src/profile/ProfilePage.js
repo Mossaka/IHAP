@@ -8,6 +8,9 @@ import UserBar from './UserBar';
 import './ProfilePage.css';
 import ProfileSettingPage from './ProfileSettingPage';
 import firebase from 'firebase';
+import download from '../assets/download.jpg';
+import parse from '../assets/parse.jpg';
+import edit from '../assets/eidt.jpg';
 
 export default class ProfilePage extends React.Component {
   constructor(props, context) {
@@ -126,31 +129,37 @@ export default class ProfilePage extends React.Component {
   renderUserInfo() {
     return (
       <div className='user-info'>
-        <Row xs='8'>
-          <Col xs='3'>
+        <Row xs="8">
+          <Col xs='auto'>
             <div id="user">
               <div id="avatar" style={{backgroundImage: `URL(${this.state.avatar})`, width:'100px', height:'100px'}}></div>
               <p className="username" style={{fontSize: '25px', float:'left'}}>{this.state.username}</p>
             </div>
           </Col>
           <Col xs='auto'>
-            <div className="info">
+            <div className="info float-left">
               <Nav>
+                <Row>
                 <NavItem>
-                  <NavLink href='#'>{this.state.email}</NavLink>
+                  <NavLink href='#'><img src={download} style={{width:'25px', height:'25px'}}/>  {this.state.email}</NavLink>
                 </NavItem>
-                <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
-                  <DropdownToggle nav caret>Bio</DropdownToggle>
-                  <DropdownMenu>
-                    <p>{this.state.bio}</p>
-                  </DropdownMenu>
-                </Dropdown>
+                </Row>
+                <Row>
+                <NavItem>
+                  <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
+                    <DropdownToggle nav caret><img src={parse} style={{width:'25px', height:'25px'}}/>  </DropdownToggle>
+                    <DropdownMenu>
+                      <p>{this.state.bio}</p>
+                    </DropdownMenu>
+                  </Dropdown>
+                </NavItem>
+                </Row>
               </Nav>
             </div>  
           </Col>
           <Col>
             <div id="follow" className='float-right' style={{bottom:'0', float:'right'}}>
-              {this.state.currentUser ? <Button size='sm' onClick={this.toggleSetting}>Edit</Button> : <div></div>}
+              {this.state.currentUser ? <Button size='sm' style={{backgroundColor:'white', borderColor:'white'}} onClick={this.toggleSetting}><img src={edit} style={{width:'30px', height:'30px'}}/> </Button> : <div></div>}
               {this.state.currentUser ? <div></div> : <Button color={"primary"} style={{float:'left'}} size="sm">Follow</Button>}
             </div>
           </Col>
