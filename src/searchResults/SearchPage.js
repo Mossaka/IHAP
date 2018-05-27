@@ -1,12 +1,10 @@
 import React from 'react';
 import SearchPreview from './SearchPreview';
 import UserPreview from './UserPreview';
-import FilterButton from './FilterButton';
 import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import './SearchPage.css'
-import * as global from '../global.js'
 import firebase from 'firebase';
 import { weightedSearch } from './SearchTicket';
 
