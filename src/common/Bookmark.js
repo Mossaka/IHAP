@@ -9,15 +9,25 @@ class Bookmark extends React.Component {
         this.state = {
             bookmarked: false
         }
-        this.onBookmarkClick = this.onBookmarkClick.bind(this);
+        this.bookmark = this.bookmark.bind(this);
+        this.unbookmark = this.unbookmark.bind(this);
 
         firebase.auth().onAuthStateChanged(user => {
             if(user) {
                 const uid = user.uid;
-                firebase.database().ref('notebooks/' + uid + '/bookmarked').on('value', snapshot => {
+                // Attempt to use database to get child by value
+                /*
+                firebase.database().ref('notebooks/' + uid).orderByChild("bookmarked").equalTo(this.props.ticketID).once('value').then((snapshot) => {
+                    
+                    this.setState({bookmarked: true});
+                    return true;
+                })*/
+                
+                firebase.database().ref('notebooks/' + uid + '/bookmarked').once('value').then(snapshot => {
                     snapshot.forEach(childSnapshot => {
                         if( childSnapshot.val() === this.props.ticketID ) {
                             this.setState({bookmarked: true});
+                            return true;
                         }
                     })
                 })
@@ -27,47 +37,72 @@ class Bookmark extends React.Component {
         })
     }
 
-    onBookmarkClick(event) {
-        firebase.auth().onAuthStateChanged(user => {
-            if(user) {
-                var updates = {};
-                var count = null;
-                // var problemID = null;
-                const uid = user.uid;
-                const ticketID = this.props.ticketID;
-                // firebase.database().ref('tickets/' + ticketID + "/problem").on('value', (snapshot) => {
-                //     problemID = snapshot.val();  
-                // })
-                firebase.database().ref('tickets/' + ticketID + '/bookmarkCount').on('value', snapshot => {
-                    count = snapshot.val().valueOf() + 1;
-                })
-                if(count != null && this.state.bookmarked === false) {
-                    updates['bookmarkCount'] = count
-                    this.setState({bookmarked: true})
-                    firebase.database().ref('tickets/' + ticketID).update(updates)
-                    firebase.database().ref('notebooks/' + uid + '/bookmarked/').push(ticketID);
+    bookmark(event) {
+        if(!this.state.bookmarked) {
+            firebase.auth().onAuthStateChanged(user => {
+                if(user) {
+                    const uid = user.uid;
+                    const ticketID = this.props.ticketID;
+
+                    firebase.database().ref('notebooks/' + uid + '/bookmarked/').push(this.props.ticketID).catch(() => {
+                        console.log('unbookmark failed.');
+                    });
+                    this.setState({ bookmarked: true });
+
+                } else {
+                    alert("Please sign in to bookmark!");
                 }
-            } else {
-                alert("user not signin!");
-            }
-        })
+            })
+        }
         
+        event.preventDefault();
+    }
+
+    unbookmark(event) {
+        if(this.state.bookmarked) {
+            firebase.auth().onAuthStateChanged(user => {
+                if(user) {
+                    const uid = user.uid;
+                    const ticketID = this.props.ticketID;
+
+                    firebase.database().ref('notebooks/' + uid + '/bookmarked').once('value').then(snapshot => {
+                        snapshot.forEach(childSnapshot => {
+                            if( childSnapshot.val() === this.props.ticketID ) {
+                                firebase.database().ref('notebooks/' + uid + '/bookmarked/' + childSnapshot.key).remove().then(
+                                    () => {
+                                        this.setState({ bookmarked: false })
+                                    }
+                                ).catch(() => {
+                                    console.log('unbookmark failed.');
+                                });
+                                return true;
+                            }
+                        })
+                    })
+                    
+
+                } else {
+                    alert("Please sign in to unbookmark!");
+                }
+            })
+        }
+
         event.preventDefault();
     }
 
     render(){
         if(!this.state.bookmarked) {
             return (
-                <div className='bookmark'>
-                    <svg width='16' height='42' style={{float:'right'}} onClick={this.onBookmarkClick}>
+                <div title="Bookmark" className='bookmark'>
+                    <svg width='16' height='42' style={{float:'right'}} onClick={this.bookmark}>
                         <polygon points='0,0 0,33 8,40 16,33 16,0' />
                     </svg>
                 </div>
             )
         } else {
             return (
-                <div className='bookmark'>
-                    <svg width='16' height='42' style={{float:'right'}}>
+                <div title="Unbookmark" className='bookmark'>
+                    <svg width='16' height='42' style={{float:'right'}} onClick={this.unbookmark}>
                         <polygon style={{opacity: '1'}} points='0,0 0,33 8,40 16,33 16,0' />
                     </svg>
                 </div>
