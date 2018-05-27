@@ -55,9 +55,8 @@ class StoryPreview extends React.Component {
               {this.state.ticketTitle}
             </h6>
             <p className="card-text" style={{ fontSize: '14px' }}>{this.state.ticketDetails}</p>
-            {this.state.creator && !this.state.anonymous && <Avatar id={this.state.creator}  style={{position: 'relative', bottom: '0px'}}/>}
           </div>
-
+          {this.state.creator && !this.state.anonymous && <Avatar id={this.state.creator}  style={{position: 'absolute', bottom: '0px', backgroundimage: 'url("greycard.jpg")'}}/>}
          </div>
       </div>
     );
