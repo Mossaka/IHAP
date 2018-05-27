@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Col, Container } from 'reactstrap';
 import firebase from 'firebase';
 import './SearchPreview.css'
-import Avatar from '../common/Avatar'
 
 
 class UserPreview extends React.Component {

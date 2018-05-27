@@ -9,7 +9,7 @@ import SearchPage from './searchResults/SearchPage';
 export default class App extends React.Component {
   render() {
     return (
-      <div id="app">
+      <React.Fragment>
         <Header />
         <Switch>
           <Route path="/ticket/:id" component={TicketPage} />
@@ -17,7 +17,7 @@ export default class App extends React.Component {
           <Route path="/profile/:id" component={ProfilePage} />
           <Route component={HomePage} />
         </Switch>
-      </div>
+      </React.Fragment>
     );
   }
 }
