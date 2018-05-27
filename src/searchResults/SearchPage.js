@@ -1,12 +1,10 @@
 import React from 'react';
 import SearchPreview from './SearchPreview';
 import UserPreview from './UserPreview';
-import FilterButton from './FilterButton';
 import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import './SearchPage.css'
-import * as global from '../global.js'
 import firebase from 'firebase';
 import { weightedSearch } from './SearchTicket';
 
@@ -22,6 +20,9 @@ class SearchPage extends React.Component {
       show: '1',
     };
     this.toggleTab = this.toggleTab.bind(this);
+    this.refreshSearch = this.refreshSearch.bind(this);
+    this.generateTicketCard = this.generateTicketCard.bind(this);
+    this.generateUserCard = this.generateUserCard.bind(this);
     firebase.auth().onAuthStateChanged(user => {
       if (user) this.setState({ loggedIn: true });
       else this.setState({ loggedIn: false });
@@ -31,6 +32,11 @@ class SearchPage extends React.Component {
   refreshSearch() {
     if (this.props.match.params.keyword !== this.state.keyword) {
       var key = this.props.match.params.keyword;
+
+      this.setState({
+        ticketCards: [],
+        userCards: []
+      });
 
       this.generateTicketCard(key);
 
@@ -72,7 +78,6 @@ class SearchPage extends React.Component {
 
 
   generateUserCard(keyword) {
-    var self = this;
     var ids = [];
     var ref = firebase.database().ref('profiles');
     //startAt(keyword.toLowerCase()).endAt(keyword.toLowerCase()+'\uf8ff')
@@ -84,7 +89,7 @@ class SearchPage extends React.Component {
       return <UserPreview userID={id} />
     });
     
-    self.setState({ userCards: cards});
+    this.setState({ userCards: cards});
   }
 
   generateTicketCard(keyword) {
