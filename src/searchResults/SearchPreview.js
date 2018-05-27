@@ -27,7 +27,7 @@ class SearchPreview extends React.Component {
         this.setState({
           image: snapshot.val().image,
           ticketTitle: snapshot.val().title.substring(0, 30),
-          ticketDetails: stripHtml(snapshot.val().content.substring(0, 100)),
+          ticketDetails: (stripHtml(snapshot.val().content).length < 200) ? (stripHtml(snapshot.val().content)) : (stripHtml(snapshot.val().content).substr(0,197) + '...'),
           anonymous: snapshot.val().anonymous,
           creator: snapshot.val().creator
         });

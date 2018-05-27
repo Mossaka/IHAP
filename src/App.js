@@ -13,7 +13,7 @@ export default class App extends React.Component {
         <Header />
         <Switch>
           <Route path="/ticket/:id" component={TicketPage} />
-          <Route path="/search/:type/:keyword" component={SearchPage} />
+          <Route path="/search/:keyword" component={SearchPage} />
           <Route path="/profile/:id" component={ProfilePage} />
           <Route component={HomePage} />
         </Switch>

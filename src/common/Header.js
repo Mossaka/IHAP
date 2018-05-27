@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import lever from '../assets/lever.png';
-import * as global from '../global.js';
 import User from './User';
 import './Header.css';
 import firebase from 'firebase';
@@ -15,8 +14,6 @@ class Header extends React.Component {
     this.state = {
       random: false,
       rotation: 0,
-      searchDropdownOpen: false,
-      searching: 'Tickets',
       keyword: ' ',
       loggedIn: false,
       showSignup: false, 
@@ -27,9 +24,6 @@ class Header extends React.Component {
     this.handleLeverClick = this.handleLeverClick.bind(this);
     this.setRandom = this.setRandom.bind(this);
     this.setSearch = this.setSearch.bind(this);
-    this.toggleSearch = this.toggleSearch.bind(this);
-    this.searchTickets = this.searchTickets.bind(this);
-    this.searchUsers = this.searchUsers.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.search = this.search.bind(this);
     this.loadRandomTicket = this.loadRandomTicket.bind(this);
@@ -54,7 +48,7 @@ class Header extends React.Component {
   }
 
   search() {
-    this.props.history.push('/search/' + (this.state.searching === 'Tickets' ? global.TICKETS : global.USERS) + '/' + this.state.keyword);
+    this.props.history.push('/search/' + this.state.keyword);
   }
 
 
@@ -96,33 +90,6 @@ class Header extends React.Component {
     );
   }
 
-  toggleSearch() {
-    this.setState(
-      {
-        searchDropdownOpen: !this.state.searchDropdownOpen
-      }
-    );
-  }
-
-  searchTickets() {
-    this.setState (
-      {
-        searching: "Tickets"
-      }
-    );
-    this.search();
-
-  }
-
-  searchUsers() {
-    this.setState (
-      {
-        searching: "Users"
-      }
-    );
-    this.search();
-  }
-
 
   loadRandomTicket() {
     
@@ -150,15 +117,8 @@ class Header extends React.Component {
       </div>
     ) : (
       <div className="searchOrRandom">
-        <Input className="searchOrRandomItem"  type="search" name="search" placeholder="Search" onKeyUp={this.handleKeyPress}/>
-        <ButtonDropdown className="searchOrRandomItem" isOpen={this.state.searchDropdownOpen} toggle={this.toggleSearch}>
-        <Button color="secondary" onClick={this.search}>Search {this.state.searching}</Button>
-        <DropdownToggle caret color="secondary" />
-        <DropdownMenu>
-          <DropdownItem onClick={this.searchTickets}>Search Tickets</DropdownItem>
-          <DropdownItem onClick={this.searchUsers}>Search Users</DropdownItem>
-        </DropdownMenu>
-      </ButtonDropdown>
+        <Input className="searchOrRandomItem" type="search" name="search" placeholder="Search" onKeyUp={this.handleKeyPress}/>
+        <Button color="secondary" onClick={this.search}>Search</Button>
       </div>
     ); 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Alert } from 'reactstrap';
+import { Button, Alert } from 'reactstrap';
 import firebase from 'firebase';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -45,7 +45,8 @@ export default class EditSolution extends React.Component {
       creator: uid,
       dateEdited: new Date().getTime(),
       upvote: 0,
-      downvote: 0
+      downvote: 0,
+      ticket: this.props.ticket
     }).key;
     db.ref('tickets/' + this.props.ticket + '/solutions').push(key);
     db.ref('profiles/' + uid + '/solutions').push(key);
