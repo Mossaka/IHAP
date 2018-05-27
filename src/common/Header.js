@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import lever from '../assets/lever.png';
-import * as global from '../global.js';
 import User from './User';
 import './Header.css';
 import { Button, Col, Input } from 'reactstrap';
