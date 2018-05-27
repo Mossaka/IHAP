@@ -1,9 +1,7 @@
 @import "../_global";
-html{
-    background-color: $homepage-bg;
+.container {
 
     .searchpage{
-        background-color: $float-window;
         padding: 2rem 2rem 2rem 2rem;
         max-width: 100%;
     }

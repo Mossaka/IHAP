@@ -88,7 +88,7 @@ class SearchPage extends React.Component {
     this.refreshSearch();
 
     return (
-      <Container >
+      <Container className="container">
         <div className='searchTitle'>
           <h3 className='left'> {this.props.match.params.type === global.TICKETS ? "Ticket" : "User"} Results: {this.props.match.params.keyword}</h3>
           <FilterButton className='right' />
