@@ -5,6 +5,7 @@ import lever from '../assets/lever.png';
 import * as global from '../global.js';
 import User from './User';
 import './Header.css';
+import firebase from 'firebase';
 import { Button, Col, Input, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 
@@ -18,7 +19,10 @@ class Header extends React.Component {
       searching: 'Tickets',
       keyword: ' ',
       loggedIn: false,
-      showSignup: false
+      showSignup: false, 
+      ticketIDs: [],
+      numTickets: 0, 
+      refresh: false
     }
     this.handleLeverClick = this.handleLeverClick.bind(this);
     this.setRandom = this.setRandom.bind(this);
@@ -28,6 +32,25 @@ class Header extends React.Component {
     this.searchUsers = this.searchUsers.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.search = this.search.bind(this);
+    this.loadRandomTicket = this.loadRandomTicket.bind(this);
+    this.doneLoadingRandomTicket = this.doneLoadingRandomTicket.bind(this);
+
+    // Save load ticket keys from database. 
+    var tickets = firebase.database().ref('tickets'); 
+    tickets.once('value').then((snapshot) => {
+      var numTickets = snapshot.numChildren();
+      var ticketKeys = []; 
+      snapshot.forEach(((snapshot) => {
+        var key = snapshot.key;
+        ticketKeys.push(key);
+      }));
+      this.setState (
+        {
+          ticketIDs: ticketKeys, 
+          numTickets: numTickets
+        }
+      )
+    });
   }
 
   search() {
@@ -101,10 +124,29 @@ class Header extends React.Component {
   }
 
 
+  loadRandomTicket() {
+    
+    var ticketKey = this.state.ticketIDs[Math.floor(Math.random() * this.state.numTickets)];
+    this.props.history.push('/ticket/' + ticketKey);
+
+    
+  }
+
+  doneLoadingRandomTicket() {
+    this.setState (
+      {
+        refresh: !this.state.refresh,
+      }
+    )
+  }
+
+
+
+
   render() {
     const searchOrButton = this.state.random ? (
       <div className="searchOrRandom">
-        <Button className="searchOrRandomItem" color="secondary" block ><Link className="randomButton" to={"/ticket/" + Math.ceil(Math.random() * 1)}>GET RANDOM TICKET</Link></Button>
+        <Button className="searchOrRandomItem" color="secondary" onClick={this.loadRandomTicket} block >GET RANDOM TICKET</Button>
       </div>
     ) : (
       <div className="searchOrRandom">
