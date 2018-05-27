@@ -9,8 +9,13 @@ import EditTicket from './EditTicket';
 export default class Ticket extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      prevID: this.props.id
+    }
+    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
 
     firebase.database().ref('tickets/' + this.props.id).once('value').then(t => {
+      
       this.setState({ ...t.val() });
       this.props.gotSolution(t.val().solutions);
 
@@ -21,6 +26,27 @@ export default class Ticket extends React.Component {
           this.setState({ editable: false });
       });
     });
+  }
+
+  componentWillReceiveProps(newProps) {
+    if(this.state.prevID !== newProps.id) {
+      this.setState({
+        prevID: newProps.id
+      });
+      firebase.database().ref('tickets/' + newProps.id).once('value').then(t => {
+    
+        this.setState({ ...t.val() });
+        this.props.gotSolution(t.val().solutions);
+
+        firebase.auth().onAuthStateChanged(user => {
+          if (user && user.uid === t.val().creator)
+            this.setState({ editable: true });
+          else
+            this.setState({ editable: false });
+        });
+      });
+    }
+    
   }
 
   edit = () => {
@@ -35,6 +61,7 @@ export default class Ticket extends React.Component {
     }
 
     if (this.state.edit) {
+      
       let preload = {
         title: this.state.title,
         content: this.state.content,

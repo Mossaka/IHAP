@@ -7,6 +7,11 @@ import TicketPage from './ticket/TicketPage';
 import SearchPage from './searchResults/SearchPage';
 
 export default class App extends React.Component {
+
+  constructor(props) {
+    super(props); 
+
+  }
   render() {
     return (
       <div id="app">

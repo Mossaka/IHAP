@@ -18,8 +18,8 @@ class Header extends React.Component {
       loggedIn: false,
       showSignup: false, 
       ticketIDs: [],
-      numTickets: 0, 
-      refresh: false
+      ticketDisplayed: '',
+      numTickets: 0
     }
     this.handleLeverClick = this.handleLeverClick.bind(this);
     this.setRandom = this.setRandom.bind(this);
@@ -27,7 +27,6 @@ class Header extends React.Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.search = this.search.bind(this);
     this.loadRandomTicket = this.loadRandomTicket.bind(this);
-    this.doneLoadingRandomTicket = this.doneLoadingRandomTicket.bind(this);
 
     // Save load ticket keys from database. 
     var tickets = firebase.database().ref('tickets'); 
@@ -50,7 +49,6 @@ class Header extends React.Component {
   search() {
     this.props.history.push('/search/' + this.state.keyword);
   }
-
 
   handleKeyPress(e) {
     this.setState (
@@ -90,24 +88,18 @@ class Header extends React.Component {
     );
   }
 
-
   loadRandomTicket() {
-    
     var ticketKey = this.state.ticketIDs[Math.floor(Math.random() * this.state.numTickets)];
-    this.props.history.push('/ticket/' + ticketKey);
-
-    
+    if(ticketKey !== this.state.ticketDisplayed) {
+      console.log(ticketKey);
+      this.props.history.push('/ticket/' + ticketKey);
+      this.setState (
+        {
+          ticketDisplayed: ticketKey
+        }
+      )
+    }    
   }
-
-  doneLoadingRandomTicket() {
-    this.setState (
-      {
-        refresh: !this.state.refresh,
-      }
-    )
-  }
-
-
 
 
   render() {
