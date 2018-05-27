@@ -103,8 +103,8 @@ class SearchPage extends React.Component {
     this.refreshSearch();
 
     return (
-      
-      <Container>
+      <div className='searchbg'>
+      <Container >
         <div className='searchTitle'>
           <h3 className='left'> {this.props.match.params.type === global.TICKETS ? "Ticket" : "User"} Results: {this.props.match.params.keyword}</h3>
           <FilterButton className='right' />
@@ -126,22 +126,18 @@ class SearchPage extends React.Component {
               </Nav>
               <TabContent activeTab={this.state.show}>
                 <TabPane tabId='1'>
-                  <div className='container searchpage'>
-                    <div className="card-deck">
-                      {this.state.ticketCards}
-                    </div>
-
+                  <div className='searchpage'>
+                    {this.state.ticketCards}
+                  </div>
                     <div className="create-ticket" style={{ marginTop: '1rem' }}>
                       {this.state.loggedIn ? <Button><Link to="/ticket/new">What's Your Problem</Link></Button>
                           : <Button>Sign In to Post</Button>}
                     </div>
-                  </div>
+                  
                 </TabPane>
                 <TabPane tabId='2'>
-                  <div className='container searchpage'>
-                    <div className="card-deck">
-                      {this.state.userCards}
-                    </div>
+                  <div className='searchpage'>
+                    {this.state.userCards}
                   </div>
                 </TabPane>
               </TabContent>
@@ -149,6 +145,7 @@ class SearchPage extends React.Component {
           </Col>
         </Row>
       </Container>
+      </div>
     );
   }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import StoryPreview from './StoryPreview';
 import { weightedSearch } from '../searchResults/SearchTicket'
+import './StoryPreview.css'
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -89,24 +90,26 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className='container'>
-        <h2 className='my-5' style={{'text-align': 'center'}}>Top Stories</h2>
+      <div className='homepage-bg'>
+      <div className='container' >
+        <h1 className='my-5' style={{'text-align': 'center'}}>Top Stories</h1>
         <hr />
         <div className="row">
           {this.state.topCards}
         </div>
-        <h2 className='my-3' style={{'text-align': 'center'}}>For you</h2>
+        <h1 className='my-3' style={{'text-align': 'center'}}>For you</h1>
         <hr />
         
         <div className='row'>
           {this.state.recommendedCards}
         </div>
-        <h2 className="my-3" style={{'text-align': 'center'}}>Recent Stories</h2>
+        <h1 className="my-3" style={{'text-align': 'center'}}>Recent Stories</h1>
         <hr />
 
         <div className='row'>
           {this.state.recentCards}
         </div>
+      </div>
       </div>
     );
   }

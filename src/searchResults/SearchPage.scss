@@ -1,4 +1,15 @@
-.searchpage {
+@import "../_global";
+html{
+    background-color: $homepage-bg;
+    .searchbg{
+        background-color: $homepage-bg;
+    }
+
+    .searchpage{
+        background-color: $float-window;
+        padding: 2rem 2rem 2rem 2rem;
+        max-width: 100%;
+    }
     .searchTitle{
         margin: auto;
         max-width:80%;
@@ -25,4 +36,5 @@
         width: 15%;
         height: 80%
     }
+    
 }
