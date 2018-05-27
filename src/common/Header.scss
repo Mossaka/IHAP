@@ -2,50 +2,39 @@
 
     display: flex;
     justify-content: space-between;
-    background-color:#05386b;
-    //#30415d;
-    // #0b3c5d;
-    padding: 10px; 
+    background-color:white;
+    padding: 40px; 
     text-align: center;
+    border-bottom: 2px solid lightgray;
 
-    
     .image {
         height: 80px;
     }
-    
     .clickable:hover {
         cursor: pointer;
     }
-    
-        
-    
     .center {
         display: flex;
         justify-content: space-between;
-    
     }
-    
     .searchOrRandom {
-        width: 100%;
+        width: 85%;
         height: 80px;
         display: flex;
         align-items: center;
-    
     }
-    
-    .searchOrRandomItem {
-        height: 40px;
+    .searchInput {
+        border: 2px solid steelblue;
     }
-
-    .randomButton {
-        color: white;
-        display: block;
-        height: 100%;
+    .searchButton {
+        width: 100px;
+        background-color: steelblue;
+        border: 2px solid steelblue;
     }
-
-    .randomButton:hover {
-        text-decoration: none;
-    }
+    .searchButton:hover {
+        background-color:#2A6A90;
+        border: 2px solid #2A6A90;
+    } 
     
     #lever {
         position: relative;

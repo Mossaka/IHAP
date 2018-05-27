@@ -10,6 +10,7 @@ class ProfileSettingPage extends React.Component {
             firstname: null,
             lastname: null,
             username: null,
+            username_lowercase: null,
             title: null,
             biography: null,
             avatar: null,
@@ -37,12 +38,22 @@ class ProfileSettingPage extends React.Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    this.setState({
+    if(name === 'username') {
+      this.setState({
         profile: {
-            ...this.state.profile,
-            [name]: value
+          ...this.state.profile,
+          [name]: value,
+          username_lowercase: value.toLowerCase()
         }
-    });
+      });
+    } else {
+      this.setState({
+        profile: {
+          ...this.state.profile,
+          [name]: value
+        }
+      });
+    }
   }
 
   handleSubmit(event) {

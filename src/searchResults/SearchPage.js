@@ -3,7 +3,7 @@ import SearchPreview from './SearchPreview';
 import UserPreview from './UserPreview';
 import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
 import classnames from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './SearchPage.css'
 import firebase from 'firebase';
 import { weightedSearch } from './SearchTicket';
@@ -26,6 +26,7 @@ class SearchPage extends React.Component {
     this.refreshSearch = this.refreshSearch.bind(this);
     this.generateTicketCard = this.generateTicketCard.bind(this);
     this.generateUserCard = this.generateUserCard.bind(this);
+    this.toNewProblem = this.toNewProblem.bind(this);
     firebase.auth().onAuthStateChanged(user => {
       if (user) this.setState({ loggedIn: true });
       else this.setState({ loggedIn: false });
@@ -47,26 +48,6 @@ class SearchPage extends React.Component {
       this.generateUserCard(key);
     }
   }
-
-  /*
-  <div className='container searchpage'>
-        <div className='searchTitle'>
-          <h3 className='left'> {this.props.match.params.type === global.TICKETS ? "Ticket" : "User"} Results: {this.props.match.params.keyword}</h3>
-          <FilterButton className='right' />
-        </div>
-        <hr />
-
-        <div className="card-deck">
-          {this.state.cards}
-        </div>
-
-        <div className="create-ticket" style={{ marginTop: '1rem' }}>
-          {this.state.loggedIn ? <Button><Link to="/ticket/new">What's Your Problem</Link></Button>
-            : <Button>Sign In to Post</Button>}
-        </div>
-      </div>
-*/
-
 
   toggleTab(tab) {
     if(this.state.show !== tab) {
@@ -99,11 +80,14 @@ class SearchPage extends React.Component {
     });
   }
 
+  toNewProblem() {
+    this.props.history.push('/ticket/new');
+  }
+
   render() {
     this.refreshSearch();
 
     return (
-      <div className='searchbg'>
       <Container >
         <div className='searchTitle'>
           <h3 className='left'> {this.props.match.params.type === global.TICKETS ? "Ticket" : "User"} Results: {this.props.match.params.keyword}</h3>
@@ -126,13 +110,18 @@ class SearchPage extends React.Component {
               </Nav>
               <TabContent activeTab={this.state.show}>
                 <TabPane tabId='1'>
+                  <div className='buttonContainer'>
+                    {this.state.loggedIn ? 
+                    <Button className='button' onClick={this.toNewProblem} color='steelblue'>
+                      <span>Post Your Problem here</span>
+                    </Button>
+                    : <Button className='button' color='steelblue'>
+                      <span>Sign In to Post</span>
+                    </Button>}
+                  </div>
                   <div className='searchpage'>
                     {this.state.ticketCards}
                   </div>
-                    <div className="create-ticket" style={{ marginTop: '1rem' }}>
-                      {this.state.loggedIn ? <Button><Link to="/ticket/new">What's Your Problem</Link></Button>
-                          : <Button>Sign In to Post</Button>}
-                    </div>
                   
                 </TabPane>
                 <TabPane tabId='2'>
@@ -145,7 +134,6 @@ class SearchPage extends React.Component {
           </Col>
         </Row>
       </Container>
-      </div>
     );
   }
 

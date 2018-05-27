@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Dropdown, DropdownToggle, DropdownItem, DropdownMenu, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 import './User.css';
 import Signup from './Signup';
 import Signin from './Signin';
@@ -77,8 +77,18 @@ export default class User extends React.Component {
     else {
       return (
         <div className="user">
-          <Button size="sm" onClick={() => this.setState({ mode: 'in' })}>Sign in</Button>
-          <Button size="sm" onClick={() => this.setState({ mode: 'up' })}>Sign up</Button>
+          <InputGroup>
+            <InputGroupAddon addonType="prepend">
+              <Button className="buttons" color="#FFCD00" onClick={() => this.setState({ mode: 'in' })}>
+                <span>Sign In</span>
+              </Button>
+            </InputGroupAddon>
+            <InputGroupAddon addonType="append">
+              <Button className="buttons" color="#FFCD00" onClick={() => this.setState({ mode: 'up' })}>
+                <span>Sign Up</span>
+              </Button>
+            </InputGroupAddon>
+          </InputGroup>
           <Modal isOpen={this.state.mode !== null} toggle={this.closeModal}>
             <ModalHeader toggle={this.closeModal}>{STR[this.state.mode]}</ModalHeader>
             <ModalBody>

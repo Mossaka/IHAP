@@ -5,7 +5,7 @@ import lever from '../assets/lever.png';
 import User from './User';
 import './Header.css';
 import firebase from 'firebase';
-import { Button, Col, Input } from 'reactstrap';
+import { Button, Col, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 
 
 class Header extends React.Component {
@@ -105,13 +105,15 @@ class Header extends React.Component {
   render() {
     const searchOrButton = this.state.random ? (
       <div className="searchOrRandom">
-        <Button className="searchOrRandomItem" color="secondary" onClick={this.loadRandomTicket} block >GET RANDOM TICKET</Button>
+        <Button className="randomButton" color="steelblue" onClick={this.loadRandomTicket} block >GET RANDOM TICKET</Button>
       </div>
     ) : (
-      <div className="searchOrRandom">
-        <Input className="searchOrRandomItem" type="search" name="search" placeholder="Search" onKeyUp={this.handleKeyPress}/>
-        <Button color="secondary" onClick={this.search}>Search</Button>
-      </div>
+      <InputGroup className="searchOrRandom">
+        <Input className="searchInput" type="search" name="search" placeholder="Search" onKeyUp={this.handleKeyPress}/>
+        <InputGroupAddon addonType="append">
+          <Button className="searchButton" onClick={this.search}>Search</Button>
+        </InputGroupAddon>
+      </InputGroup>
     ); 
 
     return (
@@ -134,7 +136,7 @@ class Header extends React.Component {
         </Col>
 
         <Col xs="3">
-          <User />
+          <User/>
         </Col>
       </nav>
     );
