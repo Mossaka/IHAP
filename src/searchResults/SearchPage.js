@@ -13,6 +13,8 @@ class SearchPage extends React.Component {
   constructor(props) {
     super(props);
 
+    this.proRef = firebase.database().ref('profiles');
+
     this.state = {
       loggedIn: false,
       ticketCards: [],
@@ -35,6 +37,7 @@ class SearchPage extends React.Component {
       var key = this.props.match.params.keyword;
 
       this.setState({
+        keyword: key,
         ticketCards: [],
         userCards: []
       });
@@ -42,10 +45,6 @@ class SearchPage extends React.Component {
       this.generateTicketCard(key);
 
       this.generateUserCard(key);
-
-      this.setState({
-        keyword: key,
-      });
     }
   }
 
@@ -79,18 +78,13 @@ class SearchPage extends React.Component {
 
 
   generateUserCard(keyword) {
-    var ids = [];
-    var ref = firebase.database().ref('profiles');
-    //startAt(keyword.toLowerCase()).endAt(keyword.toLowerCase()+'\uf8ff')
-    ref.orderByChild('username_lowercase').on('child_added', function(snapshot) {
-      ids.push(snapshot.key);
+    var self = this;
+    var cards = [];
+    this.proRef.off();
+    this.proRef.orderByChild('username_lowercase').startAt(keyword.toLowerCase()).endAt(keyword.toLowerCase()+'\uf8ff').on('child_added', function (snapshot) {
+      cards.push(<UserPreview userID={snapshot.key} />);
+      self.setState({userCards: cards});
     });
-
-    var cards = ids.map(function(id) {
-      return <UserPreview userID={id} />
-    });
-    
-    this.setState({ userCards: cards});
   }
 
   generateTicketCard(keyword) {
