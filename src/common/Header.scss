@@ -10,8 +10,12 @@
     .image {
         height: 80px;
     }
-    .clickable:hover {
+    .clickable {
+        color: gray;
         cursor: pointer;
+    }
+    .clickable:hover {
+        color: black;
     }
     .center {
         display: flex;
