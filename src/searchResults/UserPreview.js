@@ -33,7 +33,13 @@ class UserPreview extends React.Component {
         <Container>
           <div className ="search">
             <Col xs="2">
-              <Avatar id={this.props.userID} />
+              <div className="avatar">
+                <Link to={'/profile/' + this.props.userID}>
+                  <img src={this.state.Avatar} alt="avatar" />
+                  <br/>
+                  <p>{this.state.Username}</p>
+                </Link>
+              </div>
             </Col>
             <Col xs='10'>
                 <Container>
