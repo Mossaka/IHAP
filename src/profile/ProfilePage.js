@@ -141,13 +141,13 @@ export default class ProfilePage extends React.Component {
               <Nav>
                 <Row>
                 <NavItem>
-                  <NavLink href='#'><img src={download} style={{width:'25px', height:'25px'}}/>  {this.state.email}</NavLink>
+                  <NavLink href='#'><img src={download} style={{width:'25px', height:'25px'}} alt="email"/>  {this.state.email}</NavLink>
                 </NavItem>
                 </Row>
                 <Row>
                 <NavItem>
                   <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
-                    <DropdownToggle nav caret><img src={parse} style={{width:'25px', height:'25px'}}/>  </DropdownToggle>
+                    <DropdownToggle nav caret><img src={parse} style={{width:'25px', height:'25px'}} alt="drop down" />  </DropdownToggle>
                     <DropdownMenu>
                       <p>{this.state.bio}</p>
                     </DropdownMenu>
@@ -159,7 +159,7 @@ export default class ProfilePage extends React.Component {
           </Col>
           <Col>
             <div id="follow" className='float-right' style={{bottom:'0', float:'right'}}>
-              {this.state.currentUser ? <Button size='sm' style={{backgroundColor:'white', borderColor:'white'}} onClick={this.toggleSetting}><img src={edit} style={{width:'30px', height:'30px'}}/> </Button> : <div></div>}
+              {this.state.currentUser ? <Button size='sm' style={{backgroundColor:'white', borderColor:'white'}} onClick={this.toggleSetting}><img src={edit} style={{width:'30px', height:'30px'}} alt="edit" /> </Button> : <div></div>}
               {this.state.currentUser ? <div></div> : <Button color={"primary"} style={{float:'left'}} size="sm">Follow</Button>}
             </div>
           </Col>

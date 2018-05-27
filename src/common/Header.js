@@ -5,7 +5,7 @@ import lever from '../assets/lever.png';
 import User from './User';
 import './Header.css';
 import firebase from 'firebase';
-import { Button, Col, Input, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Button, Col, Input } from 'reactstrap';
 
 
 class Header extends React.Component {
