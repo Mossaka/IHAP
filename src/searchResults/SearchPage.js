@@ -75,7 +75,8 @@ class SearchPage extends React.Component {
     var self = this;
     var ids = [];
     var ref = firebase.database().ref('profiles');
-    ref.orderByChild('username_lowercase').startAt(keyword.toLowerCase()).endAt(keyword.toLowerCase()+'\uf8ff').on('child_added', function(snapshot) {
+    //startAt(keyword.toLowerCase()).endAt(keyword.toLowerCase()+'\uf8ff')
+    ref.orderByChild('username_lowercase').on('child_added', function(snapshot) {
       ids.push(snapshot.key);
     });
 
@@ -102,7 +103,12 @@ class SearchPage extends React.Component {
     this.refreshSearch();
 
     return (
+      
       <Container>
+        <div className='searchTitle'>
+          <h3 className='left'> {this.props.match.params.type === global.TICKETS ? "Ticket" : "User"} Results: {this.props.match.params.keyword}</h3>
+          <FilterButton className='right' />
+        </div>
         <Row>
           <Col>
             <div id="tabs">
@@ -145,6 +151,7 @@ class SearchPage extends React.Component {
       </Container>
     );
   }
+
 }
 
 export default SearchPage;
