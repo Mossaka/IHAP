@@ -73,7 +73,7 @@ class SearchPage extends React.Component {
     weightedSearch(keyword, 5, {title: 5, content: 2}).then(function(ids) {
 
       var cards = ids.map(function(id) {
-        return <SearchPreview ticketID={id} />
+        return <div className='container'><SearchPreview ticketID={id} /></div>
       });
 
       self.setState({ ticketCards: cards});

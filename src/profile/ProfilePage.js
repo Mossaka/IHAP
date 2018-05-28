@@ -12,7 +12,7 @@ import firebase from 'firebase';
 import download from '../assets/download.jpg';
 import parse from '../assets/parse.jpg';
 import edit from '../assets/eidt.jpg';
-import SearchPreview from '../searchResults/SearchPreview';
+import TicketPreview from './TicketPreview';
 
 export default class ProfilePage extends React.Component {
   constructor(props, context) {
@@ -112,7 +112,9 @@ export default class ProfilePage extends React.Component {
     return (
       <div>
         {Object.keys(ticketList).map((key,index) => 
-          <SearchPreview key={index} ticketID={ticketList[key]} />
+            <div className='container'>
+              <TicketPreview key={index} ticketID={ticketList[key]} />
+            </div>
           
         )}
       </div>
@@ -123,7 +125,7 @@ export default class ProfilePage extends React.Component {
     return (
       <div>
         {Object.keys(solutionList).map((key,index) => 
-          <SolutionBar key={index} solutionID={solutionList[key]} />
+          <TicketPreview key={index} solutionID={solutionList[key]} />
         )}
       </div>
     )

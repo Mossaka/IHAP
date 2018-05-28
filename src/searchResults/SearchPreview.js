@@ -37,7 +37,7 @@ class SearchPreview extends React.Component {
 
   render() {
     return (
-      <div className = "container">
+      // <div className = "container">
         <div className ="search">
           
           <div className = "textbox">
@@ -60,7 +60,7 @@ class SearchPreview extends React.Component {
           <Bookmark ticketID={this.props.ticketID}/>
 
         </div>
-      </div>
+      // </div>
     );
   }
 }
