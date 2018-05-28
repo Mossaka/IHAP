@@ -40,7 +40,7 @@ class Bookmark extends React.Component {
                 if(this.state.bookmarked === false) {
                     this.setState({bookmarked: true})
                     firebase.database().ref('notebooks/' + uid + '/bookmarked/').push(ticketID);
-                }
+                } 
             } else {
                 alert("user not signin!");
             }

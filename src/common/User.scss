@@ -20,7 +20,38 @@
     @extend %avatar
   }
 }
-.userModal {
-  display: block;
-  width: 300px;
+.buttons {
+  font-family: Verdana, sans-serif;
+  font-size: 16px;
+  color: white;
+  background-color: #FFCD00;
+  border-radius: 10px;
+  width: 120px;
+  padding: 5px;
+  transition: all 0.7s;
+  cursor: pointer;
+  outline: none;
 }
+.buttons span {
+  cursor: pointer;
+  position: relative;
+  transition: 0.7s;
+}
+.buttons span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  right: -20px;
+  transition: 0.7s;
+}
+.buttons:hover {
+  background-color:rgb(241, 194, 3)
+}
+.buttons:hover span {
+  padding-right: 20px;
+}
+.buttons:hover span:after{
+  opacity: 1;
+  right: 0;
+}
+
