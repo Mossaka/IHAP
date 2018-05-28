@@ -5,12 +5,14 @@ import {Dropdown, DropdownMenu, DropdownToggle } from 'reactstrap';
 import classnames from 'classnames';
 import TicketBar from './TicketBar';
 import UserBar from './UserBar';
+import SolutionBar from './SolutionBar';
 import './ProfilePage.css';
 import ProfileSettingPage from './ProfileSettingPage';
 import firebase from 'firebase';
 import download from '../assets/download.jpg';
 import parse from '../assets/parse.jpg';
 import edit from '../assets/eidt.jpg';
+import SearchPreview from '../searchResults/SearchPreview';
 
 export default class ProfilePage extends React.Component {
   constructor(props, context) {
@@ -109,8 +111,9 @@ export default class ProfilePage extends React.Component {
   generateTicketBarGivenTicketList(ticketList) {
     return (
       <div>
-        {Object.keys(ticketList).map(key => 
-          <TicketBar ticketID={ticketList[key]} />
+        {Object.keys(ticketList).map((key,index) => 
+          <SearchPreview key={index} ticketID={ticketList[key]} />
+          
         )}
       </div>
     )
@@ -119,8 +122,8 @@ export default class ProfilePage extends React.Component {
   generateSolutionBarGivenSolutionList(solutionList) {
     return (
       <div>
-        {Object.keys(solutionList).map(key => 
-          <TicketBar ticketID={solutionList[key]} />
+        {Object.keys(solutionList).map((key,index) => 
+          <SolutionBar key={index} solutionID={solutionList[key]} />
         )}
       </div>
     )
@@ -130,8 +133,8 @@ export default class ProfilePage extends React.Component {
   generateUserBarGivenUserList(userList) {
     return (
       <div>
-        {Object.keys(userList).map(key => 
-          <UserBar uid={userList[key]} />
+        {Object.keys(userList).map((key,index) => 
+          <UserBar key={index} uid={userList[key]} />
         )}
       </div>
     )
