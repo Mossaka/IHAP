@@ -43,9 +43,7 @@ export default class ProfilePage extends React.Component {
     };
 
     this.toggleSetting = this.toggleSetting.bind(this)
-  }
 
-  componentDidMount() {
     const uid = this.props.match.params.id;
 
     firebase.auth().onAuthStateChanged(user => {
@@ -64,7 +62,7 @@ export default class ProfilePage extends React.Component {
       this.setState({
         ...snapshot.val()
       })
-      console.log(this.state)
+      // console.log(this.state)
     })
 
     firebase.database().ref('networks/' + uid).once('value').then(snapshot => {
@@ -78,8 +76,8 @@ export default class ProfilePage extends React.Component {
         ...snapshot.val()
       })
     })
-
   }
+
 
   toggle(tab) {
     if(this.state.activeTab !== tab) {
@@ -112,8 +110,8 @@ export default class ProfilePage extends React.Component {
     return (
       <div>
         {Object.keys(ticketList).map((key,index) => 
-            <div className='container'>
-              <TicketPreview key={index} ticketID={ticketList[key]} />
+            <div className='container' key={index}>
+              <TicketPreview  ticketID={ticketList[key]} />
             </div>
           
         )}
@@ -125,7 +123,9 @@ export default class ProfilePage extends React.Component {
     return (
       <div>
         {Object.keys(solutionList).map((key,index) => 
-          <TicketPreview key={index} solutionID={solutionList[key]} />
+          <div className='container' key={index}>
+            <TicketPreview  solutionID={solutionList[key]} />
+          </div>
         )}
       </div>
     )

@@ -14,8 +14,8 @@ class StoryPreview extends React.Component {
     // Initialize states for this Story Preview component
     this.state = {
       image: greycard,
-      ticketTitle: "Ticket Title!!",
-      ticketDetails: "Ticket details... ",
+      title: "Ticket Title!!",
+      content: "Ticket details... ",
       anonymous: true
     }
 
@@ -26,11 +26,7 @@ class StoryPreview extends React.Component {
       // If the problem field exists, bind a value change listener to the problem object in database
       if (snapshot.exists()) {
         this.setState({
-          image: snapshot.val().image,
-          ticketTitle: snapshot.val().title.substring(0, 30),
-          ticketDetails: snapshot.val().content.substring(0, 100),
-          anonymous: snapshot.val().anonymous,
-          creator: snapshot.val().creator
+          ...snapshot.val()
         });
       }
     });
@@ -52,11 +48,12 @@ class StoryPreview extends React.Component {
 
           <div className="card-body pb-1 pl-1 pr-1">
             <h6 className="card-title">
-              {this.state.ticketTitle}
+              {this.state.title.substring(0,30)}
             </h6>
-            <p className="card-text" style={{ fontSize: '14px' }}>{this.state.ticketDetails}</p>
+            <p className="card-text" style={{ fontSize: '14px' }}>{this.state.content.substring(0,100)}</p>
           </div>
-          {this.state.creator && !this.state.anonymous && <Avatar id={this.state.creator}  style={{position: 'absolute', bottom: '0px', backgroundimage: 'url("greycard.jpg")'}}/>}
+          {this.state.creator && (!this.state.anonymous)&& <Avatar id={this.state.creator}  
+           style={{position: 'absolute', bottom: '0px', backgroundimage: 'url("greycard.jpg")'}}/>}
          </div>
       </div>
     );
