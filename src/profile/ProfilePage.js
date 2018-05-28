@@ -26,7 +26,7 @@ export default class ProfilePage extends React.Component {
       firstname: 'Gary',
       lastname: 'Gillespie',
       username: 'gg',
-      bio: "Loading",
+      biography: "Loading",
       tickets: [],
       solutions: [],
       bookmarked: [],
@@ -59,6 +59,7 @@ export default class ProfilePage extends React.Component {
       this.setState({
         ...snapshot.val()
       })
+      console.log(this.state)
     })
 
     firebase.database().ref('networks/' + uid).once('value').then(snapshot => {
@@ -112,6 +113,16 @@ export default class ProfilePage extends React.Component {
     )
   }
 
+  generateSolutionBarGivenSolutionList(solutionList) {
+    return (
+      <div>
+        {Object.keys(solutionList).map(key => 
+          <TicketBar ticketID={solutionList[key]} />
+        )}
+      </div>
+    )
+  }
+
   // haven't used it yet
   generateUserBarGivenUserList(userList) {
     return (
@@ -142,7 +153,7 @@ export default class ProfilePage extends React.Component {
                 <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
                   <DropdownToggle nav caret>Bio</DropdownToggle>
                   <DropdownMenu>
-                    <p>{this.state.bio}</p>
+                    <p>{this.state.biography}</p>
                   </DropdownMenu>
                 </Dropdown>
               </Nav>
@@ -208,8 +219,7 @@ export default class ProfilePage extends React.Component {
                       {this.generateTicketBarGivenTicketList(this.state.tickets)}
                     </TabPane>
                     <TabPane tabId='2'>
-                      <TicketBar />
-                      <TicketBar />
+                      {this.generateSolutionBarGivenSolutionList(this.state.solutions)}
                     </TabPane>
                     <TabPane tabId='3'>
                       <TicketBar />

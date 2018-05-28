@@ -30,7 +30,6 @@ class Bookmark extends React.Component {
     onBookmarkClick(event) {
         firebase.auth().onAuthStateChanged(user => {
             if(user) {
-                var updates = {};
                 var count = null;
                 // var problemID = null;
                 const uid = user.uid;
@@ -38,13 +37,8 @@ class Bookmark extends React.Component {
                 // firebase.database().ref('tickets/' + ticketID + "/problem").on('value', (snapshot) => {
                 //     problemID = snapshot.val();  
                 // })
-                firebase.database().ref('tickets/' + ticketID + '/bookmarkCount').on('value', snapshot => {
-                    count = snapshot.val().valueOf() + 1;
-                })
-                if(count != null && this.state.bookmarked === false) {
-                    updates['bookmarkCount'] = count
+                if(this.state.bookmarked === false) {
                     this.setState({bookmarked: true})
-                    firebase.database().ref('tickets/' + ticketID).update(updates)
                     firebase.database().ref('notebooks/' + uid + '/bookmarked/').push(ticketID);
                 }
             } else {
