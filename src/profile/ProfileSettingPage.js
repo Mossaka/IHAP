@@ -9,6 +9,8 @@ class ProfileSettingPage extends React.Component {
         profile: {
             firstname: null,
             lastname: null,
+            username: null,
+            username_lowercase: null,
             title: null,
             biography: null,
             avatar: null,
@@ -36,12 +38,22 @@ class ProfileSettingPage extends React.Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    this.setState({
+    if(name === 'username') {
+      this.setState({
         profile: {
-            ...this.state.profile,
-            [name]: value
+          ...this.state.profile,
+          [name]: value,
+          username_lowercase: value.toLowerCase()
         }
-    });
+      });
+    } else {
+      this.setState({
+        profile: {
+          ...this.state.profile,
+          [name]: value
+        }
+      });
+    }
   }
 
   handleSubmit(event) {
@@ -107,10 +119,18 @@ class ProfileSettingPage extends React.Component {
                 </div>
             </Row>
             <Row>
-                <FormGroup className="form-group col-md-12">
+                <FormGroup className="col-md-6">
+                    <Label for="username" className="col-form-label float-left">USERNAME NAME</Label>
+                    <input type="username" name="username" value={this.state.profile.username} onChange={this.handleChange} className="form-control" id="InputUsername"/>
+                </FormGroup> 
+                <div className="form-group col-md-6">
+                    <Label for="title" className="col-form-label float-left">TITLE</Label>
+                    <input type="title" name="title" value={this.state.profile.title} onChange={this.handleChange} className="form-control" id="InputTitle"/>
+                </div>
+                {/* <FormGroup className="form-group col-md-12">
                     <Label for="title" className="col-form-label float-left">TITLE</Label>
                     <input type="title" name="title" value={this.state.profile.title} onChange={this.handleChange} className="form-control" id="InputTitle" />
-                </FormGroup>
+                </FormGroup> */}
             </Row>
             <Row>
                 <FormGroup className="form-group col-md-12">
@@ -125,10 +145,10 @@ class ProfileSettingPage extends React.Component {
                 </FormGroup>
             </Row>
             <Row>
-                <div className="col-md-12 float-right">
-                <div className="btn-group">
-                    <Button type="submit" value="Submit" className="btn btn-info">Save</Button>
-                    <Button type="button" className="btn btn-warning" onClick={this.handleCancel}>Cancel</Button>
+                <div className="col-md-12">
+                <div className="btn-group float-right">
+                    <Button type="submit" value="Submit" className="btn btn-info" style={{marginRight:"10px", borderRadius:"4px", width:"80px"}}>Save</Button>
+                    <Button type="button" className="btn btn-warning" style={{borderRadius:"4px", width:"80px"}} onClick={this.handleCancel}>Cancel</Button>
                 </div>
                 </div>
             </Row>

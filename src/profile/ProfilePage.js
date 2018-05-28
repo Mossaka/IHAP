@@ -5,9 +5,14 @@ import {Dropdown, DropdownMenu, DropdownToggle } from 'reactstrap';
 import classnames from 'classnames';
 import TicketBar from './TicketBar';
 import UserBar from './UserBar';
+import SolutionBar from './SolutionBar';
 import './ProfilePage.css';
 import ProfileSettingPage from './ProfileSettingPage';
 import firebase from 'firebase';
+import download from '../assets/download.jpg';
+import parse from '../assets/parse.jpg';
+import edit from '../assets/eidt.jpg';
+import TicketPreview from './TicketPreview';
 
 export default class ProfilePage extends React.Component {
   constructor(props, context) {
@@ -26,7 +31,7 @@ export default class ProfilePage extends React.Component {
       firstname: 'Gary',
       lastname: 'Gillespie',
       username: 'gg',
-      bio: "Loading",
+      biography: "Loading",
       tickets: [],
       solutions: [],
       bookmarked: [],
@@ -59,6 +64,7 @@ export default class ProfilePage extends React.Component {
       this.setState({
         ...snapshot.val()
       })
+      console.log(this.state)
     })
 
     firebase.database().ref('networks/' + uid).once('value').then(snapshot => {
@@ -105,8 +111,21 @@ export default class ProfilePage extends React.Component {
   generateTicketBarGivenTicketList(ticketList) {
     return (
       <div>
-        {Object.keys(ticketList).map(key => 
-          <TicketBar ticketID={ticketList[key]} />
+        {Object.keys(ticketList).map((key,index) => 
+            <div className='container'>
+              <TicketPreview key={index} ticketID={ticketList[key]} />
+            </div>
+          
+        )}
+      </div>
+    )
+  }
+
+  generateSolutionBarGivenSolutionList(solutionList) {
+    return (
+      <div>
+        {Object.keys(solutionList).map((key,index) => 
+          <TicketPreview key={index} solutionID={solutionList[key]} />
         )}
       </div>
     )
@@ -116,8 +135,8 @@ export default class ProfilePage extends React.Component {
   generateUserBarGivenUserList(userList) {
     return (
       <div>
-        {Object.keys(userList).map(key => 
-          <UserBar uid={userList[key]} />
+        {Object.keys(userList).map((key,index) => 
+          <UserBar key={index} uid={userList[key]} />
         )}
       </div>
     )
@@ -126,31 +145,43 @@ export default class ProfilePage extends React.Component {
   renderUserInfo() {
     return (
       <div className='user-info'>
-        <Row xs='8'>
-          <Col xs='3'>
+        <Row xs="8">
+          <Col xs='auto'>
             <div id="user">
               <div id="avatar" style={{backgroundImage: `URL(${this.state.avatar})`, width:'100px', height:'100px'}}></div>
               <p className="username" style={{fontSize: '25px', float:'left'}}>{this.state.username}</p>
             </div>
           </Col>
           <Col xs='auto'>
-            <div className="info">
+            <div className="info float-left">
               <Nav>
+                <Row>
                 <NavItem>
-                  <NavLink href='#'>{this.state.email}</NavLink>
+                  <NavLink href='#'><img src={download} style={{width:'25px', height:'25px'}} alt="email"/>  {this.state.email}</NavLink>
+                </NavItem>
+                </Row>
+                <Row>
+                <NavItem>
+                  <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
+                    <DropdownToggle nav caret><img src={parse} style={{width:'25px', height:'25px'}} alt="drop down" />  </DropdownToggle>
+                    <DropdownMenu>
+                      <p>{this.state.bio}</p>
+                    </DropdownMenu>
+                  </Dropdown>
                 </NavItem>
                 <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
                   <DropdownToggle nav caret>Bio</DropdownToggle>
                   <DropdownMenu>
-                    <p>{this.state.bio}</p>
+                    <p>{this.state.biography}</p>
                   </DropdownMenu>
                 </Dropdown>
+                </Row>
               </Nav>
             </div>  
           </Col>
           <Col>
             <div id="follow" className='float-right' style={{bottom:'0', float:'right'}}>
-              {this.state.currentUser ? <Button size='sm' onClick={this.toggleSetting}>Edit</Button> : <div></div>}
+              {this.state.currentUser ? <Button size='sm' style={{backgroundColor:'white', borderColor:'white'}} onClick={this.toggleSetting}><img src={edit} style={{width:'30px', height:'30px'}} alt="edit" /> </Button> : <div></div>}
               {this.state.currentUser ? <div></div> : <Button color={"primary"} style={{float:'left'}} size="sm">Follow</Button>}
             </div>
           </Col>
@@ -208,8 +239,7 @@ export default class ProfilePage extends React.Component {
                       {this.generateTicketBarGivenTicketList(this.state.tickets)}
                     </TabPane>
                     <TabPane tabId='2'>
-                      <TicketBar />
-                      <TicketBar />
+                      {this.generateSolutionBarGivenSolutionList(this.state.solutions)}
                     </TabPane>
                     <TabPane tabId='3'>
                       <TicketBar />

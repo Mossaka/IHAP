@@ -24,7 +24,7 @@ export default class TicketBar extends React.Component {
           <Navbar>
             <NavbarBrand href={"/ticket/" + this.props.ticketID}>{this.state.title}</NavbarBrand>
             <Nav>
-              <NavItem navbar>
+              <NavItem>
                 <NavLink href={"/ticket" + this.props.ticketID}>edit</NavLink>
               </NavItem>
             </Nav>

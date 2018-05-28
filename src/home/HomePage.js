@@ -1,6 +1,7 @@
 import React from 'react';
 import StoryPreview from './StoryPreview';
 import { weightedSearch } from '../searchResults/SearchTicket'
+import './StoryPreview.css'
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class HomePage extends React.Component {
 
   generateTopCards(num) {
     var self = this;
-    weightedSearch("", num, 0, 0, 3, 1, 3).then(function(ids) {
+    weightedSearch("", num, {dateEdited: 2, rating:2, upvotes: 1}).then(function(ids) {
 
       var cards = ids.map(function(id, index) {
         return (<div key={index} className="col-sm-6 col-md-4 col-lg-3">
@@ -52,7 +53,7 @@ class HomePage extends React.Component {
   generateRecommendedCards(num) {
     var self = this;
     // change to 0 0 0 1 3
-    weightedSearch("", num, 0, 0, 0, 0, 0).then(function(ids) {
+    weightedSearch("", num, {}).then(function(ids) {
 
       var cards = ids.map(function(id, index) {
         return (<div key={index} className="col-sm-6 col-md-4 col-lg-3">
@@ -70,7 +71,7 @@ class HomePage extends React.Component {
 
   generateRecentCards(num) {
     var self = this;
-    weightedSearch("", num, 0, 0, 1, 0, 0).then(function(ids) {
+    weightedSearch("", num, {dateEdited: 1}).then(function(ids) {
 
       var cards = ids.map(function(id, index) {
         return ( 
@@ -89,24 +90,26 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className='container'>
+      <div className='homepage-bg'>
+      <div className='container' >
         <h2 className='my-5' style={{'text-align': 'center'}}>Top Stories</h2>
         <hr />
         <div className="row">
           {this.state.topCards}
         </div>
-        <h2 className='my-3' style={{'text-align': 'center'}}>For you</h2>
+        <h2 className='my-5' style={{'text-align': 'center'}}>For you</h2>
         <hr />
         
         <div className='row'>
           {this.state.recommendedCards}
         </div>
-        <h2 className="my-3" style={{'text-align': 'center'}}>Recent Stories</h2>
+        <h2 className="my-5" style={{'text-align': 'center'}}>Recent Stories</h2>
         <hr />
 
         <div className='row'>
           {this.state.recentCards}
         </div>
+      </div>
       </div>
     );
   }

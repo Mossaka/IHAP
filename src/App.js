@@ -9,15 +9,15 @@ import SearchPage from './searchResults/SearchPage';
 export default class App extends React.Component {
   render() {
     return (
-      <div id="app">
-        <Header />
+      <React.Fragment>
+        <Header/>
         <Switch>
           <Route path="/ticket/:id" component={TicketPage} />
-          <Route path="/search/:type/:keyword" component={SearchPage} />
+          <Route path="/search/:keyword" component={SearchPage} />
           <Route path="/profile/:id" component={ProfilePage} />
           <Route component={HomePage} />
         </Switch>
-      </div>
+      </React.Fragment>
     );
   }
 }
