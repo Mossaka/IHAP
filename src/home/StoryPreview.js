@@ -7,6 +7,12 @@ import './StoryPreview.css'
 import Bookmark from '../common/Bookmark';
 import Avatar from '../common/Avatar';
 
+function stripHtml (html){
+  var tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html;
+  return tempDiv.textContent || tempDiv.innerText || "";
+}
+
 class StoryPreview extends React.Component {
   constructor(props) {
     super(props)
@@ -28,14 +34,13 @@ class StoryPreview extends React.Component {
         this.setState({
           image: snapshot.val().image,
           ticketTitle: snapshot.val().title.substring(0, 30),
-          ticketDetails: snapshot.val().content.substring(0, 100),
+          ticketDetails: (stripHtml(snapshot.val().content).length < 100) ? (stripHtml(snapshot.val().content)) : (stripHtml(snapshot.val().content).substr(0,97) + '...'),
           anonymous: snapshot.val().anonymous,
           creator: snapshot.val().creator
         });
       }
     });
   }
-
 
   render() {
 
