@@ -27,10 +27,8 @@ export default class Avatar extends React.Component {
     return (
       <div className="avatar">
         <Link to={'/profile/' + this.props.id} className='link'>
-          <img src={this.state.avatar} alt="avatar" style={{
-            paddingRight: '4px'
-          }}/>
-          {this.state.username.substring(0,15)}
+          <img src={this.state.avatar} alt="avatar"/>
+          {"  " + this.state.username.substring(0,15)}
         </Link>
       </div>
     );
