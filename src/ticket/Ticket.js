@@ -84,7 +84,7 @@ export default class Ticket extends React.Component {
           <CardText dangerouslySetInnerHTML={{ __html: this.state.content }}></CardText>
           Last Edit: <TimeDisplay time={this.state.dateEdited} />
         </CardBody>
-        <Vote up={this.state.upvote} down={this.state.downvote} path={'tickets/' + this.props.id} />
+        <Vote up={this.state.upvote} down={this.state.downvote} path={'tickets/' + this.props.id}  />
         {!this.state.anonymous && <Avatar id={this.state.creator} />}
         {this.state.editable && <Button onClick={this.edit}>Edit</Button>}
       </Card>

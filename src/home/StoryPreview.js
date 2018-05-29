@@ -7,6 +7,12 @@ import './StoryPreview.css'
 import Bookmark from '../common/Bookmark';
 import Avatar from '../common/Avatar';
 
+function stripHtml (html){
+  var tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html;
+  return tempDiv.textContent || tempDiv.innerText || "";
+}
+
 class StoryPreview extends React.Component {
   constructor(props) {
     super(props)
@@ -16,7 +22,8 @@ class StoryPreview extends React.Component {
       image: greycard,
       title: "Ticket Title!!",
       content: "Ticket details... ",
-      anonymous: true
+      anonymous: true,
+      creator: ''
     }
 
     // Get the ticket from database
@@ -26,12 +33,15 @@ class StoryPreview extends React.Component {
       // If the problem field exists, bind a value change listener to the problem object in database
       if (snapshot.exists()) {
         this.setState({
-          ...snapshot.val()
+          image: snapshot.val().image,
+          title: snapshot.val().title.substring(0, 30),
+          content: (stripHtml(snapshot.val().content).length < 100) ? (stripHtml(snapshot.val().content)) : (stripHtml(snapshot.val().content).substr(0,97) + '...'),
+          anonymous: snapshot.val().anonymous,
+          creator: snapshot.val().creator
         });
       }
     });
   }
-
 
   render() {
 
