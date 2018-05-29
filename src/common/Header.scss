@@ -2,8 +2,11 @@
 
     display: flex;
     justify-content: space-between;
-    background-color:white;
-    padding: 40px; 
+    background-color: #6B7A8F;
+    padding-left: 15px; 
+    padding-right: 15px;
+    padding-top: 7px;
+    padding-bottom: 7px;
     text-align: center;
     border-bottom: 2px solid lightgray;
 
@@ -11,7 +14,7 @@
         height: 80px;
     }
     .clickable {
-        color: gray;
+        color:whitesmoke;
         cursor: pointer;
     }
     .clickable:hover {
