@@ -21,6 +21,13 @@
     box-shadow: $box-shadow-on-hover;
 }
 
+.link {
+    color: rgb(0, 0, 0);
+  }
+.link:hover {
+     color: rgb(31, 85, 129)
+}
+
 .container {
     padding: 5px 16px;
 }
