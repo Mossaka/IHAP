@@ -28,9 +28,9 @@ export default class ProfilePage extends React.Component {
       setting: false,
       avatar: avatar,
       email: 'email',
-      firstname: 'Gary',
-      lastname: 'Gillespie',
-      username: 'gg',
+      firstname: ' ',
+      lastname: ' ',
+      username: ' ',
       biography: "Loading",
       tickets: [],
       solutions: [],
@@ -59,10 +59,11 @@ export default class ProfilePage extends React.Component {
     })
 
     firebase.database().ref('profiles/' + uid).once('value').then(snapshot => {
+      // console.log(snapshot.val())
       this.setState({
         ...snapshot.val()
       })
-      // console.log(this.state)
+      console.log(this.state)
     })
 
     firebase.database().ref('networks/' + uid).once('value').then(snapshot => {
