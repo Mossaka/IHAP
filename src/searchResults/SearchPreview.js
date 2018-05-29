@@ -49,7 +49,7 @@ class SearchPreview extends React.Component {
             </div>
           </div>
           <div className = "userbox">
-            {this.state.creator && !this.state.anonymous && <Avatar id={this.state.creator} />}
+            {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} />}
             {/*<Link to='/profile'>
               <img className="avatar" src={avatar} style={{width: '35px'}} alt="Avatar" />
             </Link>

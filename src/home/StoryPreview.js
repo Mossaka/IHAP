@@ -62,9 +62,11 @@ class StoryPreview extends React.Component {
             </h6>
             <p className="card-text" style={{ fontSize: '14px' }}>{this.state.content.substring(0,100)}</p>
           </div>
-          {this.state.creator && (!this.state.anonymous)&& <Avatar id={this.state.creator}  
+          <div className='avatar'>
+          {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous}  
            style={{position: 'absolute', bottom: '0px', backgroundimage: 'url("greycard.jpg")'}}/>}
          </div>
+        </div>
       </div>
     );
   }

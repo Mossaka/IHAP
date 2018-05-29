@@ -28,7 +28,7 @@ export default class Solution extends React.Component {
           Last Edit: <TimeDisplay time={this.state.dateEdited} />
         </CardBody>
         <Vote up={this.state.upvote} down={this.state.downvote} path={'solutions/' + this.props.id} />
-        <Avatar id={this.state.creator} />
+        <Avatar id={this.state.creator} isAnonymous={false} />
       </Card>
     );
   }
