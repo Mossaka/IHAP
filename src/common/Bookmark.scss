@@ -14,4 +14,16 @@
         opacity: 0.75;
 
     }
+
+    g:hover {
+        fill: $story-preview-bookmark-tag-fill-color;
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    g {
+        fill: $story-preview-bookmark-tag-fill-color;
+        opacity: 0.75;
+
+    }
 }
