@@ -3,7 +3,6 @@ import SearchPreview from './SearchPreview';
 import UserPreview from './UserPreview';
 import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
 import classnames from 'classnames';
-import { Link, withRouter } from 'react-router-dom';
 import './SearchPage.css'
 import firebase from 'firebase';
 import { weightedSearch } from './SearchTicket';

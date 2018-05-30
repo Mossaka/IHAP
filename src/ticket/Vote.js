@@ -4,10 +4,12 @@ import firebase from 'firebase';
 export default class Vote extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props.path+ "the props value is: " + this.props.up);
+    console.log(this.props.path+ "the props value is: " + this.props.down);
     let l  = this.props.path.split("/");
     this.state = {
-      up: Number(props.up),
-      down: Number(props.down),
+      up: Number(this.props.up),
+      down: Number(this.props.down),
       loggedin: false,
       mood: (l[0]==='solutions') ? 'votedSolution' : 'votedProblem',
       ticketid: l[1]

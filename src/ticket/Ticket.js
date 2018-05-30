@@ -9,13 +9,9 @@ import EditTicket from './EditTicket';
 export default class Ticket extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      prevID: this.props.id
-    }
-    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
+    //this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
 
     firebase.database().ref('tickets/' + this.props.id).once('value').then(t => {
-      
       this.setState({ ...t.val() });
       this.props.gotSolution(t.val().solutions);
 
@@ -25,29 +21,33 @@ export default class Ticket extends React.Component {
         else
           this.setState({ editable: false });
       });
+      //this.setState({prevID: this.props.id});
+      //console.log("ticet page, ticket information fetch from the firebase: " + this.state.upvote);
+      //console.log("ticet page, ticket information fetch from the firebase: " + this.state.downvote);
+
     });
   }
 
-  componentWillReceiveProps(newProps) {
-    if(this.state.prevID !== newProps.id) {
-      this.setState({
-        prevID: newProps.id
-      });
-      firebase.database().ref('tickets/' + newProps.id).once('value').then(t => {
-    
-        this.setState({ ...t.val() });
-        this.props.gotSolution(t.val().solutions);
+  // componentWillReceiveProps(newProps) {
+  //   if(this.state.prevID !== newProps.id) {
+  //     this.setState({
+  //       prevID: newProps.id
+  //     });
+  //     firebase.database().ref('tickets/' + newProps.id).once('value').then(t => {
 
-        firebase.auth().onAuthStateChanged(user => {
-          if (user && user.uid === t.val().creator)
-            this.setState({ editable: true });
-          else
-            this.setState({ editable: false });
-        });
-      });
-    }
-    
-  }
+  //       this.setState({ ...t.val() });
+  //       this.props.gotSolution(t.val().solutions);
+
+  //       firebase.auth().onAuthStateChanged(user => {
+  //         if (user && user.uid === t.val().creator)
+  //           this.setState({ editable: true });
+  //         else
+  //           this.setState({ editable: false });
+  //       });
+  //     });
+  //   }
+
+  // }
 
   edit = () => {
     this.setState({ edit: !this.state.edit });
@@ -61,7 +61,7 @@ export default class Ticket extends React.Component {
     }
 
     if (this.state.edit) {
-      
+
       let preload = {
         title: this.state.title,
         content: this.state.content,

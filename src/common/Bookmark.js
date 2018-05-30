@@ -30,7 +30,6 @@ class Bookmark extends React.Component {
     onBookmarkClick(event) {
         firebase.auth().onAuthStateChanged(user => {
             if(user) {
-                var count = null;
                 // var problemID = null;
                 const uid = user.uid;
                 const ticketID = this.props.ticketID;

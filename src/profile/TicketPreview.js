@@ -1,11 +1,9 @@
 import React from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 //import avatar from '../assets/img_avatar.png'
 // import bookmark from '../assets/bookmark.png'
 import './TicketPreview.css'
-import Bookmark from '../common/Bookmark';
 import firebase from 'firebase';
-import Avatar from '../common/Avatar'
 
 
 class TicketPreview extends React.Component {
