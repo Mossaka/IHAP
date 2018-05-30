@@ -1,9 +1,8 @@
 import React from 'react';
 import avatar from '../assets/img_avatar.png';
 import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
-import {Dropdown, DropdownMenu, DropdownToggle } from 'reactstrap';
+import {Dropdown, DropdownMenu, DropdownToggle, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import classnames from 'classnames';
-import TicketBar from './TicketBar';
 import UserBar from './UserBar';
 import './ProfilePage.css';
 import ProfileSettingPage from './ProfileSettingPage';
@@ -26,7 +25,7 @@ export default class ProfilePage extends React.Component {
       dropdownOpen: false,
       setting: false,
       avatar: avatar,
-      email: 'email',
+      email: 'No email',
       firstname: ' ',
       lastname: ' ',
       username: ' ',
@@ -156,25 +155,17 @@ export default class ProfilePage extends React.Component {
             <div className="info float-left">
               <Nav>
                 <Row>
-                <NavItem>
-                  <NavLink href='#'><img src={download} style={{width:'25px', height:'25px'}} alt="email"/>  {this.state.email}</NavLink>
-                </NavItem>
-                </Row>
-                <Row>
-                <NavItem>
-                  <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
-                    <DropdownToggle nav caret><img src={parse} style={{width:'25px', height:'25px'}} alt="drop down" />  </DropdownToggle>
-                    <DropdownMenu>
-                      <p>{this.state.bio}</p>
-                    </DropdownMenu>
-                  </Dropdown>
-                </NavItem>
-                <Dropdown nav isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
-                  <DropdownToggle nav caret>Bio</DropdownToggle>
-                  <DropdownMenu>
-                    <p>{this.state.biography}</p>
-                  </DropdownMenu>
-                </Dropdown>
+                  <NavItem>
+                    <NavLink><img src={download} style={{width:'25px', height:'25px'}} alt="email"/>  {this.state.email}</NavLink>
+                  </NavItem>
+                  <NavLink id='Popover1' onClick={this.toggleDropdown}>
+                    <img src={parse} style={{width:'25px', height:'25px'}} alt="drop down" />
+                    <a>Bio</a>
+                  </NavLink>
+                  <Popover placement='bottom' isOpen={this.state.dropdownOpen} target='Popover1' toggle={this.toggleDropdown}>
+                    <PopoverHeader>Biography</PopoverHeader>
+                    <PopoverBody>{this.state.biography}</PopoverBody>
+                  </Popover>
                 </Row>
               </Nav>
             </div>  
