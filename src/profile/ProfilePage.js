@@ -5,7 +5,6 @@ import {Dropdown, DropdownMenu, DropdownToggle } from 'reactstrap';
 import classnames from 'classnames';
 import TicketBar from './TicketBar';
 import UserBar from './UserBar';
-import SolutionBar from './SolutionBar';
 import './ProfilePage.css';
 import ProfileSettingPage from './ProfileSettingPage';
 import firebase from 'firebase';
@@ -28,9 +27,9 @@ export default class ProfilePage extends React.Component {
       setting: false,
       avatar: avatar,
       email: 'email',
-      firstname: 'Gary',
-      lastname: 'Gillespie',
-      username: 'gg',
+      firstname: ' ',
+      lastname: ' ',
+      username: ' ',
       biography: "Loading",
       tickets: [],
       solutions: [],
@@ -43,9 +42,7 @@ export default class ProfilePage extends React.Component {
     };
 
     this.toggleSetting = this.toggleSetting.bind(this)
-  }
 
-  componentDidMount() {
     const uid = this.props.match.params.id;
 
     firebase.auth().onAuthStateChanged(user => {
@@ -61,6 +58,7 @@ export default class ProfilePage extends React.Component {
     })
 
     firebase.database().ref('profiles/' + uid).once('value').then(snapshot => {
+      // console.log(snapshot.val())
       this.setState({
         ...snapshot.val()
       })
@@ -78,8 +76,8 @@ export default class ProfilePage extends React.Component {
         ...snapshot.val()
       })
     })
-
   }
+
 
   toggle(tab) {
     if(this.state.activeTab !== tab) {
@@ -112,8 +110,8 @@ export default class ProfilePage extends React.Component {
     return (
       <div>
         {Object.keys(ticketList).map((key,index) => 
-            <div className='container'>
-              <TicketPreview key={index} ticketID={ticketList[key]} />
+            <div className='container' key={index}>
+              <TicketPreview  ticketID={ticketList[key]} />
             </div>
           
         )}
@@ -125,7 +123,9 @@ export default class ProfilePage extends React.Component {
     return (
       <div>
         {Object.keys(solutionList).map((key,index) => 
-          <TicketPreview key={index} solutionID={solutionList[key]} />
+          <div className='container' key={index}>
+            <TicketPreview  solutionID={solutionList[key]} />
+          </div>
         )}
       </div>
     )

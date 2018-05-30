@@ -7,6 +7,12 @@ import './StoryPreview.css'
 import Bookmark from '../common/Bookmark';
 import Avatar from '../common/Avatar';
 
+function stripHtml (html){
+  var tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html;
+  return tempDiv.textContent || tempDiv.innerText || "";
+}
+
 class StoryPreview extends React.Component {
   constructor(props) {
     super(props)
@@ -14,9 +20,10 @@ class StoryPreview extends React.Component {
     // Initialize states for this Story Preview component
     this.state = {
       image: greycard,
-      ticketTitle: "Ticket Title!!",
-      ticketDetails: "Ticket details... ",
-      anonymous: true
+      title: "Ticket Title!!",
+      content: "Ticket details... ",
+      anonymous: true,
+      creator: ''
     }
 
     // Get the ticket from database
@@ -27,15 +34,14 @@ class StoryPreview extends React.Component {
       if (snapshot.exists()) {
         this.setState({
           image: snapshot.val().image,
-          ticketTitle: snapshot.val().title.substring(0, 30),
-          ticketDetails: snapshot.val().content.substring(0, 100),
+          title: snapshot.val().title.substring(0, 30),
+          content: (stripHtml(snapshot.val().content).length < 100) ? (stripHtml(snapshot.val().content)) : (stripHtml(snapshot.val().content).substr(0,97) + '...'),
           anonymous: snapshot.val().anonymous,
           creator: snapshot.val().creator
         });
       }
     });
   }
-
 
   render() {
 
@@ -52,12 +58,15 @@ class StoryPreview extends React.Component {
 
           <div className="card-body pb-1 pl-1 pr-1">
             <h6 className="card-title">
-              {this.state.ticketTitle}
+              {this.state.title.substring(0,30)}
             </h6>
-            <p className="card-text" style={{ fontSize: '14px' }}>{this.state.ticketDetails}</p>
+            <p className="card-text" style={{ fontSize: '14px' }}>{this.state.content.substring(0,100)}</p>
           </div>
-          {this.state.creator && !this.state.anonymous && <Avatar id={this.state.creator}  style={{position: 'absolute', bottom: '0px', backgroundimage: 'url("greycard.jpg")'}}/>}
+          <div className='avatar'>
+          {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous}  
+           style={{position: 'absolute', bottom: '0px', backgroundimage: 'url("greycard.jpg")'}}/>}
          </div>
+        </div>
       </div>
     );
   }

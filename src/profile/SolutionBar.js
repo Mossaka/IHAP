@@ -17,7 +17,7 @@ export default class SolutionBar extends React.Component {
     const db = firebase.database();
     db.ref("solutions/" + solutionID + '/ticket/').once('value').then(snapshot => {
         const ticketID = snapshot.val();
-        console.log(snapshot.val());
+        // console.log(snapshot.val());
         db.ref('tickets/' + ticketID).once('value').then(snapshot => {
             this.setState(
             {   

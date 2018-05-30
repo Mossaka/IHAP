@@ -1,5 +1,5 @@
 import React from 'react';
-//import {Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 //import avatar from '../assets/img_avatar.png'
 // import bookmark from '../assets/bookmark.png'
 import './SearchPreview.css'
@@ -11,6 +11,7 @@ import Avatar from '../common/Avatar'
 class SearchPreview extends React.Component {
   constructor(props) {
     super(props)
+    //props: ticketID
 
     // Initialize states for this Story Preview component
     this.state = {
@@ -39,17 +40,18 @@ class SearchPreview extends React.Component {
     return (
       // <div className = "container">
         <div className ="search">
-          
           <div className = "textbox">
+          <Link to={'/ticket/' + this.props.ticketID} style={{ textDecoration: 'none' }} className = "link">
             <div className ="title">
               <h5><b>{this.state.ticketTitle}</b></h5>
             </div> 
             <div className ="description">
               <p>{this.state.ticketDetails}</p> 
             </div>
+          </Link>
           </div>
           <div className = "userbox">
-            {this.state.creator && !this.state.anonymous && <Avatar id={this.state.creator} />}
+            {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} />}
             {/*<Link to='/profile'>
               <img className="avatar" src={avatar} style={{width: '35px'}} alt="Avatar" />
             </Link>
@@ -58,7 +60,7 @@ class SearchPreview extends React.Component {
             </Link>*/}
           </div>
           <Bookmark ticketID={this.props.ticketID}/>
-
+        
         </div>
       // </div>
     );

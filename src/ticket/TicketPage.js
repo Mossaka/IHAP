@@ -2,17 +2,32 @@ import React from 'react';
 import Solution from './Solution';
 import Ticket from './Ticket';
 import RelateTicket from './RelatedTicket';
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
 import EditTicket from './EditTicket';
 import EditSolution from './EditSolution';
 import './TicketPage.css';
+import firebase from 'firebase';
+
 
 export default class TicketPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      solutions: []
+      solutions: [],
+      loggedIn: false,
+      newsol: false
     }
+
+    firebase.auth().onAuthStateChanged(u => {
+      if (u)
+        this.setState({ loggedIn: true });
+      else
+        this.setState({ loggedIn: false });
+    });
+  }
+
+  newSolution = () => {
+    this.setState({ newsol: !this.state.newsol });
   }
 
   loadSolutions = (obj) => {
@@ -36,6 +51,15 @@ export default class TicketPage extends React.Component {
       );
     }
 
+    let newSolBtn = null;
+    if (!this.state.newsol) {
+      if (this.state.loggedIn) {
+        newSolBtn = <Button onClick={this.newSolution}>Post New Solution</Button>;
+      } else {
+        newSolBtn = <h3>Sign In to Post</h3>;
+      }
+    }
+
     return (
       <Container className="ticket-page">
         <Row>
@@ -51,7 +75,8 @@ export default class TicketPage extends React.Component {
             <h3>Solutions</h3>
             <hr />
             {this.state.solutions.map(s => <Solution key={s} id={s} />)}
-            <EditSolution ticket={this.props.match.params.id} />
+            {this.state.newsol && <EditSolution cancel={this.newSolution} ticket={this.props.match.params.id}/>}
+            {newSolBtn}
           </Col>
         </Row>
       </Container>

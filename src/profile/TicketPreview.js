@@ -1,11 +1,9 @@
 import React from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 //import avatar from '../assets/img_avatar.png'
 // import bookmark from '../assets/bookmark.png'
 import './TicketPreview.css'
-import Bookmark from '../common/Bookmark';
 import firebase from 'firebase';
-import Avatar from '../common/Avatar'
 
 
 class TicketPreview extends React.Component {
@@ -45,7 +43,7 @@ class TicketPreview extends React.Component {
         const db = firebase.database();
         db.ref("solutions/" + solutionID + '/ticket/').once('value').then(snapshot => {
             const ticketID = snapshot.val();
-            console.log(snapshot.val());
+            // console.log(snapshot.val());
             db.ref('tickets/' + ticketID).once('value').then(snapshot => {
                 if(snapshot.exists()) {
                     this.setState(
