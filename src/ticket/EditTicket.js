@@ -18,7 +18,7 @@ class EditTicket extends React.Component {
       this.state = {
         title: '',
         image: '',
-        content: '',
+        content: 'As a ___, I want a ___ to ___',
         anonymous: false,
         error: ''
       };
