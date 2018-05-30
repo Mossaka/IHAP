@@ -8,23 +8,16 @@ import { EDITOR_TOOLBAR } from './config';
 export default class EditSolution extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loggedIn: false,
-      content: '',
-      error: '',
-      edit: false
-    };
-
-    firebase.auth().onAuthStateChanged(u => {
-      if (u)
-        this.setState({ loggedIn: true });
-      else
-        this.setState({ loggedIn: false });
-    });
-  }
-
-  flip = () => {
-    this.setState({ edit: !this.state.edit });
+    if (props.preload)
+      this.state = {
+        ...props.preload,
+        error: ''
+      }
+    else
+      this.state = {
+        content: '',
+        error: '',
+      };
   }
 
   handleChange = (c) => {
@@ -39,40 +32,35 @@ export default class EditSolution extends React.Component {
     }
 
     let db = firebase.database();
-    let uid = firebase.auth().currentUser.uid;
-    let key = db.ref('solutions').push({
-      content: this.state.content,
-      creator: uid,
-      dateEdited: new Date().getTime(),
-      upvote: 0,
-      downvote: 0,
-      ticket: this.props.ticket
-    }).key;
-    db.ref('tickets/' + this.props.ticket + '/solutions').push(key);
-    db.ref('profiles/' + uid + '/solutions').push(key);
+    if (this.props.preload) {
+      db.ref('solutions/' + this.props.id).update({
+        content: this.state.content
+      });
+    }
+    else {
+      let uid = firebase.auth().currentUser.uid;
+      let key = db.ref('solutions').push({
+        content: this.state.content,
+        creator: uid,
+        dateEdited: new Date().getTime(),
+        upvote: 0,
+        downvote: 0,
+        ticket: this.props.ticket
+      }).key;
+      db.ref('tickets/' + this.props.ticket + '/solutions').push(key);
+      db.ref('profiles/' + uid + '/solutions').push(key);
+    }
     window.location.reload();
   }
 
   render() {
-    if (!this.state.loggedIn) {
-      return (
-        <Button>Sign In to Post</Button>
-      );
-    }
-
-    if (this.state.edit) {
-      return (
-        <div>
-          <ReactQuill value={this.state.content} modules={EDITOR_TOOLBAR} onChange={this.handleChange} />
-          {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
-          <Button onClick={this.handleSubmit}>Submit</Button>
-          <Button onClick={this.flip}>Cancel</Button>
-        </div>
-      );
-    }
-
     return (
-      <Button onClick={this.flip}>Write New Solution</Button>
+      <div>
+        <ReactQuill value={this.state.content} modules={EDITOR_TOOLBAR} onChange={this.handleChange} />
+        {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
+        <Button onClick={this.handleSubmit}>Submit</Button>
+        <Button onClick={this.props.cancel}>Cancel</Button>
+      </div>
     );
   }
 }

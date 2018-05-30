@@ -5,7 +5,6 @@ import {Dropdown, DropdownMenu, DropdownToggle } from 'reactstrap';
 import classnames from 'classnames';
 import TicketBar from './TicketBar';
 import UserBar from './UserBar';
-import SolutionBar from './SolutionBar';
 import './ProfilePage.css';
 import ProfileSettingPage from './ProfileSettingPage';
 import firebase from 'firebase';
