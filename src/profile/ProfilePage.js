@@ -220,16 +220,11 @@ export default class ProfilePage extends React.Component {
                     </NavItem>
                     <NavItem>
                       <NavLink className={classnames({active:this.state.activeTab === '3'})} onClick={() => {this.toggle('3')}}>
-                        Activity
-                      </NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink className={classnames({active:this.state.activeTab === '4'})} onClick={() => {this.toggle('4')}}>
                         Bookmark
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink className={classnames({active:this.state.activeTab === '5'})} onClick={() => {this.toggle('5')}}>
+                      <NavLink className={classnames({active:this.state.activeTab === '4'})} onClick={() => {this.toggle('4')}}>
                         Following
                       </NavLink>
                     </NavItem>
@@ -242,15 +237,9 @@ export default class ProfilePage extends React.Component {
                       {this.generateSolutionBarGivenSolutionList(this.state.solutions)}
                     </TabPane>
                     <TabPane tabId='3'>
-                      <TicketBar />
-                      <TicketBar />
-                      <TicketBar />
-                      <TicketBar />
-                    </TabPane>
-                    <TabPane tabId='4'>
                       {this.generateTicketBarGivenTicketList(this.state.bookmarked)}
                     </TabPane>
-                    <TabPane tabId='5'>
+                    <TabPane tabId='4'>
                       {this.generateTicketBarGivenTicketList(this.state.following)}
                     </TabPane>
                   </TabContent>
