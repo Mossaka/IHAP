@@ -4,14 +4,14 @@ import firebase from 'firebase';
 export default class Vote extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.path+ "the props value is: " + this.props.up);
-    console.log(this.props.path+ "the props value is: " + this.props.down);
-    let l  = this.props.path.split("/");
+    console.log(this.props.path + "the props value is: " + this.props.up);
+    console.log(this.props.path + "the props value is: " + this.props.down);
+    let l = this.props.path.split("/");
     this.state = {
       up: Number(this.props.up),
       down: Number(this.props.down),
-      loggedin: false,
-      mood: (l[0]==='solutions') ? 'votedSolution' : 'votedProblem',
+      loggedIn: false,
+      mood: (l[0] === 'solutions') ? 'votedSolution' : 'votedProblem',
       ticketid: l[1]
     }
 
@@ -21,40 +21,48 @@ export default class Vote extends React.Component {
     });
   }
 
+  handleSignIn = () => {
+    if (!this.state.loggedIn)
+      alert('please sign in to vote');
+    return this.state.loggedIn;
+  }
+
   handleUpVote = () => {
+    if (!this.handleSignIn()) return;
+
     let userId = firebase.auth().currentUser.uid;
-    let url = 'notebooks/' + userId +'/'+ this.state.mood;
+    let url = 'notebooks/' + userId + '/' + this.state.mood;
     firebase.database().ref(url).once('value')
-      .then(t=>{
-        if(t.val()==null){
+      .then(t => {
+        if (t.val() == null) {
           let newData = {
             ticketID: this.state.ticketid,
             voted: true
           };
-          firebase.database().ref('notebooks/' + userId +'/'+  this.state.mood).push(newData);
+          firebase.database().ref('notebooks/' + userId + '/' + this.state.mood).push(newData);
           let newVote = this.state.up + 1;
           firebase.database().ref(this.props.path)
-                  .update({ upvote: newVote });
+            .update({ upvote: newVote });
           this.setState({
             up: newVote,
           });
           alert("upvoted");
-        }else{
+        } else {
           let res = t.val();
           let flag = false;
-          for(let key in res){
-            if(res[key].ticketID === this.state.ticketid){
-              if(res[key].voted === true){
+          for (let key in res) {
+            if (res[key].ticketID === this.state.ticketid) {
+              if (res[key].voted === true) {
                 flag = true;
                 alert("cannot upvote twice");
-              }else{
+              } else {
                 let newUpVote = this.state.up + 1;
                 let newDownVote = this.state.down - 1;
                 firebase.database().ref(this.props.path)
                   .update({ upvote: newUpVote });
                 firebase.database().ref(this.props.path)
                   .update({ downvote: newDownVote });
-                let url = 'notebooks/' + userId +'/'+  this.state.mood + '/'+key+'/'+'voted';
+                let url = 'notebooks/' + userId + '/' + this.state.mood + '/' + key + '/' + 'voted';
                 console.log(url);
                 firebase.database().ref(url).set(true);
 
@@ -66,89 +74,91 @@ export default class Vote extends React.Component {
               }
             }
           }
-          if(!flag){
+          if (!flag) {
             let newVote = this.state.up + 1;
             let newData = {
               ticketID: this.state.ticketid,
               voted: true
             };
-            firebase.database().ref('notebooks/' + userId +'/'+  this.state.mood).push(newData);
+            firebase.database().ref('notebooks/' + userId + '/' + this.state.mood).push(newData);
             firebase.database().ref(this.props.path)
-                    .update({ upvote: newVote });
+              .update({ upvote: newVote });
             this.setState({
               up: newVote,
             });
           }
         }
       });
-    }
-    // firebase.database().
-    //   ref(this.props.ticketInfor + userId + '/votedProblem').once('value').then(t=>{
-    //     console.log(userId);
-    //     console.log(t);
-    //   });
+  }
+  // firebase.database().
+  //   ref(this.props.ticketInfor + userId + '/votedProblem').once('value').then(t=>{
+  //     console.log(userId);
+  //     console.log(t);
+  //   });
 
-    //   ref(this.props.ticketInfor + userId + '/votedProblem').push(ticketid);
+  //   ref(this.props.ticketInfor + userId + '/votedProblem').push(ticketid);
 
 
 
-    //   firebase.database().ref(this.props.path)
-    //     .update({ upvote: newVote });
-    //   this.setState({
-    //     up: newVote,
-    //     upvoteClicked: true
-    //   });
-    // } else if (!this.state.upvoteClicked && this.state.downvoteClicked) {
-    //   let newUpVote = this.state.up + 1;
-    //   let newDownVote = this.state.down - 1;
-    //   firebase.database().ref(this.props.path)
-    //     .update({ upvote: newUpVote });
-    //   firebase.database().ref(this.props.path)
-    //     .update({ downvote: newDownVote });
-    //   this.setState({
-    //     up: newUpVote,
-    //     down: newDownVote,
-    //     upvoteClicked: true,
-    //     downvoteClicked: false
-    //   });
-    // } else {
-    //   alert("Cannot upVote twice");
-    // }
+  //   firebase.database().ref(this.props.path)
+  //     .update({ upvote: newVote });
+  //   this.setState({
+  //     up: newVote,
+  //     upvoteClicked: true
+  //   });
+  // } else if (!this.state.upvoteClicked && this.state.downvoteClicked) {
+  //   let newUpVote = this.state.up + 1;
+  //   let newDownVote = this.state.down - 1;
+  //   firebase.database().ref(this.props.path)
+  //     .update({ upvote: newUpVote });
+  //   firebase.database().ref(this.props.path)
+  //     .update({ downvote: newDownVote });
+  //   this.setState({
+  //     up: newUpVote,
+  //     down: newDownVote,
+  //     upvoteClicked: true,
+  //     downvoteClicked: false
+  //   });
+  // } else {
+  //   alert("Cannot upVote twice");
+  // }
 
 
   handleDownVote = () => {
+    if (!this.handleSignIn()) return;
+
     let userId = firebase.auth().currentUser.uid;
-    let url = 'notebooks/' + userId +'/'+ this.state.mood;
+    let url = 'notebooks/' + userId + '/' + this.state.mood;
     firebase.database().ref(url).once('value')
-      .then(t=>{
-        if(t.val()==null){
+      .then(t => {
+        if (t.val() == null) {
           let newData = {
             ticketID: this.state.ticketid,
             voted: false
           };
-          firebase.database().ref('notebooks/' + userId +'/'+  this.state.mood).push(newData);
+          firebase.database().ref('notebooks/' + userId + '/' + this.state.mood).push(newData);
           let newVote = this.state.down + 1;
           firebase.database().ref(this.props.path)
-                  .update({ downvote: newVote });
+            .update({ downvote: newVote });
           this.setState({
             down: newVote,
           });
-        }else{
+        } else {
           let res = t.val();
           let flag = false;
-          for(let key in res){
-            if(res[key].ticketID === this.state.ticketid){
-              if(res[key].voted === false){
+          for (let key in res) {
+            if (res[key].ticketID === this.state.ticketid) {
+              if (res[key].voted === false) {
                 flag = true;
                 alert("cannot downvote twice");
-              }else{
+              } else {
                 let newDownVote = this.state.down + 1;
                 let newUpVote = this.state.up - 1;
                 firebase.database().ref(this.props.path)
                   .update({ upvote: newUpVote });
                 firebase.database().ref(this.props.path)
                   .update({ downvote: newDownVote });
-                let url = 'notebooks/' + userId +'/'+  this.state.mood + '/'+key+'/'+'voted';
+                let url = 'notebooks/' + userId + '/' + this.state.mood + '/' + key + '/' + 'voted';
                 console.log(url);
                 firebase.database().ref(url).set(false);
                 this.setState({
@@ -159,27 +169,24 @@ export default class Vote extends React.Component {
               }
             }
           }
-          if(!flag){
+          if (!flag) {
             let newVote = this.state.down + 1;
             let newData = {
               ticketID: this.state.ticketid,
               voted: false
             };
-            firebase.database().ref('notebooks/' + userId +'/'+  this.state.mood).push(newData);
+            firebase.database().ref('notebooks/' + userId + '/' + this.state.mood).push(newData);
             firebase.database().ref(this.props.path)
-                    .update({ downvote: newVote });
+              .update({ downvote: newVote });
             this.setState({
               down: newVote,
             });
           }
         }
       });
-    }
+  }
 
   render() {
-    if (!this.state.loggedIn)
-      return null;
-
     return (
       <div className="d-flex">
         <i className="far fa-arrow-alt-circle-up" onClick={this.handleUpVote}></i>
