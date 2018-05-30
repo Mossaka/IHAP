@@ -6,7 +6,6 @@ import firebase from 'firebase';
 import './StoryPreview.css';
 import Bookmark from '../common/Bookmark';
 import Avatar from '../common/Avatar';
-import {Col} from 'reactstrap';
 
 function stripHtml (html){
   var tempDiv = document.createElement("div");
@@ -64,10 +63,10 @@ class StoryPreview extends React.Component {
             <p className="card-text" style={{ fontSize: '14px' }}>{this.state.content.substring(0,100)}</p>
           </div>
           <div className='bottomLine'>
-            <div class="avatar">
+            <div className="avatar">
               {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} />}
             </div>
-            <div class="bookmark">
+            <div className="bookmark">
               <Bookmark ticketID={this.props.ticketID} />
             </div>
           </div>

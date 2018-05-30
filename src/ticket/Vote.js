@@ -62,8 +62,6 @@ export default class Vote extends React.Component {
                   .update({ upvote: newUpVote });
                 firebase.database().ref(this.props.path)
                   .update({ downvote: newDownVote });
-                let url = 'notebooks/' + userId + '/' + this.state.mood + '/' + key + '/' + 'voted';
-                console.log(url);
                 firebase.database().ref(url).set(true);
 
                 this.setState({
@@ -158,8 +156,6 @@ export default class Vote extends React.Component {
                   .update({ upvote: newUpVote });
                 firebase.database().ref(this.props.path)
                   .update({ downvote: newDownVote });
-                let url = 'notebooks/' + userId + '/' + this.state.mood + '/' + key + '/' + 'voted';
-                console.log(url);
                 firebase.database().ref(url).set(false);
                 this.setState({
                   up: newUpVote,

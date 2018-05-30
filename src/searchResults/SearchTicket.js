@@ -36,7 +36,7 @@ export function weightedSearch(keyword, count, weights) {
 
           if ("upvotes" in weights) {
             weight += weights["upvotes"] * (1 / (1 + Math.exp(-0.1 * (data.upvote - 20))));
-            console.log((1 / (1 + Math.exp(-0.1 * (data.upvote - 20)))));
+            //console.log((1 / (1 + Math.exp(-0.1 * (data.upvote - 20)))));
           }
 
           ids.push([weight, id]);
@@ -55,8 +55,8 @@ export function weightedSearch(keyword, count, weights) {
         }
       }
 
-      console.log(ids);
-      console.log(ret);
+      //console.log(ids);
+      //console.log(ret);
 
       return ret;
     });
