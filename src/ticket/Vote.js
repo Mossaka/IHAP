@@ -189,10 +189,14 @@ export default class Vote extends React.Component {
   render() {
     return (
       <div className="d-flex">
-        <i className="far fa-arrow-alt-circle-up" onClick={this.handleUpVote}></i>
+        <svg width="20" height="20" onClick={this.handleUpVote}>
+          <g><path d="M12 8l-6 6 1.41 1.41 4.59-4.58 4.59 4.58 1.41-1.41z"></path></g>
+        </svg>
         <p className="mx-2">{this.state.up}</p>
         <p className="mx-2">{this.state.down}</p>
-        <i className="far fa-arrow-alt-circle-down" onClick={this.handleDownVote}></i>
+        <svg width="20" height="20" onClick={this.handleDownVote}>
+          <g><path d="M16.59 8.59l-4.59 4.58-4.59-4.58-1.41 1.41 6 6 6-6z"></path></g>
+        </svg>
       </div>
     );
   }
