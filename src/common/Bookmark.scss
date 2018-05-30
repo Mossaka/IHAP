@@ -21,20 +21,21 @@
 
     g:hover {
         fill: $story-preview-bookmark-tag-fill-color;
-        opacity: 1;
+        opacity: 0.5;
         cursor: pointer;
     }
 
     g {
-        fill: $story-preview-bookmark-tag-fill-color;
-        opacity: 0.75;
+        stroke: gray;
+        fill: white;
     }
 
     g.disabled {
-        fill: black;
+        fill: darkgray;
     }
 
     g.bookmarked {
-      fill: red;
+        fill: $story-preview-bookmark-tag-fill-color;
+        stroke-opacity:0;
     }
 }
