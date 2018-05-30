@@ -1,19 +1,23 @@
-@import "../_global";
+@import '../_global';
 
 .bookmark {
     position: relative;
+    float: right;
+    width: 25px;
+    height: 25px;
+    
 
-    polygon:hover {
-        fill: $story-preview-bookmark-tag-fill-color;
-        opacity: 1;
-        cursor: pointer;
-    }
+    // polygon:hover {
+    //     fill: $story-preview-bookmark-tag-fill-color;
+    //     opacity: 1;
+    //     cursor: pointer;
+    // }
 
-    polygon {
-        fill: $story-preview-bookmark-tag-fill-color;
-        opacity: 0.75;
+    // polygon {
+    //     fill: $story-preview-bookmark-tag-fill-color;
+    //     opacity: 0.75;
 
-    }
+    // }
 
     g:hover {
         fill: $story-preview-bookmark-tag-fill-color;
@@ -24,6 +28,13 @@
     g {
         fill: $story-preview-bookmark-tag-fill-color;
         opacity: 0.75;
+    }
 
+    g.disabled {
+        fill: black;
+    }
+
+    g.bookmarked {
+      fill: red;
     }
 }
