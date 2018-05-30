@@ -8,27 +8,35 @@ import anonymousAvatar from '../assets/anonymous-avatar.jpg';
 export default class Avatar extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      username: 'Anonymous',
-      avatar: anonymousAvatar
+      avatar: anonymousAvatar,
+      username: 'Anonymous'
     };
 
-    let db = firebase.database();
-    console.log("isanonymous: " + props.isAnonymous)
-    db.ref('profiles/' + props.id).once('value').then(snapshot => {
-      if(props.isAnonymous === false) {
-        this.setState({...snapshot.val()})
-        console.log(props.id)
-      }
+    if (props.isAnonymous) return;
+    firebase.database().ref('profiles/' + props.id).once('value', snapshot => {
+      this.setState({ username: snapshot.val().username });
+      if (snapshot.val().avatar)
+        this.setState({ avatar: snapshot.val().avatar });
     });
   }
 
   render() {
+    if (this.props.isAnonymous) {
+      return (
+        <div className="avatar">
+          <img src={this.state.avatar} alt="avatar" />
+          {this.state.username}
+        </div>
+      );
+    }
+
     return (
       <div className="avatar">
         <Link to={'/profile/' + this.props.id} className='link'>
-          <img src={this.state.avatar} alt="avatar"/>
-          {"  " + this.state.username.substring(0,15)}
+          <img src={this.state.avatar} alt="avatar" />
+          {' ' + this.state.username.substring(0, 15)}
         </Link>
       </div>
     );
