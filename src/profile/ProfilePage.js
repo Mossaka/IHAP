@@ -1,7 +1,7 @@
 import React from 'react';
 import avatar from '../assets/img_avatar.png';
 import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
-import {Dropdown, DropdownMenu, DropdownToggle, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
+import { Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import classnames from 'classnames';
 import UserBar from './UserBar';
 import './ProfilePage.css';

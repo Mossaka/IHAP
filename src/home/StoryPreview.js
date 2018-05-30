@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import greycard from '../assets/greycard.jpg'
+import greycard from '../assets/greycard.jpg';
 import firebase from 'firebase';
 // import bookmark from '../assets/bookmark.png'
-import './StoryPreview.css'
+import './StoryPreview.css';
 import Bookmark from '../common/Bookmark';
 import Avatar from '../common/Avatar';
 
@@ -49,23 +49,27 @@ class StoryPreview extends React.Component {
       <div className="story-preview">
         <div className="card" style={{ height: '400px' }}>
           <Link className="clickable-card" to={'/ticket/' + this.props.ticketID}></Link>
-
           <img className="card-img-top img-fluid card-img" src={this.state.image} alt="ticket thumbnail" />
           {/* there will be problem here if image is not fixed size. I set the card-img-overlay to a fixed size */}
-          <div className="card-img-overlay" style={{ height: '100px' }}>
-            <Bookmark ticketID={this.props.ticketID} />
+          {/*<div className="card-img-overlay" style={{ height: '100px' }}>
+            
           </div>
-
+          */}
+        
           <div className="card-body pb-1 pl-1 pr-1">
             <h6 className="card-title">
               {this.state.title.substring(0,30)}
             </h6>
             <p className="card-text" style={{ fontSize: '14px' }}>{this.state.content.substring(0,100)}</p>
           </div>
-          <div className='avatar'>
-          {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous}  
-           style={{position: 'absolute', bottom: '0px', backgroundimage: 'url("greycard.jpg")'}}/>}
-         </div>
+          <div className='bottomLine'>
+            <div className="avatar">
+              {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} />}
+            </div>
+            <div className="bookmark">
+              <Bookmark ticketID={this.props.ticketID} />
+            </div>
+          </div>
         </div>
       </div>
     );

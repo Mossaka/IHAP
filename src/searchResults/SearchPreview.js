@@ -59,7 +59,9 @@ class SearchPreview extends React.Component {
               <p className='w-60 pt-3 mb-0 ml-1' style={{fontSize: '15px', float:'left'}}>username</p>
             </Link>*/}
           </div>
-          <Bookmark ticketID={this.props.ticketID}/>
+          <div className = "sidebookmark">
+            <Bookmark ticketID={this.props.ticketID}/>
+          </div>
         
         </div>
       // </div>

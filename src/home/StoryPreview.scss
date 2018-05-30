@@ -28,12 +28,26 @@
         object-fit: cover;
     }
    
-    .avatar {
-        z-index: 1;
+    .bottomLine {
+        display: flex;
+        overflow: auto;
+    }
+
+    .avatar{
+        width:100%;
+        z-index: 2;
+    }
+
+    Avatar{
+        position: 'absolute';
+        bottom: '0px';
     }
 
     .bookmark {
-        z-index: 1;
+        width:40%;
+        text-align: right;
+        float: right;
+        z-index: 2;
     }
     
     .card-body {
@@ -62,9 +76,6 @@
         text-decoration: none;
         color: black;
         box-shadow: $box-shadow-on-hover;
-    }
-
-    .avatar {
     }
 
 }

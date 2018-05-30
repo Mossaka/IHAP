@@ -14,6 +14,7 @@
     // rgb(250, 254, 255);
     display: flex;
     overflow: auto;
+    position: relative;
 }
 
 
@@ -56,4 +57,10 @@
 
 .search-author-info { 
     margin-top: auto;
+}
+
+.sidebookmark{
+    position: absolute;
+    top: 7.5%;
+    right: 2.5%;
 }

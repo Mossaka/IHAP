@@ -92,18 +92,18 @@ class HomePage extends React.Component {
     return (
       <div className='homepage-bg'>
       <div className='container' >
-        <h2 className='my-5' style={{'text-align': 'center'}}>Top Stories</h2>
+        <h2 className='my-5' style={{'textAlign': 'center'}}>Top Stories</h2>
         <hr />
         <div className="row">
           {this.state.topCards}
         </div>
-        <h2 className='my-5' style={{'text-align': 'center'}}>For you</h2>
+        <h2 className='my-5' style={{'textAlign': 'center'}}>For you</h2>
         <hr />
         
         <div className='row'>
           {this.state.recommendedCards}
         </div>
-        <h2 className="my-5" style={{'text-align': 'center'}}>Recent Stories</h2>
+        <h2 className="my-5" style={{'textAlign': 'center'}}>Recent Stories</h2>
         <hr />
 
         <div className='row'>
