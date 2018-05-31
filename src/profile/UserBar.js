@@ -4,6 +4,7 @@ import Avatar from '../common/Avatar'
 import firebase from 'firebase'
 import './UserBar.css'
 import { Redirect } from 'react-router-dom';
+import FollowButton from './FollowButton'
 
 // import {MdCancel, MdChat, MdCheck} from 'react-icons/md';
 
@@ -27,7 +28,8 @@ export default class TicketBar extends React.Component {
     });
   }
   
-  changeRoute() {
+  changeRoute(e) {
+    e.preventDefault();
     this.setState({redirect: true,})
   }
 
@@ -50,15 +52,15 @@ export default class TicketBar extends React.Component {
 
         <div className='user-preview' onClick={this.changeRoute}>
         {/* <Link className="clickable-card" to={'/ticket/' + this.state.ticketID}></Link> */}
-          <div className='avatar'>
-            <Avatar id={this.props.uid} isAnonymous={false} />
-          </div>
-          <div className = 'name'>
-            {'Name: ' + this.state.firstname + " " + this.state.lastname}
-          </div>
-          <div className ="biography">
-            {'Biography: '} {this.state.biography}
-          </div>
+
+          <Avatar id={this.props.uid} isAnonymous={false} />
+          { this.props.isUserSelf ? <div className='followbtn'>
+            <FollowButton isUserSelf = {false}
+                          profileUserID = {this.props.uid}
+                          isKnown = {true}
+            />
+          </div> : <div></div>
+          }
           
         </div>
     )

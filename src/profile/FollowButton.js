@@ -19,7 +19,10 @@ export default class FollowButton extends React.Component {
         if(this.props.isUserSelf) { // should be edit profile button
             this.setState({editMode: true});
         } else { // if not current user's profile, then it should be follow button
-            this.followButtonInit();
+            if(!this.props.isKnown)
+                this.followButtonInit();
+            else
+                this.setState({text: "Followed"})
         }
 
     } 
@@ -55,7 +58,8 @@ export default class FollowButton extends React.Component {
         this.followButtonInit()
   }
 
-  handleFollow() {
+  handleFollow(e) {
+    e.preventDefault();
     const db = firebase.database();
     if(this.state.uid && this.state.text === 'Follow') {
       db.ref('networks/' + this.state.uid + '/followingUsers/').push(this.props.profileUserID, error => {
@@ -103,8 +107,8 @@ export default class FollowButton extends React.Component {
 
   render() {
     if(this.state.editMode)
-        return <Button color={'secondary'} style={{float: 'right'}} size="sm" onClick={this.props.toggleSetting}><FaEdit width='25px' height='25px'/> Edit</Button> 
+        return <Button color={'secondary'} style={{float: 'right'}} size='sm' onClick={this.props.toggleSetting}><FaEdit width='25px' height='25px'/> Edit</Button> 
     else
-        return <Button color={"primary"} style={{float:'left'}} onClick={this.handleFollow} size="sm"><MdPersonAdd width='25px' height='25px'/> {this.state.text}</Button>
+        return <Button color={"primary"} style={{float:'left'}} onClick={this.handleFollow} size='sm'><MdPersonAdd width='25px' height='25px'/> {this.state.text}</Button>
   }
 }

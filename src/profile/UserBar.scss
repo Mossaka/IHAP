@@ -14,17 +14,15 @@
         // display: flex;
         padding: 1rem;
         overflow: auto;
+        background-color: white;
 
 
     .user-preview:hover{
         box-shadow: $box-shadow-on-hover;
     }
-    
-    .name{
-        text-align: left;
-    }
-    .biography{
-        text-align: left ;
+
+    .followbtn {
+        float: right;
     }
 }
 
