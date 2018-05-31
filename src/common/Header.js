@@ -91,7 +91,7 @@ class Header extends React.Component {
   loadRandomTicket() {
     var ticketKey = this.state.ticketIDs[Math.floor(Math.random() * this.state.numTickets)];
     if(ticketKey !== this.state.ticketDisplayed) {
-      console.log(ticketKey);
+      // console.log(ticketKey);
       this.props.history.push('/ticket/' + ticketKey);
       this.setState (
         {

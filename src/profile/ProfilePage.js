@@ -34,7 +34,6 @@ export default class ProfilePage extends React.Component {
       tickets: [],
       solutions: [],
       bookmarked: [],
-      following: [],
       followingUsers: [],
       followedUsers: [],
       currentUser: false,
@@ -44,28 +43,73 @@ export default class ProfilePage extends React.Component {
     };
 
     this.toggleSetting = this.toggleSetting.bind(this)
+    this.retriveData = this.retriveData.bind(this)
     // this.handleFollow = this.handleFollow.bind(this)
 
-    const uid = this.props.match.params.id;
+    const profileUserID = this.props.match.params.id;
 
     firebase.auth().onAuthStateChanged(user => {
       if(user) {
-        if(user.uid === uid) { // the profile page is login user's profile
+        if(user.uid === profileUserID) { // the profile page is login user's profile
           this.setState({currentUser: true, uid: user.uid})
+          this.retriveData(user.uid);
         } else {
           this.setState({currentUser: false, uid: user.uid})
+          this.retriveData(profileUserID);
         }
       } else {
         this.setState({currentUser: false})
       }
     })
+  }
 
+  componentWillReceiveProps(nextProps) {
+    const userID = nextProps.match.params.id
+    this.setState({
+      activeTab: '1',
+      userTab: '1',
+      dropdownOpen: false,
+      setting: false,
+      avatar: avatar,
+      email: 'No email',
+      firstname: ' ',
+      lastname: ' ',
+      username: ' ',
+      biography: "Loading",
+      tickets: [],
+      solutions: [],
+      bookmarked: [],
+      followingUsers: [],
+      followedUsers: [],
+      currentUser: false,
+      followClicked: false,
+      followButtonText: "Follow",
+      uid: '',
+    })
+    firebase.auth().onAuthStateChanged(user => {
+      if(user) {
+        if(user.uid == userID) {
+          this.setState({currentUser: true, uid: user.uid})
+          this.retriveData(user.uid)
+          // console.log(this.state)
+        } else {
+          this.setState({currentUser: false, uid: user.uid})
+          this.retriveData(userID);
+        }
+      } else {
+        this.setState({currentUser: false})
+      }
+    })
+  }
+
+  retriveData(uid) {
+    console.log('here')
     firebase.database().ref('profiles/' + uid).once('value').then(snapshot => {
       // console.log(snapshot.val())
       this.setState({
         ...snapshot.val()
       })
-      console.log(this.state)
+      // console.log(this.state)
     })
 
     firebase.database().ref('networks/' + uid).once('value').then(snapshot => {
@@ -134,7 +178,6 @@ export default class ProfilePage extends React.Component {
     )
   }
 
-  // haven't used it yet
   generateUserBarGivenUserList(userList) {
     return (
       <div>
@@ -227,6 +270,7 @@ export default class ProfilePage extends React.Component {
                   </Nav>
                   <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId='1'>
+                    {/* here is a problem */}
                       {this.generateTicketBarGivenTicketList(this.state.tickets)}
                     </TabPane>
                     <TabPane tabId='2'>

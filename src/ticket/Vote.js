@@ -4,8 +4,8 @@ import firebase from 'firebase';
 export default class Vote extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.path + "the props value is: " + this.props.up);
-    console.log(this.props.path + "the props value is: " + this.props.down);
+    // console.log(this.props.path + "the props value is: " + this.props.up);
+    // console.log(this.props.path + "the props value is: " + this.props.down);
     let l = this.props.path.split("/");
     this.state = {
       up: Number(this.props.up),

@@ -3,39 +3,54 @@ import { Button } from 'reactstrap';
 import firebase from 'firebase'
 
 export default class FollowButton extends React.Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      editMode: false,
-      text: "Follow",
-      uid: null,
-    }
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+        editMode: false,
+        text: "Follow",
+        uid: null,
+        }
+        this.handleFollow = this.handleFollow.bind(this)
+        this.followButtonInit = this.followButtonInit.bind(this)
 
-    if(this.props.isUserSelf) { // should be edit profile button
-        this.setState({editMode: true});
-    } else { // if not current user's profile, then it should be follow button
+        if(this.props.isUserSelf) { // should be edit profile button
+            this.setState({editMode: true});
+        } else { // if not current user's profile, then it should be follow button
+            this.followButtonInit();
+        }
+
+    } 
+
+    followButtonInit() {
         firebase.auth().onAuthStateChanged(user => {
-            if(user) {
-                this.setState({uid:user.uid});
+            if (user) {
+                this.setState({ uid: user.uid });
                 const db = firebase.database();
-                if(user.uid !== '') {
+                if (user.uid !== '') {
                     const query = db.ref('networks/' + user.uid + '/followingUsers/').orderByKey();
                     query.once('value').then(snapshot => {
-                        if(snapshot.exists())
+                        if (snapshot.exists())
                             snapshot.forEach(child => {
-                                if(child.val() === this.props.profileUserID) {
-                                    console.log("find the user in database")
-                                    this.setState({text: "Followed"})
+                                if (child.val() === this.props.profileUserID) {
+                                    console.log("find the user in database");
+                                    this.setState({ text: "Followed" });
                                 }
-                            })
-                    })
+                            });
+                    });
                 }
             }
-        })
+            else {
+                this.setState({ editMode: false, text: "Follow", uid: null });
+            }
+        });
     }
 
-    this.handleFollow = this.handleFollow.bind(this)
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.isUserSelf) 
+        this.setState({editMode: true});
+    else 
+        this.followButtonInit()
   }
 
   handleFollow() {

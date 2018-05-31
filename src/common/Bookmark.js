@@ -40,7 +40,7 @@ export default class Bookmark extends React.Component {
     let uid = firebase.auth().currentUser.uid;
     let db = firebase.database();
     if (this.state.bookmarked) {
-      console.log(this.key)
+    //   console.log(this.key)
       db.ref('notebooks/' + uid + '/bookmarked/' + this.key).remove();
       this.setState({ bookmarked: false });
     }
