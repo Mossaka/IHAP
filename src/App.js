@@ -5,11 +5,12 @@ import HomePage from './home/HomePage';
 import ProfilePage from './profile/ProfilePage';
 import TicketPage from './ticket/TicketPage';
 import SearchPage from './searchResults/SearchPage';
+import './App.css';
 
 export default class App extends React.Component {
   render() {
     return (
-      <React.Fragment>
+      <div className="app">
         <Header/>
         <Switch>
           <Route path="/ticket/:id" component={TicketPage} />
@@ -17,7 +18,7 @@ export default class App extends React.Component {
           <Route path="/profile/:id" component={ProfilePage} />
           <Route component={HomePage} />
         </Switch>
-      </React.Fragment>
+      </div>
     );
   }
 }

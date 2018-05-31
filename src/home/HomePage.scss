@@ -1,15 +1,10 @@
-@import '../global';
-
 .homepage {
-  background-color: $bg-color;
-
   h2 {
     margin: 24px auto 0 auto;
     text-align: center;
   }
 
   .row {
-      background-color: $bg-color;
-      padding: 24px 0 24px 0;
+    padding: 24px 0 24px 0;
   }
 }
