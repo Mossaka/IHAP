@@ -68,7 +68,7 @@ export default class TicketPage extends React.Component {
             <hr />
             <Ticket id={this.props.match.params.id} gotSolution={this.loadSolutions} />
             <div className="mt-5">
-              <RelateTicket />
+              <RelateTicket id={this.props.match.params.id}/>
             </div>
           </Col>
           <Col xs="6">
