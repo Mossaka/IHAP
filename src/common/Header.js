@@ -6,7 +6,7 @@ import User from './User';
 import './Header.css';
 import firebase from 'firebase';
 import { Button, Col, Input, InputGroup, InputGroupAddon } from 'reactstrap';
-
+import { MdSearch } from 'react-icons/lib/md'
 
 class Header extends React.Component {
   constructor(props) {
@@ -111,7 +111,7 @@ class Header extends React.Component {
       <InputGroup className="searchOrRandom">
         <Input className="searchInput" type="search" name="search" placeholder="Search" onKeyUp={this.handleKeyPress}/>
         <InputGroupAddon addonType="append">
-          <Button className="searchButton" onClick={this.search}>Search</Button>
+          <Button className="searchButton" onClick={this.search}><MdSearch width='25px' height='25px' />Search</Button>
         </InputGroupAddon>
       </InputGroup>
     ); 

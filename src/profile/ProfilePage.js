@@ -12,6 +12,7 @@ import parse from '../assets/parse.jpg';
 import edit from '../assets/eidt.jpg';
 import TicketPreview from './TicketPreview';
 import FollowButton from './FollowButton'
+import * as FontAwesome from 'react-icons/lib/fa';
 
 export default class ProfilePage extends React.Component {
   constructor(props, context) {
@@ -205,11 +206,11 @@ export default class ProfilePage extends React.Component {
               <Nav>
                 <Row>
                   <NavItem>
-                    <NavLink><img src={download} style={{width:'25px', height:'25px'}} alt="email"/>  {this.state.email}</NavLink>
+                    <NavLink>
+                    <FontAwesome.FaEnvelope width='25px' height='25px'/>  {this.state.email}</NavLink>
                   </NavItem>
                   <NavLink id='Popover1' onClick={this.toggleDropdown}>
-                    <img src={parse} style={{width:'25px', height:'25px'}} alt="drop down" />
-                    <a>Bio</a>
+                    <FontAwesome.FaUser width='25px' height='25px' />  <a>Bio</a>
                   </NavLink>
                   <Popover placement='bottom' isOpen={this.state.dropdownOpen} target='Popover1' toggle={this.toggleDropdown}>
                     <PopoverHeader>Biography</PopoverHeader>

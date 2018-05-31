@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import firebase from 'firebase'
+import { FaEdit } from 'react-icons/lib/fa'
+import { MdPersonAdd } from 'react-icons/lib/md'
 
 export default class FollowButton extends React.Component {
     constructor(props) {
@@ -101,8 +103,8 @@ export default class FollowButton extends React.Component {
 
   render() {
     if(this.state.editMode)
-        return <Button color={'secondary'} style={{float: 'right'}} size="sm" onClick={this.props.toggleSetting}>Edit</Button> 
+        return <Button color={'secondary'} style={{float: 'right'}} size="sm" onClick={this.props.toggleSetting}><FaEdit width='25px' height='25px'/> Edit</Button> 
     else
-        return <Button color={"primary"} style={{float:'left'}} onClick={this.handleFollow} size="sm">{this.state.text}</Button>
+        return <Button color={"primary"} style={{float:'left'}} onClick={this.handleFollow} size="sm"><MdPersonAdd width='25px' height='25px'/> {this.state.text}</Button>
   }
 }
