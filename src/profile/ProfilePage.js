@@ -1,15 +1,12 @@
 import React from 'react';
 import avatar from '../assets/img_avatar.png';
-import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
+import { Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
 import { Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import classnames from 'classnames';
 import UserBar from './UserBar';
 import './ProfilePage.css';
 import ProfileSettingPage from './ProfileSettingPage';
 import firebase from 'firebase';
-import download from '../assets/download.jpg';
-import parse from '../assets/parse.jpg';
-import edit from '../assets/eidt.jpg';
 import TicketPreview from './TicketPreview';
 import FollowButton from './FollowButton'
 import * as FontAwesome from 'react-icons/lib/fa';
@@ -89,7 +86,7 @@ export default class ProfilePage extends React.Component {
     })
     firebase.auth().onAuthStateChanged(user => {
       if(user) {
-        if(user.uid == userID) {
+        if(user.uid === userID) {
           this.setState({currentUser: true, uid: user.uid})
           this.retriveData(user.uid)
           // console.log(this.state)

@@ -1,10 +1,8 @@
 import React from 'react';
 import avatar from '../assets/img_avatar.png';
 import Avatar from '../common/Avatar'
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import firebase from 'firebase'
 import './UserBar.css'
-import * as TI from 'react-icons/lib/ti'
 import { Redirect } from 'react-router-dom';
 
 // import {MdCancel, MdChat, MdCheck} from 'react-icons/md';
