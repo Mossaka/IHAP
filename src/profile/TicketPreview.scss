@@ -7,9 +7,9 @@
         border-style: solid;
         border-color: lightgray;
         border-width: 1px;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         transition: 0.3s;
-        background: $story-preview-background-color;
+        // background: $story-preview-background-color;
         // rgb(250, 254, 255);
         // display: flex;
         padding: 1rem;
@@ -19,7 +19,16 @@
     .ticket-preview:hover{
         box-shadow: $box-shadow-on-hover;
     }
-
+    .textbox {
+        float: left;
+    }
+    img {
+        
+        width: 100px;
+        height: 100px;
+        object-fit: scale-down;
+    }
+    
     .title{
         text-align: left;
         font-size: 5em;
@@ -27,16 +36,6 @@
     .description{
         text-align: left ;
         font-size: 1em;
-    }
-    .clickable-card:hover {
-        text-decoration: none;
-        color: black;
-        box-shadow: $box-shadow-on-hover;
-    }
-
-
-    .search-author-info { 
-        margin-top: auto;
     }
 }
 

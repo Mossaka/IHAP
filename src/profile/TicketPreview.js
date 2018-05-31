@@ -15,6 +15,7 @@ class TicketPreview extends React.Component {
       ticketTitle: "Ticket Title!!",
       ticketDetails: "Ticket details... ",
       redirect: false,
+      image: null,
     }
     
     this.changeRoute = this.changeRoute.bind(this);
@@ -75,14 +76,15 @@ class TicketPreview extends React.Component {
       <div className='ticket-preview' onClick={this.changeRoute}>
         {/* <Link className="clickable-card" to={'/ticket/' + this.state.ticketID}></Link> */}
         <div className = "textbox">
-        <div className ="title">
-            <h5><b>{this.state.ticketTitle}</b></h5>
-        </div> 
-        <div className ="description">
-            <p>{this.state.ticketDetails}</p> 
+            <div className ="title">
+                <h5><b>{this.state.ticketTitle}</b></h5>
+            </div> 
+            <div className ="description">
+                <p>{this.state.ticketDetails}</p> 
+            </div>
         </div>
-        </div>
-    </div>
+        <img className="img-thumbnail" src={this.state.image} alt="ticket thumbnail" />
+       </div>
     );
   }
 }

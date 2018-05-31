@@ -182,7 +182,9 @@ export default class ProfilePage extends React.Component {
     return (
       <div>
         {Object.keys(userList).map((key,index) => 
-          <UserBar key={index} uid={userList[key]} />
+          <div className='container' key={index}>
+            <UserBar uid={userList[key]} />
+          </div>
         )}
       </div>
     )

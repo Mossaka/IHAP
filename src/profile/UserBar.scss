@@ -1,5 +1,34 @@
 @import "../_global";
 
-#avatar {
-    @extend %avatar;
+.user-preview {
+   
+        // max-width:80%;
+        // margin: auto;
+        border-style: solid;
+        border-color: lightgray;
+        border-width: 1px;
+        // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        // background: $story-preview-background-color;
+        // rgb(250, 254, 255);
+        // display: flex;
+        padding: 1rem;
+        overflow: auto;
+
+
+    .user-preview:hover{
+        box-shadow: $box-shadow-on-hover;
+    }
+    
+    .name{
+        text-align: left;
+    }
+    .biography{
+        text-align: left ;
+    }
+}
+
+.user-preview:hover {
+    box-shadow: $box-shadow-on-hover;
+    cursor: pointer;
 }
