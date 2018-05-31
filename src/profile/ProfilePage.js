@@ -11,6 +11,7 @@ import download from '../assets/download.jpg';
 import parse from '../assets/parse.jpg';
 import edit from '../assets/eidt.jpg';
 import TicketPreview from './TicketPreview';
+import FollowButton from './FollowButton'
 
 export default class ProfilePage extends React.Component {
   constructor(props, context) {
@@ -37,10 +38,13 @@ export default class ProfilePage extends React.Component {
       followingUsers: [],
       followedUsers: [],
       currentUser: false,
+      followClicked: false,
+      followButtonText: "Follow",
       uid: '',
     };
 
     this.toggleSetting = this.toggleSetting.bind(this)
+    // this.handleFollow = this.handleFollow.bind(this)
 
     const uid = this.props.match.params.id;
 
@@ -172,8 +176,14 @@ export default class ProfilePage extends React.Component {
           </Col>
           <Col>
             <div id="follow" className='float-right' style={{bottom:'0', float:'right'}}>
-              {this.state.currentUser ? <Button size='sm' style={{backgroundColor:'white', borderColor:'white'}} onClick={this.toggleSetting}><img src={edit} style={{width:'30px', height:'30px'}} alt="edit" /> </Button> : <div></div>}
-              {this.state.currentUser ? <div></div> : <Button color={"primary"} style={{float:'left'}} size="sm">Follow</Button>}
+              {/* {this.state.currentUser ? <Button size='sm' style={{backgroundColor:'white', borderColor:'white'}} onClick={this.toggleSetting}><img src={edit} style={{width:'30px', height:'30px'}} alt="edit" /> </Button> : <div></div>}
+              {this.state.currentUser ? 
+                <div></div> :  */}
+                <FollowButton isUserSelf = {this.state.currentUser}
+                              profileUserID = {this.props.match.params.id}
+                              toggleSetting = {this.toggleSetting}
+                />
+              {/* } */}
             </div>
           </Col>
         </Row>
@@ -214,11 +224,6 @@ export default class ProfilePage extends React.Component {
                         Bookmark
                       </NavLink>
                     </NavItem>
-                    <NavItem>
-                      <NavLink className={classnames({active:this.state.activeTab === '4'})} onClick={() => {this.toggle('4')}}>
-                        Following
-                      </NavLink>
-                    </NavItem>
                   </Nav>
                   <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId='1'>
@@ -229,9 +234,6 @@ export default class ProfilePage extends React.Component {
                     </TabPane>
                     <TabPane tabId='3'>
                       {this.generateTicketBarGivenTicketList(this.state.bookmarked)}
-                    </TabPane>
-                    <TabPane tabId='4'>
-                      {this.generateTicketBarGivenTicketList(this.state.following)}
                     </TabPane>
                   </TabContent>
                 </div>
