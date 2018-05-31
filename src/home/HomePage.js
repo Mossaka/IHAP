@@ -1,118 +1,84 @@
 import React from 'react';
 import StoryPreview from './StoryPreview';
-import { weightedSearch } from '../searchResults/SearchTicket'
-import './StoryPreview.css'
+import { weightedSearch } from '../searchResults/SearchTicket';
+import './HomePage.css';
+import { Container, Row, Col } from 'reactstrap';
 
-class HomePage extends React.Component {
+export default class HomePage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       topCards: [],
-      recommendedCards: [],
       recentCards: []
-    }
+    };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.generateTopCards(4);
-    this.generateRecommendedCards(8);
     this.generateRecentCards(12);
   }
 
-  generateCard(num, id) {
-    let cards = [];
-    for (let i = 0; i < num; i++) {
-      cards.push(
-        <div key={i} className="col-sm-6 col-md-4 col-lg-3">
-          <StoryPreview ticketID={id} />
-        </div>
-      );
-    }
-    return cards;
+  generateCard(id, idx) {
+    return (
+      <Col sm="6" md="4" lg="3" key={idx}>
+        <StoryPreview ticketID={id} />
+      </Col>
+    );
   }
 
   generateTopCards(num) {
-    var self = this;
-    weightedSearch("", num, {dateEdited: 2, rating:2, upvotes: 1}).then(function(ids) {
-
-      var cards = ids.map(function(id, index) {
-        return (<div key={index} className="col-sm-6 col-md-4 col-lg-3">
-                  <StoryPreview ticketID={id} />
-                </div>)
+    weightedSearch('', num, { dateEdited: 2, rating: 2, upvotes: 1 }).then(ids => {
+      let topCards = ids.map((id, index) => {
+        return this.generateCard(id, index);
       });
-
-      if (cards.length < num) {
-        cards.push.apply(cards, self.generateCard(num - cards.length, '1'));
-      }
-
-      self.setState({ topCards: cards});
-    })
+      this.setState({ topCards });
+    });
   }
 
-  generateRecommendedCards(num) {
-    var self = this;
-    // change to 0 0 0 1 3
-    weightedSearch("", num, {}).then(function(ids) {
+  // generateRecommendedCards(num) {
+  //   var self = this;
+  //   // change to 0 0 0 1 3
+  //   weightedSearch("", num, {}).then(function (ids) {
 
-      var cards = ids.map(function(id, index) {
-        return (<div key={index} className="col-sm-6 col-md-4 col-lg-3">
-                  <StoryPreview ticketID={id} />
-                </div>)
-      });
+  //     var cards = ids.map(function (id, index) {
+  //       return (<div key={index} className="col-sm-6 col-md-4 col-lg-3">
+  //         <StoryPreview ticketID={id} />
+  //       </div>)
+  //     });
 
-      if (cards.length < num) {
-        cards.push.apply(cards, self.generateCard(num - cards.length, '1'));
-      }
+  //     if (cards.length < num) {
+  //       cards.push.apply(cards, self.generateCard(num - cards.length, '1'));
+  //     }
 
-      self.setState({ recommendedCards: cards});
-    })
-  }
+  //     self.setState({ recommendedCards: cards });
+  //   })
+  // }
 
   generateRecentCards(num) {
-    var self = this;
-    weightedSearch("", num, {dateEdited: 1}).then(function(ids) {
-
-      var cards = ids.map(function(id, index) {
-        return ( 
-        <div key={index} className="col-sm-6 col-md-4 col-lg-3">
-          <StoryPreview ticketID={id} />
-        </div> )
+    weightedSearch('', num, { dateEdited: 1 }).then(ids => {
+      let recentCards = ids.map((id, index) => {
+        return this.generateCard(id, index);
       });
-
-      if (cards.length < num) {
-        cards.push.apply(cards, self.generateCard(num - cards.length, '1'));
-      }
-
-      self.setState({ recentCards: cards});
-    })
+      this.setState({ recentCards });
+    });
   }
 
   render() {
     return (
-      <div className='homepage-bg'>
-      <div className='container' >
-        <h2 className='my-5' style={{'textAlign': 'center'}}>Top Stories</h2>
+      <Container className="homepage">
+        <h2>Top Stories</h2>
         <hr />
-        <div className="row">
+        <Row>
           {this.state.topCards}
-        </div>
-        <h2 className='my-5' style={{'textAlign': 'center'}}>For you</h2>
-        <hr />
-        
-        <div className='row'>
-          {this.state.recommendedCards}
-        </div>
-        <h2 className="my-5" style={{'textAlign': 'center'}}>Recent Stories</h2>
-        <hr />
+        </Row>
 
-        <div className='row'>
+        <h2>Recent Stories</h2>
+        <hr />
+        <Row>
           {this.state.recentCards}
-        </div>
-      </div>
-      </div>
+        </Row>
+      </Container>
     );
   }
 }
-
-export default HomePage;

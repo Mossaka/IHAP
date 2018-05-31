@@ -30,12 +30,12 @@
         fill: white;
     }
 
-    g.disabled {
-        fill: darkgray;
-    }
-
     g.bookmarked {
         fill: $story-preview-bookmark-tag-fill-color;
         stroke-opacity:0;
+    }
+
+    g.disabled {
+        fill: darkgray;
     }
 }
