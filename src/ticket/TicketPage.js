@@ -6,24 +6,15 @@ import { Container, Row, Col, Button } from 'reactstrap';
 import EditTicket from './EditTicket';
 import EditSolution from './EditSolution';
 import './TicketPage.css';
-import firebase from 'firebase';
-
+import { GlobalContext } from '../common/context';
 
 export default class TicketPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       solutions: [],
-      loggedIn: false,
       newsol: false
     }
-
-    firebase.auth().onAuthStateChanged(u => {
-      if (u)
-        this.setState({ loggedIn: true });
-      else
-        this.setState({ loggedIn: false });
-    });
   }
 
   newSolution = () => {
@@ -51,15 +42,6 @@ export default class TicketPage extends React.Component {
       );
     }
 
-    let newSolBtn = null;
-    if (!this.state.newsol) {
-      if (this.state.loggedIn) {
-        newSolBtn = <Button onClick={this.newSolution}>Post New Solution</Button>;
-      } else {
-        newSolBtn = <h3>Sign In to Post</h3>;
-      }
-    }
-
     return (
       <Container className="ticket-page">
         <Row>
@@ -68,15 +50,22 @@ export default class TicketPage extends React.Component {
             <hr />
             <Ticket id={this.props.match.params.id} gotSolution={this.loadSolutions} />
             <div className="mt-5">
-              <RelateTicket id={this.props.match.params.id}/>
+              <RelateTicket id={this.props.match.params.id} />
             </div>
           </Col>
           <Col xs="6">
             <h3>Solutions</h3>
             <hr />
             {this.state.solutions.map(s => <Solution key={s} id={s} />)}
-            {this.state.newsol && <EditSolution cancel={this.newSolution} ticket={this.props.match.params.id}/>}
-            {newSolBtn}
+            {this.state.newsol && <EditSolution cancel={this.newSolution} ticket={this.props.match.params.id} />}
+            {!this.state.newsol && <GlobalContext.Consumer>
+              {user => {
+                if (user)
+                  return <Button onClick={this.newSolution}>Post New Solution</Button>;
+                else
+                  return <h3>Sign In to Post</h3>;
+              }}
+            </GlobalContext.Consumer>}
           </Col>
         </Row>
       </Container>
