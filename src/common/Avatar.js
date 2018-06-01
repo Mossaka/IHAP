@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import './Avatar.css';
 import anonymousAvatar from '../assets/anonymous-avatar.jpg';
 
-
 export default class Avatar extends React.Component {
   constructor(props) {
     super(props);
