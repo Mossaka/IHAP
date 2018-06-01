@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardBody, CardTitle, CardLink } from 'reactstrap';
-import { weightedSearch } from '../searchResults/SearchTicket';
+import { weightedSearch } from '../utils/search';
 import firebase from 'firebase';
 
 export default class RelatedTicket extends React.Component {

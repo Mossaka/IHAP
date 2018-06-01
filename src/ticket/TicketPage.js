@@ -6,7 +6,7 @@ import { Container, Row, Col, Button } from 'reactstrap';
 import EditTicket from './EditTicket';
 import EditSolution from './EditSolution';
 import './TicketPage.css';
-import { GlobalContext } from '../common/context';
+import { GlobalContext } from '../utils/context';
 
 export default class TicketPage extends React.Component {
   constructor(props) {

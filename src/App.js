@@ -6,7 +6,7 @@ import ProfilePage from './profile/ProfilePage';
 import TicketPage from './ticket/TicketPage';
 import SearchPage from './searchResults/SearchPage';
 import './App.css';
-import { GlobalContext } from './common/context';
+import { GlobalContext } from './utils/context';
 import firebase from 'firebase';
 
 export default class App extends React.Component {

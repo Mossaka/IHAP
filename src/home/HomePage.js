@@ -1,13 +1,12 @@
 import React from 'react';
 import StoryPreview from './StoryPreview';
-import { weightedSearch } from '../searchResults/SearchTicket';
+import { weightedSearch } from '../utils/search';
 import './HomePage.css';
 import { Container, Row, Col } from 'reactstrap';
 
 export default class HomePage extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       topCards: [],
       recentCards: []
@@ -19,19 +18,17 @@ export default class HomePage extends React.Component {
     this.generateRecentCards(12);
   }
 
-  generateCard(id, idx) {
+  generateCard(id) {
     return (
-      <Col sm="6" md="4" lg="3" key={idx}>
+      <Col sm="6" md="4" lg="3" key={id}>
         <StoryPreview ticketID={id} />
       </Col>
     );
   }
 
   generateTopCards(num) {
-    weightedSearch('', num, { dateEdited: 2, rating: 2, upvotes: 1 }).then(ids => {
-      let topCards = ids.map((id, index) => {
-        return this.generateCard(id, index);
-      });
+    weightedSearch('', num, { dateEdited: 2, rating: 2, upvotes: 1 }, ids => {
+      let topCards = ids.map(id => this.generateCard(id));
       this.setState({ topCards });
     });
   }
@@ -56,10 +53,8 @@ export default class HomePage extends React.Component {
   // }
 
   generateRecentCards(num) {
-    weightedSearch('', num, { dateEdited: 1 }).then(ids => {
-      let recentCards = ids.map((id, index) => {
-        return this.generateCard(id, index);
-      });
+    weightedSearch('', num, { dateEdited: 1 }, ids => {
+      let recentCards = ids.map(id => this.generateCard(id));
       this.setState({ recentCards });
     });
   }
