@@ -21,7 +21,7 @@ export default class HomePage extends React.Component {
   generateCard(id) {
     return (
       <Col sm="6" md="4" lg="3" key={id}>
-        <StoryPreview ticketID={id} />
+        <StoryPreview id={id} />
       </Col>
     );
   }

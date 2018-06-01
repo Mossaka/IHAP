@@ -10,3 +10,7 @@ export function getTickets(cb) {
     });
   }
 }
+
+export function getTicket(key, cb) {
+  getTickets(tickets => cb(tickets[key]));
+}

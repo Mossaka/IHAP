@@ -90,7 +90,7 @@ export default class Ticket extends React.Component {
             <Vote up={this.state.upvote} down={this.state.downvote} path={'tickets/' + this.props.id}  />
           </Col>
           <Col style={{'padding-right':'8%'}}>
-            <Bookmark ticketID={this.props.id}/>
+            <Bookmark id={this.props.id}/>
           </Col>
         </Row>
         {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} />}

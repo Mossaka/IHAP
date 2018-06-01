@@ -60,7 +60,7 @@ class SearchPreview extends React.Component {
             </Link>*/}
           </div>
           <div className = "sidebookmark">
-            <Bookmark ticketID={this.props.ticketID}/>
+            <Bookmark id={this.props.ticketID}/>
           </div>
         
         </div>

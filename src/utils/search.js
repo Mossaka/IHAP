@@ -70,7 +70,7 @@ function subsetRatio(keywords, content) {
   return intersection.length / keywords.length;
 }
 
-function stripHtml(html) {
+export function stripHtml(html) {
   var tempDiv = document.createElement("div");
   tempDiv.innerHTML = html;
   return tempDiv.textContent || tempDiv.innerText || "";
