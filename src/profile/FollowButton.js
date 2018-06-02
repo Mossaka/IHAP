@@ -60,6 +60,7 @@ export default class FollowButton extends React.Component {
 
   handleFollow(e) {
     e.preventDefault();
+    e.stopPropagation();
     const db = firebase.database();
     if(this.state.uid && this.state.text === 'Follow') {
       db.ref('networks/' + this.state.uid + '/followingUsers/').push(this.props.profileUserID, error => {
