@@ -17,7 +17,7 @@ export default class TicketPage extends React.Component {
     }
   }
 
-  newSolution = () => {
+  toggleEditor = () => {
     this.setState({ newsol: !this.state.newsol });
   }
 
@@ -57,14 +57,12 @@ export default class TicketPage extends React.Component {
             <h3>Solutions</h3>
             <hr />
             {this.state.solutions.map(s => <Solution key={s} id={s} />)}
-            {this.state.newsol && <EditSolution cancel={this.newSolution} ticket={this.props.match.params.id} />}
+            {this.state.newsol && <EditSolution cancel={this.toggleEditor} ticket={this.props.match.params.id} />}
             {!this.state.newsol && <GlobalContext.Consumer>
-              {user => {
-                if (user)
-                  return <Button onClick={this.newSolution}>Post New Solution</Button>;
-                else
-                  return <h3>Sign In to Post</h3>;
-              }}
+              {user => user ?
+                <Button onClick={this.toggleEditor}>Post New Solution</Button> :
+                <h3>Sign In to Post</h3>
+              }
             </GlobalContext.Consumer>}
           </Col>
         </Row>

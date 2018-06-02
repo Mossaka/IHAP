@@ -1,12 +1,12 @@
 import React from 'react';
-import { Row, Col, Card, CardBody, CardTitle, CardText, Button, CardImg } from 'reactstrap';
+import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
 import TimeDisplay from '../common/TimeDisplay';
 import Vote from './Vote';
 import Avatar from '../common/Avatar';
 import EditTicket from './EditTicket';
 import Bookmark from '../common/Bookmark';
 import { getTicket } from '../utils/store';
-import { GlobalContext } from '../utils/context';
+import EditButton from './EditButton';
 
 export default class Ticket extends React.Component {
   constructor(props) {
@@ -42,26 +42,15 @@ export default class Ticket extends React.Component {
         <CardBody>
           <CardTitle>{this.state.title}</CardTitle>
         </CardBody>
-        <CardImg src={this.state.image} alt="ticket thumbnail" />
+        <img width="100%" src={this.state.image} alt="ticket thumbnail" />
         <CardBody>
-          <CardText dangerouslySetInnerHTML={{ __html: this.state.content }}></CardText>
+          <CardText dangerouslySetInnerHTML={{ __html: this.state.content }} />
           Last Edit: <TimeDisplay time={this.state.dateEdited} />
+          <Vote up={this.state.upvote} down={this.state.downvote} path={'tickets/' + this.props.id} />
+          <Bookmark id={this.props.id} />
+          <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} />
+          <EditButton id={this.state.creator} onClick={this.toggleEditor} />
         </CardBody>
-        <Row>
-          <Col>
-            <Vote up={this.state.upvote} down={this.state.downvote} path={'tickets/' + this.props.id} />
-          </Col>
-          <Col>
-            <Bookmark id={this.props.id} />
-          </Col>
-        </Row>
-        {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} />}
-        <GlobalContext.Consumer>
-          {user => {
-            if (user && user.uid === this.state.creator)
-              return <Button onClick={this.toggleEditor}>Edit</Button>
-          }}
-        </GlobalContext.Consumer>
       </Card>
     );
   }
