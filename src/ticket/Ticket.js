@@ -60,7 +60,7 @@ export default class Ticket extends React.Component {
           Last Edit: <TimeDisplay time={this.state.dateEdited} />
           <Vote up={this.state.upvote} down={this.state.downvote} path={'tickets/' + this.props.id} />
           <Bookmark id={this.props.id} />
-          <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} />
+          <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} hor />
           <EditButton id={this.state.creator} onClick={this.toggleEditor} />
         </CardBody>
       </Card>

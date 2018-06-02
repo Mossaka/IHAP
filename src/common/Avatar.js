@@ -9,7 +9,8 @@ export default class Avatar extends React.Component {
     super(props);
     this.state = {
       avatar: anonymousAvatar,
-      username: 'Anonymous'
+      username: 'Anonymous',
+      link: '#'
     };
   }
   
@@ -17,27 +18,21 @@ export default class Avatar extends React.Component {
     if (this.props.isAnonymous) return;
     
     firebase.database().ref('profiles/' + this.props.id).once('value', snapshot => {
-      this.setState({ username: snapshot.val().username });
+      this.setState({ 
+        username: snapshot.val().username,
+        link: '/profile/' + this.props.id
+      });
       if (snapshot.val().avatar)
         this.setState({ avatar: snapshot.val().avatar });
     });
   }
 
   render() {
-    if (this.props.isAnonymous) {
-      return (
-        <div className="avatar">
-          <img src={this.state.avatar} alt="avatar" />
-          {this.state.username}
-        </div>
-      );
-    }
-
     return (
       <div className="avatar">
-        <Link to={'/profile/' + this.props.id} className='link'>
+        <Link to={this.state.link}>
           <img src={this.state.avatar} alt="avatar" />
-          {' ' + this.state.username.substring(0, 15)}
+          <p className={`${this.props.hor ? 'd-inline' : ''}`}>{' ' + this.state.username.substring(0, 15)}</p>
         </Link>
       </div>
     );

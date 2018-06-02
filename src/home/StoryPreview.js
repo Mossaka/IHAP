@@ -43,7 +43,7 @@ export default class StoryPreview extends React.Component {
           <CardText>{this.state.content}</CardText>
         </CardBody>
         <CardBody className="bottomLine">
-          {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} />}
+          {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} hor />}
           <Bookmark id={this.props.id} />
         </CardBody>
       </Card>
