@@ -45,7 +45,7 @@ export default class Bookmark extends React.Component {
       this.setState({ bookmarked: false });
     }
     else {
-      this.key = db.ref('notebooks/' + uid + '/bookmarked').push(this.props.ticketID).key;
+      this.key = db.ref('notebooks/' + uid + '/bookmarked').push(this.props.id).key;
       this.setState({ bookmarked: true });
     }
   }
