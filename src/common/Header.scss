@@ -1,61 +1,61 @@
-#nav {
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #6B7A8F;
+  padding: 7px 15px 7px 15px;
+  border-bottom: 2px solid lightgray;
 
+  img {
+    height: 80px;
+  }
+
+  .center {
     display: flex;
-    justify-content: space-between;
-    background-color: #6B7A8F;
-    padding-left: 15px; 
-    padding-right: 15px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    text-align: center;
-    border-bottom: 2px solid lightgray;
+    justify-content: center;
+    width: 60%;
 
-    .image {
-        height: 80px;
-    }
-    .clickable {
-        color:whitesmoke;
-        cursor: pointer;
-    }
-    .clickable:hover {
-        color: black;
-    }
-    .center {
+    .lever {
+      display: flex;
+      cursor: pointer;
+
+      img.true {
+        transform: rotate(180deg);
+      }
+
+      .label {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
+
+        div {
+          color:whitesmoke;
+        }
+
+        div:hover {
+          color: black;
+        }
+      }
     }
+
     .searchOrRandom {
-        width: 85%;
-        height: 80px;
-        display: flex;
-        align-items: center;
-    }
-    .searchInput {
+      display: flex;
+      flex-grow: 1;
+      justify-content: center;
+      align-items: center;
+
+      input {
         border: 2px solid steelblue;
-    }
-    .searchButton {
-        width: 100px;
+      }
+
+      .searchButton {
         background-color: steelblue;
         border: 2px solid steelblue;
-    }
-    .searchButton:hover {
+      }
+
+      .btn:hover {
         background-color:#2A6A90;
         border: 2px solid #2A6A90;
-    } 
-    
-    #lever {
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        height: 80px;
-        width: 90px;
-        color: white;
+      } 
     }
-    
-    #search {
-        position: absolute;
-        text-align: left;
-        bottom: 0;
-    }
-
+  }
 }

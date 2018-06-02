@@ -5,141 +5,102 @@ import lever from '../assets/lever.png';
 import User from './User';
 import './Header.css';
 import firebase from 'firebase';
-import { Button, Col, Input, InputGroup, InputGroupAddon } from 'reactstrap';
-import { MdSearch } from 'react-icons/lib/md'
+import { Button, Input, InputGroup, InputGroupAddon } from 'reactstrap';
+import { MdSearch } from 'react-icons/lib/md';
+import { getTickets } from '../utils/store';
 
 class Header extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       random: false,
-      rotation: 0,
-      keyword: ' ',
-      loggedIn: false,
-      showSignup: false, 
-      ticketIDs: [],
-      ticketDisplayed: '',
-      numTickets: 0
-    }
-    this.handleLeverClick = this.handleLeverClick.bind(this);
-    this.setRandom = this.setRandom.bind(this);
-    this.setSearch = this.setSearch.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-    this.search = this.search.bind(this);
-    this.loadRandomTicket = this.loadRandomTicket.bind(this);
+      keyword: '',
+    };
+  }
 
-    // Save load ticket keys from database. 
-    var tickets = firebase.database().ref('tickets'); 
-    tickets.once('value').then((snapshot) => {
-      var numTickets = snapshot.numChildren();
-      var ticketKeys = []; 
-      snapshot.forEach(((snapshot) => {
-        var key = snapshot.key;
-        ticketKeys.push(key);
-      }));
-      this.setState (
-        {
-          ticketIDs: ticketKeys, 
-          numTickets: numTickets
-        }
-      )
+  componentDidMount() {
+    getTickets(tickets => {
+      let ids = [];
+      let count = 0;
+      for (let t in tickets) {
+        ids.push(t);
+        count++;
+      }
+      this.ticketIDs = ids;
+      this.numTickets = count;
     });
   }
 
-  search() {
+  search = () => {
     this.props.history.push('/search/' + this.state.keyword);
   }
 
-  handleKeyPress(e) {
-    this.setState (
-      {
-        keyword: e.target.value,
-      }
-    );
-    if(e.key === 'Enter') {
+  handleKeyPress = e => {
+    this.setState({ keyword: e.target.value });
+    if (e.key === 'Enter') {
       this.search();
     }
   }
 
-  
-  handleLeverClick() {
-    if (this.state.random === true) {
-      this.setSearch();
-    } else {
-      this.setRandom();
+  setRandom = () => {
+    this.setState({ random: true });
+  }
+
+  setSearch = () => {
+    this.setState({ random: false });
+  }
+
+  toggleRandom = () => {
+    this.setState({ random: !this.state.random });
+  }
+
+  loadRandomTicket = () => {
+    if (!this.ticketIDs) return;
+
+    let ticketKey = this.ticketIDs[Math.floor(Math.random() * this.numTickets)];
+    if (ticketKey !== this.ticketDisplayed) {
+      this.ticketDisplayed = ticketKey;
+      this.props.history.push('/ticket/' + ticketKey);
     }
   }
 
-  setRandom() {
-    this.setState(
-      {
-        random: true,
-        rotation: 180,
-      }
-    );
-  }
-
-  setSearch() {
-    this.setState(
-      {
-        random: false,
-        rotation: 0,
-      }
-    );
-  }
-
-  loadRandomTicket() {
-    var ticketKey = this.state.ticketIDs[Math.floor(Math.random() * this.state.numTickets)];
-    if(ticketKey !== this.state.ticketDisplayed) {
-      // console.log(ticketKey);
-      this.props.history.push('/ticket/' + ticketKey);
-      this.setState (
-        {
-          ticketDisplayed: ticketKey
-        }
-      )
-    }    
-  }
-
-
   render() {
-    const searchOrButton = this.state.random ? (
-      <div className="searchOrRandom">
-        <Button className="randomButton" color="steelblue" onClick={this.loadRandomTicket} block >GET RANDOM TICKET</Button>
-      </div>
-    ) : (
-      <InputGroup className="searchOrRandom">
-        <Input className="searchInput" type="search" name="search" placeholder="Search" onKeyUp={this.handleKeyPress}/>
-        <InputGroupAddon addonType="append">
-          <Button className="searchButton" onClick={this.search}><MdSearch width='25px' height='25px' />Search</Button>
-        </InputGroupAddon>
-      </InputGroup>
-    ); 
+    let searchOrButton = null;
+    if (this.state.random) {
+      searchOrButton = (
+        <div className="searchOrRandom">
+          <Button color="steelblue" onClick={this.loadRandomTicket}>GET RANDOM TICKET</Button>
+        </div>
+      );
+    }
+    else {
+      searchOrButton = (
+        <InputGroup className="searchOrRandom">
+          <Input placeholder="Search" onKeyUp={this.handleKeyPress} />
+          <InputGroupAddon addonType="append">
+            <Button className="searchButton" onClick={this.search}><MdSearch width="25px" height="25px" />Search</Button>
+          </InputGroupAddon>
+        </InputGroup>
+      );
+    }
 
     return (
-      <nav id='nav'>
-        <Col className="logo" xs="3">
-          <Link to="/"><img src={logo} className="image" alt="IHAP Logo" /></Link>
-        </Col>
-
-        <Col className="center" xs="6">
+      <nav className="navbar">
+        <Link to="/"><img src={logo} alt="IHAP Logo" /></Link>
+        <div className="center">
           {searchOrButton}
-          <div id="lever">
-            <div>
-              <img src={lever} alt="Lever" className="image clickable" style={{ transform: `rotate(${this.state.rotation}deg)` }} onClick={this.handleLeverClick} />
-            </div>
-            <div>
-              <div className="clickable" id="random" onClick={this.setRandom}>Random</div>
-              <div className="clickable" id="search" onClick={this.setSearch}>Search</div>
+          <div className="lever">
+            <img src={lever} alt="Lever" className={'clickable ' + this.state.random} onClick={this.toggleRandom} />
+            <div className="label">
+              <div onClick={this.setRandom}>Random</div>
+              <div onClick={this.setSearch}>Search</div>
             </div>
           </div>
-        </Col>
-
-        <Col xs="3">
-          <User/>
-        </Col>
+        </div>
+        <User />
       </nav>
     );
   }
 }
+
 export default withRouter(Header);

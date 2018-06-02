@@ -5,22 +5,22 @@
   height: 25px;
   
   g:hover {
-      fill: $story-preview-bookmark-tag-fill-color;
-      opacity: 0.5;
-      cursor: pointer;
+    fill: $story-preview-bookmark-tag-fill-color;
+    opacity: 0.5;
+    cursor: pointer;
   }
 
   g {
-      stroke: gray;
-      fill: white;
+    stroke: gray;
+    fill: white;
   }
 
   g.bookmarked {
-      fill: $story-preview-bookmark-tag-fill-color;
-      stroke-opacity:0;
+    fill: $story-preview-bookmark-tag-fill-color;
+    stroke-opacity:0;
   }
 
   g.disabled {
-      fill: darkgray;
+    fill: darkgray;
   }
 }
