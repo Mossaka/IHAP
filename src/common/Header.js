@@ -4,7 +4,6 @@ import logo from '../assets/logo.png';
 import lever from '../assets/lever.png';
 import User from './User';
 import './Header.css';
-import firebase from 'firebase';
 import { Button, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 import { MdSearch } from 'react-icons/lib/md';
 import { getTickets } from '../utils/store';
