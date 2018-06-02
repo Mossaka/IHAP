@@ -5,17 +5,11 @@ import './SearchPreview.css'
 export default class FilterButton extends React.Component {
   constructor(props) {
     super(props);
-
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      dropdownOpen: false
-    };
+    this.state = { dropdownOpen: false };
   }
 
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
+  toggle = () => {
+    this.setState({ dropdownOpen: !this.state.dropdownOpen });
   }
 
   render() {
