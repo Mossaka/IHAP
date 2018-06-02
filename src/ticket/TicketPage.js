@@ -14,7 +14,7 @@ export default class TicketPage extends React.Component {
     this.state = {
       solutions: [],
       newsol: false
-    }
+    };
   }
 
   toggleEditor = () => {

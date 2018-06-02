@@ -17,11 +17,23 @@ export default class Ticket extends React.Component {
     };
   }
 
-  componentDidMount() {
+  refresh() {
     getTicket(this.props.id, t => {
       this.setState({ ...t, loaded: true });
       this.props.gotSolution(t.solutions);
     });
+  }
+
+  componentDidMount() {
+    this.refresh();
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.id !== this.props.id) {
+      this.refresh();
+      return false;
+    }
+    return true;
   }
 
   toggleEditor = () => {

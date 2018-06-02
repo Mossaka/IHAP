@@ -1,9 +1,8 @@
 import React from 'react';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import { weightedSearch } from '../utils/search';
-import firebase from 'firebase';
 import { stripHtml } from '../utils/search';
-import { getTicket } from '../utils/store';
+import { getTicket, getTickets } from '../utils/store';
 import { Link } from 'react-router-dom';
 
 export default class RelatedTicket extends React.Component {
@@ -15,6 +14,18 @@ export default class RelatedTicket extends React.Component {
   }
 
   componentDidMount() {
+    this.refresh();
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.id !== this.props.id) {
+      this.refresh();
+      return false;
+    }
+    return true;
+  }
+
+  refresh() {
     getTicket(this.props.id, t => {
       let title = t.title.toLowerCase();
       let content = stripHtml(t.content).toLowerCase();
@@ -24,11 +35,13 @@ export default class RelatedTicket extends React.Component {
       }
 
       weightedSearch(keyword, 4, { title: 3, content: 1 }, ids => {
-        for (let id of ids) {
-          getTicket(id, t => {
-            this.setState({ related: [...this.state.related, { id, title: t.title }] });
-          });
-        }
+        getTickets(tickets => {
+          let related = [];
+          for (let id of ids) {
+            related.push({ id, title: tickets[id].title });
+          }
+          this.setState({ related });
+        });
       });
     });
   }
@@ -50,7 +63,7 @@ export default class RelatedTicket extends React.Component {
           <CardTitle>Related Tickets</CardTitle>
         </CardBody>
         <CardBody>
-          {this.state.related.map(t => <Link to={'/ticket/' + t.id}>{t.title}</Link>)}
+          {this.state.related.map(t => <Link key={t.id} to={'/ticket/' + t.id}>{t.title}</Link>)}
         </CardBody>
       </Card>
     );
