@@ -24,14 +24,16 @@ export default class Vote extends React.Component {
   }
 
   handleSignIn = () => {
+
     if (!this.state.loggedIn)
       alert('please sign in to vote');
     return this.state.loggedIn;
   }
 
   handleUpVote = () => {
+    console.log("adfs");
     if (!this.handleSignIn()) return;
-
+    console.log("upvoted cliked");
     let userId = firebase.auth().currentUser.uid;
     let url = 'notebooks/' + userId + '/' + this.state.mood;
     firebase.database().ref(url).once('value')
@@ -48,7 +50,7 @@ export default class Vote extends React.Component {
           this.setState({
             up: newVote,
           });
-          alert("upvoted");
+          console.log("votedSolution is not created in firebaes");
         } else {
           let res = t.val();
           let flag = false;
@@ -57,6 +59,7 @@ export default class Vote extends React.Component {
               if (res[key].voted === true) {
                 flag = true;
                 alert("cannot upvote twice");
+                break;
               } else {
                 let newUpVote = this.state.up + 1;
                 let newDownVote = this.state.down - 1;
@@ -64,8 +67,10 @@ export default class Vote extends React.Component {
                   .update({ upvote: newUpVote });
                 firebase.database().ref(this.props.path)
                   .update({ downvote: newDownVote });
+                console.log("changing downvote to upvote");
+                url = url + '/'+key + '/voted'
+                console.log("the url adding to is :" + url );
                 firebase.database().ref(url).set(true);
-
                 this.setState({
                   up: newUpVote,
                   down: newDownVote,
@@ -83,6 +88,7 @@ export default class Vote extends React.Component {
             firebase.database().ref('notebooks/' + userId + '/' + this.state.mood).push(newData);
             firebase.database().ref(this.props.path)
               .update({ upvote: newVote });
+            console.log("have not seem this before, add to firebase")
             this.setState({
               up: newVote,
             });
@@ -126,7 +132,7 @@ export default class Vote extends React.Component {
 
   handleDownVote = () => {
     if (!this.handleSignIn()) return;
-
+    console.log("downvoted cliked");
     let userId = firebase.auth().currentUser.uid;
     let url = 'notebooks/' + userId + '/' + this.state.mood;
     firebase.database().ref(url).once('value')
@@ -136,6 +142,7 @@ export default class Vote extends React.Component {
             ticketID: this.state.ticketid,
             voted: false
           };
+          console.log("creating voted problem in firebase");
           firebase.database().ref('notebooks/' + userId + '/' + this.state.mood).push(newData);
           let newVote = this.state.down + 1;
           firebase.database().ref(this.props.path)
@@ -158,6 +165,8 @@ export default class Vote extends React.Component {
                   .update({ upvote: newUpVote });
                 firebase.database().ref(this.props.path)
                   .update({ downvote: newDownVote });
+                url = url + '/' + key + '/voted'
+                console.log("the url adding to is :" + url );
                 firebase.database().ref(url).set(false);
                 this.setState({
                   up: newUpVote,
@@ -173,6 +182,7 @@ export default class Vote extends React.Component {
               ticketID: this.state.ticketid,
               voted: false
             };
+            console.log("ticket not voted before");
             firebase.database().ref('notebooks/' + userId + '/' + this.state.mood).push(newData);
             firebase.database().ref(this.props.path)
               .update({ downvote: newVote });
