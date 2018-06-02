@@ -17,20 +17,20 @@ export default class Ticket extends React.Component {
     };
   }
 
-  refresh() {
-    getTicket(this.props.id, t => {
+  refresh(id) {
+    getTicket(id, t => {
       this.setState({ ...t, loaded: true });
       this.props.gotSolution(t.solutions);
     });
   }
 
   componentDidMount() {
-    this.refresh();
+    this.refresh(this.props.id);
   }
 
   shouldComponentUpdate(nextProps) {
     if (nextProps.id !== this.props.id) {
-      this.refresh();
+      this.refresh(nextProps.id);
       return false;
     }
     return true;
