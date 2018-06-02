@@ -12,22 +12,15 @@ export default class Vote extends React.Component {
     this.state = {
       up: Number(this.props.up),
       down: Number(this.props.down),
-      loggedIn: false,
       mood: (l[0] === 'solutions') ? 'votedSolution' : 'votedProblem',
       ticketid: l[1]
     }
-
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) this.setState({ loggedIn: true });
-      else this.setState({ loggedIn: false });
-    });
   }
 
   handleSignIn = () => {
-
-    if (!this.state.loggedIn)
+    if (!firebase.auth().currentUser)
       alert('please sign in to vote');
-    return this.state.loggedIn;
+    return firebase.auth().currentUser;
   }
 
   handleUpVote = () => {

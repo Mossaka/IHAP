@@ -23,12 +23,14 @@ export default class User extends React.Component {
       uid: '',
       defaultAvatar
     };
+    this.unsub = [];
   }
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
+    let un = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        firebase.database().ref('profiles/' + user.uid).on('value', snapshot => {
+        let ref = firebase.database().ref('profiles/' + user.uid);
+        let cb = ref.on('value', snapshot => {
           snapshot = snapshot.val();
           let avatar = snapshot.avatar ? snapshot.avatar : defaultAvatar;
           this.setState({
@@ -37,6 +39,7 @@ export default class User extends React.Component {
             avatar
           });
         });
+        this.unsub.push(() => ref.off(cb));
         this.setState({
           mode: null,
           loggedIn: true
@@ -47,6 +50,13 @@ export default class User extends React.Component {
         });
       }
     });
+    this.unsub.push(un);
+  }
+
+  componentWillUnmount() {
+    for (let fn of this.unsub) {
+      fn();
+    }
   }
 
   handleLogout = () => {
