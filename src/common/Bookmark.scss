@@ -1,41 +1,26 @@
 @import '../_global';
 
 .bookmark {
-    position: relative;
-    float: right;
-    width: 25px;
-    height: 25px;
-    
+  width: 25px;
+  height: 25px;
+  
+  g:hover {
+    fill: $story-preview-bookmark-tag-fill-color;
+    opacity: 0.5;
+    cursor: pointer;
+  }
 
-    // polygon:hover {
-    //     fill: $story-preview-bookmark-tag-fill-color;
-    //     opacity: 1;
-    //     cursor: pointer;
-    // }
+  g {
+    stroke: gray;
+    fill: white;
+  }
 
-    // polygon {
-    //     fill: $story-preview-bookmark-tag-fill-color;
-    //     opacity: 0.75;
+  g.bookmarked {
+    fill: $story-preview-bookmark-tag-fill-color;
+    stroke-opacity:0;
+  }
 
-    // }
-
-    g:hover {
-        fill: $story-preview-bookmark-tag-fill-color;
-        opacity: 0.5;
-        cursor: pointer;
-    }
-
-    g {
-        stroke: gray;
-        fill: white;
-    }
-
-    g.bookmarked {
-        fill: $story-preview-bookmark-tag-fill-color;
-        stroke-opacity:0;
-    }
-
-    g.disabled {
-        fill: darkgray;
-    }
+  g.disabled {
+    fill: darkgray;
+  }
 }

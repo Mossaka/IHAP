@@ -1,79 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import greycard from '../assets/greycard.jpg';
-import firebase from 'firebase';
-// import bookmark from '../assets/bookmark.png'
 import './StoryPreview.css';
 import Bookmark from '../common/Bookmark';
 import Avatar from '../common/Avatar';
+import { stripHtml } from '../utils/search';
+import { getTicket } from '../utils/store';
+import { Card, CardBody, CardTitle, CardImg, CardText } from 'reactstrap';
 
-function stripHtml (html){
-  var tempDiv = document.createElement("div");
-  tempDiv.innerHTML = html;
-  return tempDiv.textContent || tempDiv.innerText || "";
-}
-
-class StoryPreview extends React.Component {
+export default class StoryPreview extends React.Component {
   constructor(props) {
-    super(props)
-
-    // Initialize states for this Story Preview component
+    super(props);
     this.state = {
       image: greycard,
-      title: "Ticket Title!!",
-      content: "Ticket details... ",
+      title: 'Ticket Title!!',
+      content: 'Ticket details... ',
       anonymous: true,
       creator: ''
     }
+  }
 
-    // Get the ticket from database
-    var ticket = firebase.database().ref('tickets/' + this.props.ticketID);
-    // Once we get the ticket snapshot,
-    ticket.once('value').then((snapshot) => {
-      // If the problem field exists, bind a value change listener to the problem object in database
-      if (snapshot.exists()) {
-        this.setState({
-          image: snapshot.val().image,
-          title: snapshot.val().title.substring(0, 30),
-          content: (stripHtml(snapshot.val().content).length < 100) ? (stripHtml(snapshot.val().content)) : (stripHtml(snapshot.val().content).substr(0,97) + '...'),
-          anonymous: snapshot.val().anonymous,
-          creator: snapshot.val().creator
-        });
-      }
+  componentDidMount() {
+    getTicket(this.props.id, t => {
+      let plaintext = stripHtml(t.content);
+      this.setState({
+        image: t.image,
+        title: t.title.substring(0, 30),
+        content: plaintext.length < 100 ? plaintext : plaintext.substr(0, 97) + '...',
+        anonymous: t.anonymous,
+        creator: t.creator
+      });
     });
   }
 
   render() {
-
     return (
-      <div className="story-preview">
-        <div className="card" style={{ height: '400px' }}>
-          <Link className="clickable-card" to={'/ticket/' + this.props.ticketID}></Link>
-          <img className="card-img-top img-fluid card-img" src={this.state.image} alt="ticket thumbnail" />
-          {/* there will be problem here if image is not fixed size. I set the card-img-overlay to a fixed size */}
-          {/*<div className="card-img-overlay" style={{ height: '100px' }}>
-            
-          </div>
-          */}
-        
-          <div className="card-body pb-1 pl-1 pr-1">
-            <h6 className="card-title">
-              {this.state.title.substring(0,30)}
-            </h6>
-            <p className="card-text" style={{ fontSize: '14px' }}>{this.state.content.substring(0,100)}</p>
-          </div>
-          <div className='bottomLine'>
-            <div className="avatar">
-              {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} />}
-            </div>
-            <div className="bookmark">
-              <Bookmark ticketID={this.props.ticketID} />
-            </div>
-          </div>
-        </div>
-      </div>
+      <Card className="story-preview">
+        <Link className="clickable-card" to={'/ticket/' + this.props.id} />
+        <CardImg top src={this.state.image} alt="ticket thumbnail" />
+        <CardBody className="body">
+          <CardTitle>{this.state.title}</CardTitle>
+          <CardText>{this.state.content}</CardText>
+        </CardBody>
+        <CardBody className="bottomLine">
+          {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} hor />}
+          <Bookmark id={this.props.id} />
+        </CardBody>
+      </Card>
     );
   }
 }
-
-export default StoryPreview

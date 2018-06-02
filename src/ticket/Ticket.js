@@ -1,78 +1,52 @@
 import React from 'react';
-import firebase from 'firebase';
-import { Row, Col,Card, CardBody, CardTitle, CardText, Button } from 'reactstrap';
+import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
 import TimeDisplay from '../common/TimeDisplay';
 import Vote from './Vote';
 import Avatar from '../common/Avatar';
 import EditTicket from './EditTicket';
 import Bookmark from '../common/Bookmark';
+import { getTicket } from '../utils/store';
+import EditButton from './EditButton';
 
 export default class Ticket extends React.Component {
   constructor(props) {
     super(props);
-    //this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
+    this.state = {
+      edit: false,
+      loaded: false
+    };
+  }
 
-    firebase.database().ref('tickets/' + this.props.id).once('value').then(t => {
-      this.setState({ ...t.val() });
-      this.props.gotSolution(t.val().solutions);
-
-      firebase.auth().onAuthStateChanged(user => {
-        if (user && user.uid === t.val().creator)
-          this.setState({ editable: true });
-        else
-          this.setState({ editable: false });
-      });
-      //this.setState({prevID: this.props.id});
-      //console.log("ticet page, ticket information fetch from the firebase: " + this.state.upvote);
-      //console.log("ticet page, ticket information fetch from the firebase: " + this.state.downvote);
-
+  refresh() {
+    getTicket(this.props.id, t => {
+      this.setState({ ...t, loaded: true });
+      this.props.gotSolution(t.solutions);
     });
   }
 
-  // componentWillReceiveProps(newProps) {
-  //   if(this.state.prevID !== newProps.id) {
-  //     this.setState({
-  //       prevID: newProps.id
-  //     });
-  //     firebase.database().ref('tickets/' + newProps.id).once('value').then(t => {
+  componentDidMount() {
+    this.refresh();
+  }
 
-  //       this.setState({ ...t.val() });
-  //       this.props.gotSolution(t.val().solutions);
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.id !== this.props.id) {
+      this.refresh();
+      return false;
+    }
+    return true;
+  }
 
-  //       firebase.auth().onAuthStateChanged(user => {
-  //         if (user && user.uid === t.val().creator)
-  //           this.setState({ editable: true });
-  //         else
-  //           this.setState({ editable: false });
-  //       });
-  //     });
-  //   }
-
-  // }
-
-  edit = () => {
+  toggleEditor = () => {
     this.setState({ edit: !this.state.edit });
   }
 
   render() {
-    if (!this.state) {
-      return (
-        <h1>Loading...</h1>
-      );
+    if (!this.state.loaded) {
+      return <h1>Loading...</h1>;
     }
 
     if (this.state.edit) {
-
-      let preload = {
-        title: this.state.title,
-        content: this.state.content,
-        image: this.state.image,
-        anonymous: this.state.anonymous
-      };
-
-      return (
-        <EditTicket cancel={this.edit} preload={preload} id={this.props.id}/>
-      );
+      return <EditTicket cancel={this.toggleEditor} preload={this.state} id={this.props.id} />;
     }
 
     return (
@@ -82,19 +56,13 @@ export default class Ticket extends React.Component {
         </CardBody>
         <img width="100%" src={this.state.image} alt="ticket thumbnail" />
         <CardBody>
-          <CardText dangerouslySetInnerHTML={{ __html: this.state.content }}></CardText>
+          <CardText dangerouslySetInnerHTML={{ __html: this.state.content }} />
           Last Edit: <TimeDisplay time={this.state.dateEdited} />
+          <Vote up={this.state.upvote} down={this.state.downvote} path={'tickets/' + this.props.id} />
+          <Bookmark id={this.props.id} />
+          <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} hor />
+          <EditButton id={this.state.creator} onClick={this.toggleEditor} />
         </CardBody>
-        <Row>
-          <Col style={{'padding-left':'5%'}}>
-            <Vote up={this.state.upvote} down={this.state.downvote} path={'tickets/' + this.props.id}  />
-          </Col>
-          <Col style={{'padding-right':'8%'}}>
-            <Bookmark ticketID={this.props.id}/>
-          </Col>
-        </Row>
-        {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} />}
-        {this.state.editable && <Button onClick={this.edit}>Edit</Button>}
       </Card>
     );
   }

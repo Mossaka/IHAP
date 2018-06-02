@@ -5,19 +5,20 @@ import './Bookmark.css';
 export default class Bookmark extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       disabled: true,
       bookmarked: false
     };
+  }
 
+  componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({ disabled: false });
         firebase.database()
           .ref('notebooks/' + user.uid + '/bookmarked')
           .orderByValue()
-          .equalTo(props.ticketID).once('value', ss => {
+          .equalTo(this.props.id).once('value', ss => {
             if (ss.val()) {
               for (let key in ss.val()) {
                 this.key = key;
@@ -40,7 +41,6 @@ export default class Bookmark extends React.Component {
     let uid = firebase.auth().currentUser.uid;
     let db = firebase.database();
     if (this.state.bookmarked) {
-    //   console.log(this.key)
       db.ref('notebooks/' + uid + '/bookmarked/' + this.key).remove();
       this.setState({ bookmarked: false });
     }

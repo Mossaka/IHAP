@@ -1,59 +1,49 @@
 import React from 'react';
 import firebase from 'firebase';
-import { Card, CardBody, CardText, Button } from 'reactstrap';
+import { Card, CardBody, CardText } from 'reactstrap';
 import TimeDisplay from '../common/TimeDisplay';
 import Vote from './Vote';
 import Avatar from '../common/Avatar';
 import EditSolution from './EditSolution';
+import EditButton from './EditButton';
 
 export default class Solution extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      edit: false,
+      loaded: false
+    };
+  }
 
-    firebase.database().ref('solutions/' + this.props.id).once('value').then(s => {
-      this.setState({ ...s.val() });
-
-      firebase.auth().onAuthStateChanged(user => {
-        if (user && user.uid === s.val().creator)
-          this.setState({ editable: true });
-        else
-          this.setState({ editable: false });
-      });
+  componentDidMount() {
+    firebase.database().ref('solutions/' + this.props.id).once('value', s => {
+      this.setState({ ...s.val(), loaded: true });
     });
   }
 
-  edit = () => {
+  toggleEditor = () => {
     this.setState({ edit: !this.state.edit });
   }
 
   render() {
-    if (!this.state) {
-      return (
-        <h1>Loading...</h1>
-      );
+    if (!this.state.loaded) {
+      return <h1>Loading...</h1>;
     }
 
     if (this.state.edit) {
-      let preload = {
-        content: this.state.content,
-      };
-
-      return (
-        <EditSolution cancel={this.edit} preload={preload} id={this.props.id}/>
-      );
+      return <EditSolution cancel={this.toggleEditor} preload={this.state} id={this.props.id} />;
     }
 
     return (
       <Card>
         <CardBody>
-          <CardText dangerouslySetInnerHTML={{ __html: this.state.content }}></CardText>
+          <CardText dangerouslySetInnerHTML={{ __html: this.state.content }} />
           Last Edit: <TimeDisplay time={this.state.dateEdited} />
         </CardBody>
-        <div className='pl-3'>
-        <Vote up={this.state.upvote} down={this.state.downvote} path={'solutions/' + this.props.id}/>
-        </div>
-        <Avatar id={this.state.creator} isAnonymous={false} />
-        {this.state.editable && <Button onClick={this.edit}>Edit</Button>}
+        <Vote up={this.state.upvote} down={this.state.downvote} path={'solutions/' + this.props.id} />
+        <Avatar id={this.state.creator} isAnonymous={false} hor />
+        <EditButton id={this.state.creator} onClick={this.toggleEditor} />
       </Card>
     );
   }

@@ -3,7 +3,6 @@ import { Button, Alert } from 'reactstrap';
 import firebase from 'firebase';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { EDITOR_TOOLBAR } from './config';
 
 export default class EditSolution extends React.Component {
   constructor(props) {
@@ -56,7 +55,7 @@ export default class EditSolution extends React.Component {
   render() {
     return (
       <div>
-        <ReactQuill value={this.state.content} modules={EDITOR_TOOLBAR} onChange={this.handleChange} />
+        <ReactQuill value={this.state.content} onChange={this.handleChange} />
         {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
         <Button onClick={this.handleSubmit}>Submit</Button>
         <Button onClick={this.props.cancel}>Cancel</Button>
