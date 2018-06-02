@@ -4,7 +4,7 @@ import Header from './common/Header';
 import HomePage from './home/HomePage';
 import ProfilePage from './profile/ProfilePage';
 import TicketPage from './ticket/TicketPage';
-import SearchPage from './searchResults/SearchPage';
+import SearchPage from './search/SearchPage';
 import './App.css';
 import { GlobalContext } from './utils/context';
 import firebase from 'firebase';

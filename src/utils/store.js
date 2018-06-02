@@ -2,20 +2,28 @@ import firebase from 'firebase';
 
 let tickets = null;
 export function getTickets(cb) {
-  if (tickets) cb(tickets);
+  if (tickets) {
+    cb(tickets);
+  }
   else {
-    firebase.database().ref('tickets').once('value', snapshot => {
-      tickets = snapshot.val();
-      cb(tickets);
-    });
+    let id = setInterval(() => {
+      if (tickets) {
+        clearInterval(id);
+        cb(tickets);
+      }
+    }, 100);
   }
 }
 
 export function getTicket(key, cb) {
-  if (tickets && tickets[key]) cb(tickets[key]);
-  else {
-    firebase.database().ref('tickets/' + key).once('value', snapshot => {
-      cb(snapshot.val());
-    });
-  }
+  getTickets(tickets => {
+    cb(tickets[key]);
+  });
+}
+
+export function loadTickets() {
+  firebase.database().ref('tickets').on('value', snapshot => {
+    tickets = snapshot.val();
+    console.log('tickets loaded')
+  });
 }
