@@ -12,7 +12,7 @@ export default class Bookmark extends React.Component {
   }
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
+    this.unsub = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({ disabled: false });
         firebase.database()
@@ -32,6 +32,10 @@ export default class Bookmark extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    this.unsub();
+  }
+
   bookmark = e => {
     if (this.state.disabled) {
       alert('Please sign in to bookmark this ticket');
@@ -45,7 +49,7 @@ export default class Bookmark extends React.Component {
       this.setState({ bookmarked: false });
     }
     else {
-      this.key = db.ref('notebooks/' + uid + '/bookmarked').push(this.props.ticketID).key;
+      this.key = db.ref('notebooks/' + uid + '/bookmarked').push(this.props.id).key;
       this.setState({ bookmarked: true });
     }
   }

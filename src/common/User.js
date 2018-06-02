@@ -1,11 +1,11 @@
 import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Dropdown, DropdownToggle, DropdownItem, DropdownMenu, InputGroup, InputGroupAddon } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, DropdownToggle, DropdownItem, DropdownMenu, InputGroup, InputGroupAddon, ButtonDropdown } from 'reactstrap';
 import './User.css';
 import Signup from './Signup';
 import Signin from './Signin';
 import firebase from 'firebase';
-import avatar from '../assets/img_avatar.png';
-import {Link} from 'react-router-dom';
+import defaultAvatar from '../assets/anonymous-avatar.jpg';
+import { Link } from 'react-router-dom';
 
 const STR = {
   in: 'Sign In',
@@ -21,17 +21,25 @@ export default class User extends React.Component {
       mode: null,
       dropdown: false,
       uid: '',
-      avatar: avatar
+      defaultAvatar
     };
+    this.unsub = [];
+  }
 
-    firebase.auth().onAuthStateChanged(user => {
+  componentDidMount() {
+    let un = firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        firebase.database().ref('profiles/' + user.uid).once('value')
-          .then(snapshot => {
-            this.setState({ name: snapshot.child('username').val(), 
-                            uid: user.uid,
-                            avatar: snapshot.child('avatar').val()  });
+        let ref = firebase.database().ref('profiles/' + user.uid);
+        let cb = ref.on('value', snapshot => {
+          snapshot = snapshot.val();
+          let avatar = snapshot.avatar ? snapshot.avatar : defaultAvatar;
+          this.setState({
+            name: snapshot.username,
+            uid: user.uid,
+            avatar
           });
+        });
+        this.unsub.push(() => ref.off(cb));
         this.setState({
           mode: null,
           loggedIn: true
@@ -42,6 +50,13 @@ export default class User extends React.Component {
         });
       }
     });
+    this.unsub.push(un);
+  }
+
+  componentWillUnmount() {
+    for (let fn of this.unsub) {
+      fn();
+    }
   }
 
   handleLogout = () => {
@@ -63,41 +78,44 @@ export default class User extends React.Component {
     if (this.state.loggedIn) {
       return (
         <div className="user">
-          <div id="avatar" style={{backgroundImage: `URL(${this.state.avatar})`}}></div>
-          <Dropdown isOpen={this.state.dropdown} toggle={this.toggleDropdown}>
-            <DropdownToggle>{this.state.name}</DropdownToggle>
+          <Link to={'/profile/' + this.state.uid}><img src={this.state.avatar} alt="avatar" /></Link>
+          <ButtonDropdown isOpen={this.state.dropdown} toggle={this.toggleDropdown}>
+            <Button className="userbutton" id="caret">
+              <Link to={'/profile/' + this.state.uid}>
+                {this.state.name}
+              </Link>
+            </Button>
+            <DropdownToggle className="userbutton" caret />
             <DropdownMenu>
-              <DropdownItem><Link to={'/profile/' + this.state.uid}>Profile</Link></DropdownItem>
-              <DropdownItem onClick={this.handleLogout}>Logout</DropdownItem>
+              <DropdownItem onClick={this.handleLogout}>Log Out</DropdownItem>
             </DropdownMenu>
-          </Dropdown>
-        </div>
+          </ButtonDropdown>
+        </div >
       );
     }
-    else {
-      return (
-        <div className="user">
-          <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <Button className="buttons" color="#FFCD00" onClick={() => this.setState({ mode: 'in' })}>
-                <span>Sign In</span>
-              </Button>
-            </InputGroupAddon>
-            <InputGroupAddon addonType="append">
-              <Button className="buttons" color="#FFCD00" onClick={() => this.setState({ mode: 'up' })}>
-                <span>Sign Up</span>
-              </Button>
-            </InputGroupAddon>
-          </InputGroup>
-          <Modal isOpen={this.state.mode !== null} toggle={this.closeModal}>
-            <ModalHeader toggle={this.closeModal}>{STR[this.state.mode]}</ModalHeader>
-            <ModalBody>
-              {this.state.mode === 'in' && <Signin />}
-              {this.state.mode === 'up' && <Signup />}
-            </ModalBody>
-          </Modal>
-        </div>
-      );
-    }
+
+    return (
+      <div className="user">
+        <InputGroup>
+          <InputGroupAddon addonType="prepend">
+            <Button className="buttons" color="#FFCD00" onClick={() => this.setState({ mode: 'in' })}>
+              <span>Sign In</span>
+            </Button>
+          </InputGroupAddon>
+          <InputGroupAddon addonType="append">
+            <Button className="buttons" color="#FFCD00" onClick={() => this.setState({ mode: 'up' })}>
+              <span>Sign Up</span>
+            </Button>
+          </InputGroupAddon>
+        </InputGroup>
+        <Modal isOpen={this.state.mode !== null} toggle={this.closeModal}>
+          <ModalHeader toggle={this.closeModal}>{STR[this.state.mode]}</ModalHeader>
+          <ModalBody>
+            {this.state.mode === 'in' && <Signin />}
+            {this.state.mode === 'up' && <Signup />}
+          </ModalBody>
+        </Modal>
+      </div>
+    );
   }
 }
