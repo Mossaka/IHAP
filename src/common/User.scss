@@ -1,57 +1,69 @@
 @import "../_global";
+
 .user {
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  .btn {
-    width: 100px;
-    margin: 2px;
-  }
-
   img {
     border-radius: 50%;
     width: 35px;
-    height: 35px;
+    height: 35px !important;
   }
 
-  #avatar {
-    @extend %avatar
+  a {
+    color: white;
+    text-decoration: none;
   }
-}
-.buttons {
-  font-family: Verdana, sans-serif;
-  font-size: 16px;
-  color: white;
-  background-color: #FFCD00;
-  border-radius: 10px;
-  width: 120px;
-  padding: 5px;
-  transition: all 0.7s;
-  cursor: pointer;
-  outline: none;
-}
-.buttons span {
-  cursor: pointer;
-  position: relative;
-  transition: 0.7s;
-}
-.buttons span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  right: -20px;
-  transition: 0.7s;
-}
-.buttons:hover {
-  background-color:rgb(241, 194, 3)
-}
-.buttons:hover span {
-  padding-right: 20px;
-}
-.buttons:hover span:after{
-  opacity: 1;
-  right: 0;
+
+  a:hover {
+    color: white;
+    text-decoration: none;
+  }
+
+  .userbutton {
+    background-color: steelblue;
+  }
+
+  .buttons {
+    font-family: Verdana, sans-serif;
+    font-size: 16px;
+    color: white;
+    background-color: #FFCD00;
+    border-radius: 10px;
+    width: 120px;
+    padding: 5px;
+    transition: all 0.7s;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .buttons span {
+    cursor: pointer;
+    position: relative;
+    transition: 0.7s;
+  }
+
+  .buttons span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    right: -20px;
+    transition: 0.7s;
+  }
+
+  .buttons:hover {
+    background-color:rgb(241, 194, 3)
+  }
+
+  .buttons:hover span {
+    padding-right: 20px;
+  }
+  
+  .buttons:hover span:after{
+    opacity: 1;
+    right: 0;
+  }  
 }
 
