@@ -4,7 +4,6 @@ import 'react-quill/dist/quill.snow.css';
 import { Input, FormGroup, Button, Label, Alert } from 'reactstrap';
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
-import { EDITOR_TOOLBAR } from './config';
 
 class EditTicket extends React.Component {
   constructor(props) {
@@ -13,7 +12,7 @@ class EditTicket extends React.Component {
       this.state = {
         ...props.preload,
         error: ''
-      }
+      };
     else
       this.state = {
         title: '',
@@ -74,7 +73,6 @@ class EditTicket extends React.Component {
       db.ref('profiles/' + firebase.auth().currentUser.uid + '/tickets').push(key);
       this.props.history.push('/ticket/' + key);
     }
-
   }
 
   render() {
@@ -89,7 +87,7 @@ class EditTicket extends React.Component {
           {this.state.image && <img className="img-thumbnail d-block" src={this.state.image} alt="thumbnail" />}
           <Input type="text" name="image" value={this.state.image} onChange={this.handleChange} required />
         </FormGroup>
-        <ReactQuill value={this.state.content} modules={EDITOR_TOOLBAR} onChange={this.handleChange} />
+        <ReactQuill value={this.state.content} onChange={this.handleChange} />
         <FormGroup check>
           <Label check>
             <Input type="checkbox" name="anonymous" onChange={this.handleChange} checked={this.state.anonymous} /> Anonymous

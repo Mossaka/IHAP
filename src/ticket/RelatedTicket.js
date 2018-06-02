@@ -43,7 +43,7 @@ export default class RelatedTicket extends React.Component {
         keyword += " " + title;
       }
 
-      weightedSearch(keyword, 4, {title: 3, content: 1}).then(function(ids) {
+      weightedSearch(keyword, 4, {title: 3, content: 1}, function(ids) {
         
         if(ids.length > 1) { 
           firebase.database().ref('tickets/' + ids[1]).once('value').then(t => {

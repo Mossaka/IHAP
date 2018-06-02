@@ -4,7 +4,7 @@ let tickets = null;
 export function getTickets(cb) {
   if (tickets) cb(tickets);
   else {
-    firebase.database().ref('tickets').on('value', snapshot => {
+    firebase.database().ref('tickets').once('value', snapshot => {
       tickets = snapshot.val();
       cb(tickets);
     });
@@ -12,5 +12,10 @@ export function getTickets(cb) {
 }
 
 export function getTicket(key, cb) {
-  getTickets(tickets => cb(tickets[key]));
+  if (tickets && tickets[key]) cb(tickets[key]);
+  else {
+    firebase.database().ref('tickets/' + key).once('value', snapshot => {
+      cb(snapshot.val());
+    });
+  }
 }
