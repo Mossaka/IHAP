@@ -57,9 +57,11 @@ export default class TicketBar extends React.Component {
           <div className='col-6'>
             <Avatar id={this.props.uid} isAnonymous={false} />
           </div>
+          { this.props.currentUser ? 
           <div className='col-6'>
               <UnfollowButton handleUnfollow = {(e) => this.props.handleUnfollow(e, this.props.uid)} />
-          </div>
+          </div> : <div></div>
+          }
           </div>
           
         </div>

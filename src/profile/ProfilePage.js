@@ -179,7 +179,7 @@ export default class ProfilePage extends React.Component {
       <div>
         {Object.keys(userList).map((key,index) => 
           <div className='pt-3' key={index}>
-            <UserBar uid={userList[key]} handleUnfollow={this.handleUnfollow}/>
+            <UserBar uid={userList[key]} handleUnfollow={this.handleUnfollow} currentUser={this.state.currentUser} />
           </div>
         )}
       </div>
@@ -307,7 +307,7 @@ export default class ProfilePage extends React.Component {
       return (
         <Container>
           {this.renderUserInfo()}
-          <ProfileSettingPage onSubmit={this.toggleSetting} uid={this.state.uid}/>
+          <ProfileSettingPage onSubmit={this.toggleSetting} uid={this.state.loginUserID}/>
         </Container>
       )
     } else {

@@ -23,6 +23,8 @@ class ProfileSettingPage extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleImage = this.handleImage.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+
+    console.log(this.props.uid)
   }
 
   componentDidMount() {
@@ -92,6 +94,7 @@ class ProfileSettingPage extends React.Component {
     }
 
     event.preventDefault();
+    window.location.reload();
   }
   
   handleCancel(event) {
