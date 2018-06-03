@@ -1,0 +1,43 @@
+.new-problem-button {
+  .postbutton {
+    font-family: Verdana, sans-serif;
+    font-size: 16px;
+    color: white;
+    background-color: steelblue;
+    border-radius: 10px;
+    margin-top: 30px;
+    width: 240px;
+    padding: 5px;
+    transition: all 0.7s;
+    outline: none;
+    margin: 0 auto 0 auto;
+    display: block;
+
+    span {
+      cursor: pointer;
+      position: relative;
+      transition: 0.7s;
+    }
+
+    span:after {
+      content: '\00bb';
+      position: absolute;
+      opacity: 0;
+      right: -20px;
+      transition: 0.7s;
+    }
+  }
+
+  .postbutton:hover {
+    background-color:#2A6A90;
+
+    span {
+      padding-right: 20px;
+    }
+
+    span:after {
+      opacity: 1;
+      right: 0;
+    }
+  }
+}

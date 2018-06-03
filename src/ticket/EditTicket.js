@@ -5,7 +5,13 @@ import { Input, FormGroup, Button, Label, Alert } from 'reactstrap';
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
 
+const DEFAULT_CONTENT = 'As a ___, I want a ___ to ___';
+const DEFAULT_IMAGE = "https://www.knowledgedesk.com/wp-content/uploads/2017/10/problem-solution.jpeg"
+const EMPTY = ''; 
+
 class EditTicket extends React.Component {
+
+  
   constructor(props) {
     super(props);
     if (props.preload)
@@ -17,7 +23,7 @@ class EditTicket extends React.Component {
       this.state = {
         title: '',
         image: '',
-        content: 'As a ___, I want a ___ to ___',
+        content: 'DEFAULT_CONTENT',
         anonymous: false,
         error: ''
       };
@@ -40,7 +46,7 @@ class EditTicket extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (!this.state.content) {
+    if (this.state.content == DEFAULT_CONTENT || !this.state.title) {
       this.setState({ error: 'Content can not be empty' });
       return;
     }
@@ -52,7 +58,7 @@ class EditTicket extends React.Component {
           anonymous: this.state.anonymous,
           content: this.state.content,
           dateEdited: new Date().getTime(),
-          image: this.state.image,
+          image: this.state.image == EMPTY ? DEFAULT_IMAGE : this.state.image,
           title: this.state.title,
         });
       window.location.reload();
@@ -64,7 +70,7 @@ class EditTicket extends React.Component {
           content: this.state.content,
           creator: firebase.auth().currentUser.uid,
           dateEdited: new Date().getTime(),
-          image: this.state.image,
+          image: this.state.image == EMPTY ? DEFAULT_IMAGE : this.state.image,
           title: this.state.title,
           upvote: 0,
           downvote: 0
