@@ -70,7 +70,7 @@ class Header extends React.Component {
     if (this.state.random) {
       searchOrButton = (
         <div className="searchOrRandom">
-          <GetRandomTicketButton buttonText="GET RAND"/>
+          <GetRandomTicketButton buttonText="GET RANDOM TICKET"/>
         </div>
       );
     }
