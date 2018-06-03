@@ -28,6 +28,16 @@
         height: 100px;
         object-fit: cover;
     }
+    .clickable-card {
+        text-decoration: none;
+        color: black;
+        position: absolute;
+        left: 0; 
+        top: 0; 
+        bottom: 0; 
+        right: 0;
+        z-index: 1;
+      }
     
     // .title{
     //     text-align: left;

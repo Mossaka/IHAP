@@ -10,6 +10,8 @@ import firebase from 'firebase';
 import TicketPreview from './TicketPreview';
 import FollowButton from './FollowButton'
 import * as FontAwesome from 'react-icons/lib/fa';
+import UnfollowButton from './UnfollowButton'
+import EditButton from './EditButton'
 
 export default class ProfilePage extends React.Component {
   constructor(props, context) {
@@ -25,7 +27,6 @@ export default class ProfilePage extends React.Component {
       setting: false,
       avatar: avatar,
       email: 'No email',
-      title: null,
       firstname: ' ',
       lastname: ' ',
       username: ' ',
@@ -35,35 +36,26 @@ export default class ProfilePage extends React.Component {
       bookmarked: [],
       followingUsers: [],
       followedUsers: [],
-      currentUser: false,
-      followClicked: false,
-      followButtonText: "Follow",
-      uid: '',
+      currentUser: null,
+      followed: false,
+      profileUserID: null,
+      loginUserID: null,
     };
 
     this.toggleSetting = this.toggleSetting.bind(this)
     this.retriveData = this.retriveData.bind(this)
+    this.checkLoginUser = this.checkLoginUser.bind(this)
+    this.toggleButton = this.toggleButton.bind(this)
+    this.handleFollow = this.handleFollow.bind(this)
+    this.handleUnfollow = this.handleUnfollow.bind(this)
     // this.handleFollow = this.handleFollow.bind(this)
 
     const profileUserID = this.props.match.params.id;
-
-    firebase.auth().onAuthStateChanged(user => {
-      if(user) {
-        if(user.uid === profileUserID) { // the profile page is login user's profile
-          this.setState({currentUser: true, uid: user.uid})
-          this.retriveData(user.uid);
-        } else {
-          this.setState({currentUser: false, uid: user.uid})
-          this.retriveData(profileUserID);
-        }
-      } else {
-        this.setState({currentUser: false})
-      }
-    })
+    this.checkLoginUser(profileUserID)
   }
 
   componentWillReceiveProps(nextProps) {
-    const userID = nextProps.match.params.id
+    const profileUserID = nextProps.match.params.id // the user id for current page
     this.setState({
       activeTab: '1',
       userTab: '1',
@@ -80,23 +72,37 @@ export default class ProfilePage extends React.Component {
       bookmarked: [],
       followingUsers: [],
       followedUsers: [],
-      currentUser: false,
-      followClicked: false,
-      followButtonText: "Follow",
-      uid: '',
+      currentUser: null,
+      followed: false,
+      profileUserID: null,
+      loginUserID: null,
+      notsignin: false,
     })
+
+    this.checkLoginUser(profileUserID);
+  }
+
+  checkLoginUser(profileUserID) {
     firebase.auth().onAuthStateChanged(user => {
       if(user) {
-        if(user.uid === userID) {
-          this.setState({currentUser: true, uid: user.uid})
-          this.retriveData(user.uid)
-          // console.log(this.state)
+        if(user.uid === profileUserID) { // the profile page is login user's profile
+          this.setState({currentUser: true, profileUserID: user.uid, loginUserID: user.uid})
+          this.retriveData(user.uid);
         } else {
-          this.setState({currentUser: false, uid: user.uid})
-          this.retriveData(userID);
+          this.setState({currentUser: false, profileUserID: profileUserID, loginUserID: user.uid})
+          firebase.database().ref('networks/' + user.uid + '/followingUsers/').once('value').then(snapshot => {
+              if (snapshot.exists())
+                  snapshot.forEach(child => {
+                      if (child.val() === profileUserID) {
+                          this.setState({ followed: true });
+                      }
+                  });
+          });
+          this.retriveData(profileUserID);
+          
         }
       } else {
-        this.setState({currentUser: false})
+        this.setState({notsignin: true})
       }
     })
   }
@@ -104,22 +110,13 @@ export default class ProfilePage extends React.Component {
   retriveData(uid) {
     console.log('here')
     firebase.database().ref('profiles/' + uid).once('value').then(snapshot => {
-      // console.log(snapshot.val())
-      this.setState({
-        ...snapshot.val()
-      })
-      // console.log(this.state)
-    })
-
-    firebase.database().ref('networks/' + uid).once('value').then(snapshot => {
-      this.setState({
-        ...snapshot.val()
-      })
-    })
-
-    firebase.database().ref('notebooks/' + uid).once('value').then(snapshot => {
-      this.setState({
-        ...snapshot.val()
+      const profiles = {...snapshot.val()};
+      firebase.database().ref('networks/' + uid).once('value').then(snapshot => {
+        const networks = {...snapshot.val()};
+        firebase.database().ref('notebooks/' + uid).once('value').then(snapshot => {
+          const notebooks = {...snapshot.val()};
+          this.setState({...networks, ...profiles, ...notebooks})
+        })
       })
     })
   }
@@ -189,6 +186,71 @@ export default class ProfilePage extends React.Component {
     )
   }
 
+  handleFollow(e) {
+    e.preventDefault();
+    e.stopPropagation(); 
+    const db = firebase.database();
+    
+    db.ref('networks/' + this.state.loginUserID + '/followingUsers/').push(this.state.profileUserID, error => {
+        if (error)
+            alert('Error has occured during saving process')
+        else
+            db.ref('networks/' + this.state.profileUserID + '/followedUsers/').push(this.state.loginUserID, error => {
+            if (error)
+                alert('Error has occured during saving process')
+            else {
+                this.setState({followed: true})
+              }
+            })
+    })
+  }
+
+  handleUnfollow(e) {
+
+    e.preventDefault();
+    e.stopPropagation();
+    const db = firebase.database();
+    
+    db.ref('networks/' + this.state.loginUserID + '/followingUsers/').orderByKey().once('value').then(snapshot => {
+      snapshot.forEach(child => {
+          if(child.val() === this.state.profileUserID) {
+              child.ref.remove(err => {
+                  if(err) alert("error has occured during unfollowing this user")
+                  else 
+                    db.ref('networks/' + this.state.profileUserID + '/followedUsers/').once('value').then(snapshot => {
+                        snapshot.forEach(child => {
+                            if(child.val() === this.state.loginUserID) {
+                                child.ref.remove(err => {
+                                    if(err) alert("error has occured during unfollowing this user")
+                                    else {
+                                        this.setState({followed: false})
+                                    }
+                                })
+                            }
+                        })
+                    })
+              })
+          }
+      })
+    })
+  }
+
+  toggleButton() {
+    if(this.state.currentUser !== null) { 
+      if(this.state.currentUser === true) {
+        return <EditButton toggleSetting={this.toggleSetting} />
+      } else if(this.state.followed !== null) {
+        if(this.state.followed)
+          return <UnfollowButton handleUnfollow={this.handleUnfollow} />
+        else
+          return <FollowButton handleFollow={this.handleFollow}  />
+      }
+    }
+    else {
+      return <div>Loading</div>
+    }
+  }
+
   renderUserInfo() {
     return (
       <div className='user-info'>
@@ -228,14 +290,7 @@ export default class ProfilePage extends React.Component {
           </Col>
           <Col>
             <div id="follow" className='float-right' style={{bottom:'0', float:'right'}}>
-              {/* {this.state.currentUser ? <Button size='sm' style={{backgroundColor:'white', borderColor:'white'}} onClick={this.toggleSetting}><img src={edit} style={{width:'30px', height:'30px'}} alt="edit" /> </Button> : <div></div>}
-              {this.state.currentUser ? 
-                <div></div> :  */}
-                <FollowButton isUserSelf = {this.state.currentUser}
-                              profileUserID = {this.props.match.params.id}
-                              toggleSetting = {this.toggleSetting}
-                />
-              {/* } */}
+                {this.toggleButton()}
             </div>
           </Col>
         </Row>

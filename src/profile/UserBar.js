@@ -1,5 +1,6 @@
 import React from 'react';
 import avatar from '../assets/img_avatar.png';
+import { Link } from 'react-router-dom';
 import Avatar from '../common/Avatar'
 import firebase from 'firebase'
 import './UserBar.css'
@@ -15,10 +16,10 @@ export default class TicketBar extends React.Component {
     this.state = {
       avatar: avatar,
       username: "Username",
-      redirect: false,
+      // redirect: false,
     }
 
-    this.changeRoute = this.changeRoute.bind(this);
+    // this.changeRoute = this.changeRoute.bind(this);
   }
 
   componentDidMount() {
@@ -28,14 +29,14 @@ export default class TicketBar extends React.Component {
     });
   }
   
-  changeRoute(e) {
-    e.preventDefault();
-    this.setState({redirect: true,})
-  }
+  // changeRoute(e) {
+  //   e.preventDefault();
+  //   this.setState({redirect: true,})
+  // }
 
   render() {
-    if(this.state.redirect)
-        return <Redirect push to={"/profile/" + this.props.uid }/>;
+    // if(this.state.redirect)
+    //     return <Redirect push to={"/profile/" + this.props.uid }/>;
     return(
         // <div>
         //   <Navbar>
@@ -50,8 +51,8 @@ export default class TicketBar extends React.Component {
         //   </Navbar>
         // </div>
 
-        <div className='user-preview' onClick={this.changeRoute}>
-        {/* <Link className="clickable-card" to={'/ticket/' + this.state.ticketID}></Link> */}
+        <Link className="clickable-card " to={'/profile/' + this.props.uid} style={{ textDecoration: 'none' }} >
+        <div className='user-preview'>
           <div className='row'>
           <div className='col-6'>
             <Avatar id={this.props.uid} isAnonymous={false} />
@@ -68,6 +69,7 @@ export default class TicketBar extends React.Component {
           </div>
           
         </div>
+        </Link>
     )
   }
 }
