@@ -263,7 +263,7 @@ export default class ProfilePage extends React.Component {
                 <img src={this.state.avatar} alt='avatar' />
               </div>
               <div className='row'>
-                <a className="username" style={{fontSize: '25px', float:'left'}}>{this.state.username}</a>
+                <a className="username" style={{fontSize: '25px', float:'left'}}>{this.state.username.substring(0,12)}</a>
               </div>
               <div className='row'>
                 <a className="realname pl-1" style={{fontSize: '20px', float:'left'}}>{this.state.firstname.substr(0,8) + " " + this.state.lastname.substr(0, 8)}</a>

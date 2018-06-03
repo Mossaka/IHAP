@@ -82,7 +82,7 @@ export default class User extends React.Component {
           <ButtonDropdown isOpen={this.state.dropdown} toggle={this.toggleDropdown}>
             <Button className="userbutton" id="caret">
               <Link to={'/profile/' + this.state.uid}>
-                {this.state.name}
+                {this.state.name ? this.state.name.substring(0,15) : this.state.name}
               </Link>
             </Button>
             <DropdownToggle className="userbutton" caret />
