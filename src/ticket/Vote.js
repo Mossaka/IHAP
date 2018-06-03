@@ -22,6 +22,23 @@ export default class Vote extends React.Component {
       alert('please sign in to vote');
     return firebase.auth().currentUser;
   }
+  refresh(nextProps) {
+    let l = nextProps.path.split('/');
+    this.setState({
+      up: Number(nextProps.up),
+      down: Number(nextProps.down),
+      mood: (l[0] === 'solutions') ? 'votedSolution' : 'votedProblem',
+      ticketid: l[1]
+    })
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.id !== this.props.id) {
+      this.refresh(nextProps);
+      return false;
+    }
+    return true;
+  }
 
   handleUpVote = () => {
     console.log("adfs");
