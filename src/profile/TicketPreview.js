@@ -84,7 +84,7 @@ class TicketPreview extends React.Component {
                     <p>{this.state.ticketDetails}</p> 
                 </div>
             </div>
-            <div className='col-3'>
+            <div className='col-3 pt-3'>
             <img className="img-thumbnail" src={this.state.image} alt="ticket thumbnail" />
             </div>
         </div>
