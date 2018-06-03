@@ -38,11 +38,11 @@ export default class Solution extends React.Component {
     return (
       <Card>
         <CardBody>
+          <Avatar id={this.state.creator} isAnonymous={false} hor />
           <CardText dangerouslySetInnerHTML={{ __html: this.state.content }} />
-          Last Edit: <TimeDisplay time={this.state.dateEdited} />
+          <TimeDisplay time={this.state.dateEdited} />
         </CardBody>
         <Vote up={this.state.upvote} down={this.state.downvote} path={'solutions/' + this.props.id} />
-        <Avatar id={this.state.creator} isAnonymous={false} hor />
         <EditButton id={this.state.creator} onClick={this.toggleEditor} />
       </Card>
     );
