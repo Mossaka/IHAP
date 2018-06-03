@@ -20,10 +20,12 @@ export default class ProfilePage extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.toggleUserTab = this.toggleUserTab.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.toggleUserName = this.toggleUserName.bind(this);
     this.state = {
       activeTab: '1',
       userTab: '1',
       dropdownOpen: false,
+      userName: false,
       setting: false,
       avatar: avatar,
       email: 'No email',
@@ -60,6 +62,7 @@ export default class ProfilePage extends React.Component {
       activeTab: '1',
       userTab: '1',
       dropdownOpen: false,
+      userName: false,
       setting: false,
       avatar: avatar,
       email: 'No email',
@@ -142,6 +145,13 @@ export default class ProfilePage extends React.Component {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
+  }
+
+  toggleUserName(){
+
+    this.setState({
+      userName: !this.state.userName
+    })
   }
 
   toggleSetting() {
@@ -263,7 +273,10 @@ export default class ProfilePage extends React.Component {
                 <img src={this.state.avatar} alt='avatar' />
               </div>
               <div className='row'>
-                <a className="username" style={{fontSize: '25px', float:'left'}}>{this.state.username.substring(0,12)}</a>
+                <a className="username" id="Popover" onClick={this.toggleUserName} style={{fontSize: '25px', float:'left'}}>{this.state.username.substring(0,12)}</a>
+                <Popover placement='bottom' isOpen={this.state.userName} target='Popover' toggle={this.toggleUserName}>
+                    <PopoverBody>{this.state.username}</PopoverBody>
+                  </Popover>
               </div>
               <div className='row'>
                 <a className="realname pl-1" style={{fontSize: '20px', float:'left'}}>{this.state.firstname.substr(0,8) + " " + this.state.lastname.substr(0, 8)}</a>
