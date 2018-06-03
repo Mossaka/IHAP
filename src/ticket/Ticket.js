@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardTitle, CardText } from 'reactstrap';
+import { Card, CardBody, CardTitle, CardText, Row, Col } from 'reactstrap';
 import TimeDisplay from '../common/TimeDisplay';
 import Vote from './Vote';
 import Avatar from '../common/Avatar';
@@ -53,15 +53,23 @@ export default class Ticket extends React.Component {
       <Card>
         <CardBody>
           <CardTitle>{this.state.title}</CardTitle>
+          <Row>
+            <Col>
+              <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} hor />
+            </Col>
+            <Col>
+              <EditButton id={this.state.creator} onClick={this.toggleEditor} />
+            </Col>
+          </Row>
         </CardBody>
         <img width="100%" src={this.state.image} alt="ticket thumbnail" />
         <CardBody>
           <CardText dangerouslySetInnerHTML={{ __html: this.state.content }} />
-          Last Edit: <TimeDisplay time={this.state.dateEdited} />
-          <Vote up={this.state.upvote} down={this.state.downvote} path={'tickets/' + this.props.id} />
-          <Bookmark id={this.props.id} />
-          <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} hor />
-          <EditButton id={this.state.creator} onClick={this.toggleEditor} />
+          <TimeDisplay time={this.state.dateEdited} />
+          <Row className="ticketBottom">
+            <Vote up={this.state.upvote} down={this.state.downvote} path={'tickets/' + this.props.id} />
+            <Bookmark id={this.props.id} />
+          </Row>
         </CardBody>
       </Card>
     );

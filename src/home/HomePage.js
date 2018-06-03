@@ -4,6 +4,12 @@ import { weightedSearch } from '../utils/search';
 import './HomePage.css';
 import { Container, Row, Col } from 'reactstrap';
 
+import { GlobalContext } from '../utils/context';
+import NewProblemButton from '../common/NewProblemButton';
+import GetRandomTicketButton from '../common/GetRandomTicketButton';
+
+
+
 export default class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -62,6 +68,10 @@ export default class HomePage extends React.Component {
   render() {
     return (
       <Container className="homepage">
+        {/* <div className="options"> 
+          <NewProblemButton />
+          <GetRandomTicketButton buttonText="Solve a Problem"/>
+        </div>  */}
         <h2>Top Stories</h2>
         <hr />
         <Row>

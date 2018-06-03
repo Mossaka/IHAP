@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 // import bookmark from '../assets/bookmark.png'
 import './TicketPreview.css'
 import firebase from 'firebase';
+import { Link } from 'react-router-dom';
+import { Card, CardBody, CardTitle, CardImg, CardText } from 'reactstrap';
 
 
 class TicketPreview extends React.Component {
@@ -14,11 +16,11 @@ class TicketPreview extends React.Component {
     this.state = {
       ticketTitle: "Ticket Title!!",
       ticketDetails: "Ticket details... ",
-      redirect: false,
+    //   redirect: false,
       image: null,
     }
     
-    this.changeRoute = this.changeRoute.bind(this);
+    // this.changeRoute = this.changeRoute.bind(this);
   }
 
   componentDidMount() {
@@ -62,29 +64,33 @@ class TicketPreview extends React.Component {
     }
   }
 
-  changeRoute() {
-      this.setState({redirect: true,})
-  }
+//   changeRoute() {
+//       this.setState({redirect: true,})
+//   }
 
   render() {
-    if(this.state.redirect)
-        return <Redirect push to={"/ticket/" + this.state.ticketID }/>;
+    // if(this.state.redirect)
+    //     return <Redirect push to={"/ticket/" + this.state.ticketID }/>;
     
 
     return (
       // <div className = "container">
-      <div className='ticket-preview' onClick={this.changeRoute}>
-        {/* <Link className="clickable-card" to={'/ticket/' + this.state.ticketID}></Link> */}
-        <div className = "textbox">
-            <div className ="title">
-                <h5><b>{this.state.ticketTitle}</b></h5>
-            </div> 
-            <div className ="description">
-                <p>{this.state.ticketDetails}</p> 
+      <Card className='ticket-preview card'>
+        <Link className="clickable-card" to={'/ticket/' + this.state.ticketID}></Link>
+        <div className='row'>
+            <div className = "textbox col-9">
+                <div className ="title">
+                    <h5><b>{this.state.ticketTitle}</b></h5>
+                </div> 
+                <div className ="description">
+                    <p>{this.state.ticketDetails}</p> 
+                </div>
+            </div>
+            <div className='col-3 pt-3'>
+            <img className="img-thumbnail" src={this.state.image} alt="ticket thumbnail" />
             </div>
         </div>
-        <img className="img-thumbnail" src={this.state.image} alt="ticket thumbnail" />
-       </div>
+       </Card>
     );
   }
 }

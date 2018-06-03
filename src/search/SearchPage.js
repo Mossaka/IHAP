@@ -7,6 +7,7 @@ import firebase from 'firebase';
 import { weightedSearch } from '../utils/search';
 import FilterButton from './FilterButton';
 import { GlobalContext } from '../utils/context';
+import NewProblemButton from '../common/NewProblemButton';
 
 export default class SearchPage extends React.Component {
   constructor(props) {
@@ -97,9 +98,7 @@ export default class SearchPage extends React.Component {
             <TabContent activeTab={this.state.show}>
               <TabPane tabId="1">
                 {this.state.tickets.map(id => <SearchPreview id={id} key={id} />)}
-                <GlobalContext.Consumer>
-                  {user => user ? this.makeButton('Post Your Problem here') : this.makeButton('Sign In to Post')}
-                </GlobalContext.Consumer>
+                <NewProblemButton />
               </TabPane>
               <TabPane tabId="2">
                 {this.state.users.map(user => <UserPreview user={user} key={user.id} />)}
