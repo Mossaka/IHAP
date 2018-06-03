@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardBody, CardTitle, ListGroup, ListGroupItem } from 'reactstrap';
 import { weightedSearch } from '../utils/search';
 import { stripHtml } from '../utils/search';
 import { getTicket, getTickets } from '../utils/store';
@@ -38,12 +38,16 @@ export default class RelatedTicket extends React.Component {
         getTickets(tickets => {
           let related = [];
           for (let id of ids) {
-            related.push({ id, title: tickets[id].title });
+            if(id !== this.props.id) related.push({ id, title: tickets[id].title });
           }
           this.setState({ related });
         });
       });
     });
+  }
+
+  generateRelatedTicket(t) {
+    return <ListGroupItem><Link key={t.id} to={'/ticket/' + t.id}>{t.title}</Link></ListGroupItem>;
   }
 
   render() {
@@ -61,9 +65,9 @@ export default class RelatedTicket extends React.Component {
       <Card>
         <CardBody>
           <CardTitle>Related Tickets</CardTitle>
-        </CardBody>
-        <CardBody>
-          {this.state.related.map(t => <Link key={t.id} to={'/ticket/' + t.id}>{t.title}</Link>)}
+          <ListGroup>
+            {this.state.related.map(t => this.generateRelatedTicket(t))}
+          </ListGroup>
         </CardBody>
       </Card>
     );
