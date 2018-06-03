@@ -1,7 +1,8 @@
 import React from 'react';
 import { GlobalContext } from '../utils/context';
 import { Button } from 'reactstrap';
-import './EditButton.css'
+import './EditButton.css';
+import '../common/StyleButton.css';
 
 export default class EditButton extends React.Component {
   render() {
@@ -10,7 +11,7 @@ export default class EditButton extends React.Component {
           <GlobalContext.Consumer>
             {user => {
               if (user && user.uid === this.props.id)
-               return <Button className="button" onClick={this.props.onClick}>Edit</Button>
+               return <div className='style-btn-secondary'><Button className="secondary" onClick={this.props.onClick}>Edit</Button></div>
             }}
           </GlobalContext.Consumer>
         </div>

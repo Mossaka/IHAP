@@ -7,6 +7,7 @@ import EditTicket from './EditTicket';
 import EditSolution from './EditSolution';
 import './TicketPage.css';
 import { GlobalContext } from '../utils/context';
+import '../common/StyleButton.css'
 
 export default class TicketPage extends React.Component {
   constructor(props) {
@@ -65,7 +66,7 @@ export default class TicketPage extends React.Component {
               <Col>
                 {!this.state.newsol && <GlobalContext.Consumer>
                   {user => user ?
-                      <Button className="postSolutionButton" size='sm' onClick={this.toggleEditor}>Post New Solution</Button> :
+                    <div className='style-btn'><button className="postSolutionButton" onClick={this.toggleEditor}>Post New Solution</button></div> :
                       <h3>Sign In to Post</h3>
                   }
                   </GlobalContext.Consumer>}
