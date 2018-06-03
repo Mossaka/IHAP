@@ -81,9 +81,6 @@ export default class Solution extends React.Component {
             <Button className="float-right" color="primary" onClick = { this.handleSubmit } > Submit </Button>
           </div>
         </ReactModal>
-        <Avatar id={this.state.creator} isAnonymous={false} hor />
-        <EditButton id={this.state.creator} onClick={this.toggleEditor} />
-        <Vote up={this.state.upvote} down={this.state.downvote} path={'solutions/' + this.props.id} />
       </Card>
     );
   }

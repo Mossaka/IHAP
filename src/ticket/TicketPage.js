@@ -54,16 +54,22 @@ export default class TicketPage extends React.Component {
             </div>
           </Col>
           <Col xs="6">
-            <h3>Solutions</h3>
+            <Row>
+              <Col>
+                <h3>Solutions</h3>
+              </Col>
+              <Col>
+                {!this.state.newsol && <GlobalContext.Consumer>
+                  {user => user ?
+                      <Button className="postSolutionButton" onClick={this.toggleEditor}>Post New Solution</Button> :
+                      <h3>Sign In to Post</h3>
+                  }
+                  </GlobalContext.Consumer>}
+              </Col>
+            </Row>
             <hr />
             {this.state.solutions.map(s => <Solution key={s} id={s} />)}
             {this.state.newsol && <EditSolution cancel={this.toggleEditor} ticket={this.props.match.params.id} />}
-            {!this.state.newsol && <GlobalContext.Consumer>
-              {user => user ?
-                <Button onClick={this.toggleEditor}>Post New Solution</Button> :
-                <h3>Sign In to Post</h3>
-              }
-            </GlobalContext.Consumer>}
           </Col>
         </Row>
       </Container>
