@@ -7,6 +7,8 @@ import './Header.css';
 import { Button, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 import { MdSearch } from 'react-icons/lib/md';
 import { getTickets } from '../utils/store';
+import GetRandomTicketButton from '../common/GetRandomTicketButton';
+
 
 class Header extends React.Component {
   constructor(props) {
@@ -68,7 +70,7 @@ class Header extends React.Component {
     if (this.state.random) {
       searchOrButton = (
         <div className="searchOrRandom">
-          <Button color="steelblue" onClick={this.loadRandomTicket}>GET RANDOM TICKET</Button>
+          <GetRandomTicketButton buttonText="GET RAND"/>
         </div>
       );
     }

@@ -19,24 +19,24 @@
     .ticket-preview:hover{
         box-shadow: $box-shadow-on-hover;
     }
-    .textbox {
-        float: left;
-    }
+    // .textbox {
+    //     float: left;
+    // }
     img {
         
         width: 100px;
         height: 100px;
-        object-fit: scale-down;
+        object-fit: cover;
     }
     
-    .title{
-        text-align: left;
-        font-size: 5em;
-    }
-    .description{
-        text-align: left ;
-        font-size: 1em;
-    }
+    // .title{
+    //     text-align: left;
+    //     font-size: 5em;
+    // }
+    // .description{
+    //     text-align: left ;
+    //     font-size: 1em;
+    // }
 }
 
 .ticket-preview:hover {

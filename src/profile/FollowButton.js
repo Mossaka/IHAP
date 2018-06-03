@@ -60,6 +60,7 @@ export default class FollowButton extends React.Component {
 
   handleFollow(e) {
     e.preventDefault();
+    e.stopPropagation();
     const db = firebase.database();
     if(this.state.uid && this.state.text === 'Follow') {
       db.ref('networks/' + this.state.uid + '/followingUsers/').push(this.props.profileUserID, error => {
@@ -109,6 +110,6 @@ export default class FollowButton extends React.Component {
     if(this.state.editMode)
         return <Button color={'secondary'} style={{float: 'right'}} size='sm' onClick={this.props.toggleSetting}><FaEdit width='25px' height='25px'/> Edit</Button> 
     else
-        return <Button color={"primary"} style={{float:'left'}} onClick={this.handleFollow} size='sm'><MdPersonAdd width='25px' height='25px'/> {this.state.text}</Button>
+        return <Button color={"secondary"} style={{float:'left'}} onClick={this.handleFollow} size='sm'><MdPersonAdd width='25px' height='25px'/> {this.state.text}</Button>
   }
 }

@@ -12,7 +12,7 @@ export default class Bookmark extends React.Component {
   }
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
+    this.unsub = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({ disabled: false });
         firebase.database()
@@ -30,6 +30,10 @@ export default class Bookmark extends React.Component {
         this.setState({ disabled: true });
       }
     });
+  }
+
+  componentWillUnmount() {
+    this.unsub();
   }
 
   bookmark = e => {
