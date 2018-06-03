@@ -15,7 +15,7 @@ class ProfileSettingPage extends React.Component {
             biography: null,
             avatar: null,
         },
-        fileState: 'Yo, pick a file!',
+        fileState: 'Please pick a picture for your avatar',
         file: null,
     };
 
@@ -140,7 +140,7 @@ class ProfileSettingPage extends React.Component {
             </Row>
             <Row>
                 <FormGroup className="col-md-12">
-                    <Label>Thumbnail</Label>
+                    <Label>AVATAR</Label>
                     <CustomInput id="fileInput" type="file" label={this.state.fileState} onChange={this.handleImage}/>
                 </FormGroup>
             </Row>

@@ -1,6 +1,6 @@
 import React from 'react';
 import avatar from '../assets/anonymous-avatar.jpg';
-import { Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
+import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
 import { Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import classnames from 'classnames';
 import UserBar from './UserBar';
@@ -25,6 +25,7 @@ export default class ProfilePage extends React.Component {
       setting: false,
       avatar: avatar,
       email: 'No email',
+      title: null,
       firstname: ' ',
       lastname: ' ',
       username: ' ',
@@ -155,7 +156,7 @@ export default class ProfilePage extends React.Component {
     return (
       <div>
         {Object.keys(ticketList).map((key,index) => 
-            <div className='container pt-3' key={index}>
+            <div className='pt-3' key={index}>
               <TicketPreview  ticketID={ticketList[key]} />
             </div>
           
@@ -168,7 +169,7 @@ export default class ProfilePage extends React.Component {
     return (
       <div>
         {Object.keys(solutionList).map((key,index) => 
-          <div className='container pt-3' key={index}>
+          <div className='pt-3' key={index}>
             <TicketPreview  solutionID={solutionList[key]} />
           </div>
         )}
@@ -180,7 +181,7 @@ export default class ProfilePage extends React.Component {
     return (
       <div>
         {Object.keys(userList).map((key,index) => 
-          <div className='container pt-3' key={index}>
+          <div className='pt-3' key={index}>
             <UserBar uid={userList[key]} isUserSelf = {this.state.currentUser}/>
           </div>
         )}
@@ -192,10 +193,15 @@ export default class ProfilePage extends React.Component {
     return (
       <div className='user-info'>
         <Row xs="8">
-          <Col xs='auto'>
+          <Col xs='3'>
             <div id="user">
-              <div id="avatar" style={{backgroundImage: `URL(${this.state.avatar})`, width:'100px', height:'100px'}}></div>
-              <p className="username" style={{fontSize: '25px', float:'left'}}>{this.state.username}</p>
+              <div id="avatar">
+                <img src={this.state.avatar} alt='avatar' />
+              </div>
+              <div className='row'>
+                <a className="username" style={{fontSize: '25px', float:'left'}}>{this.state.username}</a>
+                <a className="realname pl-1" style={{fontSize: '20px', float:'left'}}>{this.state.firstname.substr(0,8) + " " + this.state.lastname.substr(0, 8)}</a>
+              </div>
             </div>
           </Col>
           <Col xs='auto'>
@@ -213,6 +219,9 @@ export default class ProfilePage extends React.Component {
                     <PopoverHeader>Biography</PopoverHeader>
                     <PopoverBody>{this.state.biography}</PopoverBody>
                   </Popover>
+                  <NavItem>
+                    <NavLink> <FontAwesome.FaBriefcase  width='25px' height='25px' />  {this.state.title ? this.state.title.substring(0,10) : 'Awesome Human'}</NavLink>
+                  </NavItem>
                 </Row>
               </Nav>
             </div>  
