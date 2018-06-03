@@ -1,11 +1,12 @@
 import React from 'react';
 import firebase from 'firebase';
-import { Card, CardBody, CardText } from 'reactstrap';
+import { Card, CardBody, CardText, Row, Col } from 'reactstrap';
 import TimeDisplay from '../common/TimeDisplay';
 import Vote from './Vote';
 import Avatar from '../common/Avatar';
 import EditSolution from './EditSolution';
 import EditButton from './EditButton';
+import './Solution.css';
 
 export default class Solution extends React.Component {
   constructor(props) {
@@ -36,14 +37,22 @@ export default class Solution extends React.Component {
     }
 
     return (
-      <Card>
+      <Card className="solution">
         <CardBody>
-          <Avatar id={this.state.creator} isAnonymous={false} hor />
+          <Row>
+            <Col>
+              <Avatar id={this.state.creator} isAnonymous={false} hor />
+            </Col>
+            <Col>
+              <EditButton id={this.state.creator} onClick={this.toggleEditor} />
+            </Col>
+          </Row>
+        </CardBody>
+        <CardBody>
           <CardText dangerouslySetInnerHTML={{ __html: this.state.content }} />
           <TimeDisplay time={this.state.dateEdited} />
         </CardBody>
         <Vote up={this.state.upvote} down={this.state.downvote} path={'solutions/' + this.props.id} />
-        <EditButton id={this.state.creator} onClick={this.toggleEditor} />
       </Card>
     );
   }
