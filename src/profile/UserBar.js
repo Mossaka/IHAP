@@ -5,7 +5,7 @@ import Avatar from '../common/Avatar'
 import firebase from 'firebase'
 import './UserBar.css'
 import { Redirect } from 'react-router-dom';
-import FollowButton from './FollowButton'
+import UnfollowButton from './UnfollowButton'
 
 // import {MdCancel, MdChat, MdCheck} from 'react-icons/md';
 
@@ -58,13 +58,7 @@ export default class TicketBar extends React.Component {
             <Avatar id={this.props.uid} isAnonymous={false} />
           </div>
           <div className='col-6'>
-            { this.props.isUserSelf ? <div className='followbtn'>
-              <FollowButton isUserSelf = {false}
-                            profileUserID = {this.props.uid}
-                            isKnown = {true}
-              />
-            </div> : <div></div>
-            }
+              <UnfollowButton handleUnfollow = {(e) => this.props.handleUnfollow(e, this.props.uid)} />
           </div>
           </div>
           

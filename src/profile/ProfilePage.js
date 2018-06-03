@@ -179,7 +179,7 @@ export default class ProfilePage extends React.Component {
       <div>
         {Object.keys(userList).map((key,index) => 
           <div className='pt-3' key={index}>
-            <UserBar uid={userList[key]} isUserSelf = {this.state.currentUser}/>
+            <UserBar uid={userList[key]} handleUnfollow={this.handleUnfollow}/>
           </div>
         )}
       </div>
@@ -205,7 +205,7 @@ export default class ProfilePage extends React.Component {
     })
   }
 
-  handleUnfollow(e) {
+  handleUnfollow(e, unfollowID=null) {
 
     e.preventDefault();
     e.stopPropagation();
@@ -213,17 +213,19 @@ export default class ProfilePage extends React.Component {
     
     db.ref('networks/' + this.state.loginUserID + '/followingUsers/').orderByKey().once('value').then(snapshot => {
       snapshot.forEach(child => {
-          if(child.val() === this.state.profileUserID) {
+          if(child.val() === (unfollowID ? unfollowID : this.state.profileUserID)) {
               child.ref.remove(err => {
                   if(err) alert("error has occured during unfollowing this user")
                   else 
-                    db.ref('networks/' + this.state.profileUserID + '/followedUsers/').once('value').then(snapshot => {
+                    db.ref('networks/' + (unfollowID ? unfollowID : this.state.profileUserID) + '/followedUsers/').once('value').then(snapshot => {
                         snapshot.forEach(child => {
                             if(child.val() === this.state.loginUserID) {
                                 child.ref.remove(err => {
                                     if(err) alert("error has occured during unfollowing this user")
                                     else {
-                                        this.setState({followed: false})
+                                        this.setState({followed: false});
+                                        if(unfollowID) window.location.reload();
+                                        // (unfollowID ? window.location.reload() : this.setState({followed: false}));
                                     }
                                 })
                             }
