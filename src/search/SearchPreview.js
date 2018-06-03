@@ -32,15 +32,17 @@ export default class SearchPreview extends React.Component {
 
   render() {
     return (
-      <div className="search-result">
-        <div className="textbox">
-          <Link to={'/ticket/' + this.props.id}>
-            <h5>{this.state.ticketTitle}</h5>
-            <p>{this.state.ticketDetails}</p>
-          </Link>
-        </div>
-        {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} />}
-        <Bookmark id={this.props.id} />
+      <div>
+        <div className="search-result">
+          <div className="textbox">
+            <Link to={'/ticket/' + this.props.id}>
+              <h5>{this.state.ticketTitle}</h5>
+              <p>{this.state.ticketDetails}</p>
+            </Link>
+          </div>
+          {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} hor />}
+          <Bookmark id={this.props.id} />
+         </div>
       </div>
     );
   }

@@ -83,10 +83,9 @@ export default class SearchPage extends React.Component {
       <Container className="search-page">
         <div className="title">
           <h3>Search Results of: {this.props.match.params.keyword}</h3>
-          <FilterButton />
         </div>
         <Row>
-          <Col xs={{ size: '8', offset: '2' }}>
+          <Col xs={{ size: '9', offset: '1' }}>
             <Nav tabs>
               <NavItem>
                 <NavLink className={`${this.state.show === '1' ? 'active' : ''}`} onClick={() => this.toggleTab('1')}>Tickets</NavLink>
