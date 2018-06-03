@@ -1,5 +1,5 @@
 import React from 'react';
-import avatar from '../assets/img_avatar.png';
+import avatar from '../assets/anonymous-avatar.jpg';
 import { Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
 import { Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import classnames from 'classnames';
@@ -155,7 +155,7 @@ export default class ProfilePage extends React.Component {
     return (
       <div>
         {Object.keys(ticketList).map((key,index) => 
-            <div className='container' key={index}>
+            <div className='container pt-3' key={index}>
               <TicketPreview  ticketID={ticketList[key]} />
             </div>
           
@@ -168,7 +168,7 @@ export default class ProfilePage extends React.Component {
     return (
       <div>
         {Object.keys(solutionList).map((key,index) => 
-          <div className='container' key={index}>
+          <div className='container pt-3' key={index}>
             <TicketPreview  solutionID={solutionList[key]} />
           </div>
         )}
@@ -180,7 +180,7 @@ export default class ProfilePage extends React.Component {
     return (
       <div>
         {Object.keys(userList).map((key,index) => 
-          <div className='container' key={index}>
+          <div className='container pt-3' key={index}>
             <UserBar uid={userList[key]} isUserSelf = {this.state.currentUser}/>
           </div>
         )}

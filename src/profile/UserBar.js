@@ -52,15 +52,20 @@ export default class TicketBar extends React.Component {
 
         <div className='user-preview' onClick={this.changeRoute}>
         {/* <Link className="clickable-card" to={'/ticket/' + this.state.ticketID}></Link> */}
-
-          <Avatar id={this.props.uid} isAnonymous={false} />
-          { this.props.isUserSelf ? <div className='followbtn'>
-            <FollowButton isUserSelf = {false}
-                          profileUserID = {this.props.uid}
-                          isKnown = {true}
-            />
-          </div> : <div></div>
-          }
+          <div className='row'>
+          <div className='col-6'>
+            <Avatar id={this.props.uid} isAnonymous={false} />
+          </div>
+          <div className='col-6'>
+            { this.props.isUserSelf ? <div className='followbtn'>
+              <FollowButton isUserSelf = {false}
+                            profileUserID = {this.props.uid}
+                            isKnown = {true}
+              />
+            </div> : <div></div>
+            }
+          </div>
+          </div>
           
         </div>
     )

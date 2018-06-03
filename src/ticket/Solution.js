@@ -1,12 +1,13 @@
 import React from 'react';
 import firebase from 'firebase';
-import { Card, CardBody, CardText,FormGroup,Label,Input,Button } from 'reactstrap';
+import { Card, CardBody, CardText,FormGroup,Label,Input,Button, Row, Col } from 'reactstrap';
 import TimeDisplay from '../common/TimeDisplay';
 import Vote from './Vote';
 import Avatar from '../common/Avatar';
 import EditSolution from './EditSolution';
 import EditButton from './EditButton';
 import ReactModal from 'react-modal';
+import './Solution.css';
 
 ReactModal.setAppElement('#root')
 export default class Solution extends React.Component {
@@ -49,10 +50,20 @@ export default class Solution extends React.Component {
     }
 
     return (
-      <Card>
+      <Card className="solution">
+        <CardBody>
+          <Row>
+            <Col>
+              <Avatar id={this.state.creator} isAnonymous={false} hor />
+            </Col>
+            <Col>
+              <EditButton id={this.state.creator} onClick={this.toggleEditor} />
+            </Col>
+          </Row>
+        </CardBody>
         <CardBody>
           <CardText dangerouslySetInnerHTML={{ __html: this.state.content }} />
-          Last Edit: <TimeDisplay time={this.state.dateEdited} />
+          <TimeDisplay time={this.state.dateEdited} />
         </CardBody>
         <div className="clearfix" style = {{ display: 'inline-block' }}>
           <div className = "float-left"> <Vote up={this.state.upvote} down={this.state.downvote} path={'solutions/' + this.props.id} ></Vote></div>
@@ -72,6 +83,7 @@ export default class Solution extends React.Component {
         </ReactModal>
         <Avatar id={this.state.creator} isAnonymous={false} hor />
         <EditButton id={this.state.creator} onClick={this.toggleEditor} />
+        <Vote up={this.state.upvote} down={this.state.downvote} path={'solutions/' + this.props.id} />
       </Card>
     );
   }

@@ -12,7 +12,7 @@ export default class StoryPreview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: greycard,
+      image: "https://www.knowledgedesk.com/wp-content/uploads/2017/10/problem-solution.jpeg",
       title: 'Ticket Title!!',
       content: 'Ticket details... ',
       anonymous: true,
