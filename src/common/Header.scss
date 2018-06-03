@@ -1,7 +1,7 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  background-color: #6B7A8F;
+  background-color: white;
   padding: 7px 15px 7px 15px;
   border-bottom: 2px solid lightgray;
 
@@ -28,11 +28,11 @@
         justify-content: space-between;
 
         div {
-          color:whitesmoke;
+          color: black;
         }
 
         div:hover {
-          color: black;
+          color: #A9A9A9;
         }
       }
     }
