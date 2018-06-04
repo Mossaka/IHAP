@@ -94,8 +94,8 @@ class Header extends React.Component {
           <div className='col-7'>
         <div className="center">
           {searchOrButton}
-          <div className="lever">
-            <img src={lever} alt="Lever" className={'clickable ' + this.state.random} onClick={this.toggleRandom} />
+          <div className="lever" onClick={this.toggleRandom}>
+            <img src={lever} alt="Lever" className={'clickable ' + this.state.random}  />
             <div className="label">
               <div onClick={this.setRandom}>Random</div>
               <div onClick={this.setSearch}>Search</div>
