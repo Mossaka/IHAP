@@ -34,6 +34,8 @@ export default class Solution extends React.Component {
     let y = firebase.database().ref('comments').push(newData).getKey();
     firebase.database().ref('solutions/'+this.props.id+'/comments').push(y);
     this.handleCloseModal();
+    this.refresh();
+    this.setState({comment : ''})
   }
   handleCommentChange(e){
     this.setState({comment: e.target.value});
@@ -60,16 +62,28 @@ export default class Solution extends React.Component {
     });
   }
 
-  getUserName(name){
-    let url = "profiles/"+name + "/username";
-    console.log("url is " + url);
 
-    firebase.database().ref("profiles/"+name + "/username").once('value',s=>{
-      console.log("username is " + s.val() + "type is " + typeof(s.val()));
-      this.setState({name : s.val()});
-    })
+  refresh(){
+        let init = [];
+    firebase.database().ref('solutions/' + this.props.id).once('value', s => {
+      this.setState({ ...s.val(), loaded: true });
+      let comments = s.val().comments;
+      for(let comment in comments){
+        firebase.database().ref('comments/' + comments[comment]).once('value', s => {
+          let name = s.val().creator;
+          firebase.database().ref("profiles/"+name + "/username").once('value', t => {
+            var data = {
+              content: s.val().content,
+              creator: t.val(),
+              dateEdited:s.val().dateEdited
+            }
+            init.push(data);
+            this.setState ({comments : init});
+          });
+        });
+      }
+    });
   }
-
   toggleEditor = () => {
     this.setState({ edit: !this.state.edit });
   }
