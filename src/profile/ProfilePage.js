@@ -210,6 +210,7 @@ export default class ProfilePage extends React.Component {
                 alert('Error has occured during saving process')
             else {
                 this.setState({followed: true})
+                window.location.reload();
               }
             })
     })
