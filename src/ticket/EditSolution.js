@@ -3,6 +3,7 @@ import { Button, Alert } from 'reactstrap';
 import firebase from 'firebase';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import '../common/StyleButton.css';
 
 export default class EditSolution extends React.Component {
   constructor(props) {
@@ -57,8 +58,14 @@ export default class EditSolution extends React.Component {
       <div>
         <ReactQuill value={this.state.content} onChange={this.handleChange} />
         {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
-        <Button onClick={this.handleSubmit}>Submit</Button>
-        <Button onClick={this.props.cancel}>Cancel</Button>
+        <div className='row'>
+          <div className='col-2'>
+            <div className='style-btn-secondary'><Button onClick={this.handleSubmit}>Submit</Button></div>
+          </div>
+          <div className='col-2'>
+            <div className='style-btn-secondary'><Button onClick={this.props.cancel}>Cancel</Button></div>
+          </div>
+        </div>
       </div>
     );
   }
