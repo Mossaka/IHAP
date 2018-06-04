@@ -15,7 +15,8 @@ class ProfileSettingPage extends React.Component {
             biography: null,
             avatar: null,
         },
-        fileState: 'Please pick a picture for your avatar',
+        filetext: 'Please pick a picture for your avatar',
+        fileState: 3,
         file: null,
     };
 
@@ -59,40 +60,10 @@ class ProfileSettingPage extends React.Component {
   }
 
   handleSubmit(event) {
-    // need error handling
-    // console.log(this.props.uid)
-    
-
-    if(this.state.file !== null) {
-        let file = this.state.file
-        let uploadTask = firebase.storage().ref().child('avatars/' + file.name).put(file)
-        uploadTask.on('state_changed', snapshot => {
-            // state change
-            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            this.setState({fileState: 'Upload is ' + progress + '% done'});
-        }, error => {
-            // error handling
-            this.setState({fileState: error})
-        }, () => {
-            // file upload succes
-            uploadTask.snapshot.ref.getDownloadURL().then(url => {
-                this.setState({
-                    profile: {...this.state.profile, avatar: url}, 
-                    fileState: 'file uploading success!'
-                })
-                firebase.database().ref('profiles/' + this.props.uid).update({
-                    ...this.state.profile
-                })
-                this.props.onSubmit();
-            })
-        })
-    } else {
-        firebase.database().ref('profiles/' + this.props.uid).update({
-            ...this.state.profile
-        })
-        this.props.onSubmit();
-    }
-
+    firebase.database().ref('profiles/' + this.props.uid).update({
+        ...this.state.profile
+    })
+    this.props.onSubmit();
     event.preventDefault();
     window.location.reload();
   }
@@ -102,8 +73,26 @@ class ProfileSettingPage extends React.Component {
   }
 
   handleImage(event) {
+    this.setState({filetext: 'File start uploading', fileState: 2})
     let file = event.target.files[0]
-    this.setState({file: file, fileState: 'upload success!'})
+    let uploadTask = firebase.storage().ref().child('avatars/' + file.name).put(file)
+    uploadTask.on('state_changed', snapshot => {
+        // state change
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        this.setState({filetext: 'Upload is ' + progress + '% done'});
+    }, error => {
+        // error handling
+        this.setState({fileState: 2})
+    }, () => {
+        // file upload succes
+        uploadTask.snapshot.ref.getDownloadURL().then(url => {
+            this.setState({
+                profile: {...this.state.profile, avatar: url}, 
+                filetext: 'file uploading success!',
+                fileState: 3
+            })
+        })
+    })
   }
 
 
@@ -144,13 +133,16 @@ class ProfileSettingPage extends React.Component {
             <Row>
                 <FormGroup className="col-md-12">
                     <Label>AVATAR</Label>
-                    <CustomInput id="fileInput" type="file" label={this.state.fileState} onChange={this.handleImage}/>
+                    <CustomInput id="fileInput" type="file" label={this.state.filetext} onChange={this.handleImage}/>
                 </FormGroup>
             </Row>
             <Row>
                 <div className="col-md-12">
                 <div className="btn-group float-right">
-                    <Button type="submit" value="Submit" className="btn btn-info" style={{marginRight:"10px", borderRadius:"4px", width:"80px"}}>Save</Button>
+                    {
+                        this.state.fileState === 3 ? <Button type="submit" value="Submit" className="btn btn-info" style={{marginRight:"10px", borderRadius:"4px", width:"80px"}}>Save</Button>
+                        : <Button disabled type="submit" value="Submit" className="btn btn-info" style={{marginRight:"10px", borderRadius:"4px", width:"80px"}}>Save</Button>
+                    }
                     <Button type="button" className="btn btn-warning" style={{borderRadius:"4px", width:"80px"}} onClick={this.handleCancel}>Cancel</Button>
                 </div>
                 </div>
