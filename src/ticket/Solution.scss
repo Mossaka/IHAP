@@ -1,3 +1,29 @@
 .solution {
   margin-bottom: 16px;
+
+  .bottom {
+    padding: 0 16px 0 16px;
+    .btn {
+      background-color: steelblue;
+    }
+  }
+
+  hr {
+    margin-bottom: 0;
+  }
+
+  .comments {
+    padding-top: 16px;
+    background-color: #fcfcfc;
+
+    div {
+      padding: 0 16px 0 16px;
+      
+      .name {
+        color: steelblue;
+        font-size: 12px;
+        font-weight: bold;
+      }
+    }
+  }
 }
