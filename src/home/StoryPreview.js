@@ -25,7 +25,7 @@ export default class StoryPreview extends React.Component {
       let plaintext = stripHtml(t.content);
       this.setState({
         image: t.image,
-        title: t.title.substring(0, 30),
+        title: t.title,
         content: plaintext.length < 100 ? plaintext : plaintext.substr(0, 97) + '...',
         anonymous: t.anonymous,
         creator: t.creator

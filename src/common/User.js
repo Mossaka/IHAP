@@ -98,12 +98,12 @@ export default class User extends React.Component {
       <div className="user float-right">
         <InputGroup>
           <InputGroupAddon addonType="prepend">
-            <Button className="buttons" color="#FFCD00" onClick={() => this.setState({ mode: 'in' })}>
+            <Button className="buttons" color="#F5B940" onClick={() => this.setState({ mode: 'in' })}>
               <span>Sign In</span>
             </Button>
           </InputGroupAddon>
           <InputGroupAddon addonType="append">
-            <Button className="buttons" color="#FFCD00" onClick={() => this.setState({ mode: 'up' })}>
+            <Button className="buttons" color="#F5B940" onClick={() => this.setState({ mode: 'up' })}>
               <span>Sign Up</span>
             </Button>
           </InputGroupAddon>
