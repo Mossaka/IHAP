@@ -106,6 +106,7 @@ export default class ProfilePage extends React.Component {
         }
       } else {
         this.setState({notsignin: true})
+        this.retriveData(profileUserID);
       }
     })
   }
@@ -260,7 +261,7 @@ export default class ProfilePage extends React.Component {
       }
     }
     else {
-      return <div>Loading</div>
+      return <div>Sign in please</div>
     }
   }
 
