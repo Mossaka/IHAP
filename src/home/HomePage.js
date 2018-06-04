@@ -68,17 +68,17 @@ export default class HomePage extends React.Component {
   render() {
     return (
       <Container className="homepage">
-        <div className="options"> 
+        {/* <div className="options"> 
           <NewProblemButton />
           <GetRandomTicketButton buttonText="Solve a Problem"/>
-        </div> 
-        <h2>Top</h2>
+        </div>  */}
+        <h2>Top Stories</h2>
         <hr />
         <Row>
           {this.state.topCards}
         </Row>
 
-        <h2>Recent</h2>
+        <h2>Recent Stories</h2>
         <hr />
         <Row>
           {this.state.recentCards}

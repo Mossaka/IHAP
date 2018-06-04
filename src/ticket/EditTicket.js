@@ -4,6 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import { Input, FormGroup, Button, Label, Alert } from 'reactstrap';
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
+import '../common/StyleButton.css'
 
 const DEFAULT_CONTENT = 'As a ___, I want a ___ to ___';
 const DEFAULT_IMAGE = "https://www.knowledgedesk.com/wp-content/uploads/2017/10/problem-solution.jpeg"
@@ -100,8 +101,17 @@ class EditTicket extends React.Component {
           </Label>
         </FormGroup>
         {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
-        <Button className="mt-3" onClick={this.handleSubmit}>Submit</Button>
-        {this.props.cancel && <Button onClick={this.props.cancel}>Cancel</Button>}
+
+        <div className='row'>
+          <div className='col-2'>
+            <div className='style-btn-secondary'><Button className="mt-3" onClick={this.handleSubmit}>Submit</Button></div>
+          </div>
+          <div className='col-2'>
+            <div className='style-btn-secondary'>{this.props.cancel && <Button className='mt-3' onClick={this.props.cancel}>Cancel</Button>}</div>
+          </div>
+        </div>
+        
+        
       </div>
     );
   }

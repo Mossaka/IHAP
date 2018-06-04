@@ -14,7 +14,16 @@
 }
 
 #avatar {
-    @extend %avatar;
+    img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        float: left;
+    }
+    a {
+        color: rgba(0, 0, 0, 0.884);
+      }
 }
 
 .username {
@@ -24,4 +33,13 @@
 
 .info {
     margin-top: 25px;
+}
+
+#editbutton {
+    padding-top: 7px;	
+	padding-right: 7px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: none;
 }

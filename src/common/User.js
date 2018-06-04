@@ -77,12 +77,12 @@ export default class User extends React.Component {
   render() {
     if (this.state.loggedIn) {
       return (
-        <div className="user">
+        <div className="user float-right">
           <Link to={'/profile/' + this.state.uid}><img src={this.state.avatar} alt="avatar" /></Link>
           <ButtonDropdown isOpen={this.state.dropdown} toggle={this.toggleDropdown}>
             <Button className="userbutton" id="caret">
               <Link to={'/profile/' + this.state.uid}>
-                {this.state.name}
+                {this.state.name ? this.state.name.substring(0,15) : this.state.name}
               </Link>
             </Button>
             <DropdownToggle className="userbutton" caret />
@@ -95,7 +95,7 @@ export default class User extends React.Component {
     }
 
     return (
-      <div className="user">
+      <div className="user float-right">
         <InputGroup>
           <InputGroupAddon addonType="prepend">
             <Button className="buttons" color="#FFCD00" onClick={() => this.setState({ mode: 'in' })}>

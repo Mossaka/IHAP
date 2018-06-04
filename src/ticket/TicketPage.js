@@ -7,6 +7,7 @@ import EditTicket from './EditTicket';
 import EditSolution from './EditSolution';
 import './TicketPage.css';
 import { GlobalContext } from '../utils/context';
+import '../common/StyleButton.css'
 
 export default class TicketPage extends React.Component {
   constructor(props) {
@@ -43,10 +44,14 @@ export default class TicketPage extends React.Component {
     }
 
     return (
-      <Container className="ticket-page">
+      <Container className="ticket-page mt-3">
         <Row>
           <Col xs="6">
-            <h3>Problem</h3>
+            <Row>
+              <Col>
+              <h3>Problem</h3>
+              </Col>
+            </Row>
             <hr />
             <Ticket id={this.props.match.params.id} gotSolution={this.loadSolutions} />
             <div className="mt-5">
@@ -54,16 +59,22 @@ export default class TicketPage extends React.Component {
             </div>
           </Col>
           <Col xs="6">
-            <h3>Solutions</h3>
+            <Row>
+              <Col>
+                <h3>Solutions</h3>
+              </Col>
+              <Col>
+                {!this.state.newsol && <GlobalContext.Consumer>
+                  {user => user ?
+                    <div className='style-btn'><button className="postSolutionButton" onClick={this.toggleEditor}>Post New Solution</button></div> :
+                      <h3>Sign In to Post</h3>
+                  }
+                  </GlobalContext.Consumer>}
+              </Col>
+            </Row>
             <hr />
             {this.state.solutions.map(s => <Solution key={s} id={s} />)}
             {this.state.newsol && <EditSolution cancel={this.toggleEditor} ticket={this.props.match.params.id} />}
-            {!this.state.newsol && <GlobalContext.Consumer>
-              {user => user ?
-                <Button onClick={this.toggleEditor}>Post New Solution</Button> :
-                <h3>Sign In to Post</h3>
-              }
-            </GlobalContext.Consumer>}
           </Col>
         </Row>
       </Container>

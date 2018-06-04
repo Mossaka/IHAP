@@ -70,7 +70,7 @@ class Header extends React.Component {
     if (this.state.random) {
       searchOrButton = (
         <div className="searchOrRandom">
-          <GetRandomTicketButton buttonText="GET RAND"/>
+          <GetRandomTicketButton buttonText="GET RANDOM TICKET"/>
         </div>
       );
     }
@@ -87,7 +87,11 @@ class Header extends React.Component {
 
     return (
       <nav className="navbar">
-        <Link to="/"><img src={logo} alt="IHAP Logo" /></Link>
+      <div className='container'>
+          <div className='col-2'>
+            <Link to="/"><img src={logo} alt="IHAP Logo" /></Link>
+          </div>
+          <div className='col-7'>
         <div className="center">
           {searchOrButton}
           <div className="lever">
@@ -98,7 +102,11 @@ class Header extends React.Component {
             </div>
           </div>
         </div>
-        <User />
+        </div>
+        <div className='col-3 float-right'>
+          <User />
+        </div>
+        </div>
       </nav>
     );
   }
