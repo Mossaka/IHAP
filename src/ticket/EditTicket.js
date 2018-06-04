@@ -4,6 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import { Input, FormGroup, Button, Label, Alert } from 'reactstrap';
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
+import anony from '../assets/anonymous-avatar.jpg';
 import '../common/StyleButton.css'
 
 const DEFAULT_CONTENT = 'As a ___, I want a ___ to ___';
@@ -24,7 +25,7 @@ class EditTicket extends React.Component {
       this.state = {
         title: '',
         image: '',
-        content: 'DEFAULT_CONTENT',
+        content: 'As a UCSD student, I have a problem of pulling myself up for 8am class, I want an app to help me',
         anonymous: false,
         error: ''
       };
@@ -85,6 +86,10 @@ class EditTicket extends React.Component {
   render() {
     return (
       <div>
+        {/* { this.props.id? <h></h>:
+            <h2>Turn Your Problem into Inspiration</h2>
+        } */}
+        
         <FormGroup>
           <Label>Title</Label>
           <Input type="text" name="title" value={this.state.title} onChange={this.handleChange} required maxLength="64" />
@@ -94,10 +99,13 @@ class EditTicket extends React.Component {
           {this.state.image && <img className="img-thumbnail d-block" src={this.state.image} alt="thumbnail" />}
           <Input type="text" name="image" value={this.state.image} onChange={this.handleChange} required />
         </FormGroup>
-        <ReactQuill value={this.state.content} onChange={this.handleChange} />
+        {
+          this.props.id ? <ReactQuill value={this.state.content} onChange={this.handleChange} />
+          : <ReactQuill placeholder={this.state.content} onChange={this.handleChange} />
+        }
         <FormGroup check>
           <Label check>
-            <Input type="checkbox" name="anonymous" onChange={this.handleChange} checked={this.state.anonymous} /> Anonymous
+            <Input type="checkbox" name="anonymous" onChange={this.handleChange} checked={this.state.anonymous} /> <img src={anony} style={{borderRadius:"50%", width:"30px", height:"30px",marginTop:"3px"}}/> Anonymous
           </Label>
         </FormGroup>
         {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
