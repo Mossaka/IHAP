@@ -78,7 +78,7 @@ export default class User extends React.Component {
     if (this.state.loggedIn) {
       return (
         <div className="user float-right">
-          <Link to={'/profile/' + this.state.uid}><img src={this.state.avatar} alt="avatar" /></Link>
+          <Link to={'/profile/' + this.state.uid}><img src={this.state.avatar} alt="avatar" style={{objectFit:'cover'}}/></Link>
           <ButtonDropdown isOpen={this.state.dropdown} toggle={this.toggleDropdown}>
             <Button className="userbutton" id="caret">
               <Link to={'/profile/' + this.state.uid}>
