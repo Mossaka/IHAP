@@ -62,12 +62,12 @@ export default class UserInfo extends React.Component {
             <div className='row'>
               <a className="username" id="Popover" onClick={this.toggleUserName} style={{ fontSize: '25px', float: 'left' }}>{this.state.username.substring(0, 12)}</a>
               <Popover placement='bottom' isOpen={this.state.isUserNameDropDownOpen} target='Popover' toggle={this.toggleUserName}>
-                <PopoverBody>{this.state.username}</PopoverBody>
+                <PopoverBody>{this.state.firstname.substr(0, 8) + " " + this.state.lastname.substr(0, 8)}</PopoverBody>
               </Popover>
             </div>
-            <div className='row'>
-              <a className="realname pl-1" style={{ fontSize: '20px', float: 'left' }}>{this.state.firstname.substr(0, 8) + " " + this.state.lastname.substr(0, 8)}</a>
-            </div>
+            {/*<div className='row'>
+              <div className="realname pl-1" style={{ fontSize: '20px', float: 'left' }}>{this.state.firstname.substr(0, 8) + " " + this.state.lastname.substr(0, 8)}</div>
+            </div>*/}
           </div>
         </Col>
         <Col xs='auto'>
@@ -82,7 +82,7 @@ export default class UserInfo extends React.Component {
                   <FontAwesome.FaUser width='25px' height='25px' />  <a>Bio</a>
                 </NavLink>
                 <Popover placement='bottom' isOpen={this.state.isBioDropDownOpen} target='Popover1' toggle={this.toggleDropdown}>
-                  <PopoverHeader>Biography</PopoverHeader>
+                  <PopoverHeader>{this.state.firstname.substr(0, 8) + " " + this.state.lastname.substr(0, 8)}</PopoverHeader>
                   <PopoverBody>{this.state.biography}</PopoverBody>
                 </Popover>
                 <NavItem>

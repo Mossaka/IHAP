@@ -62,29 +62,16 @@ export default class SearchPage extends React.Component {
     }
   }
 
-  toNewProblem = () => {
-    if (!firebase.auth().currentUser) {
-      return;
-    }
-    this.props.history.push('/ticket/new');
-  }
-
-  makeButton = (text) => {
-    return (
-      <Button className="postbutton" onClick={this.toNewProblem} color="steelblue">
-        <span>{text}</span>
-      </Button>
-    );
-  }
 
   render() {
     return (
       <Container className="search-page">
-        <div className="title">
-          <h3>Search Results of: {this.props.match.params.keyword}</h3>
-        </div>
+        
         <Row>
           <Col xs={{ size: '9', offset: '1' }}>
+          <div className="title">
+            <h3>Search Results of: {this.props.match.params.keyword}</h3>
+          </div>
             <Nav tabs>
               <NavItem>
                 <NavLink className={`${this.state.show === '1' ? 'active' : ''}`} onClick={() => this.toggleTab('1')}>Tickets</NavLink>

@@ -138,7 +138,7 @@ export default class Solution extends React.Component {
         </div>
         <ReactModal isOpen={this.state.showAnswerForm}>
           <Avatar id={this.state.creator} isAnonymous={false} />
-          <p dangerouslySetInnerHTML={{ __html: this.state.content }} />
+          {/*<p dangerouslySetInnerHTML={{ __html: this.state.content }} />*/}
           <FormGroup>
             <Label >Comment</Label>
             <Input type="textarea" value={this.state.comment} onChange={evt => this.handleCommentChange(evt)} />

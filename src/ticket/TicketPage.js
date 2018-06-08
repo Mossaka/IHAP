@@ -66,15 +66,15 @@ export default class TicketPage extends React.Component {
               <Col>
                 {!this.state.newsol && <GlobalContext.Consumer>
                   {user => user ?
-                    <div className='style-btn'><button className="postSolutionButton" onClick={this.toggleEditor}>Post New Solution</button></div> :
-                      <h3>Sign In to Post</h3>
+                    <Button className="postSolutionButton" onClick={this.toggleEditor}>Post New Solution</Button> :
+                      <div>Sign In to Post</div>
                   }
                   </GlobalContext.Consumer>}
               </Col>
             </Row>
             <hr />
-            {this.state.solutions.map(s => <Solution key={s} id={s} />)}
             {this.state.newsol && <EditSolution cancel={this.toggleEditor} ticket={this.props.match.params.id} />}
+            {this.state.solutions.map(s => <Solution key={s} id={s} />)}
           </Col>
         </Row>
       </Container>

@@ -78,11 +78,12 @@ export default class User extends React.Component {
     if (this.state.loggedIn) {
       return (
         <div className="user float-right">
-          <Link to={'/profile/' + this.state.uid}><img src={this.state.avatar} alt="avatar" style={{objectFit:'cover'}}/></Link>
           <ButtonDropdown isOpen={this.state.dropdown} toggle={this.toggleDropdown}>
             <Button className="userbutton" id="caret">
               <Link to={'/profile/' + this.state.uid}>
-                {this.state.name ? this.state.name.substring(0,15) : this.state.name}
+                <img src={this.state.avatar} alt="avatar" style={{objectFit:'cover'}}/>
+
+                {this.state.name ? "  " + this.state.name.substring(0,15) : "  " + this.state.name}
               </Link>
             </Button>
             <DropdownToggle className="userbutton" caret />

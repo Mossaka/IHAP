@@ -57,6 +57,7 @@ export default class EditSolution extends React.Component {
     return (
       <div>
         <ReactQuill value={this.state.content} onChange={this.handleChange} />
+        <br/>
         {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
         <div className='row'>
           <div className='col-2'>
@@ -66,6 +67,7 @@ export default class EditSolution extends React.Component {
             <div className='style-btn-secondary'><Button onClick={this.props.cancel}>Cancel</Button></div>
           </div>
         </div>
+        <br/>
       </div>
     );
   }

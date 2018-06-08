@@ -15,7 +15,7 @@ class Header extends React.Component {
     super(props);
     this.state = {
       random: false,
-      keyword: '',
+      keyword: ' ',
     };
   }
 
@@ -37,7 +37,7 @@ class Header extends React.Component {
   }
 
   handleKeyPress = e => {
-    this.setState({ keyword: e.target.value });
+    this.setState({ keyword: e.target.value == '' ? ' ' : e.target.value });
     if (e.key === 'Enter') {
       this.search();
     }
@@ -78,8 +78,9 @@ class Header extends React.Component {
       searchOrButton = (
         <InputGroup className="searchOrRandom">
           <Input placeholder="Search" onKeyUp={this.handleKeyPress} />
-          <InputGroupAddon addonType="append">
-            <Button className="searchButton" onClick={this.search}><MdSearch width="25px" height="25px" />Search</Button>
+          
+            <Button className="searchButton" onClick={this.search}><MdSearch width="25px" height="25px"/>Search | Post</Button>
+            <InputGroupAddon addonType="append">
           </InputGroupAddon>
         </InputGroup>
       );

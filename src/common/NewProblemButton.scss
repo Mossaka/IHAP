@@ -4,6 +4,7 @@
     font-size: 16px;
     color: white;
     background-color: steelblue;
+    border: 2px solid steelblue;
     border-radius: 10px;
     margin-top: 30px;
     width: 240px;
@@ -12,6 +13,8 @@
     outline: none;
     margin: 0 auto 0 auto;
     display: block;
+    margin-top: 15px;
+    flex-grow: 1;
 
     span {
       cursor: pointer;
@@ -29,7 +32,8 @@
   }
 
   .postbutton:hover {
-    background-color:#2A6A90;
+    background-color: steelblue;
+    border: 2px solid steelblue;
 
     span {
       padding-right: 20px;

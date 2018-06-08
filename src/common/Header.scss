@@ -15,10 +15,12 @@
     // width: 60%;
 
     .lever {
-      margin-left: 5px;
+      margin-left: 10px;
       display: flex;
       cursor: pointer;
-      border-style: inset;
+      border: inset;
+      border-radius: 5px;
+      background: #333;
 
       img.true {
         transform: rotate(180deg);
@@ -28,14 +30,17 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        color: grey;
+        
+       
 
         div {
-          color: black;
-        }
-
-        div:hover {
-          color: steelblue;
+          color: #DDD;
+          padding-left: 3px;
+          padding-right: 3px;
+          -webkit-user-select: none; /* Safari */        
+          -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* IE10+/Edge */
+          user-select: none; /* Standard */
         }
       }
     }
