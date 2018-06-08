@@ -5,8 +5,6 @@ import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container
 import './SearchPage.css'
 import firebase from 'firebase';
 import { weightedSearch } from '../utils/search';
-import FilterButton from './FilterButton';
-import { GlobalContext } from '../utils/context';
 import NewProblemButton from '../common/NewProblemButton';
 
 export default class SearchPage extends React.Component {

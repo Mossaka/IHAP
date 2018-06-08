@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import { GlobalContext } from '../utils/context';
 import { Button } from 'reactstrap';
 import './NewProblemButton.css'
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class NewProblemButton extends React.Component {
     constructor(props) {

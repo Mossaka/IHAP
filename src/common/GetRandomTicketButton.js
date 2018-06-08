@@ -1,11 +1,9 @@
 import React from 'react';
-import firebase from 'firebase';
-import { GlobalContext } from '../utils/context';
 import { Button } from 'reactstrap';
 import './GetRandomTicketButton.css';
 import { getTickets } from '../utils/store';
 
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class GetRandomTicketButton extends React.Component {
     constructor(props) {

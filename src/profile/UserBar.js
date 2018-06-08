@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Avatar from '../common/Avatar'
 import firebase from 'firebase'
 import './UserBar.css'
-import { Redirect } from 'react-router-dom';
 import UnfollowButton from './UnfollowButton'
 
 // import {MdCancel, MdChat, MdCheck} from 'react-icons/md';

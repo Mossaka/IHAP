@@ -1,16 +1,8 @@
 import React from 'react';
-import { Button } from 'reactstrap';
-import firebase from 'firebase';
 import { MdPersonAdd } from 'react-icons/lib/md';
 import '../common/StyleButton.css';
 
 export default class UnfollowButton extends React.Component {
-    constructor(props) {
-        super(props);
-        
-    } 
-
-
   render() {
     return (
     <div className='style-btn-secondary'>

@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
-import { Card, CardBody, CardText, FormGroup, Label, Input, Button, Row, Col, CardTitle, CardSubtitle } from 'reactstrap';
+import { Card, CardBody, CardText, FormGroup, Label, Input, Button, Row, Col } from 'reactstrap';
 import TimeDisplay from '../common/TimeDisplay';
 import Vote from './Vote';
 import Avatar from '../common/Avatar';

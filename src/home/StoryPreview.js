@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import greycard from '../assets/greycard.jpg';
 import './StoryPreview.css';
 import Bookmark from '../common/Bookmark';
 import Avatar from '../common/Avatar';

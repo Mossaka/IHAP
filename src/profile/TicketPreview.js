@@ -1,10 +1,9 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import './TicketPreview.css'
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
-import { Card, CardBody, CardTitle, CardImg, CardText } from 'reactstrap';
-import { getTicket, getTickets } from '../utils/store'
+import { Card } from 'reactstrap';
+import { getTicket } from '../utils/store'
 import { stripHtml } from '../utils/search';
 
 
