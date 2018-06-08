@@ -76,13 +76,10 @@ class Header extends React.Component {
     }
     else {
       searchOrButton = (
-        <InputGroup className="searchOrRandom">
-          <Input placeholder="Search" onKeyUp={this.handleKeyPress} />
-          
-            <Button className="searchButton" onClick={this.search}><MdSearch width="25px" height="25px"/>Search | Post</Button>
-            <InputGroupAddon addonType="append">
-          </InputGroupAddon>
-        </InputGroup>
+        <div className="searchOrRandom">
+          <Input placeholder="What's bothering you?" onKeyUp={this.handleKeyPress} />
+          <Button className="searchButton" onClick={this.search}><MdSearch width="25px" height="25px"/>Search | Post</Button>
+        </div>
       );
     }
 
@@ -90,7 +87,7 @@ class Header extends React.Component {
       <nav className="navbar">
       <div className='container'>
           <div className='col-2'>
-            <Link to="/"><img src={logo} alt="IHAP Logo" /></Link>
+            <Link to="/" className="logo"><img src={logo} alt="IHAP Logo" /><h3>I.H.A.P.</h3></Link>
           </div>
           <div className='col-7'>
         <div className="center">

@@ -4,7 +4,9 @@
   background-color: white;
   padding: 7px 15px 7px 15px;
   border-bottom: 2px solid lightgray;
-
+  .logo:hover {
+    text-decoration: none;
+  }
   img {
     height: 80px;
   }
