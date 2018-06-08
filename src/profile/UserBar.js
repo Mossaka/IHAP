@@ -15,57 +15,33 @@ export default class TicketBar extends React.Component {
 
     this.state = {
       avatar: avatar,
-      username: "Username",
-      // redirect: false,
+      username: "Username"
     }
-
-    // this.changeRoute = this.changeRoute.bind(this);
   }
 
   componentDidMount() {
     const uid = this.props.uid;
     firebase.database().ref('profiles/' + uid).once('value').then(snapshot => {
-      this.setState({...snapshot.val()})
+      this.setState({ ...snapshot.val() })
     });
   }
-  
-  // changeRoute(e) {
-  //   e.preventDefault();
-  //   this.setState({redirect: true,})
-  // }
 
   render() {
-    // if(this.state.redirect)
-    //     return <Redirect push to={"/profile/" + this.props.uid }/>;
-    return(
-        // <div>
-        //   <Navbar>
-        //     <NavbarBrand href={"/profile" + this.props.uid}>
-        //     <Avatar id={this.props.uid} isAnonymous={false} />
-        //     </NavbarBrand>
-        //     <Nav>
-        //       <NavItem navbar>
-        //         <NavLink href={"/profile/" + this.props.uid}>view</NavLink>
-        //       </NavItem>
-        //     </Nav>
-        //   </Navbar>
-        // </div>
-
-        <Link className="clickable-card " to={'/profile/' + this.props.uid} style={{ textDecoration: 'none' }} >
+    return (
+      <Link className="clickable-card " to={'/profile/' + this.props.uid} style={{ textDecoration: 'none' }} >
         <div className='user-preview'>
           <div className='row'>
-          <div className='col-6'>
-            <Avatar id={this.props.uid} isAnonymous={false} />
+            <div className='col-6'>
+              <Avatar id={this.props.uid} isAnonymous={false} />
+            </div>
+            {this.props.currentUser ?
+              <div className='col-6'>
+                <UnfollowButton handleUnfollow={(e) => this.props.handleUnfollow(e, this.props.uid)} />
+              </div> : <div></div>
+            }
           </div>
-          { this.props.currentUser ? 
-          <div className='col-6'>
-              <UnfollowButton handleUnfollow = {(e) => this.props.handleUnfollow(e, this.props.uid)} />
-          </div> : <div></div>
-          }
-          </div>
-          
         </div>
-        </Link>
+      </Link>
     )
   }
 }
