@@ -107,7 +107,6 @@ export default class ProfilePage extends React.Component {
       db.ref('networks/' + this.state.profileUserID + '/followedUsers/').push(this.state.loginUserID, error => {
         this.setState({ followed: true })
         window.location.reload();
-
       })
     })
   }
@@ -170,6 +169,8 @@ export default class ProfilePage extends React.Component {
             bookmarked={this.state.bookmarked}
             followedUsers={this.state.followedUsers}
             followingUsers={this.state.followingUsers}
+            currentUser = {this.state.currentUser}
+            handleUnfollow={this.handleUnfollow}
           />
         </Container>
       )

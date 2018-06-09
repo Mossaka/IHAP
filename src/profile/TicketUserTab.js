@@ -13,19 +13,10 @@ export default class TicketUserTab extends React.Component {
     this.state = {
       activeTab: '1',
       userTab: '1',
-      tickets: [],
-      solutions: [],
-      bookmarked: [],
-      followedUsers: [],
-      followingUsers: [],
     }
 
     this.toggle = this.toggle.bind(this)
     this.toggleUserTab = this.toggleUserTab.bind(this)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({ ...nextProps })
   }
 
   toggle(tab) {
@@ -68,12 +59,12 @@ export default class TicketUserTab extends React.Component {
     )
   }
 
-  generateUserBarGivenUserList(userList) {
+  generateUserBarGivenUserList(userList, currentUser=false) {
     return (
       <div>
         {Object.keys(userList).map((key, index) =>
           <div className='pt-3' key={index}>
-            <UserBar uid={userList[key]} handleUnfollow={this.handleUnfollow} currentUser={this.state.currentUser} />
+            <UserBar uid={userList[key]} handleUnfollow={this.props.handleUnfollow} currentUser={currentUser} />
           </div>
         )}
       </div>
@@ -105,13 +96,13 @@ export default class TicketUserTab extends React.Component {
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId='1'>
                 {/* here is a problem */}
-                {this.generateTicketBarGivenTicketList(this.state.tickets)}
+                {this.generateTicketBarGivenTicketList(this.props.tickets)}
               </TabPane>
               <TabPane tabId='2'>
-                {this.generateSolutionBarGivenSolutionList(this.state.solutions)}
+                {this.generateSolutionBarGivenSolutionList(this.props.solutions)}
               </TabPane>
               <TabPane tabId='3'>
-                {this.generateTicketBarGivenTicketList(this.state.bookmarked)}
+                {this.generateTicketBarGivenTicketList(this.props.bookmarked)}
               </TabPane>
             </TabContent>
           </div>
@@ -132,10 +123,10 @@ export default class TicketUserTab extends React.Component {
             </Nav>
             <TabContent activeTab={this.state.userTab}>
               <TabPane tabId='1'>
-                {this.generateUserBarGivenUserList(this.state.followingUsers)}
+                {this.generateUserBarGivenUserList(this.props.followingUsers, this.props.currentUser)}
               </TabPane>
               <TabPane tabId='2'>
-                {this.generateUserBarGivenUserList(this.state.followedUsers)}
+                {this.generateUserBarGivenUserList(this.props.followedUsers)}
               </TabPane>
             </TabContent>
           </div>
@@ -151,4 +142,6 @@ TicketUserTab.PropTypes = {
   tickets: PropTypes.array,
   solutions: PropTypes.array,
   Bookmarked: PropTypes.array,
+  currentUser: PropTypes.bool,
+  handleUnfollow: PropTypes.func,
 }
