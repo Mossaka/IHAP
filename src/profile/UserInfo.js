@@ -52,7 +52,7 @@ export default class UserInfo extends React.Component {
     return (
     <div className='user-info'>
       <Row>
-        <div className='col-lg-3'>
+        <div className='col-lg-3 col-md-5 col-sm-7'>
           <div id="user">
             <div id="avatar">
               <img src={this.state.avatar} alt='avatar' />
@@ -68,7 +68,7 @@ export default class UserInfo extends React.Component {
             </div>
           </div>
         </div>
-        <div className='col-lg-6'>
+        <div className='col-lg-6 col-md-4 col-sm-4'>
           <div className="info float-left">
             <Nav>
               <Row>
@@ -87,7 +87,7 @@ export default class UserInfo extends React.Component {
             </Nav>
           </div>
         </div>
-        <div className='col-lg-3'>
+        <div className='col-lg-3 col-md-2 col-sm-1'>
           <div id="follow" className='float-right' style={{ bottom: '0', float: 'right' }}>
             {this.props.toggleButton()}
           </div>
