@@ -1,6 +1,11 @@
 ## Get Started
-npm install
-npm start
+1. npm install
+2. npm start
+
+## Deployment Guide
+1. npx firebase login (only required for the first time)
+2. npm run build
+3. npm run deploy
 
 ## Style Guide
 1. 2 spaces indentation, semicolon at the end of line, single quote string
