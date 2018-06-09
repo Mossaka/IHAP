@@ -1,7 +1,6 @@
 import React from 'react';
 import {Nav, NavItem, NavLink, TabContent, TabPane, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 import TicketPreview from './TicketPreview';
 import UserBar from './UserBar';
 
@@ -134,14 +133,4 @@ export default class TicketUserTab extends React.Component {
       </Row>
     );
   }
-}
-
-TicketUserTab.PropTypes = {
-  followingUsers: PropTypes.array,
-  followedUsers: PropTypes.array,
-  tickets: PropTypes.array,
-  solutions: PropTypes.array,
-  Bookmarked: PropTypes.array,
-  currentUser: PropTypes.bool,
-  handleUnfollow: PropTypes.func,
 }
