@@ -53,8 +53,8 @@ export default class UserInfo extends React.Component {
   render() {
     return (
     <div className='user-info'>
-      <Row xs="8">
-        <Col xs='3'>
+      <Row>
+        <div className='col-lg-3'>
           <div id="user">
             <div id="avatar">
               <img src={this.state.avatar} alt='avatar' />
@@ -62,15 +62,15 @@ export default class UserInfo extends React.Component {
             <div className='row'>
               <a className="username" id="Popover" onClick={this.toggleUserName} style={{ fontSize: '25px', float: 'left' }}>{this.state.username.substring(0, 12)}</a>
               <Popover placement='bottom' isOpen={this.state.isUserNameDropDownOpen} target='Popover' toggle={this.toggleUserName}>
-                <PopoverBody>{this.state.firstname.substr(0, 8) + " " + this.state.lastname.substr(0, 8)}</PopoverBody>
+                <PopoverBody>{this.state.username}</PopoverBody>
               </Popover>
             </div>
-            {/*<div className='row'>
+            <div className='row'>
               <div className="realname pl-1" style={{ fontSize: '20px', float: 'left' }}>{this.state.firstname.substr(0, 8) + " " + this.state.lastname.substr(0, 8)}</div>
-            </div>*/}
+            </div>
           </div>
-        </Col>
-        <Col xs='auto'>
+        </div>
+        <div className='col-lg-6'>
           <div className="info float-left">
             <Nav>
               <Row>
@@ -91,12 +91,12 @@ export default class UserInfo extends React.Component {
               </Row>
             </Nav>
           </div>
-        </Col>
-        <Col>
+        </div>
+        <div className='col-lg-3'>
           <div id="follow" className='float-right' style={{ bottom: '0', float: 'right' }}>
             {this.props.toggleButton()}
           </div>
-        </Col>
+        </div>
       </Row>
     </div>);
   }

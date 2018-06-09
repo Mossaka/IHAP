@@ -46,7 +46,7 @@ export default class TicketPage extends React.Component {
     return (
       <Container className="ticket-page mt-3">
         <Row>
-          <Col xs="6">
+          <Col md="6">
             <Row>
               <Col>
               <h3>Problem</h3>
@@ -58,7 +58,7 @@ export default class TicketPage extends React.Component {
               <RelateTicket id={this.props.match.params.id} />
             </div>
           </Col>
-          <Col xs="6">
+          <Col md="6">
             <Row>
               <Col>
                 <h3>Solutions</h3>

@@ -74,7 +74,7 @@ export default class TicketUserTab extends React.Component {
   render() {
     return (
       <Row>
-        <Col xs='8'>
+        <Col lg='8'>
           <div id="tabs">
             <Nav tabs>
               <NavItem>
@@ -107,7 +107,7 @@ export default class TicketUserTab extends React.Component {
             </TabContent>
           </div>
         </Col>
-        <Col xs='4'>
+        <Col lg='4'>
           <div id="tabs">
             <Nav tabs>
               <NavItem>

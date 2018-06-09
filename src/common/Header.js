@@ -86,10 +86,10 @@ class Header extends React.Component {
     return (
       <nav className="navbar">
       <div className='container'>
-          <div className='col-2'>
+          <div className='col-lg-2 col-md-3'>
             <Link to="/" className="logo"><img src={logo} alt="IHAP Logo" /><h3>I.H.A.P.</h3></Link>
           </div>
-          <div className='col-7'>
+          <div className='col-lg-7 col-md-6'>
         <div className="center">
           {searchOrButton}
           <div className="lever" onClick={this.toggleRandom}>
@@ -101,7 +101,7 @@ class Header extends React.Component {
           </div>
         </div>
         </div>
-        <div className='col-3 float-right'>
+        <div className='col-lg-3 col-md-3 float-right'>
           <User />
         </div>
         </div>
