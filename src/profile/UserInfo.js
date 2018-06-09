@@ -40,13 +40,13 @@ export default class UserInfo extends React.Component {
 
   toggleDropdown() {
     this.setState({
-      isUserNameDropDownOpen: !this.state.isUserNameDropDownOpen
+      isBioDropDownOpen: !this.state.isBioDropDownOpen
     });
   }
 
   toggleUserName(){
     this.setState({
-      isBioDropDownOpen: !this.state.isBioDropDownOpen
+      isUserNameDropDownOpen: !this.state.isUserNameDropDownOpen
     })
   }
 
