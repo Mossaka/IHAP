@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchPreview from './SearchPreview';
 import UserPreview from './UserPreview';
-import { Button, Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
+import { Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
 import './SearchPage.css'
 import firebase from 'firebase';
 import { weightedSearch } from '../utils/search';
