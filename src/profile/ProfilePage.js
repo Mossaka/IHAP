@@ -22,7 +22,7 @@ export default class ProfilePage extends React.Component {
       followedUsers: [],
       currentUser: null,
       followed: false,
-      profileUserID: null,
+      profileUserID: this.props.match.params.id,
       loginUserID: null,
     };
 
