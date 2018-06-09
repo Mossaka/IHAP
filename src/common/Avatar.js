@@ -13,17 +13,33 @@ export default class Avatar extends React.Component {
       link: '#'
     };
   }
-  
+
   componentDidMount() {
     if (this.props.isAnonymous) return;
-    
-    firebase.database().ref('profiles/' + this.props.id).once('value', snapshot => {
-      this.setState({ 
+    this.refresh(this.props.id);
+  }
+
+  shouldComponentUpdate(nextProp) {
+    if (this.props.isAnonymous) return true;
+    if (nextProp.id !== this.props.id) {
+      this.refresh(nextProp.id);
+      return false;
+    }
+    return true;
+  }
+
+  refresh(id) {
+    firebase.database().ref('profiles/' + id).once('value', snapshot => {
+      this.setState({
         username: snapshot.val().username,
-        link: '/profile/' + this.props.id
+        link: '/profile/' + id
       });
-      if (snapshot.val().avatar)
+      if (snapshot.val().avatar) {
         this.setState({ avatar: snapshot.val().avatar });
+      }
+      else {
+        this.setState({ avatar: anonymousAvatar });
+      }
     });
   }
 
