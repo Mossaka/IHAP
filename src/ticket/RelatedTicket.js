@@ -14,19 +14,19 @@ export default class RelatedTicket extends React.Component {
   }
 
   componentDidMount() {
-    this.refresh();
+    this.refresh(this.props.id);
   }
 
   shouldComponentUpdate(nextProps) {
     if (nextProps.id !== this.props.id) {
-      this.refresh();
+      this.refresh(nextProps.id);
       return false;
     }
     return true;
   }
 
-  refresh() {
-    getTicket(this.props.id, t => {
+  refresh(tid) {
+    getTicket(tid, t => {
       let title = t.title.toLowerCase();
       let content = stripHtml(t.content).toLowerCase();
       let keyword = title + ' ' + content;
@@ -38,7 +38,7 @@ export default class RelatedTicket extends React.Component {
         getTickets(tickets => {
           let related = [];
           for (let id of ids) {
-            if(id !== this.props.id) related.push({ id, title: tickets[id].title });
+            if (id !== tid) related.push({ id, title: tickets[id].title });
           }
           this.setState({ related });
         });
