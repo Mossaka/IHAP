@@ -1,6 +1,8 @@
 ## Get Started
-1. npm install
-2. npm start
+1. clone this repo
+2. cd into the root directory of this repo
+3. npm install
+4. npm start
 
 ## Deployment Guide
 1. npx firebase login (only required for the first time)
@@ -8,9 +10,9 @@
 3. npm run deploy
 
 ## Style Guide
-1. 2 spaces indentation, semicolon at the end of line, single quote string
-2. double quote in JSX
-3. put scss files next to your component
+1. 2 spaces indentation
+2. add a semicolon at the end of a statement
+3. use single quote for JS string, use double quote for html
 
 ## How To SASS
 1. add a class name to your component root
