@@ -5,6 +5,7 @@
   "dependencies": {
     "bootstrap": "^4.0.0",
     "firebase": "^5.0.4",
+    "firebase-tools": "^3.18.6",
     "node-sass-chokidar": "^1.3.0",
     "npm-run-all": "^4.1.3",
     "react": "^16.4.0",
@@ -12,13 +13,15 @@
     "react-icons": "^2.2.7",
     "react-modal": "^3.4.5",
     "react-quill": "^1.2.7",
-    "react-router-dom": "^4.2.2",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
-    "reactstrap": "^6.0.1"
+    "reactstrap": "^6.1.0"
   },
   "scripts": {
     "sass:w": "node-sass-chokidar src -w -o src",
     "react": "react-scripts start",
-    "start": "run-p sass:w react"
+    "start": "run-p sass:w react",
+    "build": "react-scripts build",
+    "deploy": "firebase deploy"
   }
 }
