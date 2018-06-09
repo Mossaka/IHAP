@@ -9,11 +9,11 @@ import '../common/StyleButton.css'
 
 const DEFAULT_CONTENT = 'As a ___, I want a ___ to ___';
 const DEFAULT_IMAGE = "https://www.knowledgedesk.com/wp-content/uploads/2017/10/problem-solution.jpeg"
-const EMPTY = ''; 
+const EMPTY = '';
 
 class EditTicket extends React.Component {
 
-  
+
   constructor(props) {
     super(props);
     if (props.preload)
@@ -48,7 +48,7 @@ class EditTicket extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.content == DEFAULT_CONTENT || !this.state.title) {
+    if (this.state.content === DEFAULT_CONTENT || !this.state.title) {
       this.setState({ error: 'Content can not be empty' });
       return;
     }
@@ -60,7 +60,7 @@ class EditTicket extends React.Component {
           anonymous: this.state.anonymous,
           content: this.state.content,
           dateEdited: new Date().getTime(),
-          image: this.state.image == EMPTY ? DEFAULT_IMAGE : this.state.image,
+          image: this.state.image === EMPTY ? DEFAULT_IMAGE : this.state.image,
           title: this.state.title,
         });
       window.location.reload();
@@ -72,7 +72,7 @@ class EditTicket extends React.Component {
           content: this.state.content,
           creator: firebase.auth().currentUser.uid,
           dateEdited: new Date().getTime(),
-          image: this.state.image == EMPTY ? DEFAULT_IMAGE : this.state.image,
+          image: this.state.image === EMPTY ? DEFAULT_IMAGE : this.state.image,
           title: this.state.title,
           upvote: 0,
           downvote: 0
@@ -89,7 +89,7 @@ class EditTicket extends React.Component {
         {/* { this.props.id? <h></h>:
             <h2>Turn Your Problem into Inspiration</h2>
         } */}
-        
+
         <FormGroup>
           <Label>Title</Label>
           <Input type="text" name="title" value={this.state.title} onChange={this.handleChange} required maxLength="64" />
@@ -101,11 +101,13 @@ class EditTicket extends React.Component {
         </FormGroup>
         {
           this.props.id ? <ReactQuill value={this.state.content} onChange={this.handleChange} />
-          : <ReactQuill placeholder={this.state.content} onChange={this.handleChange} />
+            : <ReactQuill placeholder={this.state.content} onChange={this.handleChange} />
         }
         <FormGroup check>
           <Label check>
-            <Input type="checkbox" name="anonymous" onChange={this.handleChange} checked={this.state.anonymous} /> <img src={anony} style={{borderRadius:"50%", width:"30px", height:"30px",marginTop:"3px"}}/> Anonymous
+            <Input type="checkbox" name="anonymous" onChange={this.handleChange} checked={this.state.anonymous} />
+            <img src={anony} style={{ borderRadius: "50%", width: "30px", height: "30px", marginTop: "3px" }} alt="anonymous" />
+            Anonymous
           </Label>
         </FormGroup>
         {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
@@ -118,8 +120,8 @@ class EditTicket extends React.Component {
             <div className='style-btn-secondary'>{this.props.cancel && <Button className='mt-3' onClick={this.props.cancel}>Cancel</Button>}</div>
           </div>
         </div>
-        
-        
+
+
       </div>
     );
   }

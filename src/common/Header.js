@@ -4,7 +4,7 @@ import logo from '../assets/logo.png';
 import lever from '../assets/lever.png';
 import User from './User';
 import './Header.css';
-import { Button, Input, InputGroup, InputGroupAddon } from 'reactstrap';
+import { Button, Input } from 'reactstrap';
 import { MdSearch } from 'react-icons/lib/md';
 import { getTickets } from '../utils/store';
 import GetRandomTicketButton from '../common/GetRandomTicketButton';
@@ -37,7 +37,7 @@ class Header extends React.Component {
   }
 
   handleKeyPress = e => {
-    this.setState({ keyword: e.target.value == '' ? ' ' : e.target.value });
+    this.setState({ keyword: e.target.value === '' ? ' ' : e.target.value });
     if (e.key === 'Enter') {
       this.search();
     }
