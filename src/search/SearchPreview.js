@@ -40,7 +40,7 @@ export default class SearchPreview extends React.Component {
               <p>{this.state.ticketDetails}</p>
             </Link>
           </div>
-          {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} hor />}
+          {this.state.creator && <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} />}
           <Bookmark id={this.props.id} />
          </div>
       </div>

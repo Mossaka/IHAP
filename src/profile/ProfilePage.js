@@ -80,7 +80,6 @@ export default class ProfilePage extends React.Component {
   }
 
   retriveData(uid) {
-    console.log('here')
     let db = firebase.database();
     db.ref('profiles/' + uid).once('value').then(snapshot => {
       const profiles = { ...snapshot.val() }

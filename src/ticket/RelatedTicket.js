@@ -47,7 +47,7 @@ export default class RelatedTicket extends React.Component {
   }
 
   generateRelatedTicket(t) {
-    return <ListGroupItem><Link key={t.id} to={'/ticket/' + t.id}>{t.title}</Link></ListGroupItem>;
+    return <ListGroupItem key={t.id}><Link to={'/ticket/' + t.id}>{t.title}</Link></ListGroupItem>;
   }
 
   render() {

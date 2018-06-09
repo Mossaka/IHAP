@@ -2,7 +2,6 @@ import React from 'react';
 import { Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import { Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import * as FontAwesome from 'react-icons/lib/fa';
-import PropTypes from 'prop-types';
 import anonymousAvatar from '../assets/anonymous-avatar.jpg';
 import firebase from 'firebase';
 import './UserInfo.css'
@@ -18,7 +17,6 @@ export default class UserInfo extends React.Component {
       firstname: "Loading",
       lastname: "",
       username: "Loading",
-      title: "Loading",
       isUserNameDropDownOpen: false,
       isBioDropDownOpen: false,
     }
@@ -79,15 +77,12 @@ export default class UserInfo extends React.Component {
                     <FontAwesome.FaEnvelope width='25px' height='25px' />  {this.state.email}</NavLink>
                 </NavItem>
                 <NavLink id='Popover1' onClick={this.toggleDropdown}>
-                  <FontAwesome.FaUser width='25px' height='25px' />  <a>Bio</a>
+                  <FontAwesome.FaUser width='25px' height='25px' />Bio
                 </NavLink>
                 <Popover placement='bottom' isOpen={this.state.isBioDropDownOpen} target='Popover1' toggle={this.toggleDropdown}>
                   <PopoverHeader>{this.state.firstname.substr(0, 8) + " " + this.state.lastname.substr(0, 8)}</PopoverHeader>
                   <PopoverBody>{this.state.biography}</PopoverBody>
                 </Popover>
-                <NavItem>
-                  <NavLink> <FontAwesome.FaBriefcase width='25px' height='25px' />  {this.state.title ? this.state.title.substring(0, 10) : 'Awesome Human'}</NavLink>
-                </NavItem>
               </Row>
             </Nav>
           </div>
@@ -100,10 +95,4 @@ export default class UserInfo extends React.Component {
       </Row>
     </div>);
   }
-}
-
-UserInfo.PropTypes = {
-  profileUserID: PropTypes.string,
-  toggleButton: PropTypes.func,
-
 }

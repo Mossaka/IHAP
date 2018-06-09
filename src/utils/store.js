@@ -24,6 +24,5 @@ export function getTicket(key, cb) {
 export function loadTickets() {
   firebase.database().ref('tickets').on('value', snapshot => {
     tickets = snapshot.val();
-    console.log('tickets loaded')
   });
 }

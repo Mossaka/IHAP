@@ -48,7 +48,7 @@ export default class Avatar extends React.Component {
       <div className="avatar">
         <Link to={this.state.link}>
           <img src={this.state.avatar} alt="avatar" />
-          <a className={`${this.props.hor ? 'd-inline' : ''}`}>{' ' + this.state.username.substring(0, 15)}</a>
+          <span>{' ' + this.state.username.substring(0, 15)}</span>
         </Link>
       </div>
     );

@@ -55,7 +55,7 @@ export default class Ticket extends React.Component {
           <CardTitle>{this.state.title}</CardTitle>
           <Row>
             <Col>
-              <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} hor />
+              <Avatar id={this.state.creator} isAnonymous={this.state.anonymous} />
             </Col>
             <Col>
               <EditButton id={this.state.creator} onClick={this.toggleEditor} />

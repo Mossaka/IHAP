@@ -89,7 +89,6 @@ export default class Solution extends React.Component {
   }
   handleOpenModal = () => {
     this.setState({ showAnswerForm: true });
-    console.log(this.state.comments);
   }
   handleCloseModal = () => {
     this.setState({ showAnswerForm: false });
