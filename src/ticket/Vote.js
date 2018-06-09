@@ -197,11 +197,11 @@ export default class Vote extends React.Component {
   render() {
     return (
       <div className="d-flex vote">
-        <div className="upvote">
-          <MdArrowUpward width="20" height="20" onClick={this.handleUpVote} style={{color:'rgb(83, 129, 176)'}} /> {this.state.up}
+        <div className="upvote" onClick={this.handleUpVote} >
+          <MdArrowUpward width="20" height="20" style={{color:'rgb(83, 129, 176)'}} /> {this.state.up}
         </div>
-        <div className='downvote'>
-          {this.state.down} <MdArrowDownward width="20" height="20" onClick={this.handleDownVote} style={{color:'rgb(83, 129, 176)'}}/>
+        <div className='downvote' onClick={this.handleDownVote} >
+          {this.state.down} <MdArrowDownward width="20" height="20" style={{color:'rgb(83, 129, 176)'}}/>
         </div>
       </div>
     );
