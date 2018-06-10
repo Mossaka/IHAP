@@ -7,7 +7,7 @@ import logo from '../assets/logo.png';
 import lever from '../assets/lever.png';
 import User from './User';
 import './Header.css';
-import { Button, Input } from 'reactstrap';
+import { Button, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 import { MdSearch } from 'react-icons/lib/md';
 import { getTickets } from '../utils/store';
 import GetRandomTicketButton from '../common/GetRandomTicketButton';
@@ -78,10 +78,12 @@ class Header extends React.Component {
     }
     else {
       searchOrButton = (
-        <div className="searchOrRandom">
-          <Input placeholder="What's bothering you?" onKeyUp={this.handleKeyPress} />
-          <Button className="searchButton" onClick={this.search}><MdSearch width="25px" height="25px" />Search | Post</Button>
-        </div>
+        <InputGroup className="searchOrRandom">
+          <Input className="input" placeholder="What's bothering you?" onKeyUp={this.handleKeyPress} />
+          <InputGroupAddon addonType="append">
+            <Button className="searchButton" onClick={this.search}><MdSearch width="25px" height="25px" />Search | Post</Button>
+          </InputGroupAddon>
+        </InputGroup>
       );
     }
 
