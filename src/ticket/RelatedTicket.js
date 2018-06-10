@@ -7,6 +7,7 @@ import { weightedSearch } from '../utils/search';
 import { stripHtml } from '../utils/search';
 import { getTicket, getTickets } from '../utils/store';
 import { Link } from 'react-router-dom';
+import './RelatedTicket.css';
 
 export default class RelatedTicket extends React.Component {
   constructor(props) {
@@ -50,7 +51,7 @@ export default class RelatedTicket extends React.Component {
   }
 
   generateRelatedTicket(t) {
-    return <ListGroupItem key={t.id}><Link to={'/ticket/' + t.id}>{t.title}</Link></ListGroupItem>;
+    return <ListGroupItem key={t.id}><Link className="link" to={'/ticket/' + t.id}>{t.title}</Link></ListGroupItem>;
   }
 
   render() {
@@ -65,7 +66,7 @@ export default class RelatedTicket extends React.Component {
     }
 
     return (
-      <Card>
+      <Card className="relatedtickets">
         <CardBody>
           <CardTitle>Related Tickets</CardTitle>
           <ListGroup>

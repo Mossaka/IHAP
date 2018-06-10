@@ -58,12 +58,12 @@ export default class Signup extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="signUp">
         <FormGroup>
-          <Label>User Name</Label>
+          <Label>Username</Label>
           <Input type="text" name="name" onChange={this.handleChange} value={this.state.name} required  maxlength="32"/>
         </FormGroup>
         <FormGroup>
-          <Label>Email Addess</Label>
-          <Input type="email" name="email" onChange={this.handleChange} value={this.state.email} required />
+          <Label>Email Address</Label>
+          <Input type="email" name="email" onChange={this.handleChange} value={this.state.email} required maxlength="64"/>
         </FormGroup>
         <FormGroup>
           <Label>Password</Label>

@@ -70,7 +70,7 @@ export default class ProfilePage extends React.Component {
         }
       }
       else {
-        this.setState({ notsignin: true });
+        this.setState({ profileUserID: profileUserID })
         this.retriveData(profileUserID);
       }
     })
@@ -158,8 +158,9 @@ export default class ProfilePage extends React.Component {
     } 
     else {
       return (
-        <Container>
+        <Container className="profilepage">
           <UserInfo profileUserID={this.state.profileUserID} toggleButton={this.toggleButton} />
+          <br/>
           <TicketUserTab
             tickets={this.state.tickets}
             solutions={this.state.solutions}

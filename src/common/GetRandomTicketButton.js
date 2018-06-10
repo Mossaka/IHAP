@@ -34,7 +34,7 @@ class GetRandomTicketButton extends React.Component {
 
   makeButton = (text) => {
     return (
-      <Button className="randomButton" onClick={this.loadRandomTicket} >
+      <Button className="randomButton" onClick={this.loadRandomTicket}>
         {text}
       </Button>
     );

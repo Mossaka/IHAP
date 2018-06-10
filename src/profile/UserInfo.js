@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { Nav, NavItem, NavLink, Row } from 'reactstrap';
-import { Popover, PopoverHeader, PopoverBody } from 'reactstrap';
+import { Popover, PopoverBody } from 'reactstrap';
 import * as FontAwesome from 'react-icons/lib/fa';
 import anonymousAvatar from '../assets/anonymous-avatar.jpg';
 import firebase from 'firebase';
@@ -77,10 +77,9 @@ export default class UserInfo extends React.Component {
                       <FontAwesome.FaEnvelope width="25px" height="25px" />  {this.state.email}</NavLink>
                   </NavItem>
                   <NavLink id="Popover1" onClick={this.toggleDropdown}>
-                    <FontAwesome.FaUser width="25px" height="25px" />Bio
+                    <FontAwesome.FaUser width="25px" height="25px" />Biography
                 </NavLink>
                   <Popover placement="bottom" isOpen={this.state.isBioDropDownOpen} target="Popover1" toggle={this.toggleDropdown}>
-                    <PopoverHeader>{this.state.firstname.substr(0, 8) + " " + this.state.lastname.substr(0, 8)}</PopoverHeader>
                     <PopoverBody>{this.state.biography}</PopoverBody>
                   </Popover>
                 </Row>

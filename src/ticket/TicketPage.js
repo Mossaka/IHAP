@@ -84,8 +84,8 @@ export default class TicketPage extends React.Component {
               <Col>
                 {!this.state.newsol && <GlobalContext.Consumer>
                   {user => user ?
-                    <Button className="postSolutionButton" onClick={this.toggleEditor}>Post New Solution</Button> :
-                      <div>Sign In to Post</div>
+                    <Button className="postSolutionButton" onClick={this.toggleEditor}>Post a Solution</Button> :
+                    <Button className="postSolutionButton" >Sign in to Post a Solution</Button> 
                   }
                   </GlobalContext.Consumer>}
               </Col>

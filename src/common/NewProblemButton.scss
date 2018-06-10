@@ -1,10 +1,12 @@
+@import '../_global';
+
 .newProblemButton {
   .postbutton {
     font-family: Verdana, sans-serif;
     font-size: 16px;
     color: white;
-    background-color: steelblue;
-    border: 2px solid steelblue;
+    background-color: $blue-button-color;
+    border: 2px solid $blue-button-color;
     border-radius: 10px;
     margin-top: 30px;
     width: 240px;
@@ -32,8 +34,8 @@
   }
 
   .postbutton:hover {
-    background-color: steelblue;
-    border: 2px solid steelblue;
+    background-color: $blue-button-hover-color;
+    border: 2px solid $blue-button-hover-color;
 
     span {
       padding-right: 20px;
