@@ -33,10 +33,9 @@ Our website allows new users to create their own accounts easily. However, we al
 
 ## Contacts for Technical Support
 
-Sui (Shawn) Gao (858-353-5554) sugao@ucsd.edu Software Architect
-
-Jiaxiao (Joe) Zhou (444-996-3942) jiz417@ucsd.edu Project Manager
-
+  * Sui (Shawn) Gao (858-353-5554) sugao@ucsd.edu Software Architect
+  
+  * Jiaxiao (Joe) Zhou (444-996-3942) jiz417@ucsd.edu Project Manager
 
 ## Directory Structure
 | Directory 	| Usage         |
@@ -66,7 +65,7 @@ We didn’t organize our source code in a traditional MVC manner, but the MVC pa
 Concurrent operations from multiple instances of the application may cause undesired outcomes. Such as a negative number of votes.
 
 ## Team
-We Have A Problem (WHAP)
+We Have A Problem (W.H.A.P.)
 
 ## Members
 Project Manager: 			Jiaxiao “Joe” Zhou
@@ -79,9 +78,7 @@ Software Architect: 			Sui Gao
 
 Quality Assurance Lead: 		Kevin Yinjan Huang
 
-Algorithm Specialist: 			Xindong Cai
-
-Xuanqiang Zhao
+Algorithm Specialist: 			Xindong Cai, Xuanqiang Zhao
 
 Business Analyst: 			Jiayue “Coraline” Sun
 
