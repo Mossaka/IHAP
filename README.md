@@ -65,6 +65,20 @@ We didn’t organize our source code in a traditional MVC manner, but the MVC pa
 
 Concurrent operations from multiple instances of the application may cause undesired outcomes. Such as a negative number of votes.
 
+
+## Locally Install and Deploy Instructions
+### Get Started
+1. clone this repo
+2. cd into the root directory of this repo
+3. npm install
+4. npm start
+
+### Deployment Guide
+1. npx firebase login (only required for the first time)
+2. npm run build
+3. npm run deploy
+
+
 ## Team
 We Have A Problem (W.H.A.P.)
 
