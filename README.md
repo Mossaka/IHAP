@@ -15,9 +15,9 @@ youtube link: https://youtu.be/o8zNCNKvvBE
 
 ## Requirements
 
-A modern JavaScript enabled desktop web browser
-Mobile browsers are not supported
-The latest version of Google Chrome is recommended  
+  * A modern JavaScript enabled desktop web browser
+  * Mobile browsers are not supported
+  * The latest version of Google Chrome is recommended  
 
 
 ## How to Run
@@ -28,6 +28,7 @@ Please open https://ihap-2018.firebaseapp.com in a web browser.
 ## Login Credentials
 
 Our website allows new users to create their own accounts easily. However, we also provide a shared account for testing purposes. 
+
 (Email: test@gmail.com, Password: ucsdihap)
 
 
