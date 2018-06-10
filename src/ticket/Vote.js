@@ -100,6 +100,9 @@ export default class Vote extends React.Component {
             });
           }
         }
+
+        let diff = this.state.up - this.state.down;
+        firebase.database().ref(this.props.path).update({ votediff: diff });
       });
   }
 
@@ -160,6 +163,9 @@ export default class Vote extends React.Component {
             });
           }
         }
+
+        let diff = this.state.up - this.state.down;
+        firebase.database().ref(this.props.path).update({ votediff: diff });
       });
   }
 

@@ -48,8 +48,10 @@ export default class EditSolution extends React.Component {
         dateEdited: new Date().getTime(),
         upvote: 0,
         downvote: 0,
+        votediff: 0,
         ticket: this.props.ticket
       }).key;
+
       db.ref('tickets/' + this.props.ticket + '/solutions').push(key);
       db.ref('profiles/' + uid + '/solutions').push(key);
     }

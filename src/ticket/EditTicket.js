@@ -79,7 +79,8 @@ class EditTicket extends React.Component {
           image: this.state.image === EMPTY ? DEFAULT_IMAGE : this.state.image,
           title: this.state.title,
           upvote: 0,
-          downvote: 0
+          downvote: 0,
+          votediff: 0
         }).key;
 
       db.ref('profiles/' + firebase.auth().currentUser.uid + '/tickets').push(key);
