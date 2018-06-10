@@ -1,3 +1,6 @@
+/*
+ * This file contains our search algorithm.
+ */
 import { getTickets } from './store';
 
 export function weightedSearch(keyword, count, weights, cb) {
@@ -50,9 +53,6 @@ export function weightedSearch(keyword, count, weights, cb) {
         ret.push(sortedIds[i][1]);
       }
     }
-
-    //console.log(ids);
-    //console.log(ret);
 
     cb(ret);
   });

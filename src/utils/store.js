@@ -1,3 +1,6 @@
+/*
+ * This file implements a cache of the tickets, to increase loading speed.
+ */
 import firebase from 'firebase';
 
 let tickets = null;
