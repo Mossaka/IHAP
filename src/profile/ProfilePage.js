@@ -70,7 +70,7 @@ export default class ProfilePage extends React.Component {
         }
       }
       else {
-        this.setState({ notsignin: true });
+        this.setState({ profileUserID: profileUserID })
         this.retriveData(profileUserID);
       }
     })

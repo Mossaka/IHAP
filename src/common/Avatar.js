@@ -47,13 +47,22 @@ export default class Avatar extends React.Component {
   }
 
   render() {
-    return (
-      <div className="avatar">
-        <Link to={this.state.link}>
+    if (this.props.noLink) {
+      return (
+        <div className="avatar">
           <img src={this.state.avatar} alt="avatar" />
           <span>{' ' + this.state.username.substring(0, 15)}</span>
-        </Link>
-      </div>
-    );
+        </div>
+      )
+    } else {
+      return (
+        <div className="avatar">
+          <Link to={this.state.link}>
+            <img src={this.state.avatar} alt="avatar" />
+            <span>{' ' + this.state.username.substring(0, 15)}</span>
+          </Link>
+        </div>
+      );
+    }
   }
 }

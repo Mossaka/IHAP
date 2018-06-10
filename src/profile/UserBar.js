@@ -32,7 +32,7 @@ export default class TicketBar extends React.Component {
         <div className="user-preview">
           <div className="row">
             <div className="col-6">
-              <Avatar id={this.props.uid} isAnonymous={false} />
+              <Avatar id={this.props.uid} isAnonymous={false} noLink={true}/>
             </div>
             {this.props.currentUser ?
               <div className="col-6">

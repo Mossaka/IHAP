@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { Nav, NavItem, NavLink, Row } from 'reactstrap';
-import { Popover, PopoverHeader, PopoverBody } from 'reactstrap';
+import { Popover, PopoverBody } from 'reactstrap';
 import * as FontAwesome from 'react-icons/lib/fa';
 import anonymousAvatar from '../assets/anonymous-avatar.jpg';
 import firebase from 'firebase';
