@@ -72,7 +72,7 @@ export default class SearchPage extends React.Component {
         <Row>
           <Col xs={{ size: '9', offset: '1' }}>
             <div className="title">
-              <h3>Search Results of: {this.props.match.params.keyword}</h3>
+              <h3>Search Results: {this.props.match.params.keyword}</h3>
             </div>
             <Nav tabs>
               <NavItem>

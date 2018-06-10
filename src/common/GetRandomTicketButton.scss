@@ -8,45 +8,16 @@
     font-size: 16px;
     color: white;
     background-color: $yellow-button-color;
-    border: 2px solid $yellow-button-color;
-    margin-top: 30px;
-    
-    padding-top: 5px;
-    padding-bottom: 5px;
+    border: 1px solid $yellow-button-color;
+    margin-top: 5px;
     transition: all 0.7s;
     outline: none;
-    margin: 0 auto 0 auto;
-
     display:block;
     width: 100%;
-    
-
-
-    span {
-      cursor: pointer;
-      position: relative;
-      transition: 0.7s;
-    }
-
-    span:after {
-      content: '\00bb';
-      position: absolute;
-      opacity: 0;
-      right: -20px;
-      transition: 0.7s;
-    }
   }
   
   .randomButton:hover {
     background-color: $yellow-button-hover-color;
-
-    span {
-      padding-right: 20px;
-    }
-
-    span:after {
-      opacity: 1;
-      right: 0;
-    }
+    border: 1px solid $yellow-button-hover-color;
   }
 }
