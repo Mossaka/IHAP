@@ -1,3 +1,6 @@
+/*
+ * This component is the host for everything on the home page.
+ */
 import React from 'react';
 import StoryPreview from './StoryPreview';
 import { weightedSearch } from '../utils/search';
@@ -33,25 +36,6 @@ export default class HomePage extends React.Component {
     });
   }
 
-  // generateRecommendedCards(num) {
-  //   var self = this;
-  //   // change to 0 0 0 1 3
-  //   weightedSearch("", num, {}).then(function (ids) {
-
-  //     var cards = ids.map(function (id, index) {
-  //       return (<div key={index} className="col-sm-6 col-md-4 col-lg-3">
-  //         <StoryPreview ticketID={id} />
-  //       </div>)
-  //     });
-
-  //     if (cards.length < num) {
-  //       cards.push.apply(cards, self.generateCard(num - cards.length, '1'));
-  //     }
-
-  //     self.setState({ recommendedCards: cards });
-  //   })
-  // }
-
   generateRecentCards(num) {
     weightedSearch('', num, { dateEdited: 1 }, ids => {
       let recentCards = ids.map(id => this.generateCard(id));
@@ -62,10 +46,6 @@ export default class HomePage extends React.Component {
   render() {
     return (
       <Container className="homepage">
-        {/* <div className="options"> 
-          <NewProblemButton />
-          <GetRandomTicketButton buttonText="Solve a Problem"/>
-        </div>  */}
         <h2>Top Stories</h2>
         <hr />
         <Row>

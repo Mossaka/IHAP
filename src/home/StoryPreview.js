@@ -1,3 +1,7 @@
+/*
+ * This component displays a preview of the given ticket.
+ * This is used on the home page.
+ */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './StoryPreview.css';
@@ -34,7 +38,7 @@ export default class StoryPreview extends React.Component {
 
   render() {
     return (
-      <Card className="story-preview">
+      <Card className="storyPreview">
         <Link className="clickable-card" to={'/ticket/' + this.props.id} />
         <CardImg top src={this.state.image} alt="ticket thumbnail" />
         <CardBody className="body">
