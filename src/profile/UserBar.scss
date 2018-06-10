@@ -1,39 +1,28 @@
 @import "../_global";
 
 .user-preview {
-   
-        // max-width:80%;
-        // margin: auto;
-        border-style: solid;
-        border-color: lightgray;
-        border-width: 1px;
-        // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-        transition: 0.3s;
-        // background: $story-preview-background-color;
-        // rgb(250, 254, 255);
-        // display: flex;
-        padding: 1rem;
-        overflow: auto;
-        background-color: white;
+  border-style: solid;
+  border-color: lightgray;
+  border-width: 1px;
+  transition: 0.3s;
+  padding: 1rem;
+  overflow: auto;
+  background-color: white;
 
+  .user-preview:hover{
+    box-shadow: $box-shadow-on-hover;
+  }
 
-    .user-preview:hover{
-        box-shadow: $box-shadow-on-hover;
-    }
-
-    .clickable-card {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-      }
-    // .followbtn {
-    //     float: right;
-    // }
+  .clickable-card {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
 }
 
 .user-preview:hover {
-    box-shadow: $box-shadow-on-hover;
-    cursor: pointer;
+  box-shadow: $box-shadow-on-hover;
+  cursor: pointer;
 }

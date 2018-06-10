@@ -1,55 +1,37 @@
 @import "../_global";
 
 .ticket-preview {
-   
-        // max-width:80%;
-        // margin: auto;
-        border-style: solid;
-        border-color: lightgray;
-        border-width: 1px;
-        // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-        transition: 0.3s;
-        // background: $story-preview-background-color;
-        // rgb(250, 254, 255);
-        // display: flex;
-        padding: 1rem;
-        overflow: auto;
-        background-color: white;
+  border-style: solid;
+  border-color: lightgray;
+  border-width: 1px;
+  transition: 0.3s;
+  padding: 1rem;
+  overflow: auto;
+  background-color: white;
 
-    .ticket-preview:hover{
-        box-shadow: $box-shadow-on-hover;
-    }
-    // .textbox {
-    //     float: left;
-    // }
-    img {
-        
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-    }
-    .clickable-card {
-        text-decoration: none;
-        color: black;
-        position: absolute;
-        left: 0; 
-        top: 0; 
-        bottom: 0; 
-        right: 0;
-        z-index: 1;
-      }
-    
-    // .title{
-    //     text-align: left;
-    //     font-size: 5em;
-    // }
-    // .description{
-    //     text-align: left ;
-    //     font-size: 1em;
-    // }
+  .ticket-preview:hover{
+    box-shadow: $box-shadow-on-hover;
+  }
+
+  img {      
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  .clickable-card {
+    text-decoration: none;
+    color: black;
+    position: absolute;
+    left: 0; 
+    top: 0; 
+    bottom: 0; 
+    right: 0;
+    z-index: 1;
+  }
 }
 
 .ticket-preview:hover {
-    box-shadow: $box-shadow-on-hover;
-    cursor: pointer;
+  box-shadow: $box-shadow-on-hover;
+  cursor: pointer;
 }

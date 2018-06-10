@@ -1,3 +1,6 @@
+/*
+ * This component defines the form for editing uer profile.
+ */
 import React from 'react';
 import { Row, Button, Form, FormGroup, Label, CustomInput } from 'reactstrap';
 import firebase from 'firebase';
@@ -18,25 +21,20 @@ class ProfileSettingPage extends React.Component {
       fileState: 3,
       file: null,
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleImage = this.handleImage.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
   }
 
   componentDidMount() {
     let db = firebase.database();
-    db.ref('profiles/' + this.props.uid).once('value').then(snapshot => {
+    db.ref('profiles/' + this.props.uid).once('value', snapshot => {
       this.setState({
         profile: {
           ...snapshot.val()
         }
-      })
-    })
+      });
+    });
   }
 
-  handleChange(event) {
+  handleChange = event => {
     const target = event.target;
     const value = target.value;
     const name = target.name;
@@ -48,7 +46,8 @@ class ProfileSettingPage extends React.Component {
           username_lowercase: value.toLowerCase()
         }
       });
-    } else {
+    }
+    else {
       this.setState({
         profile: {
           ...this.state.profile,
@@ -58,30 +57,30 @@ class ProfileSettingPage extends React.Component {
     }
   }
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     firebase.database().ref('profiles/' + this.props.uid).update({
       ...this.state.profile
-    })
+    });
     this.props.onSubmit();
     event.preventDefault();
     window.location.reload();
   }
 
-  handleCancel(event) {
+  handleCancel = () => {
     this.props.onSubmit();
   }
 
-  handleImage(event) {
-    this.setState({ filetext: 'File start uploading', fileState: 2 })
-    let file = event.target.files[0]
-    let uploadTask = firebase.storage().ref().child('avatars/' + file.name).put(file)
+  handleImage = event => {
+    this.setState({ filetext: 'File start uploading', fileState: 2 });
+    let file = event.target.files[0];
+    let uploadTask = firebase.storage().ref().child('avatars/' + file.name).put(file);
     uploadTask.on('state_changed', snapshot => {
       // state change
       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       this.setState({ filetext: 'Upload is ' + progress + '% done' });
     }, error => {
       // error handling
-      this.setState({ fileState: 2 })
+      this.setState({ fileState: 2 });
     }, () => {
       // file upload succes
       uploadTask.snapshot.ref.getDownloadURL().then(url => {
@@ -89,12 +88,11 @@ class ProfileSettingPage extends React.Component {
           profile: { ...this.state.profile, avatar: url },
           filetext: 'file uploading success!',
           fileState: 3
-        })
-      })
-    })
+        });
+      });
+    });
   }
-
-
+ 
   render() {
     return (
       <div className="mt-5 mx-auto p-5" style={{ maxWidth: '2000px', border: '1px solid #A9A9A9' }}>
@@ -139,7 +137,6 @@ class ProfileSettingPage extends React.Component {
             </div>
           </Row>
         </Form>
-
       </div>
     );
   }
