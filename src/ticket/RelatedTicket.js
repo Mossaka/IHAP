@@ -1,3 +1,6 @@
+/*
+ * This component renders the related ticket of a given ticket.
+ */
 import React from 'react';
 import { Card, CardBody, CardTitle, ListGroup, ListGroupItem } from 'reactstrap';
 import { weightedSearch } from '../utils/search';

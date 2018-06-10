@@ -1,13 +1,14 @@
+/*
+ * This component implements the voting buttons.
+ */
 import React from 'react';
 import firebase from 'firebase';
-import { MdArrowUpward, MdArrowDownward} from 'react-icons/lib/md'
+import { MdArrowUpward, MdArrowDownward } from 'react-icons/lib/md'
 import './Vote.css'
 
 export default class Vote extends React.Component {
   constructor(props) {
     super(props);
-    // console.log(this.props.path + "the props value is: " + this.props.up);
-    // console.log(this.props.path + "the props value is: " + this.props.down);
     let l = this.props.path.split("/");
     this.state = {
       up: Number(this.props.up),
@@ -22,6 +23,7 @@ export default class Vote extends React.Component {
       alert('please sign in to vote');
     return firebase.auth().currentUser;
   }
+
   refresh(nextProps) {
     let l = nextProps.path.split('/');
     this.setState({
@@ -74,7 +76,7 @@ export default class Vote extends React.Component {
                   .update({ upvote: newUpVote });
                 firebase.database().ref(this.props.path)
                   .update({ downvote: newDownVote });
-                url = url + '/'+key + '/voted'
+                url = url + '/' + key + '/voted'
                 firebase.database().ref(url).set(true);
                 this.setState({
                   up: newUpVote,
@@ -100,39 +102,6 @@ export default class Vote extends React.Component {
         }
       });
   }
-  // firebase.database().
-  //   ref(this.props.ticketInfor + userId + '/votedProblem').once('value').then(t=>{
-  //     console.log(userId);
-  //     console.log(t);
-  //   });
-
-  //   ref(this.props.ticketInfor + userId + '/votedProblem').push(ticketid);
-
-
-
-  //   firebase.database().ref(this.props.path)
-  //     .update({ upvote: newVote });
-  //   this.setState({
-  //     up: newVote,
-  //     upvoteClicked: true
-  //   });
-  // } else if (!this.state.upvoteClicked && this.state.downvoteClicked) {
-  //   let newUpVote = this.state.up + 1;
-  //   let newDownVote = this.state.down - 1;
-  //   firebase.database().ref(this.props.path)
-  //     .update({ upvote: newUpVote });
-  //   firebase.database().ref(this.props.path)
-  //     .update({ downvote: newDownVote });
-  //   this.setState({
-  //     up: newUpVote,
-  //     down: newDownVote,
-  //     upvoteClicked: true,
-  //     downvoteClicked: false
-  //   });
-  // } else {
-  //   alert("Cannot upVote twice");
-  // }
-
 
   handleDownVote = () => {
     if (!this.handleSignIn()) return;
@@ -198,10 +167,10 @@ export default class Vote extends React.Component {
     return (
       <div className="d-flex vote">
         <div className="upvote" onClick={this.handleUpVote} >
-          <MdArrowUpward width="20" height="20" style={{color:'rgb(83, 129, 176)'}} /> {this.state.up}
+          <MdArrowUpward width="20" height="20" style={{ color: 'rgb(83, 129, 176)' }} /> {this.state.up}
         </div>
         <div className='downvote' onClick={this.handleDownVote} >
-          {this.state.down} <MdArrowDownward width="20" height="20" style={{color:'rgb(83, 129, 176)'}}/>
+          {this.state.down} <MdArrowDownward width="20" height="20" style={{ color: 'rgb(83, 129, 176)' }} />
         </div>
       </div>
     );

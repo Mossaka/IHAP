@@ -1,3 +1,7 @@
+/*
+ * This component defines the edit ticket form.
+ * This is also used for creating a ticket.
+ */
 import React from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -5,10 +9,10 @@ import { Input, FormGroup, Button, Label, Alert } from 'reactstrap';
 import firebase from 'firebase';
 import { withRouter } from 'react-router-dom';
 import anony from '../assets/anonymous-avatar.jpg';
-import '../common/StyleButton.css'
+import '../common/StyleButton.css';
 
 const DEFAULT_CONTENT = 'As a ___, I want a ___ to ___';
-const DEFAULT_IMAGE = "https://www.knowledgedesk.com/wp-content/uploads/2017/10/problem-solution.jpeg"
+const DEFAULT_IMAGE = "https://www.knowledgedesk.com/wp-content/uploads/2017/10/problem-solution.jpeg";
 const EMPTY = '';
 
 class EditTicket extends React.Component {
@@ -86,10 +90,6 @@ class EditTicket extends React.Component {
   render() {
     return (
       <div>
-        {/* { this.props.id? <h></h>:
-            <h2>Turn Your Problem into Inspiration</h2>
-        } */}
-
         <FormGroup>
           <Label>Title</Label>
           <Input type="text" name="title" value={this.state.title} onChange={this.handleChange} required maxLength="64" />
@@ -112,12 +112,12 @@ class EditTicket extends React.Component {
         </FormGroup>
         {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
 
-        <div className='row'>
-          <div className='col-2'>
-            <div className='style-btn-secondary'><Button className="mt-3" onClick={this.handleSubmit}>Submit</Button></div>
+        <div className="row">
+          <div className="col-2">
+            <div className="style-btn-secondary"><Button className="mt-3" onClick={this.handleSubmit}>Submit</Button></div>
           </div>
-          <div className='col-2'>
-            <div className='style-btn-secondary'>{this.props.cancel && <Button className='mt-3' onClick={this.props.cancel}>Cancel</Button>}</div>
+          <div className="col-2">
+            <div className="style-btn-secondary">{this.props.cancel && <Button className="mt-3" onClick={this.props.cancel}>Cancel</Button>}</div>
           </div>
         </div>
 

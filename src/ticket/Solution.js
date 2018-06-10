@@ -1,3 +1,6 @@
+/*
+ * This component displays a given solution.
+ */
 import React from 'react';
 import firebase from 'firebase';
 import { Card, CardBody, CardText, FormGroup, Label, Input, Button, Row, Col } from 'reactstrap';
@@ -37,9 +40,11 @@ export default class Solution extends React.Component {
     this.refresh();
     this.setState({ comment: '' })
   }
+
   handleCommentChange(e) {
     this.setState({ comment: e.target.value });
   }
+
   componentDidMount() {
     let init = [];
     firebase.database().ref('solutions/' + this.props.id).once('value', s => {
@@ -62,7 +67,6 @@ export default class Solution extends React.Component {
     });
   }
 
-
   refresh() {
     let init = [];
     firebase.database().ref('solutions/' + this.props.id).once('value', s => {
@@ -84,12 +88,15 @@ export default class Solution extends React.Component {
       }
     });
   }
+
   toggleEditor = () => {
     this.setState({ edit: !this.state.edit });
   }
+
   handleOpenModal = () => {
     this.setState({ showAnswerForm: true });
   }
+  
   handleCloseModal = () => {
     this.setState({ showAnswerForm: false });
   }

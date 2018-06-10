@@ -1,3 +1,6 @@
+/*
+ * This component hosts everything on the ticket page.
+ */
 import React from 'react';
 import Solution from './Solution';
 import Ticket from './Ticket';

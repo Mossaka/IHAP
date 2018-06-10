@@ -1,3 +1,6 @@
+/*
+ * This component defines the edit solution button.
+ */
 import React from 'react';
 import { Button, Alert } from 'reactstrap';
 import firebase from 'firebase';
@@ -59,12 +62,12 @@ export default class EditSolution extends React.Component {
         <ReactQuill value={this.state.content} onChange={this.handleChange} />
         <br/>
         {this.state.error && <Alert color="danger">{this.state.error}</Alert>}
-        <div className='row'>
-          <div className='col-2'>
-            <div className='style-btn-secondary'><Button onClick={this.handleSubmit}>Submit</Button></div>
+        <div className="row">
+          <div className="col-2">
+            <div className="style-btn-secondary"><Button onClick={this.handleSubmit}>Submit</Button></div>
           </div>
-          <div className='col-2'>
-            <div className='style-btn-secondary'><Button onClick={this.props.cancel}>Cancel</Button></div>
+          <div className="col-2">
+            <div className="style-btn-secondary"><Button onClick={this.props.cancel}>Cancel</Button></div>
           </div>
         </div>
         <br/>

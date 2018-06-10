@@ -1,3 +1,6 @@
+/*
+ * This component displays the given ticket.
+ */
 import React from 'react';
 import { Card, CardBody, CardTitle, CardText, Row, Col } from 'reactstrap';
 import TimeDisplay from '../common/TimeDisplay';
