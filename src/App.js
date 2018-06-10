@@ -1,3 +1,6 @@
+/*
+ * This is the root of all components of this website.
+ */
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from './common/Header';
