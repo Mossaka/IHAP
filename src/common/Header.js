@@ -1,5 +1,5 @@
 /*
- * This component defined the header of the website.
+ * This component defines the header of the website.
  */
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
@@ -72,7 +72,7 @@ class Header extends React.Component {
     if (this.state.random) {
       searchOrButton = (
         <div className="searchOrRandom">
-          <GetRandomTicketButton buttonText="GET RANDOM TICKET" />
+          <GetRandomTicketButton buttonText="Random Ticket" />
         </div>
       );
     }
@@ -89,7 +89,7 @@ class Header extends React.Component {
       <nav className="navbar">
         <div className='container'>
           <div className='col-lg-2 col-md-3'>
-            <Link to="/" className="logo"><img src={logo} alt="IHAP Logo" /><h3>I.H.A.P.</h3></Link>
+            <Link to="/" className="logo" title="I Have a Problem.com"><img src={logo} alt="IHAP Logo" /><h3>I.H.A.P.</h3></Link>
           </div>
           <div className='col-lg-7 col-md-6'>
             <div className="center">

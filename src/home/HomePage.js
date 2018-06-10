@@ -46,6 +46,7 @@ export default class HomePage extends React.Component {
   render() {
     return (
       <Container className="homepage">
+        <br/>
         <h2>Top Stories</h2>
         <hr />
         <Row>

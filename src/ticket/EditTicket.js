@@ -90,19 +90,24 @@ class EditTicket extends React.Component {
   render() {
     return (
       <div>
+        <h2>New Problem</h2>
         <FormGroup>
           <Label>Title</Label>
           <Input type="text" name="title" value={this.state.title} onChange={this.handleChange} required maxLength="64" />
         </FormGroup>
         <FormGroup>
-          <Label>Thumbnail URL</Label>
+          <Label>Image URL</Label>
           {this.state.image && <img className="img-thumbnail d-block" src={this.state.image} alt="thumbnail" />}
           <Input type="text" name="image" value={this.state.image} onChange={this.handleChange} required />
+          
         </FormGroup>
+        <Label>Story</Label>
         {
           this.props.id ? <ReactQuill value={this.state.content} onChange={this.handleChange} />
             : <ReactQuill placeholder={this.state.content} onChange={this.handleChange} />
         }
+        <br/>
+        <Label>Post Anonymously?</Label>
         <FormGroup check>
           <Label check>
             <Input type="checkbox" name="anonymous" onChange={this.handleChange} checked={this.state.anonymous} />

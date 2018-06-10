@@ -29,7 +29,7 @@ class NewProblemButton extends React.Component {
     return (
       <div className="newProblemButton">
         <GlobalContext.Consumer>
-          {user => user ? this.makeButton('Post Your Problem here') : this.makeButton('Sign In to Post')}
+          {user => user ? this.makeButton('Post a Problem') : this.makeButton('Sign In to Post a Problem')}
         </GlobalContext.Consumer>
       </div>
     )

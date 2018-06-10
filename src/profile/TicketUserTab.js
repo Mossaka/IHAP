@@ -77,17 +77,17 @@ export default class TicketUserTab extends React.Component {
             <Nav tabs>
               <NavItem>
                 <NavLink className={classnames({ active: this.state.activeTab === '1' })} onClick={() => { this.toggle('1') }}>
-                  Ticket
+                  Tickets
                   </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink className={classnames({ active: this.state.activeTab === '2' })} onClick={() => { this.toggle('2') }}>
-                  Solution
+                  Solutions
                   </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink className={classnames({ active: this.state.activeTab === '3' })} onClick={() => { this.toggle('3') }}>
-                  Bookmark
+                  Bookmarks
                   </NavLink>
               </NavItem>
             </Nav>
@@ -114,7 +114,7 @@ export default class TicketUserTab extends React.Component {
               </NavItem>
               <NavItem>
                 <NavLink className={classnames({ active: this.state.userTab === '2' })} onClick={() => { this.toggleUserTab('2') }}>
-                  Follower
+                  Followers
                   </NavLink>
               </NavItem>
             </Nav>

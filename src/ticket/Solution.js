@@ -10,6 +10,7 @@ import Avatar from '../common/Avatar';
 import EditSolution from './EditSolution';
 import EditButton from './EditButton';
 import ReactModal from 'react-modal';
+import { GlobalContext } from '../utils/context';
 import './Solution.css';
 
 ReactModal.setAppElement('#root')
@@ -140,7 +141,11 @@ export default class Solution extends React.Component {
         </CardBody>
         <div className="clearfix bottom" style={{ display: 'inline-block' }}>
           <div className="float-left"> <Vote up={this.state.upvote} down={this.state.downvote} path={'solutions/' + this.props.id} ></Vote></div>
-          <Button className="float-right" color="info" onClick={this.handleOpenModal} size="sm">comment</Button>
+          
+          <GlobalContext.Consumer>
+            {user => user ? <Button className="float-right" color="info" onClick={this.handleOpenModal} size="sm">Comment</Button> : 
+            <Button className="float-right" color="info" size="sm">Sign In to Comment</Button>}
+          </GlobalContext.Consumer>
         </div>
         <ReactModal isOpen={this.state.showAnswerForm}>
           <Avatar id={this.state.creator} isAnonymous={false} />

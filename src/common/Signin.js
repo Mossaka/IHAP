@@ -32,7 +32,7 @@ export default class Signin extends React.Component {
     return (
       <Form onSubmit={this.handleSubmit} className="signIn">
         <FormGroup>
-          <Label>Email Addess</Label>
+          <Label>Email Address</Label>
           <Input type="email" onChange={this.handleChange} value={this.state.email} />
         </FormGroup>
         <FormGroup>

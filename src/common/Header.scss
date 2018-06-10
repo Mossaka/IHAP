@@ -1,10 +1,15 @@
+@import '../_global';
+
 .navbar {
   display: flex;
   justify-content: space-between;
-  background-color: rgb(51, 51, 51);
+  background-color: $header-bg-color;
   padding: 7px 15px 7px 15px;
   border-bottom: 2px solid lightgray;
 
+  .logo {
+    color: #ddd;
+  }
   .logo:hover {
     text-decoration: none;
   }
@@ -23,7 +28,7 @@
       cursor: pointer;
       border: inset;
       border-radius: 5px;
-      background: #333;
+      background: $header-bg-color;
 
       img.true {
         transform: rotate(180deg);
@@ -37,7 +42,7 @@
        
 
         div {
-          color: #DDD;
+          color: $bg-color;
           padding-left: 3px;
           padding-right: 3px;
           -webkit-user-select: none; /* Safari */        
@@ -55,17 +60,18 @@
       align-items: center;
 
       input {
-        border: 2px solid steelblue;
+        border: 2px solid $yellow-button-color;
       }
 
       .searchButton {
-        background-color: steelblue;
-        border: 2px solid steelblue;
+
+        background-color: $yellow-button-color;
+        border: 2px solid $yellow-button-color;
       }
 
-      .btn:hover {
-        background-color:#2A6A90;
-        border: 2px solid #2A6A90;
+      .searchButton:hover {
+        background-color: $yellow-button-hover-color;
+        border: 2px solid $yellow-button-hover-color;
       } 
     }
   }
