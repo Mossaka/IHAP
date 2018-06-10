@@ -1,3 +1,7 @@
+/*
+ * This component shows user avatar and the logout button when the user is logged in.
+ * It shows the sign in/sign up button when the user is not logged in.
+ */
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, DropdownToggle, DropdownItem, DropdownMenu, InputGroup, InputGroupAddon, ButtonDropdown } from 'reactstrap';
 import './User.css';
@@ -81,9 +85,9 @@ export default class User extends React.Component {
           <ButtonDropdown isOpen={this.state.dropdown} toggle={this.toggleDropdown}>
             <Button className="userbutton" id="caret">
               <Link to={'/profile/' + this.state.uid}>
-                <img src={this.state.avatar} alt="avatar" style={{objectFit:'cover'}}/>
+                <img src={this.state.avatar} alt="avatar" style={{ objectFit: 'cover' }} />
 
-                {this.state.name ? "  " + this.state.name.substring(0,15) : "  " + this.state.name}
+                {this.state.name ? "  " + this.state.name.substring(0, 15) : "  " + this.state.name}
               </Link>
             </Button>
             <DropdownToggle className="userbutton" caret />

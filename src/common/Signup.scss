@@ -1,8 +1,5 @@
-Label {
-    font-family: Verdana, sans-serif;
-    font-size: 14px;
-}
-.signUpButton {
+.signUp {
+  .signUpButton {
     font-family: Verdana, sans-serif;
     font-size: 16px;
     color: white;
@@ -13,26 +10,27 @@ Label {
     transition: all 0.7s;
     cursor: pointer;
     outline: none;
-}
-.signUpButton span {
+  }
+  .signUpButton span {
     cursor: pointer;
     position: relative;
     transition: 0.7s;
-}
-.signUpButton span:after {
+  }
+  .signUpButton span:after {
     content: '\00bb';
     position: absolute;
     opacity: 0;
     right: -20px;
     transition: 0.7s;
-}
-.signUpButton:hover {
+  }
+  .signUpButton:hover {
     background-color:#2A6A90;
-}
-.signUpButton:hover span {
+  }
+  .signUpButton:hover span {
     padding-right: 20px;
-}
-.signUpButton:hover span:after{
+  }
+  .signUpButton:hover span:after{
     opacity: 1;
     right: 0;
+  }
 }

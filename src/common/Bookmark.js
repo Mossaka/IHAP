@@ -1,3 +1,7 @@
+/*
+ * This component allows the user to bookmark or unbookmark a ticket.
+ * Pass in the id of the ticket on which this bookmark is used. 
+ */
 import firebase from 'firebase';
 import React from 'react';
 import './Bookmark.css';

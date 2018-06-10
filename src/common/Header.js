@@ -1,3 +1,6 @@
+/*
+ * This component defined the header of the website.
+ */
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import logo from '../assets/logo.png';
@@ -8,7 +11,6 @@ import { Button, Input } from 'reactstrap';
 import { MdSearch } from 'react-icons/lib/md';
 import { getTickets } from '../utils/store';
 import GetRandomTicketButton from '../common/GetRandomTicketButton';
-
 
 class Header extends React.Component {
   constructor(props) {
@@ -70,7 +72,7 @@ class Header extends React.Component {
     if (this.state.random) {
       searchOrButton = (
         <div className="searchOrRandom">
-          <GetRandomTicketButton buttonText="GET RANDOM TICKET"/>
+          <GetRandomTicketButton buttonText="GET RANDOM TICKET" />
         </div>
       );
     }
@@ -78,32 +80,32 @@ class Header extends React.Component {
       searchOrButton = (
         <div className="searchOrRandom">
           <Input placeholder="What's bothering you?" onKeyUp={this.handleKeyPress} />
-          <Button className="searchButton" onClick={this.search}><MdSearch width="25px" height="25px"/>Search | Post</Button>
+          <Button className="searchButton" onClick={this.search}><MdSearch width="25px" height="25px" />Search | Post</Button>
         </div>
       );
     }
 
     return (
       <nav className="navbar">
-      <div className='container'>
+        <div className='container'>
           <div className='col-lg-2 col-md-3'>
             <Link to="/" className="logo"><img src={logo} alt="IHAP Logo" /><h3>I.H.A.P.</h3></Link>
           </div>
           <div className='col-lg-7 col-md-6'>
-        <div className="center">
-          {searchOrButton}
-          <div className="lever" onClick={this.toggleRandom}>
-            <img src={lever} alt="Lever" className={'clickable ' + this.state.random}  />
-            <div className="label">
-              <div onClick={this.setRandom}>Random</div>
-              <div onClick={this.setSearch}>Search</div>
+            <div className="center">
+              {searchOrButton}
+              <div className="lever" onClick={this.toggleRandom}>
+                <img src={lever} alt="Lever" className={'clickable ' + this.state.random} />
+                <div className="label">
+                  <div onClick={this.setRandom}>Random</div>
+                  <div onClick={this.setSearch}>Search</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        </div>
-        <div className='col-lg-3 col-md-3 float-right'>
-          <User />
-        </div>
+          <div className='col-lg-3 col-md-3 float-right'>
+            <User />
+          </div>
         </div>
       </nav>
     );

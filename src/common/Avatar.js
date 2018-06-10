@@ -1,3 +1,6 @@
+/*
+ * This component displays the user avatar and username from a given user id.
+ */
 import React from 'react';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';

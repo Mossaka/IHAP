@@ -1,3 +1,6 @@
+/*
+ * This component renders the string of the given timestamp.
+ */
 import React from 'react';
 import './TimeDisplay.css'
 

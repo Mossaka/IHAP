@@ -4,9 +4,11 @@
   background-color: rgb(51, 51, 51);
   padding: 7px 15px 7px 15px;
   border-bottom: 2px solid lightgray;
+
   .logo:hover {
     text-decoration: none;
   }
+
   img {
     height: 80px;
   }
@@ -14,7 +16,6 @@
   .center {
     display: flex;
     justify-content: center;
-    // width: 60%;
 
     .lever {
       margin-left: 10px;

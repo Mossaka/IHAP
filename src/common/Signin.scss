@@ -1,8 +1,5 @@
-Label {
-    font-family: Verdana, sans-serif;
-    font-size: 14px;
-}
-.signInButton {
+.signIn {
+  .signInButton {
     font-family: Verdana, sans-serif;
     font-size: 16px;
     color: white;
@@ -13,26 +10,32 @@ Label {
     transition: all 0.7s;
     cursor: pointer;
     outline: none;
-}
-.signInButton span {
+  }
+  
+  .signInButton span {
     cursor: pointer;
     position: relative;
     transition: 0.7s;
-}
-.signInButton span:after {
+  }
+
+  .signInButton span:after {
     content: '\00bb';
     position: absolute;
     opacity: 0;
     right: -20px;
     transition: 0.7s;
-}
-.signInButton:hover {
+  }
+
+  .signInButton:hover {
     background-color:#2A6A90;
-}
-.signInButton:hover span {
+  }
+
+  .signInButton:hover span {
     padding-right: 20px;
-}
-.signInButton:hover span:after{
+  }
+  
+  .signInButton:hover span:after{
     opacity: 1;
     right: 0;
+  }
 }

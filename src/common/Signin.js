@@ -1,3 +1,6 @@
+/*
+ * This component defines the sign in form.
+ */
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import firebase from 'firebase';
@@ -27,7 +30,7 @@ export default class Signin extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit} className="signIn">
         <FormGroup>
           <Label>Email Addess</Label>
           <Input type="email" onChange={this.handleChange} value={this.state.email} />

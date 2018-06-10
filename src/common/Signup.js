@@ -1,3 +1,6 @@
+/*
+ * This component defines the sign up form.
+ */
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import firebase from 'firebase';
@@ -53,7 +56,7 @@ export default class Signup extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit} >
+      <Form onSubmit={this.handleSubmit} className="signUp">
         <FormGroup>
           <Label>User Name</Label>
           <Input type="text" name="name" onChange={this.handleChange} value={this.state.name} required  maxlength="32"/>
