@@ -142,9 +142,6 @@ export default class ProfilePage extends React.Component {
           return <FollowButton handleFollow={this.handleFollow} />;
       }
     }
-    else {
-      return <div>Sign in please</div>;
-    }
   }
 
   render() {

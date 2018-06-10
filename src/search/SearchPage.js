@@ -76,10 +76,10 @@ export default class SearchPage extends React.Component {
             </div>
             <Nav tabs>
               <NavItem>
-                <NavLink className={`${this.state.show === '1' ? 'active' : ''}`} onClick={() => this.toggleTab('1')}>Tickets</NavLink>
+                <NavLink style={{cursor:"pointer"}} className={`${this.state.show === '1' ? 'active' : ''}`} onClick={() => this.toggleTab('1')}>Tickets</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className={`${this.state.show === '2' ? 'active' : ''}`} onClick={() => this.toggleTab('2')}>Users</NavLink>
+                <NavLink style={{cursor:"pointer"}} className={`${this.state.show === '2' ? 'active' : ''}`} onClick={() => this.toggleTab('2')}>Users</NavLink>
               </NavItem>
             </Nav>
             <TabContent activeTab={this.state.show}>

@@ -76,17 +76,17 @@ export default class TicketUserTab extends React.Component {
           <div id="tabs">
             <Nav tabs>
               <NavItem>
-                <NavLink className={classnames({ active: this.state.activeTab === '1' })} onClick={() => { this.toggle('1') }}>
+                <NavLink style={{cursor:"pointer"}} className={classnames({ active: this.state.activeTab === '1' })} onClick={() => { this.toggle('1') }}>
                   Tickets
                   </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className={classnames({ active: this.state.activeTab === '2' })} onClick={() => { this.toggle('2') }}>
+                <NavLink style={{cursor:"pointer"}} className={classnames({ active: this.state.activeTab === '2' })} onClick={() => { this.toggle('2') }}>
                   Solutions
                   </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className={classnames({ active: this.state.activeTab === '3' })} onClick={() => { this.toggle('3') }}>
+                <NavLink style={{cursor:"pointer"}} className={classnames({ active: this.state.activeTab === '3' })} onClick={() => { this.toggle('3') }}>
                   Bookmarks
                   </NavLink>
               </NavItem>
@@ -108,12 +108,12 @@ export default class TicketUserTab extends React.Component {
           <div id="tabs">
             <Nav tabs>
               <NavItem>
-                <NavLink className={classnames({ active: this.state.userTab === '1' })} onClick={() => { this.toggleUserTab('1') }}>
+                <NavLink style={{cursor:"pointer"}} className={classnames({ active: this.state.userTab === '1' })} onClick={() => { this.toggleUserTab('1') }}>
                   Following
                   </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className={classnames({ active: this.state.userTab === '2' })} onClick={() => { this.toggleUserTab('2') }}>
+                <NavLink style={{cursor:"pointer"}} className={classnames({ active: this.state.userTab === '2' })} onClick={() => { this.toggleUserTab('2') }}>
                   Followers
                   </NavLink>
               </NavItem>
