@@ -1,10 +1,13 @@
+/*
+ * This component displays a preview of the given user.
+ * This is used on the search page.
+ */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './SearchPreview.css'
+import './SearchPreview.css';
 import Avatar from '../common/Avatar';
 
 export default class UserPreview extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {

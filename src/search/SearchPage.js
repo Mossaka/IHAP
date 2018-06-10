@@ -1,8 +1,11 @@
+/*
+ * This component hosts everthing on the search page.
+ */
 import React from 'react';
 import SearchPreview from './SearchPreview';
 import UserPreview from './UserPreview';
 import { Nav, NavItem, NavLink, TabContent, TabPane, Row, Col, Container } from 'reactstrap';
-import './SearchPage.css'
+import './SearchPage.css';
 import firebase from 'firebase';
 import { weightedSearch } from '../utils/search';
 import NewProblemButton from '../common/NewProblemButton';
@@ -66,12 +69,11 @@ export default class SearchPage extends React.Component {
   render() {
     return (
       <Container className="search-page">
-        
         <Row>
           <Col xs={{ size: '9', offset: '1' }}>
-          <div className="title">
-            <h3>Search Results of: {this.props.match.params.keyword}</h3>
-          </div>
+            <div className="title">
+              <h3>Search Results of: {this.props.match.params.keyword}</h3>
+            </div>
             <Nav tabs>
               <NavItem>
                 <NavLink className={`${this.state.show === '1' ? 'active' : ''}`} onClick={() => this.toggleTab('1')}>Tickets</NavLink>

@@ -1,6 +1,9 @@
+/*
+ * This component defines the filter button.
+ */
 import React from 'react';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import './SearchPreview.css'
+import './SearchPreview.css';
 
 export default class FilterButton extends React.Component {
   constructor(props) {

@@ -1,7 +1,9 @@
+/*
+ * This component displays a preview of the given ticket.
+ * This is used on the search page.
+ */
 import React from 'react';
 import { Link } from 'react-router-dom';
-//import avatar from '../assets/img_avatar.png'
-// import bookmark from '../assets/bookmark.png'
 import './SearchPreview.css'
 import Bookmark from '../common/Bookmark';
 import Avatar from '../common/Avatar'
